@@ -1,0 +1,101 @@
+"use client";
+
+import React from "react";
+import { motion } from "framer-motion";
+import { Shield, Clock, Globe, Zap, Users, BarChart } from "lucide-react";
+
+const features = [
+  {
+    icon: Shield,
+    title: "Uncompromising Security",
+    desc: "Advanced tracking and secure handling protocols ensure your cargo is protected at every stage of the journey.",
+  },
+  {
+    icon: Globe,
+    title: "Global Reach, Local Expertise",
+    desc: "A vast international network combined with deep local regulatory knowledge for seamless cross-border logistics.",
+  },
+  {
+    icon: Clock,
+    title: "Time-Definite Delivery",
+    desc: "Optimized routing and priority handling to meet strict deadlines with precision and reliability.",
+  },
+  {
+    icon: Zap,
+    title: "Next-Gen Technology",
+    desc: "Real-time visibility, automated documentation, and AI-driven predictive logistics management.",
+  },
+  {
+    icon: Users,
+    title: "Dedicated Support Teams",
+    desc: "24/7 expert assistance and proactive communication from dedicated account managers.",
+  },
+  {
+    icon: BarChart,
+    title: "Cost Efficiency",
+    desc: "Strategic supply chain optimization reducing overheads and maximizing operational value.",
+  },
+];
+
+const WhyChooseSection = () => {
+  return (
+    <section className="w-full bg-navy py-24 lg:py-32 relative overflow-hidden">
+      {/* Background Image & Overlay */}
+      <div className="absolute inset-0 pointer-events-none z-0">
+        <img
+          src={"/assets/cargo_pickup.png"}
+          alt="Logistics Background"
+          className="w-full h-full object-cover opacity-30 mix-blend-luminosity"
+        />
+        <div className="absolute inset-0 bg-navy/85" />
+      </div>
+
+      <div className="max-w-[1440px] mx-auto px-6 sm:px-8 lg:px-12 relative z-10">
+        <div className="text-center max-w-3xl mx-auto mb-16 lg:mb-24">
+          <div className="inline-flex items-center gap-2 px-3 py-1 bg-white/10 rounded-full text-white text-[11px] font-bold tracking-widest uppercase mb-6">
+            <span className="w-2 h-2 rounded-full bg-primary animate-pulse" />
+            Why Choose Seagull
+          </div>
+          <h2 className="font-heading font-extrabold text-[32px] sm:text-[40px] lg:text-[48px] text-white leading-tight mb-6">
+            Logistics excellence, <br className="hidden sm:block" />
+            <span className="text-primary">engineered for you.</span>
+          </h2>
+          <p className="text-white/70 text-[16px] lg:text-[18px] leading-relaxed">
+            We don't just move cargo; we optimize your entire supply chain with
+            industry-leading reliability, advanced technology, and unwavering
+            commitment.
+          </p>
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
+          {features.map((feature, i) => {
+            const Icon = feature.icon;
+            return (
+              <motion.div
+                key={i}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: "-50px" }}
+                transition={{ duration: 0.5, delay: i * 0.1 }}
+                className="bg-white/5 backdrop-blur-[3px] border border-white/10 rounded-[24px] p-8 hover:bg-white/10 transition-colors duration-300 group"
+                style={{ backdropFilter: "blur(3px)" }}
+              >
+                <div className="w-14 h-14 rounded-2xl bg-[#22c55e]/10 text-[#22c55e] flex items-center justify-center mb-6 group-hover:scale-110 transition-transform shadow-[inset_0_0_20px_rgba(34,197,94,0.1)]">
+                  <Icon size={28} />
+                </div>
+                <h3 className="font-heading font-bold text-white text-[20px] mb-3">
+                  {feature.title}
+                </h3>
+                <p className="text-white/60 text-[15px] leading-relaxed">
+                  {feature.desc}
+                </p>
+              </motion.div>
+            );
+          })}
+        </div>
+      </div>
+    </section>
+  );
+};
+
+export default WhyChooseSection;
