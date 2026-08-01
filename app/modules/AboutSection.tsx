@@ -1,14 +1,13 @@
 "use client";
 
 import { ArrowRight, Check, Globe, Target } from "lucide-react";
-import { motion } from "motion/react";
+import { motion } from "framer-motion";
 
-// AboutSection
 export const AboutSection = () => {
   return (
     <section
       id="about-us"
-      className="w-full py-20 lg:py-32 bg-brand-bg relative overflow-hidden"
+      className="w-full py-16 lg:py-16 bg-brand-bg relative overflow-hidden"
     >
       {/* Subtle Background Elements */}
       <div className="absolute inset-0 pointer-events-none">
@@ -32,8 +31,8 @@ export const AboutSection = () => {
               <motion.img
                 whileHover={{ scale: 1.03 }}
                 transition={{ duration: 6, ease: "easeOut" }}
-                src={"/assets/about_professional.png"}
-                alt="Modern logistics warehouse"
+                src={"/assets/photos1.webp"}
+                alt="Cargo Track professional relocation crew"
                 className="w-full h-full object-cover"
               />
               <div className="absolute inset-0 bg-navy/5 group-hover:bg-transparent transition-colors duration-500" />
@@ -50,8 +49,8 @@ export const AboutSection = () => {
               <motion.img
                 whileHover={{ scale: 1.05 }}
                 transition={{ duration: 4, ease: "easeOut" }}
-                src={"/assets/about_warehouse.png"}
-                alt="Logistics professional coordinating shipments"
+                src={"/assets/photos2.webp"}
+                alt="Cargo Track secure warehouse and packing facility"
                 className="w-full h-full object-cover"
               />
             </motion.div>
@@ -67,11 +66,11 @@ export const AboutSection = () => {
               <div className="flex items-center gap-2 mb-0.5 lg:mb-1">
                 <span className="w-1.5 h-1.5 lg:w-2 lg:h-2 rounded-full bg-accent animate-pulse" />
                 <span className="font-heading font-extrabold text-navy text-xl lg:text-2xl">
-                  Since 1995
+                  10+ Years
                 </span>
               </div>
               <span className="text-[12px] lg:text-[13px] font-sans font-medium text-brand-muted">
-                Trusted logistics expertise
+                Trusted Relocation Leaders
               </span>
             </motion.div>
 
@@ -101,8 +100,8 @@ export const AboutSection = () => {
               transition={{ duration: 0.6, delay: 0.1 }}
               className="font-heading font-extrabold text-[32px] sm:text-[36px] lg:text-[42px] leading-[1.15] text-navy mb-5 lg:mb-6"
             >
-              A trusted logistics partner for <br className="hidden lg:block" />
-              <span className="text-primary">seamless global trade.</span>
+              Your trusted partner for <br className="hidden lg:block" />
+              <span className="text-primary">seamless global mobility.</span>
             </motion.h2>
 
             <motion.p
@@ -112,11 +111,11 @@ export const AboutSection = () => {
               transition={{ duration: 0.6, delay: 0.2 }}
               className="text-brand-muted text-[16px] lg:text-[17px] leading-relaxed max-w-[600px] mb-8 lg:mb-10"
             >
-              Seagull Clearing & Forwarding Agencies Pvt. Ltd. has delivered
-              reliable and integrated logistics solutions since 1995. With a
-              strong presence across major Indian ports and cities, we simplify
-              customs clearance, freight forwarding, transportation and
-              warehousing through a coordinated single-window approach.
+              For over a decade, Cargo Track Relocations has delivered premier
+              relocation, freight, and logistics solutions across Saudi Arabia
+              and worldwide. With major branches in Jeddah, Riyadh, and Dammam,
+              we simplify international moves, corporate mobility, and storage
+              through an end-to-end, stress-free approach.
             </motion.p>
 
             <div className="grid sm:grid-cols-2 gap-4 lg:gap-5 mb-8 lg:mb-10">
@@ -136,8 +135,8 @@ export const AboutSection = () => {
                   Our Mission
                 </h3>
                 <p className="text-brand-muted text-[13.5px] leading-relaxed">
-                  To deliver efficient, reliable and cost-effective logistics
-                  solutions that enable seamless global trade.
+                  To provide secure, tailored, and hassle-free relocation
+                  solutions backed by expert craftsmanship and global standards.
                 </p>
               </motion.div>
 
@@ -157,8 +156,8 @@ export const AboutSection = () => {
                   Our Vision
                 </h3>
                 <p className="text-brand-muted text-[13.5px] leading-relaxed">
-                  To be a trusted logistics partner recognised for excellence,
-                  innovation and customer satisfaction.
+                  To be the regional leader in mobility, recognized for total
+                  reliability, safety, and worldwide logistics alliances.
                 </p>
               </motion.div>
             </div>
@@ -172,14 +171,14 @@ export const AboutSection = () => {
               className="mb-8 lg:mb-10"
             >
               <h4 className="font-heading font-bold text-navy text-[15px] lg:text-[16px] mb-4">
-                Built for dependable execution
+                Built for complete peace of mind
               </h4>
               <div className="grid sm:grid-cols-2 gap-y-3 gap-x-6">
                 {[
-                  "Experienced professionals",
-                  "Strong operational infrastructure",
-                  "Multi-location presence",
-                  "Customer-centric service",
+                  "Dedicated supervisors & carpenters",
+                  "Jeddah, Riyadh & Dammam hubs",
+                  "IAM & IATA global networks",
+                  "Comprehensive insurance coverage",
                 ].map((strength, i) => (
                   <div key={i} className="flex items-start gap-2.5">
                     <div className="w-4 h-4 lg:w-5 lg:h-5 rounded-full bg-primary/10 flex items-center justify-center shrink-0 mt-[2px] lg:mt-[1px]">
@@ -205,10 +204,10 @@ export const AboutSection = () => {
               transition={{ duration: 0.6, delay: 0.6 }}
             >
               <a
-                href="#about"
+                href="#services"
                 className="inline-flex items-center gap-2 text-primary font-semibold text-[14px] lg:text-[15px] group"
               >
-                Discover Our Story
+                Explore Our Relocation Services
                 <ArrowRight
                   size={18}
                   className="group-hover:translate-x-1 transition-transform"

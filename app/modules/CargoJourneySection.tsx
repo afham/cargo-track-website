@@ -1,7 +1,7 @@
 "use client";
 import Image from "next/image";
 import React, { useState } from "react";
-import { motion, AnimatePresence } from "motion/react";
+import { motion, AnimatePresence } from "framer-motion";
 import {
   Truck,
   FileText,
@@ -18,39 +18,39 @@ import {
 const stations = [
   {
     id: 1,
-    title: "Documentation",
+    title: "Survey & Planning",
     icon: FileText,
-    desc: "Verified paperwork & compliance.",
+    desc: "Pre-move assessment & inventory listing.",
   },
   {
     id: 2,
     title: "Customs Clearance",
     icon: ShieldCheck,
-    desc: "Regulated border crossing.",
+    desc: "Seamless import & export compliance.",
   },
   {
     id: 3,
-    title: "Freight Forwarding",
+    title: "Air & Sea Freight",
     icon: Ship,
-    desc: "Global transport coordination.",
+    desc: "Optimized global transit routing.",
   },
   {
     id: 4,
-    title: "Transportation",
+    title: "Road Transportation",
     icon: Truck,
-    desc: "Secure transit network.",
+    desc: "GPS-tracked fleet distribution.",
   },
   {
     id: 5,
-    title: "Warehousing",
+    title: "Warehousing & Care",
     icon: Package,
-    desc: "Storage and distribution.",
+    desc: "Climate-controlled storage solutions.",
   },
   {
     id: 6,
-    title: "Final Delivery",
+    title: "Doorstep Delivery",
     icon: MapPin,
-    desc: "Delivered to destination.",
+    desc: "Unpacking & assembly at destination.",
   },
 ];
 
@@ -60,7 +60,7 @@ const CargoJourneySection = () => {
   return (
     <section
       id="workflow"
-      className="w-full bg-white relative pt-12 pb-24 lg:pt-16 lg:pb-32 overflow-hidden"
+      className="w-full bg-white relative pt-16 pb-16 lg:pt-16 lg:pb-16 overflow-hidden"
     >
       {/* Background Elements */}
       <div className="absolute inset-0 pointer-events-none z-0">
@@ -87,7 +87,7 @@ const CargoJourneySection = () => {
               transition={{ duration: 0.5 }}
               className="text-[12px] font-bold text-primary uppercase tracking-[0.2em]"
             >
-              How We Move Cargo
+              How We Execute Relocations
             </motion.span>
             <span className="w-6 h-[2px] bg-[#4ade80]" />
           </div>
@@ -98,8 +98,8 @@ const CargoJourneySection = () => {
             transition={{ duration: 0.6, delay: 0.1 }}
             className="font-heading font-extrabold text-[36px] sm:text-[44px] lg:text-[56px] leading-[1.1] mb-6 text-navy"
           >
-            Every Shipment, <br className="hidden sm:block" />
-            <span className="text-primary">Handled with Precision.</span>
+            Every Moving Step, <br className="hidden sm:block" />
+            <span className="text-primary">Managed with Precision.</span>
           </motion.h2>
           <motion.p
             initial={{ opacity: 0, y: 20 }}
@@ -108,9 +108,9 @@ const CargoJourneySection = () => {
             transition={{ duration: 0.6, delay: 0.2 }}
             className="text-slate-600 text-[18px] lg:text-[20px] leading-relaxed font-medium"
           >
-            From documentation and customs clearance to transportation and final
-            delivery, Seagull manages every stage with precision, transparency
-            and reliability.
+            From specialized packing and customs coordination to international
+            air/ocean freight and destination doorstep setup, CargoTrack
+            streamlines your entire moving journey.
           </motion.p>
         </div>
 
@@ -168,7 +168,7 @@ const CargoJourneySection = () => {
               <div
                 className="h-[150px] w-full bg-cover bg-center opacity-90 group-hover:scale-105 group-hover:opacity-100 transition-all duration-700"
                 style={{
-                  backgroundImage: `url(${"/assets/cargo_pickup.png"})`,
+                  backgroundImage: `url(${"/assets/photos8.webp"})`,
                 }}
               />
               <div className="p-6 flex-1 flex flex-col justify-between">
@@ -177,20 +177,20 @@ const CargoJourneySection = () => {
                     <Truck size={24} />
                   </div>
                   <h4 className="font-heading font-extrabold text-[22px] text-navy mb-2">
-                    Cargo Pickup
+                    Origin Pickup
                   </h4>
                   <p className="text-slate-500 text-[14px] font-medium leading-relaxed mb-4">
-                    Cargo is collected from origin.
+                    Items surveyed & packed at doorstep.
                   </p>
                 </div>
                 <ul className="space-y-3 mt-2">
                   <li className="flex items-center gap-2 text-[13px] font-semibold text-slate-700">
                     <div className="w-1.5 h-1.5 rounded-full bg-[#4ade80]" />{" "}
-                    Scheduling
+                    Custom Crating
                   </li>
                   <li className="flex items-center gap-2 text-[13px] font-semibold text-slate-700">
                     <div className="w-1.5 h-1.5 rounded-full bg-[#4ade80]" />{" "}
-                    Documentation Ready
+                    Inventory Logging
                   </li>
                 </ul>
               </div>
@@ -199,7 +199,7 @@ const CargoJourneySection = () => {
 
           {/* CENTER: Animated Route & Stations */}
           <div className="flex-1 relative min-h-[300px] lg:min-h-0 lg:h-full flex items-center justify-center z-10 mx-0 lg:mx-8">
-            {/* 2:1 Aspect Ratio Wrapper to prevent SVG and moving circle stretch */}
+            {/* 2:1 Aspect Ratio Wrapper */}
             <div className="w-full h-full lg:h-auto lg:aspect-[2/1] lg:max-w-[800px] lg:max-h-full relative flex flex-col lg:block justify-between py-8 lg:py-0">
               {/* SVG Path Background */}
               <div className="absolute inset-0 pointer-events-none hidden lg:block">
@@ -254,14 +254,13 @@ const CargoJourneySection = () => {
               {stations.map((station, index) => {
                 const Icon = station.icon;
 
-                // Approximate positions along the SVG path for desktop
                 const desktopPositions = [
-                  { x: "12%", y: "45%" }, // Doc
-                  { x: "28%", y: "20%" }, // Customs
-                  { x: "46%", y: "45%" }, // Freight
-                  { x: "62%", y: "75%" }, // Transport
-                  { x: "80%", y: "65%" }, // Warehousing
-                  { x: "92%", y: "45%" }, // Delivery
+                  { x: "12%", y: "45%" },
+                  { x: "28%", y: "20%" },
+                  { x: "46%", y: "45%" },
+                  { x: "62%", y: "75%" },
+                  { x: "80%", y: "65%" },
+                  { x: "92%", y: "45%" },
                 ];
 
                 return (
@@ -306,30 +305,30 @@ const CargoJourneySection = () => {
               <div
                 className="h-[180px] w-full bg-cover bg-center opacity-80 group-hover:scale-105 group-hover:opacity-100 transition-all duration-700"
                 style={{
-                  backgroundImage: `url(${"/assets/industry_import_export.png"})`,
+                  backgroundImage: `url(${"/assets/photos9.webp"})`,
                 }}
               />
               <div className="p-6 flex-1 flex flex-col justify-between">
                 <div>
                   <div className="inline-flex items-center gap-1.5 px-3 py-1 bg-[#4ade80]/20 text-[#4ade80] rounded-full text-[12px] font-bold tracking-wider uppercase mb-4">
-                    <CheckCircle size={14} /> Delivered
+                    <CheckCircle size={14} /> Safely Delivered
                   </div>
                   <h4 className="font-heading font-extrabold text-[22px] leading-tight mb-3">
-                    Shipment Delivered Successfully
+                    Relocation Completed Smoothly
                   </h4>
                 </div>
                 <ul className="space-y-2 mt-4">
                   <li className="flex items-start gap-2 text-[13px] text-white/70">
                     <div className="mt-1 w-1.5 h-1.5 rounded-full bg-primary" />{" "}
-                    Professional logistics support
+                    Destination unmounting & assembly
                   </li>
                   <li className="flex items-start gap-2 text-[13px] text-white/70">
                     <div className="mt-1 w-1.5 h-1.5 rounded-full bg-primary" />{" "}
-                    Safe cargo handling
+                    Zero-damage handling assurance
                   </li>
                   <li className="flex items-start gap-2 text-[13px] text-white/70">
                     <div className="mt-1 w-1.5 h-1.5 rounded-full bg-primary" />{" "}
-                    Real-time coordination
+                    Complete client satisfaction
                   </li>
                 </ul>
               </div>
@@ -347,27 +346,27 @@ const CargoJourneySection = () => {
         >
           <div className="bg-white rounded-[20px] p-6 shadow-sm border border-slate-100 hover:border-primary/30 hover:shadow-md transition-all group">
             <div className="text-[12px] font-bold text-slate-400 uppercase tracking-widest mb-1">
-              Current Stage
+              Current Focus
             </div>
             <div className="font-heading font-bold text-primary text-[18px] group-hover:text-brightblue">
-              Documentation Complete
+              Customs & Flight/Ship Coordination
             </div>
           </div>
           <div className="bg-white rounded-[20px] p-6 shadow-sm border border-slate-100 hover:border-primary/30 hover:shadow-md transition-all group">
             <div className="text-[12px] font-bold text-slate-400 uppercase tracking-widest mb-1 flex items-center gap-2">
               <span className="w-2 h-2 rounded-full bg-amber-400 animate-pulse" />{" "}
-              Shipment Status
+              Operational Standard
             </div>
             <div className="font-heading font-bold text-navy text-[18px]">
-              In Transit
+              End-to-End Tracking
             </div>
           </div>
           <div className="bg-white rounded-[20px] p-6 shadow-sm border border-slate-100 hover:border-primary/30 hover:shadow-md transition-all group">
             <div className="text-[12px] font-bold text-slate-400 uppercase tracking-widest mb-1">
-              Coverage
+              Coverage Network
             </div>
             <div className="font-heading font-bold text-navy text-[18px]">
-              India + International
+              Saudi Arabia, GCC & Global
             </div>
           </div>
         </motion.div>
@@ -382,7 +381,7 @@ const CargoJourneySection = () => {
         >
           <div className="absolute inset-0 opacity-20 mix-blend-overlay transition-transform duration-700 group-hover:scale-105">
             <Image
-              src={"/assets/industry_import_export.png"}
+              src={"/assets/photos10.webp"}
               alt="Cargo Background"
               className="w-full h-full object-cover"
               fill
@@ -399,25 +398,21 @@ const CargoJourneySection = () => {
 
           <div className="relative z-10 max-w-xl text-center md:text-left">
             <h3 className="font-heading font-extrabold text-[32px] md:text-[40px] text-white mb-4 leading-tight">
-              Your Cargo. <br className="hidden sm:block" />
-              Our Responsibility.
+              Your Belongings. <br className="hidden sm:block" />
+              Our Absolute Priority.
             </h3>
             <p className="text-white/80 font-medium text-[16px] md:text-[18px]">
-              Experience seamless logistics from pickup to delivery with a
-              trusted partner focused on reliability and operational excellence.
+              Plan your household, office, or specialized relocation with
+              CargoTrack's experienced global logistics team.
             </p>
           </div>
 
           <div className="relative z-10 flex flex-col w-full md:w-auto gap-4 shrink-0">
-            {/* <button className="bg-white text-primary px-8 py-4 rounded-xl font-bold text-[16px] hover:bg-slate-50 transition-all shadow-lg hover:-translate-y-1 inline-flex justify-center items-center gap-2">
-              Track Your Shipment
-              <ArrowRightCircle size={20} />
-            </button> */}
             <a
               href="#contact"
               className="bg-transparent border-2 border-white/30 text-white px-8 py-4 rounded-xl font-bold text-[16px] hover:bg-white/10 transition-all flex justify-center items-center"
             >
-              Request a Quote
+              Request a Relocation Quote
             </a>
           </div>
         </motion.div>

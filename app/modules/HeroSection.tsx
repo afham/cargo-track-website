@@ -1,28 +1,84 @@
 "use client";
 
-import { ArrowRight } from "lucide-react";
-import { motion } from "motion/react";
+import { ArrowRight, CheckCircle2 } from "lucide-react";
+import { motion, AnimatePresence } from "motion/react";
 import { useEffect, useRef, useState } from "react";
 
-// HeroSection with Video Slider
-const heroVideos = [
-  "/assets/videos/hero-vid-1.mp4",
-  "/assets/videos/hero-vid-2.mp4",
-  "/assets/videos/hero-vid-3.mp4",
-  "/assets/videos/hero-vid-4.mp4",
+const heroVideos = ["/assets/videos/banner-full2.mp4"];
+
+const slides = [
+  {
+    headline: (
+      <>
+        Global Relocation Made <br className="hidden md:block" />
+        <span className="text-blue-400">Fast, Safe & Seamless.</span>
+      </>
+    ),
+    subline:
+      "Your trusted partner for local and corporate moves, delivering every shipment efficiently and strictly on schedule.",
+  },
+  {
+    headline: (
+      <>
+        Shared Container Shipping <br className="hidden md:block" />
+        <span className="text-blue-400">To USA, EU, CA & AUS.</span>
+      </>
+    ),
+    subline:
+      "Direct groupage service for small consignments and partial loads, offering cost-efficient routes for international moves.",
+  },
+  {
+    headline: (
+      <>
+        End-to-End Supply Chain <br className="hidden md:block" />
+        <span className="text-blue-400">Optimized For Your Growth.</span>
+      </>
+    ),
+    subline:
+      "Complete logistics management featuring modern warehousing, live cargo tracking, and dedicated air-sea transport lines.",
+  },
+  {
+    headline: (
+      <>
+        Global Freight Forwarding <br className="hidden md:block" />
+        <span className="text-blue-400">& Customs Clearance.</span>
+      </>
+    ),
+    subline:
+      "Expert air, sea, and land cargo handling with seamless brokerage clearance, preventing costly border delays worldwide.",
+  },
+  {
+    headline: (
+      <>
+        Direct Road Freight Lines <br className="hidden md:block" />
+        <span className="text-blue-400">Across The UAE Region.</span>
+      </>
+    ),
+    subline:
+      "Weekly overland transport for single packages or full house moves, backed by reliable schedules and expert handling.",
+  },
 ];
 
 export const HeroSection = () => {
   const [activeVideo, setActiveVideo] = useState(0);
+  const [activeSlide, setActiveSlide] = useState(0);
   const videoRefs = useRef<(HTMLVideoElement | null)[]>([]);
 
-  // Auto-advance slider
+  // Auto-advance video background if multiple
   useEffect(() => {
     if (heroVideos.length <= 1) return;
     const timer = setInterval(() => {
       setActiveVideo((prev) => (prev + 1) % heroVideos.length);
     }, 8000);
     return () => clearInterval(timer);
+  }, []);
+
+  // Auto-advance text slide every 5 seconds
+  useEffect(() => {
+    const slideTimer = setInterval(() => {
+      setActiveSlide((prev) => (prev + 1) % slides.length);
+    }, 5000);
+    return () => clearInterval(slideTimer);
   }, []);
 
   // Play the active video, pause others
@@ -38,6 +94,20 @@ export const HeroSection = () => {
     });
   }, [activeVideo]);
 
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [isSuccess, setIsSuccess] = useState(false);
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    setIsSubmitting(true);
+    // Simulate API call
+    setTimeout(() => {
+      setIsSubmitting(false);
+      setIsSuccess(true);
+      setTimeout(() => setIsSuccess(false), 5000);
+    }, 1500);
+  };
+
   return (
     <section
       id="home"
@@ -47,7 +117,7 @@ export const HeroSection = () => {
       {heroVideos.map((src, i) => (
         <div
           key={i}
-          className="absolute inset-0 w-full h-full z-0 transition-opacity duration-[1200ms] ease-in-out "
+          className="absolute inset-0 w-full h-full z-0 transition-opacity duration-[1200ms] ease-in-out"
           style={{ opacity: i === activeVideo ? 1 : 0 }}
         >
           <video
@@ -64,12 +134,12 @@ export const HeroSection = () => {
         </div>
       ))}
 
-      {/* White gradient overlay for text readability */}
-      <div className="absolute inset-0 bg-gradient-to-b sm:bg-gradient-to-r from-white/90 via-white/80 to-white/40 sm:from-white/85 sm:via-white/15 sm:to-transparent z-[2] pointer-events-none" />
+      {/* Subtle Dark/Light Gradient Overlay for Video Contrast */}
+      <div className="absolute inset-0 bg-gradient-to-r from-slate-950/80 via-slate-900/50 to-transparent z-[2] pointer-events-none" />
 
-      {/* Subtle dot pattern */}
+      {/* Dot pattern */}
       <div
-        className="absolute inset-0 z-[2] opacity-[0.04] pointer-events-none"
+        className="absolute inset-0 z-[2] opacity-[0.05] pointer-events-none"
         style={{
           backgroundImage: "radial-gradient(white 1px, transparent 1px)",
           backgroundSize: "30px 30px",
@@ -77,50 +147,54 @@ export const HeroSection = () => {
       />
 
       {/* Content */}
-      <div className="relative z-10 max-w-[1440px] mx-auto px-6 lg:px-12 w-full flex flex-col justify-center pb-20 lg:pb-20">
-        <div className="max-w-2xl w-full">
-          {/* <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-            className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/40 border border-white/60 backdrop-blur-sm mb-6 lg:mb-8"
-          >
-            <span className="flex h-2 w-2 rounded-full bg-accent" />
-            <span className="text-[11px] font-bold text-navy tracking-widest uppercase">
-              Global Logistics Solutions
-            </span>
-          </motion.div> */}
+      <div className="relative z-10 max-w-[1440px] mx-auto px-6 lg:px-12 w-full flex flex-col lg:flex-row gap-8 justify-between items-center pb-20 lg:pb-20">
+        <div className="max-w-[50rem] w-full">
+          {/* Fixed-height container to lock vertical height */}
+          <div className="h-[210px] sm:h-[190px] lg:h-[210px] flex flex-col justify-start">
+            <AnimatePresence mode="wait">
+              <motion.div
+                key={activeSlide}
+                initial={{ opacity: 0, y: 15 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -15 }}
+                transition={{ duration: 0.4, ease: "easeInOut" }}
+              >
+                <h1 className="font-heading font-extrabold text-[38px] sm:text-[44px] lg:text-[50px] leading-[1.15] text-white tracking-tight min-h-[2.3em]">
+                  {slides[activeSlide].headline}
+                </h1>
 
-          <motion.h1
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.7, delay: 0.1, ease: "easeOut" }}
-            className="font-heading font-extrabold text-[44px] sm:text-5xl lg:text-[56px] leading-[1.1] text-brand-dark tracking-tight"
-          >
-            Delivering Global Logistics with <br className="hidden md:block" />
-            <span className="text-primary">Precision, Speed & Trust.</span>
-          </motion.h1>
+                <p className="mt-4 lg:mt-6 text-[15px] lg:text-[17px] text-slate-200 font-sans max-w-[580px] leading-relaxed">
+                  {slides[activeSlide].subline}
+                </p>
+              </motion.div>
+            </AnimatePresence>
+          </div>
 
-          <motion.p
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.7, delay: 0.25, ease: "easeOut" }}
-            className="mt-6 lg:mt-8 text-[14px] lg:text-[17px] text-brand-muted font-sans max-w-[580px] leading-relaxed"
-          >
-            Seagull Clearing & Forwarding Agencies Pvt. Ltd. provides integrated
-            customs clearance, freight forwarding, transportation, and
-            warehousing solutions across India and international markets.
-          </motion.p>
+          {/* Slide Indicator Dots */}
+          <div className="flex items-center gap-2 mt-4">
+            {slides.map((_, index) => (
+              <button
+                key={index}
+                onClick={() => setActiveSlide(index)}
+                aria-label={`Go to slide ${index + 1}`}
+                className={`h-2 rounded-full transition-all duration-300 ${
+                  activeSlide === index
+                    ? "w-8 bg-blue-400"
+                    : "w-2 bg-white/30 hover:bg-white/50"
+                }`}
+              />
+            ))}
+          </div>
 
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7, delay: 0.4, ease: "easeOut" }}
-            className="flex flex-col sm:flex-row gap-4 lg:gap-5 mt-10 lg:mt-12"
+            className="flex flex-col sm:flex-row gap-4 lg:gap-5 mt-8 lg:mt-10"
           >
             <a
               href="#services"
-              className="group flex items-center justify-center gap-2 bg-primary text-white px-8 py-4 rounded-md font-semibold text-[15px] transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_8px_20px_rgba(21,101,192,0.4)] hover:bg-navy"
+              className="group flex items-center justify-center gap-2 bg-primary text-white px-8 py-4 rounded-xl font-semibold text-[15px] transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_8px_25px_rgba(21,101,192,0.5)] hover:bg-blue-600"
             >
               Explore Services
               <ArrowRight
@@ -131,7 +205,7 @@ export const HeroSection = () => {
 
             <a
               href="#contact"
-              className="group flex items-center justify-center gap-2 backdrop-blur-md bg-white/30 text-primary border-2 border-primary/20 px-8 py-4 rounded-md font-semibold text-[15px] transition-all duration-300 hover:border-primary hover:bg-white/50 hover:-translate-y-1"
+              className="group flex items-center justify-center gap-2 backdrop-blur-md bg-white/10 text-white border border-white/20 px-8 py-4 rounded-xl font-semibold text-[15px] transition-all duration-300 hover:border-white/50 hover:bg-white/20 hover:-translate-y-1"
             >
               Contact Us
               <ArrowRight
@@ -141,59 +215,163 @@ export const HeroSection = () => {
             </a>
           </motion.div>
         </div>
-      </div>
 
-      {/* Slider Navigation Dots */}
-      {heroVideos.length > 1 && (
-        <div className="absolute bottom-8 right-8 lg:bottom-12 lg:right-12 z-20 flex items-center gap-3">
-          {heroVideos.map((_, i) => (
-            <button
-              key={i}
-              onClick={() => setActiveVideo(i)}
-              className={`relative w-3 h-3 rounded-full transition-all duration-300 ${
-                i === activeVideo
-                  ? "bg-white scale-110 shadow-[0_0_10px_rgba(255,255,255,0.4)]"
-                  : "bg-white/40 hover:bg-white/70"
-              }`}
-            >
-              {/* Progress ring for active dot */}
-              {i === activeVideo && (
-                <svg
-                  className="absolute -inset-1.5 w-6 h-6"
-                  viewBox="0 0 24 24"
-                >
-                  <circle
-                    cx="12"
-                    cy="12"
-                    r="10"
-                    fill="none"
-                    stroke="rgba(255,255,255,0.2)"
-                    strokeWidth="2"
+        {/* RIGHT: Frosted Glass Quote Request Form */}
+        <motion.div
+          initial={{ opacity: 0, x: 30 }}
+          whileInView={{ opacity: 1, x: 0 }}
+          viewport={{ once: true, margin: "-100px" }}
+          transition={{ duration: 0.8 }}
+          className="w-full lg:max-w-[26rem] lg:min-w-[26rem]"
+        >
+          {/* Frosted Glass Box */}
+          <div className="backdrop-blur-sm bg-slate-900/40 border border-white/20 rounded-2xl p-6 shadow-[0_20px_50px_rgba(0,0,0,0.3)] text-white relative overflow-hidden">
+            {/* Ambient inner glow ring */}
+            <div className="absolute -top-12 -right-12 w-32 h-32 bg-primary/30 rounded-full blur-2xl pointer-events-none" />
+
+            <div className="mb-5 relative z-10">
+              <h3 className="font-heading font-extrabold text-[1.5rem] tracking-tight text-white">
+                Request a Quote
+              </h3>
+              <p className="text-xs text-slate-300 mt-1">
+                Get a competitive rate for your logistics needs in minutes.
+              </p>
+            </div>
+
+            <form onSubmit={handleSubmit} className="space-y-3.5 relative z-10">
+              {/* Row 1 */}
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
+                <div className="space-y-1">
+                  <input
+                    required
+                    type="text"
+                    placeholder="Full Name"
+                    className="w-full bg-white/10 border border-white/15 rounded-xl px-3.5 py-2.5 text-sm text-white placeholder:text-slate-300/70 outline-none focus:bg-white/20 focus:border-white/40 focus:ring-2 focus:ring-white/20 transition-all backdrop-blur-md"
                   />
-                  <motion.circle
-                    cx="12"
-                    cy="12"
-                    r="10"
-                    fill="none"
-                    stroke="white"
-                    strokeWidth="2"
-                    strokeLinecap="round"
-                    strokeDasharray={2 * Math.PI * 10}
-                    initial={{ strokeDashoffset: 2 * Math.PI * 10 }}
-                    animate={{ strokeDashoffset: 0 }}
-                    transition={{ duration: 8, ease: "linear" }}
-                    key={activeVideo}
-                    style={{
-                      transform: "rotate(-90deg)",
-                      transformOrigin: "center",
-                    }}
+                </div>
+                <div className="space-y-1">
+                  <select
+                    required
+                    defaultValue=""
+                    className="w-full bg-white/10 border border-white/15 rounded-xl px-3.5 py-2.5 text-sm text-white outline-none focus:bg-white/20 focus:border-white/40 focus:ring-2 focus:ring-white/20 transition-all backdrop-blur-md appearance-none bg-[url('data:image/svg+xml;base64,PHN2ZyBmaWxsPSJub25lIiBoZWlnaHQ9IjI0IiBzdHJva2U9IiNmZmZmZmYiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIgc3Ryb2tlLXdpZHRoPSIyIiB2aWV3Qm94PSIwIDAgMjQgMjQiIHdpZHRoPSIyNCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cG9seWxpbmUgcG9pbnRzPSI2IDkgMTIgMTUgMTggOSIvPjwvc3ZnPg==')] bg-no-repeat bg-[position:calc(100%-0.8rem)_center]"
+                  >
+                    <option
+                      value=""
+                      disabled
+                      className="bg-slate-900 text-slate-300"
+                    >
+                      Select Service
+                    </option>
+                    <option value="customs" className="bg-slate-900 text-white">
+                      Customs Clearance
+                    </option>
+                    <option value="freight" className="bg-slate-900 text-white">
+                      Freight Forwarding
+                    </option>
+                    <option
+                      value="transport"
+                      className="bg-slate-900 text-white"
+                    >
+                      Transportation
+                    </option>
+                    <option
+                      value="warehousing"
+                      className="bg-slate-900 text-white"
+                    >
+                      Warehousing
+                    </option>
+                    <option
+                      value="import-export"
+                      className="bg-slate-900 text-white"
+                    >
+                      Import & Export
+                    </option>
+                    <option value="other" className="bg-slate-900 text-white">
+                      Other
+                    </option>
+                  </select>
+                </div>
+              </div>
+
+              {/* Row 2 */}
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
+                <div className="space-y-1">
+                  <input
+                    required
+                    type="email"
+                    placeholder="Email Address"
+                    className="w-full bg-white/10 border border-white/15 rounded-xl px-3.5 py-2.5 text-sm text-white placeholder:text-slate-300/70 outline-none focus:bg-white/20 focus:border-white/40 focus:ring-2 focus:ring-white/20 transition-all backdrop-blur-md"
                   />
-                </svg>
-              )}
-            </button>
-          ))}
-        </div>
-      )}
+                </div>
+                <div className="space-y-1">
+                  <input
+                    required
+                    type="tel"
+                    placeholder="Phone Number"
+                    className="w-full bg-white/10 border border-white/15 rounded-xl px-3.5 py-2.5 text-sm text-white placeholder:text-slate-300/70 outline-none focus:bg-white/20 focus:border-white/40 focus:ring-2 focus:ring-white/20 transition-all backdrop-blur-md"
+                  />
+                </div>
+              </div>
+
+              {/* Row 3 */}
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
+                <div className="space-y-1">
+                  <input
+                    required
+                    type="text"
+                    placeholder="Origin (e.g. Mumbai)"
+                    className="w-full bg-white/10 border border-white/15 rounded-xl px-3.5 py-2.5 text-sm text-white placeholder:text-slate-300/70 outline-none focus:bg-white/20 focus:border-white/40 focus:ring-2 focus:ring-white/20 transition-all backdrop-blur-md"
+                  />
+                </div>
+                <div className="space-y-1">
+                  <input
+                    required
+                    type="text"
+                    placeholder="Destination (e.g. Dubai)"
+                    className="w-full bg-white/10 border border-white/15 rounded-xl px-3.5 py-2.5 text-sm text-white placeholder:text-slate-300/70 outline-none focus:bg-white/20 focus:border-white/40 focus:ring-2 focus:ring-white/20 transition-all backdrop-blur-md"
+                  />
+                </div>
+              </div>
+
+              {/* Message */}
+              <div className="space-y-1">
+                <textarea
+                  required
+                  maxLength={500}
+                  rows={3}
+                  placeholder="Additional shipment details (weight, dimensions, cargo type)..."
+                  className="w-full bg-white/10 border border-white/15 rounded-xl px-3.5 py-2.5 text-sm text-white placeholder:text-slate-300/70 outline-none focus:bg-white/20 focus:border-white/40 focus:ring-2 focus:ring-white/20 transition-all resize-none backdrop-blur-md"
+                />
+              </div>
+
+              {/* Submit Button */}
+              <button
+                disabled={isSubmitting || isSuccess}
+                type="submit"
+                className={`group w-full py-3 rounded-xl font-bold text-[15px] flex items-center justify-center gap-2 transition-all duration-300 shadow-lg ${
+                  isSuccess
+                    ? "bg-emerald-500 text-white shadow-emerald-500/30"
+                    : "bg-primary text-white hover:bg-blue-600 hover:shadow-primary/40 hover:-translate-y-0.5 active:translate-y-0"
+                } ${isSubmitting ? "opacity-80 cursor-wait" : ""}`}
+              >
+                {isSubmitting ? (
+                  <div className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin" />
+                ) : isSuccess ? (
+                  <>
+                    <CheckCircle2 className="w-5 h-5" />
+                    Quote Request Sent!
+                  </>
+                ) : (
+                  <>
+                    Request Free Quote
+                    <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                  </>
+                )}
+              </button>
+            </form>
+          </div>
+        </motion.div>
+      </div>
     </section>
   );
 };

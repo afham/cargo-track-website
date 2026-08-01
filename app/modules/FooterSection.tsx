@@ -1,9 +1,8 @@
 "use client";
-
+import Image from "next/image";
 import React, { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "motion/react";
 import {
-  ArrowRight,
   MapPin,
   Phone,
   Mail,
@@ -15,10 +14,10 @@ import {
   Youtube,
   ShieldCheck,
   Award,
-  Globe,
-  Briefcase,
   ChevronUp,
   Send,
+  Globe,
+  PhoneCallIcon,
 } from "lucide-react";
 
 const FooterSection = () => {
@@ -47,8 +46,36 @@ const FooterSection = () => {
     }
   };
 
+  const affiliations = [
+    "IATA",
+    "IAM",
+    "IMA",
+    "IAMX",
+    "GEM Network",
+    "FIDI",
+    "Asian Relocation Association",
+  ];
+
+  const services = [
+    "Household Goods Relocation",
+    "Vehicle Relocation & Transport",
+    "Packing & Crating Services",
+    "Artwork Packing & Handling",
+    "Pet Relocation",
+    "Storage & Warehousing",
+    "Industrial Packing",
+    "Office Relocation",
+    "Groupage Services",
+    "Pilgrim Baggage Handling",
+    "Mobility & Destination Services",
+    "Deep Cleaning Service",
+  ];
+
   return (
-    <footer className="w-full bg-[#071F3D] relative overflow-hidden text-white pt-[100px] pb-10 border-t border-white/10 mt-auto">
+    <footer
+      id="contact"
+      className="w-full bg-[#071F3D] relative overflow-hidden text-white pt-16 pb-16 border-t border-white/10 mt-auto"
+    >
       {/* Background Elements */}
       <div className="absolute inset-0 pointer-events-none z-0">
         <svg
@@ -78,57 +105,9 @@ const FooterSection = () => {
       </div>
 
       <div className="max-w-[1440px] mx-auto px-6 sm:px-8 lg:px-12 relative z-10">
-        {/* TOP CTA STRIP */}
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-100px" }}
-          transition={{ duration: 0.8 }}
-          className="w-full bg-gradient-to-r from-primary to-[#1E88E5] rounded-[32px] p-8 md:p-10 mb-20 shadow-[0_20px_50px_rgba(21,101,192,0.2)] flex flex-col lg:flex-row items-center justify-between gap-8 relative overflow-hidden group"
-        >
-          {/* Decorative CTA Background */}
-          <div className="absolute inset-0 opacity-[0.05] mix-blend-overlay">
-            <svg
-              viewBox="0 0 100 100"
-              preserveAspectRatio="none"
-              className="w-full h-full"
-            >
-              <path d="M 0 100 L 100 0 L 100 100 Z" fill="white" />
-            </svg>
-          </div>
-
-          <div className="relative z-10 text-center lg:text-left max-w-2xl">
-            <h3 className="font-heading font-extrabold text-[28px] sm:text-[32px] text-white mb-3">
-              Ready to Simplify Your Logistics?
-            </h3>
-            <p className="text-white/90 text-[15px] sm:text-[16px]">
-              Partner with Seagull for reliable customs clearance, freight
-              forwarding, transportation and warehousing solutions.
-            </p>
-          </div>
-          <div className="relative z-10 flex flex-col sm:flex-row items-center gap-4 shrink-0 w-full lg:w-auto">
-            <a
-              href="#contact"
-              className="w-full sm:w-auto bg-white text-primary px-8 py-4 rounded-[12px] font-bold text-[15px] hover:bg-slate-50 hover:shadow-lg hover:-translate-y-1 transition-all flex items-center justify-center gap-2 group/btn"
-            >
-              Request a Quote
-              <ArrowRight
-                size={18}
-                className="group-hover/btn:translate-x-1 transition-transform"
-              />
-            </a>
-            <a
-              href="#contact"
-              className="w-full sm:w-auto bg-transparent border-2 border-white/30 text-white px-8 py-4 rounded-[12px] font-bold text-[15px] hover:bg-white/10 hover:border-white/50 transition-all"
-            >
-              Contact Us
-            </a>
-          </div>
-        </motion.div>
-
         {/* MAIN FOOTER GRID */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-12 lg:gap-8 mb-20">
-          {/* Column 1: Company */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-12 lg:gap-8 mb-16">
+          {/* Column 1: Company Info */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -137,28 +116,30 @@ const FooterSection = () => {
             className="lg:col-span-1"
           >
             <div className="flex items-center gap-2 mb-6">
-              <img
-                src={"/assets/cargo-track-logo.png"}
-                alt="Seagull Logo"
+              <Image
+                src={"/assets/cargo-track-logo-white.svg"}
+                alt="CargoTrack Logo"
                 className="h-9 w-auto object-contain brightness"
+                width={100}
+                height={36}
               />
-              {/* <span className="font-heading font-extrabold text-[24px] text-white tracking-tight">SEAGULL</span> */}
             </div>
-            <p className="text-white/70 text-[14px] leading-relaxed mb-8">
-              Seagull delivers reliable customs clearance, freight forwarding,
-              transportation and logistics solutions with decades of industry
-              expertise.
+            <p className="text-white/70 text-[14px] leading-relaxed mb-6">
+              Based in Jeddah with branches in Riyadh and Dammam, CargoTrack
+              delivers trusted relocation, storage, mobility, and logistics
+              solutions locally and internationally.
             </p>
             <div className="flex flex-col gap-3">
               <div className="flex items-center gap-2 bg-white/5 border border-white/10 px-3 py-2 rounded-lg text-[12px] font-semibold text-white/80 w-fit">
-                <ShieldCheck size={14} className="text-[#4ade80]" /> ISO
-                Certified
+                <Award size={14} className="text-[#4ade80]" /> FIDI & IATA
+                Accredited
               </div>
               <div className="flex items-center gap-2 bg-white/5 border border-white/10 px-3 py-2 rounded-lg text-[12px] font-semibold text-white/80 w-fit">
-                <Award size={14} className="text-[#4ade80]" /> AEO Certified
+                <ShieldCheck size={14} className="text-[#4ade80]" /> IAM & GEM
+                Member
               </div>
               <div className="flex items-center gap-2 bg-white/5 border border-white/10 px-3 py-2 rounded-lg text-[12px] font-semibold text-white/80 w-fit">
-                <Clock size={14} className="text-[#4ade80]" /> 25+ Years
+                <Clock size={14} className="text-[#4ade80]" /> 10+ Years
                 Experience
               </div>
             </div>
@@ -179,9 +160,9 @@ const FooterSection = () => {
                 "Home",
                 "About Us",
                 "Services",
-                "Industries",
+                "Memberships",
                 "Global Network",
-                "Infrastructure",
+                "Pilgrim Baggage",
                 "FAQ",
                 "Contact",
               ].map((item, idx) => (
@@ -208,19 +189,12 @@ const FooterSection = () => {
             transition={{ duration: 0.5, delay: 0.2 }}
           >
             <h4 className="text-[15px] font-bold text-white uppercase tracking-wider mb-6">
-              Services
+              Our Services
             </h4>
-            <ul className="flex flex-col gap-3">
-              {[
-                "Customs Clearance",
-                "Freight Forwarding",
-                "Transportation",
-                "Warehousing",
-                "Import & Export",
-                "Supply Chain Support",
-              ].map((item, idx) => (
+            <ul className="flex flex-col gap-2.5">
+              {services.map((item, idx) => (
                 <li key={idx}>
-                  <button className="text-white/70 text-[14px] hover:text-white transition-colors relative group w-fit text-left">
+                  <button className="text-white/70 text-[13px] hover:text-white transition-colors relative group w-fit text-left">
                     {item}
                     <span className="absolute -bottom-0.5 left-0 w-0 h-[1px] bg-primary group-hover:w-full transition-all duration-300" />
                   </button>
@@ -229,7 +203,7 @@ const FooterSection = () => {
             </ul>
           </motion.div>
 
-          {/* Column 4: Contact */}
+          {/* Column 4: Contact & Hubs */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -237,36 +211,45 @@ const FooterSection = () => {
             transition={{ duration: 0.5, delay: 0.3 }}
           >
             <h4 className="text-[15px] font-bold text-white uppercase tracking-wider mb-6">
-              Contact
+              Headquarters & Hubs
             </h4>
             <ul className="flex flex-col gap-5">
               <li className="flex gap-3">
                 <MapPin size={18} className="text-primary shrink-0 mt-0.5" />
                 <span className="text-white/70 text-[14px] leading-relaxed">
-                  No.20, Beach House, Room No. 3, 2nd Floor, Second Lane Beach,
-                  Chennai - 600 001, India
+                  <strong className="text-white">Jeddah (Head Office)</strong>
+                  <br />
+                  Saudi Arabia
+                  <br />
+                  <span className="text-[12px] text-white/50">
+                    Branches: Riyadh | Dammam
+                  </span>
                 </span>
               </li>
               <li className="flex items-center gap-3">
-                <Phone size={18} className="text-primary shrink-0" />
+                <Globe size={18} className="text-primary shrink-0" />
                 <span className="text-white/70 text-[14px]">
-                  044-25249086 / 044-25264505
+                  Coverage: Middle East, Asia & Worldwide
                 </span>
               </li>
               <li className="flex items-center gap-3">
                 <Mail size={18} className="text-primary shrink-0" />
                 <span className="text-white/70 text-[14px]">
-                  seagullcfa@seagullclearing.net
-                  <br />
-                  radhakrishnan@seagullclearing.net
+                  info@cargotrack.com.sa
+                </span>
+              </li>
+              <li className="flex items-center gap-3">
+                <PhoneCallIcon size={18} className="text-primary shrink-0" />
+                <span className="text-white/70 text-[14px]">
+                  +966 59 096 7593
                 </span>
               </li>
               <li className="flex gap-3">
                 <Clock size={18} className="text-primary shrink-0 mt-0.5" />
                 <span className="text-white/70 text-[14px] leading-relaxed">
-                  Business Hours
+                  Working Hours
                   <br />
-                  Mon-Sat: 9AM - 6PM
+                  Sun - Thu: 8:00 AM - 6:00 PM
                 </span>
               </li>
             </ul>
@@ -282,7 +265,7 @@ const FooterSection = () => {
             <h4 className="text-[15px] font-bold text-white uppercase tracking-wider mb-6">
               Follow Us
             </h4>
-            <div className="flex items-center gap-3 mb-10">
+            <div className="flex items-center gap-3 mb-8">
               {[Linkedin, Facebook, Instagram, Twitter, Youtube].map(
                 (Icon, idx) => (
                   <button
@@ -298,7 +281,7 @@ const FooterSection = () => {
               )}
             </div>
 
-            <h4 className="text-[15px] font-bold text-white uppercase tracking-wider mb-4">
+            {/* <h4 className="text-[15px] font-bold text-white uppercase tracking-wider mb-4">
               Stay Updated
             </h4>
             <form
@@ -314,51 +297,16 @@ const FooterSection = () => {
                 <Send size={16} />
                 Subscribe
               </button>
-            </form>
+            </form> */}
           </motion.div>
         </div>
-
-        {/* CERTIFICATION STRIP */}
-        {/* <motion.div
-          initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }} transition={{ duration: 0.8 }}
-          className="border-t border-b border-white/10 py-8 mb-10"
-        >
-          <div className="flex flex-wrap items-center justify-center md:justify-between gap-6 lg:gap-8">
-            {[
-              { icon: <ShieldCheck size={20} />, label: "ISO Certified" },
-              { icon: <Award size={20} />, label: "AEO Certified" },
-              { icon: <Briefcase size={20} />, label: "Professional Logistics" },
-              { icon: <Globe size={20} />, label: "Trusted Operations" }
-            ].map((cert, idx) => (
-              <div key={idx} className="flex items-center gap-3 text-white/60 bg-white/5 px-5 py-3 rounded-xl border border-white/5 hover:bg-white/10 hover:text-white transition-all">
-                <span className="text-primary">{cert.icon}</span>
-                <span className="text-[14px] font-semibold tracking-wide">{cert.label}</span>
-              </div>
-            ))}
-          </div>
-        </motion.div> */}
 
         {/* BOTTOM BAR */}
         <div className="flex flex-col lg:flex-row items-center justify-between gap-6 text-white/50 text-[13px] font-medium border-t border-white/10 pt-8">
           <div>
-            © {new Date().getFullYear()} SEAGULL, Clearing & Forwarding Agencies
-            Pvt. Ltd. All Rights Reserved.
+            © {new Date().getFullYear()} CargoTrack Relocations. All Rights
+            Reserved.
           </div>
-          <div className="flex flex-wrap items-center justify-center gap-4 sm:gap-6">
-            {[
-              "Privacy Policy",
-              "Terms & Conditions",
-              "Disclaimer",
-              "Cookies Policy",
-            ].map((item, idx) => (
-              <button key={idx} className="hover:text-white transition-colors">
-                {item}
-              </button>
-            ))}
-          </div>
-          {/* <div className="text-center lg:text-right">
-            Designed with <span className="text-red-500">❤️</span> for Global Logistics Excellence
-          </div> */}
         </div>
       </div>
 

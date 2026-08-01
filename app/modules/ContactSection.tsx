@@ -314,7 +314,7 @@ const ContactSection = () => {
                         defaultValue={""}
                         className="w-full bg-[#F7FAFD] border border-slate-200 rounded-[16px] px-5 py-4 outline-none focus:bg-white focus:border-primary focus:ring-4 focus:ring-primary/10 transition-all text-slate-700 appearance-none bg-[url('data:image/svg+xml;base64,PHN2ZyBmaWxsPSJub25lIiBoZWlnaHQ9IjI0IiBzdHJva2U9IiM5NDkzYjgiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIgc3Ryb2tlLXdpZHRoPSIyIiB2aWV3Qm94PSIwIDAgMjQgMjQiIHdpZHRoPSIyNCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cG9seWxpbmUgcG9pbnRzPSI2IDkgMTIgMTUgMTggOSIvPjwvc3ZnPg==')] bg-no-repeat bg-[position:calc(100%-1.25rem)_center]"
                       >
-                        <option value="" disabled selected>
+                        <option value="" disabled>
                           Select a Service
                         </option>
                         <option value="customs">Customs Clearance</option>
@@ -334,7 +334,7 @@ const ContactSection = () => {
                         defaultValue={""}
                         className="w-full bg-[#F7FAFD] border border-slate-200 rounded-[16px] px-5 py-4 outline-none focus:bg-white focus:border-primary focus:ring-4 focus:ring-primary/10 transition-all text-slate-700 appearance-none bg-[url('data:image/svg+xml;base64,PHN2ZyBmaWxsPSJub25lIiBoZWlnaHQ9IjI0IiBzdHJva2U9IiM5NDkzYjgiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIgc3Ryb2tlLXdpZHRoPSIyIiB2aWV3Qm94PSIwIDAgMjQgMjQiIHdpZHRoPSIyNCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cG9seWxpbmUgcG9pbnRzPSI2IDkgMTIgMTUgMTggOSIvPjwvc3ZnPg==')] bg-no-repeat bg-[position:calc(100%-1.25rem)_center]"
                       >
-                        <option value="" disabled selected>
+                        <option value="" disabled>
                           Select Type
                         </option>
                         <option value="import">Import</option>

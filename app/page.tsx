@@ -16,6 +16,7 @@ import TestimonialsSection from "./modules/TestimonialsSection";
 import FAQSection from "./modules/FAQSection";
 import ContactSection from "./modules/ContactSection";
 import FooterSection from "./modules/FooterSection";
+import { GallerySection } from "./modules/GallerySection";
 
 export default function Home() {
   return (
@@ -26,16 +27,17 @@ export default function Home() {
       <TrustStrip />
       <ClientLogos />
       <AboutSection />
-      <LeadershipSection />
+      {/* <LeadershipSection /> */}
       <ServicesSection />
       <CargoJourneySection />
       <WhyChooseSection />
       <GlobalNetworkSection />
-      <InfrastructureSection />
-      <IndustriesSection />
+      <GallerySection />
+      {/* <InfrastructureSection />
+      <IndustriesSection /> */}
       <TestimonialsSection />
-      <FAQSection />
-      <ContactSection />
+      {/* <FAQSection />
+      <ContactSection /> */}
       <FooterSection />
     </main>
   );

@@ -8,42 +8,42 @@ const features = [
   {
     icon: Shield,
     title: "Uncompromising Security",
-    desc: "Advanced tracking and secure handling protocols ensure your cargo is protected at every stage of the journey.",
+    desc: "Advanced tracking and secure packing protocols ensure your cargo and personal belongings are protected at every stage.",
   },
   {
     icon: Globe,
     title: "Global Reach, Local Expertise",
-    desc: "A vast international network combined with deep local regulatory knowledge for seamless cross-border logistics.",
+    desc: "Extensive international network paired with deep regional customs knowledge for effortless cross-border moves.",
   },
   {
     icon: Clock,
     title: "Time-Definite Delivery",
-    desc: "Optimized routing and priority handling to meet strict deadlines with precision and reliability.",
+    desc: "Optimized route planning and priority freight handling to ensure precise, on-time arrivals every time.",
   },
   {
     icon: Zap,
-    title: "Next-Gen Technology",
-    desc: "Real-time visibility, automated documentation, and AI-driven predictive logistics management.",
+    title: "End-to-End Visibility",
+    desc: "Real-time tracking, proactive status updates, and transparent logistics management from pickup to placement.",
   },
   {
     icon: Users,
-    title: "Dedicated Support Teams",
-    desc: "24/7 expert assistance and proactive communication from dedicated account managers.",
+    title: "Dedicated Moving Experts",
+    desc: "Tailored customer support and personalized care from dedicated account managers available whenever you need them.",
   },
   {
     icon: BarChart,
-    title: "Cost Efficiency",
-    desc: "Strategic supply chain optimization reducing overheads and maximizing operational value.",
+    title: "Cost & Value Efficiency",
+    desc: "Transparent pricing structures and strategic consolidation solutions that maximize convenience without hidden fees.",
   },
 ];
 
 const WhyChooseSection = () => {
   return (
-    <section className="w-full bg-navy py-24 lg:py-32 relative overflow-hidden">
+    <section className="w-full bg-navy py-16 lg:py-16 relative overflow-hidden">
       {/* Background Image & Overlay */}
       <div className="absolute inset-0 pointer-events-none z-0">
         <img
-          src={"/assets/cargo_pickup.png"}
+          src={"/assets/photos11.webp"}
           alt="Logistics Background"
           className="w-full h-full object-cover opacity-30 mix-blend-luminosity"
         />
@@ -54,16 +54,16 @@ const WhyChooseSection = () => {
         <div className="text-center max-w-3xl mx-auto mb-16 lg:mb-24">
           <div className="inline-flex items-center gap-2 px-3 py-1 bg-white/10 rounded-full text-white text-[11px] font-bold tracking-widest uppercase mb-6">
             <span className="w-2 h-2 rounded-full bg-primary animate-pulse" />
-            Why Choose Seagull
+            Why Choose CargoTrack
           </div>
           <h2 className="font-heading font-extrabold text-[32px] sm:text-[40px] lg:text-[48px] text-white leading-tight mb-6">
-            Logistics excellence, <br className="hidden sm:block" />
-            <span className="text-primary">engineered for you.</span>
+            Logistics & Relocation, <br className="hidden sm:block" />
+            <span className="text-primary">Engineered for Reliability.</span>
           </h2>
           <p className="text-white/70 text-[16px] lg:text-[18px] leading-relaxed">
-            We don't just move cargo; we optimize your entire supply chain with
-            industry-leading reliability, advanced technology, and unwavering
-            commitment.
+            We go beyond moving shipments—we simplify your entire supply chain
+            and relocation journey with industry-leading care, global coverage,
+            and unyielding precision.
           </p>
         </div>
 
