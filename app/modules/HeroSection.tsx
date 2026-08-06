@@ -64,6 +64,21 @@ export const HeroSection = () => {
   const [activeSlide, setActiveSlide] = useState(0);
   const videoRefs = useRef<(HTMLVideoElement | null)[]>([]);
 
+  // Form State
+  const [formData, setFormData] = useState({
+    name: "",
+    service: "",
+    email: "",
+    phone: "",
+    origin: "",
+    destination: "",
+    message: "",
+  });
+
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [isSuccess, setIsSuccess] = useState(false);
+  const [errorMessage, setErrorMessage] = useState("");
+
   // Auto-advance video background if multiple
   useEffect(() => {
     if (heroVideos.length <= 1) return;
@@ -94,18 +109,53 @@ export const HeroSection = () => {
     });
   }, [activeVideo]);
 
-  const [isSubmitting, setIsSubmitting] = useState(false);
-  const [isSuccess, setIsSuccess] = useState(false);
+  const handleChange = (
+    e: React.ChangeEvent<
+      HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement
+    >,
+  ) => {
+    setFormData((prev) => ({ ...prev, [e.target.name]: e.target.value }));
+  };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
-    // Simulate API call
-    setTimeout(() => {
-      setIsSubmitting(false);
+    setErrorMessage("");
+
+    try {
+      const res = await fetch("/api/mail", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(formData),
+      });
+
+      const data = await res.json();
+
+      if (!res.ok) {
+        throw new Error(data.error || "Failed to submit request.");
+      }
+
       setIsSuccess(true);
+      setFormData({
+        name: "",
+        service: "",
+        email: "",
+        phone: "",
+        origin: "",
+        destination: "",
+        message: "",
+      });
+
       setTimeout(() => setIsSuccess(false), 5000);
-    }, 1500);
+    } catch (err) {
+      setErrorMessage(
+        err instanceof Error
+          ? err.message
+          : "Something went wrong. Please try again.",
+      );
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -239,20 +289,25 @@ export const HeroSection = () => {
             </div>
 
             <form onSubmit={handleSubmit} className="space-y-3.5 relative z-10">
-              {/* Row 1 */}
+              {/* Row 1: Name (Required) & Service (Required) */}
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
                 <div className="space-y-1">
                   <input
                     required
                     type="text"
-                    placeholder="Full Name"
+                    name="name"
+                    value={formData.name}
+                    onChange={handleChange}
+                    placeholder="Full Name *"
                     className="w-full bg-white/10 border border-white/15 rounded-xl px-3.5 py-2.5 text-sm text-white placeholder:text-slate-300/70 outline-none focus:bg-white/20 focus:border-white/40 focus:ring-2 focus:ring-white/20 transition-all backdrop-blur-md"
                   />
                 </div>
                 <div className="space-y-1">
                   <select
                     required
-                    defaultValue=""
+                    name="service"
+                    value={formData.service}
+                    onChange={handleChange}
                     className="w-full bg-white/10 border border-white/15 rounded-xl px-3.5 py-2.5 text-sm text-white outline-none focus:bg-white/20 focus:border-white/40 focus:ring-2 focus:ring-white/20 transition-all backdrop-blur-md appearance-none bg-[url('data:image/svg+xml;base64,PHN2ZyBmaWxsPSJub25lIiBoZWlnaHQ9IjI0IiBzdHJva2U9IiNmZmZmZmYiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIgc3Ryb2tlLXdpZHRoPSIyIiB2aWV3Qm94PSIwIDAgMjQgMjQiIHdpZHRoPSIyNCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cG9seWxpbmUgcG9pbnRzPSI2IDkgMTIgMTUgMTggOSIvPjwvc3ZnPg==')] bg-no-repeat bg-[position:calc(100%-0.8rem)_center]"
                   >
                     <option
@@ -260,89 +315,113 @@ export const HeroSection = () => {
                       disabled
                       className="bg-slate-900 text-slate-300"
                     >
-                      Select Service
+                      Select Service *
                     </option>
-                    <option value="customs" className="bg-slate-900 text-white">
+                    <option
+                      value="Customs Clearance"
+                      className="bg-slate-900 text-white"
+                    >
                       Customs Clearance
                     </option>
-                    <option value="freight" className="bg-slate-900 text-white">
+                    <option
+                      value="Freight Forwarding"
+                      className="bg-slate-900 text-white"
+                    >
                       Freight Forwarding
                     </option>
                     <option
-                      value="transport"
+                      value="Transportation"
                       className="bg-slate-900 text-white"
                     >
                       Transportation
                     </option>
                     <option
-                      value="warehousing"
+                      value="Warehousing"
                       className="bg-slate-900 text-white"
                     >
                       Warehousing
                     </option>
                     <option
-                      value="import-export"
+                      value="Import & Export"
                       className="bg-slate-900 text-white"
                     >
                       Import & Export
                     </option>
-                    <option value="other" className="bg-slate-900 text-white">
+                    <option value="Other" className="bg-slate-900 text-white">
                       Other
                     </option>
                   </select>
                 </div>
               </div>
 
-              {/* Row 2 */}
+              {/* Row 2: Email (Required & Validated) & Phone (Optional) */}
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
                 <div className="space-y-1">
                   <input
                     required
                     type="email"
-                    placeholder="Email Address"
+                    name="email"
+                    value={formData.email}
+                    onChange={handleChange}
+                    placeholder="Email Address *"
                     className="w-full bg-white/10 border border-white/15 rounded-xl px-3.5 py-2.5 text-sm text-white placeholder:text-slate-300/70 outline-none focus:bg-white/20 focus:border-white/40 focus:ring-2 focus:ring-white/20 transition-all backdrop-blur-md"
                   />
                 </div>
                 <div className="space-y-1">
                   <input
-                    required
                     type="tel"
+                    name="phone"
+                    value={formData.phone}
+                    onChange={handleChange}
                     placeholder="Phone Number"
                     className="w-full bg-white/10 border border-white/15 rounded-xl px-3.5 py-2.5 text-sm text-white placeholder:text-slate-300/70 outline-none focus:bg-white/20 focus:border-white/40 focus:ring-2 focus:ring-white/20 transition-all backdrop-blur-md"
                   />
                 </div>
               </div>
 
-              {/* Row 3 */}
+              {/* Row 3: Origin & Destination (Optional) */}
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
                 <div className="space-y-1">
                   <input
-                    required
                     type="text"
+                    name="origin"
+                    value={formData.origin}
+                    onChange={handleChange}
                     placeholder="Origin (e.g. Mumbai)"
                     className="w-full bg-white/10 border border-white/15 rounded-xl px-3.5 py-2.5 text-sm text-white placeholder:text-slate-300/70 outline-none focus:bg-white/20 focus:border-white/40 focus:ring-2 focus:ring-white/20 transition-all backdrop-blur-md"
                   />
                 </div>
                 <div className="space-y-1">
                   <input
-                    required
                     type="text"
+                    name="destination"
+                    value={formData.destination}
+                    onChange={handleChange}
                     placeholder="Destination (e.g. Dubai)"
                     className="w-full bg-white/10 border border-white/15 rounded-xl px-3.5 py-2.5 text-sm text-white placeholder:text-slate-300/70 outline-none focus:bg-white/20 focus:border-white/40 focus:ring-2 focus:ring-white/20 transition-all backdrop-blur-md"
                   />
                 </div>
               </div>
 
-              {/* Message */}
+              {/* Message (Optional) */}
               <div className="space-y-1">
                 <textarea
-                  required
+                  name="message"
+                  value={formData.message}
+                  onChange={handleChange}
                   maxLength={500}
                   rows={3}
                   placeholder="Additional shipment details (weight, dimensions, cargo type)..."
                   className="w-full bg-white/10 border border-white/15 rounded-xl px-3.5 py-2.5 text-sm text-white placeholder:text-slate-300/70 outline-none focus:bg-white/20 focus:border-white/40 focus:ring-2 focus:ring-white/20 transition-all resize-none backdrop-blur-md"
                 />
               </div>
+
+              {/* Error Alert */}
+              {errorMessage && (
+                <div className="text-xs text-rose-400 bg-rose-500/10 border border-rose-500/20 rounded-lg p-2.5">
+                  {errorMessage}
+                </div>
+              )}
 
               {/* Submit Button */}
               <button

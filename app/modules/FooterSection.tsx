@@ -235,7 +235,7 @@ const FooterSection = () => {
               <li className="flex items-center gap-3">
                 <Mail size={18} className="text-primary shrink-0" />
                 <span className="text-white/70 text-[14px]">
-                  info@cargotrack.com.sa
+                  uswafa.kamil@cargotrack.co
                 </span>
               </li>
               <li className="flex items-center gap-3">
