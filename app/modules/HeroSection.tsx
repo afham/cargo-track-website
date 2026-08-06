@@ -259,9 +259,19 @@ export const HeroSection = () => {
 
               <a
                 href="#services"
-                className="group flex items-center justify-center gap-2 backdrop-blur-md bg-white/10 text-white border border-white/20 px-8 py-4 rounded-xl font-semibold text-[15px] transition-all duration-300 hover:border-white/50 hover:bg-white/20 hover:-translate-y-1"
+                className=" group flex items-center justify-center gap-2 bg-primary text-white px-8 py-4 rounded-xl font-semibold text-[15px] transition-all duration-300 shadow-[0_8px_25px_rgba(21,101,192,0.4)]"
               >
                 Explore Services
+                <ArrowRight
+                  size={18}
+                  className="group-hover:translate-x-1 transition-transform opacity-70 group-hover:opacity-100"
+                />
+              </a>
+              <a
+                href="#contact-info"
+                className="group flex items-center justify-center gap-2 backdrop-blur-md bg-white/10 text-white border border-white/20 px-8 py-4 rounded-xl font-semibold text-[15px] transition-all duration-300 hover:border-white/50 hover:bg-white/20 hover:-translate-y-1"
+              >
+                Contact Us
                 <ArrowRight
                   size={18}
                   className="group-hover:translate-x-1 transition-transform opacity-70 group-hover:opacity-100"

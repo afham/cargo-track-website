@@ -226,6 +226,7 @@ const FooterSection = () => {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.5, delay: 0.3 }}
+            id="contact-info"
           >
             <h4 className="text-[15px] font-bold text-white uppercase tracking-wider mb-6">
               Headquarters & Hubs
