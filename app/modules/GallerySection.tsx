@@ -10,20 +10,23 @@ interface GallerySectionProps {
 }
 
 const DEFAULT_IMAGES = [
-  "/assets/gallery-2.jpg",
-  "/assets/gallery-3.jpg",
-  "/assets/gallery-4.jpg",
-  "/assets/gallery-5.jpg",
-  "/assets/gallery-6.jpg",
-  "/assets/gallery-7.jpg",
-  "/assets/gallery-8.jpg",
-  "/assets/gallery-9.jpg",
-  "/assets/gallery-10.jpg",
-  "/assets/gallery-11.jpg",
-  "/assets/gallery-12.jpg",
-  "/assets/gallery-13.jpg",
-  "/assets/gallery-14.jpg",
-  "/assets/gallery-15.jpg",
+  "/assets/gallery-1.webp",
+  "/assets/gallery-2.webp",
+  "/assets/gallery-3.webp",
+  "/assets/gallery-4.webp",
+  "/assets/gallery-5.webp",
+  "/assets/gallery-6.webp",
+  "/assets/gallery-7.webp",
+  "/assets/gallery-8.webp",
+  "/assets/gallery-9.webp",
+  "/assets/gallery-10.webp",
+  "/assets/gallery-11.webp",
+  "/assets/gallery-12.webp",
+  "/assets/gallery-13.webp",
+  "/assets/gallery-14.webp",
+  "/assets/gallery-15.webp",
+  "/assets/gallery-16.webp",
+  "/assets/gallery-17.webp",
 ];
 
 export const GallerySection = ({

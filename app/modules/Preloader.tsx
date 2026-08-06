@@ -2,14 +2,14 @@
 
 import React, { useEffect, useState } from "react";
 import { motion, AnimatePresence, useReducedMotion } from "framer-motion";
-
+import Image from "next/image";
 const Preloader = () => {
   const [isVisible, setIsVisible] = useState(true);
   const shouldReduceMotion = useReducedMotion();
 
   useEffect(() => {
     // Check if user has already visited in this session
-    const hasVisited = sessionStorage.getItem("seagull_hasVisited");
+    const hasVisited = sessionStorage.getItem("hasVisited");
     if (hasVisited) {
       setIsVisible(false);
       return;
@@ -21,7 +21,7 @@ const Preloader = () => {
     // Sequence timing (total ~2.8s)
     const timer = setTimeout(() => {
       setIsVisible(false);
-      sessionStorage.setItem("seagull_hasVisited", "true");
+      sessionStorage.setItem("hasVisited", "true");
       document.body.style.overflow = "";
     }, 2800);
 
@@ -75,12 +75,11 @@ const Preloader = () => {
             }}
             className="relative z-10"
           >
-            <video
-              src={"assets/videos/preloader-animation.mp4"}
-              autoPlay
-              muted
-              playsInline
-              className="h-16 md:h-20 w-auto object-contain mix-blend-multiply"
+            <Image
+              src={"assets/truck-moving.svg"}
+              width={160}
+              height={160}
+              alt=""
             />
           </motion.div>
         </motion.div>

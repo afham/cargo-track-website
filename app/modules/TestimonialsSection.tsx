@@ -1,16 +1,8 @@
 "use client";
 
-import React from "react";
-import { motion } from "framer-motion";
-import {
-  Quote,
-  ArrowRight,
-  Building,
-  Star,
-  Package,
-  Compass,
-  Plane,
-} from "lucide-react";
+import React, { useState, useEffect } from "react";
+import { motion, useMotionValue, animate } from "framer-motion";
+import { Quote, ChevronLeft, ChevronRight, Star, User } from "lucide-react";
 
 const StarRating = ({ count = 5 }: { count?: number }) => (
   <div className="flex items-center gap-1">
@@ -20,45 +12,140 @@ const StarRating = ({ count = 5 }: { count?: number }) => (
   </div>
 );
 
-const featuredTestimonial = {
-  company: "Al-Safwa Executive Services",
-  industry: "Corporate & Hospitality Mobility",
-  quote:
-    "CargoTrack handled our complete office relocation across Jeddah and Riyadh with exceptional professionalism. From disassembling complex IT setups and unmounting equipment to fragile crating and reassembling furniture at our new headquarters, their team managed every phase seamlessly. Over a decade of operational excellence truly shows in their execution.",
-};
-
-const supportingTestimonials = [
+const rawTestimonials = [
   {
-    company: "Holy Cities Pilgrim Services",
-    industry: "Pilgrim & Travel Logistics",
+    id: 1,
+    company: "Kanwal Saya",
+    industry: "Relocation Client",
     rating: 5,
-    icon: Compass,
+    icon: User,
     quote:
-      "CargoTrack's pilgrim baggage handling service is exceptional. Managing customs at Jeddah and arranging direct, hassle-free door-to-door delivery back to Asia for our Umrah and Hajj groups allowed our pilgrims to focus entirely on their religious journey.",
+      "They were great! The team is very helpful and did an amazing job! Definitely recommend them.",
   },
   {
-    company: "Heritage & Fine Arts Gallery",
-    industry: "Artwork & Fine Arts Logistics",
+    id: 2,
+    company: "Saud Bazarah",
+    industry: "Home Relocation",
     rating: 5,
-    icon: Package,
+    icon: User,
     quote:
-      "Transporting valuable artwork and delicate antiques requires specialized care. CargoTrack's team crafted custom wooden boxing and thermocol protection, ensuring total safety from initial pickup to final gallery placement.",
+      "Totally recommend the cargo track team. Best relocation and movers in town.",
   },
   {
-    company: "Global Horizon Mobility",
-    industry: "International Relocation & Groupage",
+    id: 3,
+    company: "Rameez Rahman",
+    industry: "Intercity Relocation",
     rating: 5,
-    icon: Plane,
+    icon: User,
     quote:
-      "Whether managing household goods transfers to Europe or combining small shipments via their cost-effective groupage services, CargoTrack consistently delivers on time with complete documentation and customs clarity.",
+      "I've used their service twice for relocations within Saudi and both times I was extremely impressed by their professionalism and customer service. Their packaging was thorough, and everything arrived undamaged.",
+  },
+  {
+    id: 4,
+    company: "Simo Simo",
+    industry: "Relocation Client",
+    rating: 5,
+    icon: User,
+    quote: "Perfect job done withing limit time.",
+  },
+  {
+    id: 5,
+    company: "Dilsha Adil",
+    industry: "Packing & Moving",
+    rating: 5,
+    icon: User,
+    quote:
+      "Appreciate their team work. Friendly staffs. Nicely packed and delivered it on time.undamaged.",
+  },
+  {
+    id: 6,
+    company: "Munir Metassan",
+    industry: "Shipping & Cargo",
+    rating: 5,
+    icon: User,
+    quote:
+      "Our go to Cargo/shipping agent. Very reasonable price and very dependable. Always 5star service and ready assist with any issues.",
+  },
+  {
+    id: 7,
+    company: "Asim Jaan",
+    industry: "Relocation Client",
+    rating: 5,
+    icon: User,
+    quote:
+      "Very convenient and helpfull.Wafa and her team were are extremely professional.",
   },
 ];
 
+// Duplicate items to support seamless continuous looping
+const testimonials = [
+  ...rawTestimonials,
+  ...rawTestimonials,
+  ...rawTestimonials,
+];
+
 const TestimonialsSection = () => {
+  const [currentIndex, setCurrentIndex] = useState(rawTestimonials.length);
+  const [cardsToShow, setCardsToShow] = useState(3);
+  const x = useMotionValue(0);
+
+  // Dynamically update visible card count based on screen width
+  useEffect(() => {
+    const updateCardsToShow = () => {
+      if (window.innerWidth >= 1024) {
+        setCardsToShow(3);
+      } else if (window.innerWidth >= 768) {
+        setCardsToShow(2);
+      } else {
+        setCardsToShow(1);
+      }
+    };
+
+    updateCardsToShow();
+    window.addEventListener("resize", updateCardsToShow);
+    return () => window.removeEventListener("resize", updateCardsToShow);
+  }, []);
+
+  // Animate track movement by shifting one card width at a time
+  useEffect(() => {
+    const cardPercentage = 100 / cardsToShow;
+    const targetX = -currentIndex * cardPercentage;
+
+    const controls = animate(x, targetX, {
+      type: "spring",
+      stiffness: 250,
+      damping: 30,
+    });
+
+    return () => controls.stop();
+  }, [currentIndex, cardsToShow, x]);
+
+  const handleNext = () => {
+    setCurrentIndex((prev) => {
+      const nextIndex = prev + 1;
+      if (nextIndex >= testimonials.length - cardsToShow) {
+        return rawTestimonials.length;
+      }
+      return nextIndex;
+    });
+  };
+
+  const handlePrev = () => {
+    setCurrentIndex((prev) => {
+      const prevIndex = prev - 1;
+      if (prevIndex < 0) {
+        return rawTestimonials.length - 1;
+      }
+      return prevIndex;
+    });
+  };
+
+  const activeDotIndex = currentIndex % rawTestimonials.length;
+
   return (
     <section
       id="testimonials"
-      className="relative bg-white py-16 overflow-hidden"
+      className="relative bg-white py-16 md:py-24 overflow-hidden"
     >
       {/* Background Elements */}
       <div className="absolute inset-0 z-0 pointer-events-none">
@@ -73,124 +160,111 @@ const TestimonialsSection = () => {
       </div>
 
       <div className="relative z-10 max-w-[1440px] mx-auto px-6 sm:px-8 lg:px-12">
-        {/* Section Header */}
-        <div className="flex flex-col items-center text-center max-w-[760px] mx-auto mb-20">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: "-100px" }}
-            transition={{ duration: 0.6 }}
-            className="flex items-center gap-3 mb-6"
-          >
+        {/* Updated Section Header */}
+        <div className="flex flex-col items-center text-center max-w-[760px] mx-auto mb-12 md:mb-16">
+          <div className="flex items-center gap-3 mb-6">
             <div className="w-2 h-2 bg-[#2E8B57] rounded-full" />
             <span className="text-sm font-bold tracking-widest text-primary uppercase">
-              Client & Partner Trust
+              Relocation Experience
             </span>
             <div className="w-2 h-2 bg-[#2E8B57] rounded-full" />
-          </motion.div>
-          <motion.h2
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: "-100px" }}
-            transition={{ duration: 0.6, delay: 0.1 }}
-            className="font-heading text-4xl md:text-5xl font-extrabold text-navy tracking-tight leading-[1.1] mb-6"
-          >
-            Trusted Relocations Across <br />
-            <span className="text-primary">Saudi Arabia & Worldwide.</span>
-          </motion.h2>
-          <motion.p
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: "-100px" }}
-            transition={{ duration: 0.6, delay: 0.2 }}
-            className="text-lg md:text-xl text-brand-muted font-medium"
-          >
-            Operating from Jeddah, Riyadh, and Dammam with IATA, IAM, and FIDI
-            affiliations to deliver seamless relocation, packing, and mobility
-            services.
-          </motion.p>
+          </div>
+
+          <h2 className="font-heading text-3xl sm:text-4xl md:text-5xl font-extrabold text-navy tracking-tight leading-[1.1] mb-6">
+            What Our Relocation <br className="hidden sm:inline" />
+            <span className="text-primary">Customers Say About Us.</span>
+          </h2>
+
+          <p className="text-base md:text-lg text-brand-muted font-medium">
+            Real feedback from families, professionals, and businesses who
+            relied on our packing, moving, and hassle-free relocation services.
+          </p>
         </div>
 
-        {/* Main Layout */}
-        <div className="flex flex-col gap-8 mb-24">
-          {/* Featured Testimonial */}
+        {/* Carousel Slider Window */}
+        <div className="relative max-w-[1280px] mx-auto overflow-hidden px-2">
+          {/* Animated Flex Container Track */}
           <motion.div
-            initial={{ opacity: 0, y: 40 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: "-100px" }}
-            transition={{ duration: 0.8 }}
-            className="bg-white rounded-[32px] shadow-[0_20px_40px_-15px_rgba(0,0,0,0.08)] border border-slate-100 p-8 md:p-12 lg:p-16 relative overflow-hidden group"
+            style={{ x: useMotionValue(0) && `${x.get()}%` }}
+            className="flex transition-transform ease-out"
           >
-            {/* Subtle background gradient */}
-            <div className="absolute top-0 right-0 w-[400px] h-[400px] bg-primary/5 rounded-full blur-[80px] pointer-events-none" />
-
-            <div className="flex flex-col lg:flex-row gap-12 lg:gap-20 items-center relative z-10">
-              {/* Left: Company Info */}
-              <div className="w-full lg:w-1/3 flex flex-col gap-6 shrink-0">
-                <Quote className="w-14 h-14 text-primary/15" />
-                <StarRating />
-                <div className="flex items-center gap-4">
-                  <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-primary/10 to-primary/20 flex items-center justify-center text-primary shrink-0 border border-primary/10 shadow-sm">
-                    <Building className="w-8 h-8" />
-                  </div>
-                  <div>
-                    <h4 className="text-xl font-bold text-navy leading-snug">
-                      {featuredTestimonial.company}
-                    </h4>
-                    <span className="inline-block mt-2 px-3 py-1 bg-primary/8 text-primary text-[12px] font-bold rounded-full tracking-wide">
-                      {featuredTestimonial.industry}
-                    </span>
-                  </div>
-                </div>
-              </div>
-
-              {/* Right: Quote */}
-              <div className="w-full lg:w-2/3">
-                <p className="text-[16px] md:text-[18px] font-medium text-navy/80 leading-relaxed">
-                  "{featuredTestimonial.quote}"
-                </p>
-              </div>
-            </div>
-          </motion.div>
-
-          {/* Supporting Testimonials */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {supportingTestimonials.map((t, index) => {
+            {testimonials.map((t, idx) => {
               const Icon = t.icon;
               return (
-                <motion.div
-                  key={t.company}
-                  initial={{ opacity: 0, y: 30 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true, margin: "-100px" }}
-                  transition={{ duration: 0.6, delay: index * 0.15 }}
-                  className="group bg-white rounded-3xl p-8 border border-slate-100 shadow-sm hover:shadow-xl hover:-translate-y-1.5 transition-all duration-300 hover:border-primary/20 flex flex-col relative overflow-hidden"
+                <div
+                  key={`${t.id}-${idx}`}
+                  style={{ flex: `0 0 ${100 / cardsToShow}%` }}
+                  className="px-3 shrink-0"
                 >
-                  <div className="absolute top-0 right-0 w-[160px] h-[160px] bg-primary/3 rounded-full blur-[50px] pointer-events-none" />
-                  <div className="flex items-center justify-between mb-5 relative z-10">
-                    <Quote className="w-10 h-10 text-slate-200 group-hover:text-primary/20 transition-colors" />
-                    <StarRating count={t.rating} />
-                  </div>
-                  <p className="text-[16px] text-brand-muted leading-relaxed mb-8 grow relative z-10">
-                    "{t.quote}"
-                  </p>
-                  <div className="flex items-center gap-3.5 mt-auto pt-6 border-t border-slate-100 relative z-10">
-                    <div className="w-11 h-11 rounded-xl bg-primary/10 flex items-center justify-center text-primary shrink-0 group-hover:scale-105 transition-transform border border-primary/10">
-                      <Icon className="w-5 h-5" />
+                  <div className="group bg-white rounded-3xl p-8 border border-slate-100 shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300 flex flex-col h-full relative overflow-hidden">
+                    <div className="absolute top-0 right-0 w-[160px] h-[160px] bg-primary/5 rounded-full blur-[50px] pointer-events-none" />
+
+                    <div className="flex items-center justify-between mb-5 relative z-10">
+                      <Quote className="w-10 h-10 text-slate-200 group-hover:text-primary/20 transition-colors" />
+                      <StarRating count={t.rating} />
                     </div>
-                    <div>
-                      <h5 className="font-bold text-navy text-[15px] leading-tight">
-                        {t.company}
-                      </h5>
-                      <p className="text-[12px] text-primary font-semibold mt-0.5">
-                        {t.industry}
-                      </p>
+
+                    <p className="text-[15px] text-brand-muted leading-relaxed mb-8 grow relative z-10">
+                      "{t.quote}"
+                    </p>
+
+                    <div className="flex items-center gap-3.5 mt-auto pt-6 border-t border-slate-100 relative z-10">
+                      <div className="w-11 h-11 rounded-xl bg-primary/10 flex items-center justify-center text-primary shrink-0 group-hover:scale-105 transition-transform border border-primary/10">
+                        <Icon className="w-5 h-5" />
+                      </div>
+                      <div>
+                        <h5 className="font-bold text-navy text-[15px] leading-tight">
+                          {t.company}
+                        </h5>
+                        {t.industry && (
+                          <p className="text-[12px] text-primary font-semibold mt-0.5">
+                            {t.industry}
+                          </p>
+                        )}
+                      </div>
                     </div>
                   </div>
-                </motion.div>
+                </div>
               );
             })}
+          </motion.div>
+        </div>
+
+        {/* Centered Navigation Controls */}
+        <div className="flex items-center justify-center gap-4 md:gap-6 mt-12">
+          {/* Previous Button */}
+          <button
+            onClick={handlePrev}
+            aria-label="Previous Testimonial"
+            className="p-3 rounded-full bg-white border border-slate-200 text-navy hover:bg-primary hover:text-white hover:border-primary transition-all duration-200 shadow-sm focus:outline-none focus:ring-2 focus:ring-primary/50"
+          >
+            <ChevronLeft className="w-5 h-5" />
+          </button>
+
+          {/* Pagination Indicators */}
+          <div className="flex items-center gap-2">
+            {rawTestimonials.map((_, index) => (
+              <button
+                key={index}
+                onClick={() => setCurrentIndex(rawTestimonials.length + index)}
+                aria-label={`Go to slide ${index + 1}`}
+                className={`h-2.5 rounded-full transition-all duration-300 ${
+                  index === activeDotIndex
+                    ? "w-8 bg-primary"
+                    : "w-2.5 bg-slate-300 hover:bg-slate-400"
+                }`}
+              />
+            ))}
           </div>
+
+          {/* Next Button */}
+          <button
+            onClick={handleNext}
+            aria-label="Next Testimonial"
+            className="p-3 rounded-full bg-white border border-slate-200 text-navy hover:bg-primary hover:text-white hover:border-primary transition-all duration-200 shadow-sm focus:outline-none focus:ring-2 focus:ring-primary/50"
+          >
+            <ChevronRight className="w-5 h-5" />
+          </button>
         </div>
       </div>
     </section>

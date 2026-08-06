@@ -27,17 +27,12 @@ export default function Home() {
       <TrustStrip />
       <ClientLogos />
       <AboutSection />
-      {/* <LeadershipSection /> */}
       <ServicesSection />
       <CargoJourneySection />
       <WhyChooseSection />
       <GlobalNetworkSection />
       <GallerySection />
-      {/* <InfrastructureSection />
-      <IndustriesSection /> */}
       <TestimonialsSection />
-      {/* <FAQSection />
-      <ContactSection /> */}
       <FooterSection />
     </main>
   );

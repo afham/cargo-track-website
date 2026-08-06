@@ -1,16 +1,9 @@
 "use client";
 
 import React, { useState } from "react";
-import { motion } from "motion/react";
-import {
-  Building2,
-  Anchor,
-  PlaneTakeoff,
-  ArrowRight,
-  Truck,
-  ShieldCheck,
-  PackageCheck,
-} from "lucide-react";
+import { motion } from "framer-motion";
+import { Building2, Anchor, Truck } from "lucide-react";
+import Image from "next/image";
 
 const GlobalNetworkSection = () => {
   const [activeCity, setActiveCity] = useState<string | null>(null);
@@ -27,21 +20,21 @@ const GlobalNetworkSection = () => {
       id: "jeddah",
       name: "Jeddah",
       role: "Headquarters",
-      desc: "Mobility • Pilgrim Baggage • Storage • Customs",
+      desc: "G53P+VV, Al Sharafeyah, 2nd Floor, ADVANCE BUSINESS CENETER ,KHALID BIN ALWALEED STREET, Door Number 213B, Jeddah 22234, Saudi Arabia",
       icon: Building2,
     },
     {
       id: "riyadh",
       name: "Riyadh",
       role: "Central Region",
-      desc: "Office Relocation • Household Goods • Packing",
+      desc: "7027 الإقدام, Al Mashael, Near, Riyadh 14322, Saudi Arabia",
       icon: Truck,
     },
     {
       id: "dammam",
       name: "Dammam",
       role: "Eastern Region",
-      desc: "Industrial Packing • Heavy Machinery • Freight",
+      desc: "5600 شارع 1، 6th floor, Al Zoabi Tower, Prince Mohammed Bin Fahd Road, Dammam 32241, Saudi Arabia",
       icon: Anchor,
     },
   ];
@@ -54,7 +47,8 @@ const GlobalNetworkSection = () => {
       x: 605,
       y: 285,
       role: "Headquarters",
-      desc: "Pilgrim Baggage • Mobility • Air & Sea Freight",
+      desc: "G53P+VV, Al Sharafeyah, 2nd Floor, ADVANCE BUSINESS CENETER ,KHALID BIN ALWALEED STREET, Door Number 213B, Jeddah 22234, Saudi Arabia",
+      icon: Building2,
     },
     {
       id: "riyadh",
@@ -62,7 +56,8 @@ const GlobalNetworkSection = () => {
       x: 630,
       y: 270,
       role: "Central Hub",
-      desc: "Corporate Moving • Household Goods • Storage",
+      desc: "7027 الإقدام, Al Mashael, Near, Riyadh 14322, Saudi Arabia",
+      icon: Truck,
     },
     {
       id: "dammam",
@@ -70,32 +65,27 @@ const GlobalNetworkSection = () => {
       x: 645,
       y: 265,
       role: "Eastern Hub",
-      desc: "Industrial Packing • Port Logistics • Machinery",
+      desc: "5600 شارع 1، 6th floor, Al Zoabi Tower, Prince Mohammed Bin Fahd Road, Dammam 32241, Saudi Arabia",
+      icon: Anchor,
     },
   ];
 
+  // Global routes connecting Jeddah HQ across continents
   const intlRoutes = [
-    { to: "Europe", x: 520, y: 180, path: "M 605 285 Q 550 210 520 180" },
+    { to: "UK & Europe", x: 480, y: 160, path: "M 605 285 Q 530 190 480 160" },
     { to: "USA & Canada", x: 220, y: 220, path: "M 605 285 Q 400 150 220 220" },
+    { to: "UAE & Gulf", x: 650, y: 280, path: "M 605 285 Q 630 280 650 280" },
     { to: "India", x: 710, y: 300, path: "M 605 285 Q 660 300 710 300" },
     { to: "Singapore", x: 770, y: 350, path: "M 605 285 Q 700 330 770 350" },
     { to: "Malaysia", x: 760, y: 340, path: "M 605 285 Q 690 320 760 340" },
+    { to: "Australia", x: 880, y: 460, path: "M 605 285 Q 780 420 880 460" },
+    { to: "South Africa", x: 570, y: 450, path: "M 605 285 Q 560 380 570 450" },
     {
       to: "Makkah & Madinah",
       x: 595,
       y: 295,
       path: "M 605 285 Q 600 290 595 295",
     },
-  ];
-
-  const affiliations = [
-    "IATA",
-    "IAM",
-    "IMA",
-    "IAMX",
-    "GEM Network",
-    "FIDI",
-    "Asian Relocation Assoc.",
   ];
 
   return (
@@ -143,14 +133,14 @@ const GlobalNetworkSection = () => {
             Headquartered in Jeddah with branches in Riyadh and Dammam,
             CargoTrack provides end-to-end household moves, corporate
             relocations, industrial packing, and pilgrim baggage handling across
-            the Middle East, Asia, Europe, and the Americas.
+            the Middle East, Asia, Europe, Australia, Africa, and the Americas.
           </motion.p>
         </div>
 
         {/* Main Layout */}
         <div className="flex flex-col lg:flex-row gap-8 lg:gap-12 mb-16 lg:mb-20">
           {/* LEFT: Interactive Map */}
-          <div className="w-full lg:w-[60%] bg-white rounded-[32px] p-4 lg:p-8 shadow-[0_20px_50px_rgba(11,58,102,0.05)] border border-brand-text/5 relative h-[400px] lg:h-[580px] overflow-hidden flex items-center justify-center">
+          <div className="w-full lg:w-[60%] bg-white rounded-[32px] p-4 lg:p-8 shadow-[0_20px_50px_rgba(11,58,102,0.05)] border border-brand-text/5 relative h-[400px] lg:h-[600px] overflow-hidden flex items-center justify-center">
             {/* Aspect Ratio Container for Map */}
             <div className="w-full h-auto aspect-[700/600] max-h-full relative flex items-center justify-center">
               {/* World Map Vector Mask */}
@@ -243,6 +233,7 @@ const GlobalNetworkSection = () => {
                   const leftPct = (loc.x / 1000) * 100;
                   const topPct = (loc.y / 600) * 100;
                   const isActive = activeCity === loc.id;
+                  const Icon = loc.icon;
 
                   return (
                     <div
@@ -252,14 +243,32 @@ const GlobalNetworkSection = () => {
                       onMouseEnter={() => setActiveCity(loc.id)}
                       onMouseLeave={() => setActiveCity(null)}
                     >
-                      <div className="relative">
-                        {/* Pulse effect */}
-                        <div className="absolute inset-0 rounded-full bg-primary/40 animate-ping" />
+                      <div className="relative flex items-center justify-center">
+                        {/* Pulse animation ring */}
                         <div
-                          className={`w-3 h-3 lg:w-4 lg:h-4 rounded-full border-2 border-white shadow-[0_0_10px_rgba(21,101,192,0.5)] transition-colors duration-300 ${
-                            isActive ? "bg-primary" : "bg-primary/80"
+                          className={`absolute inset-0 rounded-full bg-primary/30 animate-ping ${
+                            isActive ? "scale-150" : ""
                           }`}
                         />
+
+                        {/* White circular badge with added inner padding for icon/logo */}
+                        <div
+                          className={`relative w-5 h-5 lg:w-8 lg:h-8 rounded-full bg-white border flex items-center justify-center p-1 lg:p-1.5 shadow-md transition-all duration-300 transform group-hover:scale-110 ${
+                            isActive
+                              ? "border-primary ring-2 ring-primary/20 shadow-lg scale-110"
+                              : "border-primary/40 hover:border-primary"
+                          }`}
+                        >
+                          {/* Logo Image */}
+                          <Image
+                            src="/assets/cargo-track-icon.png"
+                            alt={`${loc.name} office`}
+                            className="w-full h-full object-contain"
+                            width={16}
+                            height={16}
+                          />
+                          <Icon size={12} className="text-primary hidden" />
+                        </div>
 
                         {/* Hover Card */}
                         <div
@@ -269,7 +278,8 @@ const GlobalNetworkSection = () => {
                               : "opacity-0 translate-y-4 scale-95"
                           }`}
                         >
-                          <div className="font-heading font-bold text-navy text-[14px] lg:text-[15px] mb-1">
+                          <div className="font-heading font-bold text-navy text-[14px] lg:text-[15px] mb-1 flex items-center gap-2">
+                            <span className="w-2 h-2 rounded-full bg-primary inline-block" />
                             {loc.name}
                           </div>
                           <div className="text-primary text-[11px] lg:text-[12px] font-semibold mb-2">
@@ -341,14 +351,15 @@ const GlobalNetworkSection = () => {
                         : "bg-transparent border-transparent hover:bg-brand-bg/50"
                     }`}
                   >
+                    {/* Icon Container with padding */}
                     <div
-                      className={`w-10 h-10 rounded-full flex items-center justify-center shrink-0 transition-colors ${
+                      className={`w-8 h-8 rounded-full flex items-center justify-center p-1.5 shrink-0 transition-colors ${
                         activeCity === branch.id
                           ? "bg-primary text-white"
                           : "bg-brand-bg text-primary"
                       }`}
                     >
-                      <branch.icon size={18} />
+                      <branch.icon className="w-full h-full" />
                     </div>
                     <div>
                       <div className="flex items-center gap-2 mb-0.5">

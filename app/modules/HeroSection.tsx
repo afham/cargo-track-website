@@ -161,7 +161,7 @@ export const HeroSection = () => {
   return (
     <section
       id="home"
-      className="relative w-full min-h-[100vh] lg:min-h-[880px] lg:h-[85vh] flex items-center pt-24 lg:pt-0 overflow-hidden"
+      className="relative w-full min-h-[100dvh] lg:min-h-[880px] lg:h-[85vh] flex flex-col justify-between lg:justify-center pt-24 lg:pt-0 overflow-hidden"
     >
       {/* Video Background Slides */}
       {heroVideos.map((src, i) => (
@@ -185,7 +185,7 @@ export const HeroSection = () => {
       ))}
 
       {/* Subtle Dark/Light Gradient Overlay for Video Contrast */}
-      <div className="absolute inset-0 bg-gradient-to-r from-slate-950/80 via-slate-900/50 to-transparent z-[2] pointer-events-none" />
+      <div className="absolute inset-0 bg-gradient-to-r from-slate-950/85 via-slate-900/60 to-slate-950/80 lg:to-transparent z-[2] pointer-events-none" />
 
       {/* Dot pattern */}
       <div
@@ -196,86 +196,92 @@ export const HeroSection = () => {
         }}
       />
 
-      {/* Content */}
-      <div className="relative z-10 max-w-[1440px] mx-auto px-6 lg:px-12 w-full flex flex-col lg:flex-row gap-8 justify-between items-center pb-20 lg:pb-20">
-        <div className="max-w-[50rem] w-full">
-          {/* Fixed-height container to lock vertical height */}
-          <div className="h-[210px] sm:h-[190px] lg:h-[210px] flex flex-col justify-start">
-            <AnimatePresence mode="wait">
-              <motion.div
-                key={activeSlide}
-                initial={{ opacity: 0, y: 15 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: -15 }}
-                transition={{ duration: 0.4, ease: "easeInOut" }}
+      {/* Main Container with extra bottom padding for mobile (pb-16 sm:pb-20 lg:pb-0) */}
+      <div className="relative z-10 max-w-[1440px] mx-auto px-6 lg:px-12 w-full flex flex-col lg:flex-row gap-12 lg:gap-8 justify-between items-center my-auto pb-16 sm:pb-20 lg:pb-0">
+        {/* LEFT: Text Content Stack */}
+        <div className="max-w-[50rem] w-full flex flex-col justify-center min-h-[calc(100dvh-120px)] lg:min-h-0 py-6">
+          <div className="flex flex-col gap-6 lg:gap-8">
+            {/* Animated Headline and Subline */}
+            <div className="min-h-[180px] sm:min-h-[170px] lg:min-h-[180px]">
+              <AnimatePresence mode="wait">
+                <motion.div
+                  key={activeSlide}
+                  initial={{ opacity: 0, y: 15 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: -15 }}
+                  transition={{ duration: 0.4, ease: "easeInOut" }}
+                >
+                  <h1 className="font-heading font-extrabold text-[32px] sm:text-[44px] lg:text-[50px] leading-[1.15] text-white tracking-tight">
+                    {slides[activeSlide].headline}
+                  </h1>
+
+                  <p className="mt-4 lg:mt-6 text-[15px] lg:text-[17px] text-slate-200 font-sans max-w-[580px] leading-relaxed">
+                    {slides[activeSlide].subline}
+                  </p>
+                </motion.div>
+              </AnimatePresence>
+            </div>
+
+            {/* Slide Indicator Dots */}
+            <div className="flex items-center gap-2">
+              {slides.map((_, index) => (
+                <button
+                  key={index}
+                  onClick={() => setActiveSlide(index)}
+                  aria-label={`Go to slide ${index + 1}`}
+                  className={`h-2 rounded-full transition-all duration-300 ${
+                    activeSlide === index
+                      ? "w-8 bg-blue-400"
+                      : "w-2 bg-white/30 hover:bg-white/50"
+                  }`}
+                />
+              ))}
+            </div>
+
+            {/* Action Buttons */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.7, delay: 0.4, ease: "easeOut" }}
+              className="flex flex-col sm:flex-row gap-4 lg:gap-5"
+            >
+              {/* Smooth Scroll to Form Button on Mobile */}
+              <a
+                href="#quote-form"
+                className="lg:hidden group flex items-center justify-center gap-2 bg-primary text-white px-8 py-4 rounded-xl font-semibold text-[15px] transition-all duration-300 shadow-[0_8px_25px_rgba(21,101,192,0.4)]"
               >
-                <h1 className="font-heading font-extrabold text-[38px] sm:text-[44px] lg:text-[50px] leading-[1.15] text-white tracking-tight min-h-[2.3em]">
-                  {slides[activeSlide].headline}
-                </h1>
+                Get a Free Quote
+                <ArrowRight
+                  size={18}
+                  className="group-hover:translate-x-1 transition-transform"
+                />
+              </a>
 
-                <p className="mt-4 lg:mt-6 text-[15px] lg:text-[17px] text-slate-200 font-sans max-w-[580px] leading-relaxed">
-                  {slides[activeSlide].subline}
-                </p>
-              </motion.div>
-            </AnimatePresence>
+              <a
+                href="#services"
+                className="group flex items-center justify-center gap-2 backdrop-blur-md bg-white/10 text-white border border-white/20 px-8 py-4 rounded-xl font-semibold text-[15px] transition-all duration-300 hover:border-white/50 hover:bg-white/20 hover:-translate-y-1"
+              >
+                Explore Services
+                <ArrowRight
+                  size={18}
+                  className="group-hover:translate-x-1 transition-transform opacity-70 group-hover:opacity-100"
+                />
+              </a>
+            </motion.div>
           </div>
-
-          {/* Slide Indicator Dots */}
-          <div className="flex items-center gap-2 mt-4">
-            {slides.map((_, index) => (
-              <button
-                key={index}
-                onClick={() => setActiveSlide(index)}
-                aria-label={`Go to slide ${index + 1}`}
-                className={`h-2 rounded-full transition-all duration-300 ${
-                  activeSlide === index
-                    ? "w-8 bg-blue-400"
-                    : "w-2 bg-white/30 hover:bg-white/50"
-                }`}
-              />
-            ))}
-          </div>
-
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.7, delay: 0.4, ease: "easeOut" }}
-            className="flex flex-col sm:flex-row gap-4 lg:gap-5 mt-8 lg:mt-10"
-          >
-            <a
-              href="#services"
-              className="group flex items-center justify-center gap-2 bg-primary text-white px-8 py-4 rounded-xl font-semibold text-[15px] transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_8px_25px_rgba(21,101,192,0.5)] hover:bg-blue-600"
-            >
-              Explore Services
-              <ArrowRight
-                size={18}
-                className="group-hover:translate-x-1 transition-transform"
-              />
-            </a>
-
-            <a
-              href="#contact"
-              className="group flex items-center justify-center gap-2 backdrop-blur-md bg-white/10 text-white border border-white/20 px-8 py-4 rounded-xl font-semibold text-[15px] transition-all duration-300 hover:border-white/50 hover:bg-white/20 hover:-translate-y-1"
-            >
-              Contact Us
-              <ArrowRight
-                size={18}
-                className="group-hover:translate-x-1 transition-transform opacity-70 group-hover:opacity-100"
-              />
-            </a>
-          </motion.div>
         </div>
 
-        {/* RIGHT: Frosted Glass Quote Request Form */}
+        {/* RIGHT / BELOW SCROLL: Frosted Glass Quote Request Form */}
         <motion.div
-          initial={{ opacity: 0, x: 30 }}
-          whileInView={{ opacity: 1, x: 0 }}
-          viewport={{ once: true, margin: "-100px" }}
+          id="quote-form"
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-50px" }}
           transition={{ duration: 0.8 }}
-          className="w-full lg:max-w-[26rem] lg:min-w-[26rem]"
+          className="w-full lg:max-w-[26rem] lg:min-w-[26rem] pt-8 lg:pt-0 mb-8 lg:mb-0 scroll-mt-24"
         >
           {/* Frosted Glass Box */}
-          <div className="backdrop-blur-sm bg-slate-900/40 border border-white/20 rounded-2xl p-6 shadow-[0_20px_50px_rgba(0,0,0,0.3)] text-white relative overflow-hidden">
+          <div className="backdrop-blur-md bg-slate-900/60 lg:bg-slate-900/40 border border-white/20 rounded-2xl p-6 shadow-[0_20px_50px_rgba(0,0,0,0.4)] text-white relative overflow-hidden">
             {/* Ambient inner glow ring */}
             <div className="absolute -top-12 -right-12 w-32 h-32 bg-primary/30 rounded-full blur-2xl pointer-events-none" />
 
@@ -289,7 +295,7 @@ export const HeroSection = () => {
             </div>
 
             <form onSubmit={handleSubmit} className="space-y-3.5 relative z-10">
-              {/* Row 1: Name (Required) & Service (Required) */}
+              {/* Row 1: Name & Service */}
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
                 <div className="space-y-1">
                   <input
@@ -308,7 +314,7 @@ export const HeroSection = () => {
                     name="service"
                     value={formData.service}
                     onChange={handleChange}
-                    className="w-full bg-white/10 border border-white/15 rounded-xl px-3.5 py-2.5 text-sm text-white outline-none focus:bg-white/20 focus:border-white/40 focus:ring-2 focus:ring-white/20 transition-all backdrop-blur-md appearance-none bg-[url('data:image/svg+xml;base64,PHN2ZyBmaWxsPSJub25lIiBoZWlnaHQ9IjI0IiBzdHJva2U9IiNmZmZmZmYiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIgc3Ryb2tlLXdpZHRoPSIyIiB2aWV3Qm94PSIwIDAgMjQgMjQiIHdpZHRoPSIyNCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cG9seWxpbmUgcG9pbnRzPSI2IDkgMTIgMTUgMTggOSIvPjwvc3ZnPg==')] bg-no-repeat bg-[position:calc(100%-0.8rem)_center]"
+                    className="w-full bg-white/10 border border-white/15 rounded-xl px-3.5 py-2.5 text-sm text-white outline-none focus:bg-white/20 focus:border-white/40 focus:ring-2 focus:ring-white/20 transition-all backdrop-blur-md appearance-none bg-[url('data:image/svg+xml;base64,PHN2ZyBmaWxsPSJub25lIiBoZWlnaHQ9IjI0IiBzdHJva2U9IiNmZmZmZmYiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIgc3Ryb2tlLXdpZHRoPSIyIiB2aWV3Qm94PSIwIDAgMjQgMjQiIHdpZHRoPSIyNCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnPg==')] bg-no-repeat bg-[position:calc(100%-0.8rem)_center]"
                   >
                     <option
                       value=""
@@ -316,6 +322,13 @@ export const HeroSection = () => {
                       className="bg-slate-900 text-slate-300"
                     >
                       Select Service *
+                    </option>
+
+                    <option
+                      value="Moving and reloaction services"
+                      className="bg-slate-900 text-white"
+                    >
+                      Moving and reloaction services
                     </option>
                     <option
                       value="Customs Clearance"
@@ -354,7 +367,7 @@ export const HeroSection = () => {
                 </div>
               </div>
 
-              {/* Row 2: Email (Required & Validated) & Phone (Optional) */}
+              {/* Row 2: Email & Phone */}
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
                 <div className="space-y-1">
                   <input
@@ -379,7 +392,7 @@ export const HeroSection = () => {
                 </div>
               </div>
 
-              {/* Row 3: Origin & Destination (Optional) */}
+              {/* Row 3: Origin & Destination */}
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
                 <div className="space-y-1">
                   <input
@@ -403,7 +416,7 @@ export const HeroSection = () => {
                 </div>
               </div>
 
-              {/* Message (Optional) */}
+              {/* Message */}
               <div className="space-y-1">
                 <textarea
                   name="message"

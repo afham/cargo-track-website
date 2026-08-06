@@ -71,6 +71,23 @@ const FooterSection = () => {
     "Deep Cleaning Service",
   ];
 
+  const branches = [
+    {
+      name: "Jeddah (Head Office)",
+      address:
+        "G53P+VV, Al Sharafeyah, 2nd Floor, ADVANCE BUSINESS CENETER, KHALID BIN ALWALEED STREET, Door Number 213B, Jeddah 22234, Saudi Arabia",
+    },
+    {
+      name: "Riyadh ",
+      address: "7027 الإقدام, Al Mashael, Near, Riyadh 14322, Saudi Arabia",
+    },
+    {
+      name: "Dammam ",
+      address:
+        "5600 شارع 1، 6th floor, Al Zoabi Tower, Prince Mohammed Bin Fahd Road, Dammam 32241, Saudi Arabia",
+    },
+  ];
+
   return (
     <footer
       id="contact"
@@ -214,19 +231,21 @@ const FooterSection = () => {
               Headquarters & Hubs
             </h4>
             <ul className="flex flex-col gap-5">
-              <li className="flex gap-3">
-                <MapPin size={18} className="text-primary shrink-0 mt-0.5" />
-                <span className="text-white/70 text-[14px] leading-relaxed">
-                  <strong className="text-white">Jeddah (Head Office)</strong>
-                  <br />
-                  Saudi Arabia
-                  <br />
-                  <span className="text-[12px] text-white/50">
-                    Branches: Riyadh | Dammam
-                  </span>
-                </span>
-              </li>
-              <li className="flex items-center gap-3">
+              {branches.map((branch, idx) => (
+                <li key={idx} className="flex gap-3">
+                  <MapPin size={18} className="text-primary shrink-0 mt-0.5" />
+                  <div className="text-white/70 text-[13px] leading-relaxed">
+                    <strong className="text-white text-[14px]">
+                      {branch.name}
+                    </strong>
+                    <p className="mt-0.5 text-white/60 text-[8px]">
+                      {branch.address}
+                    </p>
+                  </div>
+                </li>
+              ))}
+
+              <li className="flex items-center gap-3 pt-2 border-t border-white/10">
                 <Globe size={18} className="text-primary shrink-0" />
                 <span className="text-white/70 text-[14px]">
                   Coverage: Middle East, Asia & Worldwide
@@ -235,13 +254,13 @@ const FooterSection = () => {
               <li className="flex items-center gap-3">
                 <Mail size={18} className="text-primary shrink-0" />
                 <span className="text-white/70 text-[14px]">
-                  uswafa.kamil@cargotrack.co
+                  enquiry@cargotrack.co
                 </span>
               </li>
               <li className="flex items-center gap-3">
                 <PhoneCallIcon size={18} className="text-primary shrink-0" />
                 <span className="text-white/70 text-[14px]">
-                  +966 59 096 7593
+                  +966 55 365 9763
                 </span>
               </li>
               <li className="flex gap-3">
@@ -249,13 +268,13 @@ const FooterSection = () => {
                 <span className="text-white/70 text-[14px] leading-relaxed">
                   Working Hours
                   <br />
-                  Sun - Thu: 8:00 AM - 6:00 PM
+                  Sat - Thu: 9:00 AM - 6:30 PM
                 </span>
               </li>
             </ul>
           </motion.div>
 
-          {/* Column 5: Follow Us & Newsletter */}
+          {/* Column 5: Follow Us */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -280,24 +299,6 @@ const FooterSection = () => {
                 ),
               )}
             </div>
-
-            {/* <h4 className="text-[15px] font-bold text-white uppercase tracking-wider mb-4">
-              Stay Updated
-            </h4>
-            <form
-              className="relative flex flex-col gap-3"
-              onSubmit={(e) => e.preventDefault()}
-            >
-              <input
-                type="email"
-                placeholder="Email Address"
-                className="w-full bg-white/5 border border-white/10 rounded-[12px] px-4 py-3 outline-none focus:bg-white/10 focus:border-primary focus:ring-2 focus:ring-primary/20 transition-all text-white placeholder:text-white/40 text-[14px]"
-              />
-              <button className="w-full bg-primary text-white rounded-[12px] px-4 py-3 font-semibold text-[14px] hover:bg-brightblue transition-all flex items-center justify-center gap-2 group">
-                <Send size={16} />
-                Subscribe
-              </button>
-            </form> */}
           </motion.div>
         </div>
 

@@ -16,9 +16,9 @@ const NAV_ITEMS = [
 ];
 
 const CONTACT_INFO = {
-  email: "uswafa.kamil@cargotrack.co",
-  phone: "+966 59 096 7593",
-  cleanPhone: "966590967593",
+  email: " enquiry@cargotrack.co",
+  phone: "+966 55 365 9763",
+  cleanPhone: "966553659763",
 };
 
 // WhatsApp Brand Icon SVG
@@ -76,7 +76,7 @@ export const Navbar = () => {
         {/* Logo */}
         <a
           href="#home"
-          className="flex items-center gap-2 shrink-0 scale-125  translate-x-3"
+          className="flex items-center gap-2 shrink-0 scale-125 translate-x-3"
         >
           <Image
             src={
@@ -160,20 +160,22 @@ export const Navbar = () => {
             </a>
           </div>
 
-          {/* WhatsApp Icon */}
+          {/* WhatsApp Button with Quicker Scaling Animation */}
           <a
             href={`https://wa.me/${CONTACT_INFO.cleanPhone}`}
             target="_blank"
             rel="noopener noreferrer"
             title="Chat on WhatsApp"
-            className="flex items-center justify-center p-2 rounded-full bg-emerald-500 text-white hover:bg-emerald-600 transition-all duration-300 hover:scale-105 active:scale-95"
+            className="relative flex items-center justify-center p-2.5 rounded-full bg-emerald-500 text-white hover:bg-emerald-600 transition-transform duration-300 hover:scale-105 active:scale-95 group"
             aria-label="WhatsApp"
           >
-            <WhatsAppIcon className="w-4 h-4" />
+            <span className="absolute inset-0 rounded-full bg-emerald-500/60 animate-[ping_1.4s_cubic-bezier(0,0,0.2,1)_infinite] scale-90 pointer-events-none" />
+            <span className="absolute -inset-0.5 rounded-full bg-emerald-400/20 animate-pulse pointer-events-none" />
+            <WhatsAppIcon className="w-4 h-4 relative z-10" />
           </a>
         </div>
 
-        {/* Mobile Header Actions (Visible directly on header beside menu toggle) */}
+        {/* Mobile Header Actions */}
         <div className="flex lg:hidden items-center gap-1.5 sm:gap-2">
           {/* Phone */}
           <a
@@ -188,15 +190,16 @@ export const Navbar = () => {
             <Phone size={18} className="text-blue-500" />
           </a>
 
-          {/* WhatsApp */}
+          {/* WhatsApp Mobile Button with Quicker Scaling Animation */}
           <a
             href={`https://wa.me/${CONTACT_INFO.cleanPhone}`}
             target="_blank"
             rel="noopener noreferrer"
-            className="p-2 rounded-xl bg-emerald-500 text-white hover:bg-emerald-600 transition-colors"
+            className="relative flex items-center justify-center p-2 rounded-full bg-emerald-500 text-white hover:bg-emerald-600 transition-transform duration-300"
             aria-label="WhatsApp"
           >
-            <WhatsAppIcon className="w-4 h-4" />
+            <span className="absolute inset-0 rounded-full bg-emerald-500/60 animate-[ping_1.4s_cubic-bezier(0,0,0.2,1)_infinite] scale-90 pointer-events-none" />
+            <WhatsAppIcon className="w-4 h-4 relative z-10" />
           </a>
 
           {/* Email */}
