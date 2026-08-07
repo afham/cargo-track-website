@@ -1,100 +1,168 @@
 "use client";
+
 import Image from "next/image";
-import React, { useState, useEffect } from "react";
-import { motion, AnimatePresence } from "motion/react";
+import React, { useState, useEffect, useCallback, useMemo } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 import {
   MapPin,
-  Phone,
   Mail,
   Clock,
   Facebook,
-  Twitter,
   Instagram,
   Linkedin,
   Youtube,
   ShieldCheck,
   Award,
   ChevronUp,
-  Send,
   Globe,
   PhoneCallIcon,
 } from "lucide-react";
 
+// ----------------------------------------------------------------------
+// 1. PERFORMANCE: Hoist Static Data Outside Render Function
+// Prevents heap allocations and garbage collection on every state update
+// ----------------------------------------------------------------------
+const SERVICES = [
+  { name: "Household Goods Relocation", slug: "household-goods" },
+  { name: "Vehicle Relocation & Transport", slug: "vehicle-relocation" },
+  { name: "Packing & Crating Services", slug: "packing-crating" },
+  { name: "Artwork Packing & Handling", slug: "artwork-packing" },
+  { name: "Pet Relocation", slug: "pet-relocation" },
+  { name: "Storage & Warehousing", slug: "storage-warehousing" },
+  { name: "Industrial Packing", slug: "industrial-packing" },
+  { name: "Office Relocation", slug: "office-relocation" },
+  { name: "Groupage Services", slug: "groupage-services" },
+  { name: "Pilgrim Baggage Handling", slug: "pilgrim-baggage" },
+  { name: "Mobility & Destination Services", slug: "mobility-services" },
+  { name: "Deep Cleaning Service", slug: "deep-cleaning" },
+];
+
+const BRANCHES = [
+  {
+    name: "Jeddah (Head Office)",
+    address:
+      "G53P+VV, Al Sharafeyah, 2nd Floor, ADVANCE BUSINESS CENTER, KHALID BIN ALWALEED STREET, Door Number 213B, Jeddah 22234, Saudi Arabia",
+    telephone: "+966553659763",
+  },
+  {
+    name: "Riyadh",
+    address: "7027 Al-Iqdam, Al Mashael, Near, Riyadh 14322, Saudi Arabia",
+  },
+  {
+    name: "Dammam",
+    address:
+      "5600 1st Street, 6th Floor, Al Zoabi Tower, Prince Mohammed Bin Fahd Road, Dammam 32241, Saudi Arabia",
+  },
+];
+
+// Synchronized with Navbar NAV_ITEMS
+const QUICK_LINKS = [
+  { label: "Home", href: "#home", id: "home" },
+  { label: "About Us", href: "#about-us", id: "about-us" },
+  { label: "Services", href: "#services", id: "services" },
+  { label: "Workflow", href: "#workflow", id: "workflow" },
+  { label: "Network", href: "#network", id: "network" },
+  { label: "Gallery", href: "#gallery", id: "gallery" },
+  { label: "Contact", href: "#contact", id: "contact" },
+];
+
+const SOCIAL_LINKS = [
+  {
+    icon: Linkedin,
+    name: "LinkedIn",
+    href: "https://www.linkedin.com/company/cargotrackmovers/",
+  },
+  {
+    icon: Facebook,
+    name: "Facebook",
+    href: "https://www.facebook.com/cargotrackco/",
+  },
+  {
+    icon: Instagram,
+    name: "Instagram",
+    href: "https://www.instagram.com/cargotrack.sa/",
+  },
+  {
+    icon: Youtube,
+    name: "YouTube",
+    href: "https://www.youtube.com/@CARGOTRACKRELOCATIONS",
+  },
+];
+
 const FooterSection = () => {
   const [showScrollTop, setShowScrollTop] = useState(false);
 
+  // ----------------------------------------------------------------------
+  // 2. PERFORMANCE: Passive & Throttled Scroll Handler
+  // ----------------------------------------------------------------------
   useEffect(() => {
+    let ticking = false;
+
     const handleScroll = () => {
-      if (window.scrollY > 400) {
-        setShowScrollTop(true);
-      } else {
-        setShowScrollTop(false);
+      if (!ticking) {
+        window.requestAnimationFrame(() => {
+          setShowScrollTop(window.scrollY > 400);
+          ticking = false;
+        });
+        ticking = true;
       }
     };
-    window.addEventListener("scroll", handleScroll);
+
+    window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  const scrollToTop = () => {
+  const scrollToTop = useCallback(() => {
     window.scrollTo({ top: 0, behavior: "smooth" });
-  };
+  }, []);
 
-  const scrollToSection = (id: string) => {
+  const scrollToSection = useCallback((id: string) => {
     const element = document.getElementById(id);
     if (element) {
       element.scrollIntoView({ behavior: "smooth" });
     }
-  };
+  }, []);
 
-  const affiliations = [
-    "IATA",
-    "IAM",
-    "IMA",
-    "IAMX",
-    "GEM Network",
-    "FIDI",
-    "Asian Relocation Association",
-  ];
-
-  const services = [
-    "Household Goods Relocation",
-    "Vehicle Relocation & Transport",
-    "Packing & Crating Services",
-    "Artwork Packing & Handling",
-    "Pet Relocation",
-    "Storage & Warehousing",
-    "Industrial Packing",
-    "Office Relocation",
-    "Groupage Services",
-    "Pilgrim Baggage Handling",
-    "Mobility & Destination Services",
-    "Deep Cleaning Service",
-  ];
-
-  const branches = [
-    {
-      name: "Jeddah (Head Office)",
-      address:
-        "G53P+VV, Al Sharafeyah, 2nd Floor, ADVANCE BUSINESS CENETER, KHALID BIN ALWALEED STREET, Door Number 213B, Jeddah 22234, Saudi Arabia",
-    },
-    {
-      name: "Riyadh ",
-      address: "7027 الإقدام, Al Mashael, Near, Riyadh 14322, Saudi Arabia",
-    },
-    {
-      name: "Dammam ",
-      address:
-        "5600 شارع 1، 6th floor, Al Zoabi Tower, Prince Mohammed Bin Fahd Road, Dammam 32241, Saudi Arabia",
-    },
-  ];
+  // ----------------------------------------------------------------------
+  // 3. SEO: LocalBusiness JSON-LD Schema
+  // ----------------------------------------------------------------------
+  const schemaData = useMemo(
+    () => ({
+      "@context": "https://schema.org",
+      "@type": "MovingCompany",
+      name: "CargoTrack Relocations",
+      url: "https://cargotrack.co",
+      logo: "https://cargotrack.co/assets/cargo-track-logo-white.svg",
+      email: "enquiry@cargotrack.co",
+      telephone: "+966553659763",
+      address: {
+        "@type": "PostalAddress",
+        streetAddress: "KHALID BIN ALWALEED STREET, Door Number 213B",
+        addressLocality: "Jeddah",
+        postalCode: "22234",
+        addressCountry: "SA",
+      },
+      sameAs: SOCIAL_LINKS.map((s) => s.href),
+    }),
+    [],
+  );
 
   return (
     <footer
       id="contact"
       className="w-full bg-[#071F3D] relative overflow-hidden text-white pt-16 pb-16 border-t border-white/10 mt-auto"
     >
-      {/* Background Elements */}
-      <div className="absolute inset-0 pointer-events-none z-0">
+      {/* Local SEO Schema Script Injection */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(schemaData) }}
+      />
+
+      {/* Background Graphic Elements */}
+      <div
+        className="absolute inset-0 pointer-events-none z-0"
+        aria-hidden="true"
+      >
         <svg
           viewBox="0 0 1000 500"
           preserveAspectRatio="none"
@@ -134,9 +202,9 @@ const FooterSection = () => {
           >
             <div className="flex items-center gap-2 mb-6">
               <Image
-                src={"/assets/cargo-track-logo-white.svg"}
-                alt="CargoTrack Logo"
-                className="h-9 w-auto object-contain brightness"
+                src="/assets/cargo-track-logo-white.svg"
+                alt="CargoTrack Relocations Logo"
+                className="h-9 w-auto object-contain"
                 width={100}
                 height={36}
               />
@@ -169,30 +237,23 @@ const FooterSection = () => {
             viewport={{ once: true }}
             transition={{ duration: 0.5, delay: 0.1 }}
           >
-            <h4 className="text-[15px] font-bold text-white uppercase tracking-wider mb-6">
+            <h3 className="text-[15px] font-bold text-white uppercase tracking-wider mb-6">
               Quick Links
-            </h4>
+            </h3>
             <ul className="flex flex-col gap-3">
-              {[
-                "Home",
-                "About Us",
-                "Services",
-                "Memberships",
-                "Global Network",
-                "Pilgrim Baggage",
-                "FAQ",
-                "Contact",
-              ].map((item, idx) => (
-                <li key={idx}>
-                  <button
-                    onClick={() =>
-                      scrollToSection(item.toLowerCase().replace(" ", "-"))
-                    }
-                    className="text-white/70 text-[14px] hover:text-white transition-colors relative group w-fit text-left"
+              {QUICK_LINKS.map((item) => (
+                <li key={item.id}>
+                  <a
+                    href={item.href}
+                    onClick={(e) => {
+                      e.preventDefault();
+                      scrollToSection(item.id);
+                    }}
+                    className="text-white/70 text-[14px] hover:text-white transition-colors relative group w-fit text-left inline-block focus:outline-none focus:ring-1 focus:ring-primary"
                   >
-                    {item}
+                    {item.label}
                     <span className="absolute -bottom-0.5 left-0 w-0 h-[1px] bg-primary group-hover:w-full transition-all duration-300" />
-                  </button>
+                  </a>
                 </li>
               ))}
             </ul>
@@ -205,16 +266,19 @@ const FooterSection = () => {
             viewport={{ once: true }}
             transition={{ duration: 0.5, delay: 0.2 }}
           >
-            <h4 className="text-[15px] font-bold text-white uppercase tracking-wider mb-6">
+            <h3 className="text-[15px] font-bold text-white uppercase tracking-wider mb-6">
               Our Services
-            </h4>
+            </h3>
             <ul className="flex flex-col gap-2.5">
-              {services.map((item, idx) => (
-                <li key={idx}>
-                  <button className="text-white/70 text-[13px] hover:text-white transition-colors relative group w-fit text-left">
-                    {item}
+              {SERVICES.map((service) => (
+                <li key={service.slug}>
+                  <a
+                    href={`#${service.slug}`}
+                    className="text-white/70 text-[13px] hover:text-white transition-colors relative group w-fit text-left inline-block"
+                  >
+                    {service.name}
                     <span className="absolute -bottom-0.5 left-0 w-0 h-[1px] bg-primary group-hover:w-full transition-all duration-300" />
-                  </button>
+                  </a>
                 </li>
               ))}
             </ul>
@@ -228,20 +292,20 @@ const FooterSection = () => {
             transition={{ duration: 0.5, delay: 0.3 }}
             id="contact-info"
           >
-            <h4 className="text-[15px] font-bold text-white uppercase tracking-wider mb-6">
+            <h3 className="text-[15px] font-bold text-white uppercase tracking-wider mb-6">
               Headquarters & Hubs
-            </h4>
+            </h3>
             <ul className="flex flex-col gap-5">
-              {branches.map((branch, idx) => (
-                <li key={idx} className="flex gap-3">
+              {BRANCHES.map((branch) => (
+                <li key={branch.name} className="flex gap-3">
                   <MapPin size={18} className="text-primary shrink-0 mt-0.5" />
                   <div className="text-white/70 text-[13px] leading-relaxed">
-                    <strong className="text-white text-[14px]">
+                    <strong className="text-white text-[14px] block">
                       {branch.name}
                     </strong>
-                    <p className="mt-0.5 text-white/60 text-[8px]">
+                    <address className="not-italic mt-0.5 text-white/60 text-[12px]">
                       {branch.address}
-                    </p>
+                    </address>
                   </div>
                 </li>
               ))}
@@ -252,23 +316,30 @@ const FooterSection = () => {
                   Coverage: Middle East, Asia & Worldwide
                 </span>
               </li>
+
+              {/* SEO Tel & Mailto Clickable Attributes */}
               <li className="flex items-center gap-3">
                 <Mail size={18} className="text-primary shrink-0" />
-                <span className="text-white/70 text-[14px]">
+                <a
+                  href="mailto:enquiry@cargotrack.co"
+                  className="text-white/70 text-[14px] hover:text-white transition-colors"
+                >
                   enquiry@cargotrack.co
-                </span>
+                </a>
               </li>
               <li className="flex items-center gap-3">
                 <PhoneCallIcon size={18} className="text-primary shrink-0" />
-                <span className="text-white/70 text-[14px]">
+                <a
+                  href="tel:+966553659763"
+                  className="text-white/70 text-[14px] hover:text-white transition-colors"
+                >
                   +966 55 365 9763
-                </span>
+                </a>
               </li>
               <li className="flex gap-3">
                 <Clock size={18} className="text-primary shrink-0 mt-0.5" />
                 <span className="text-white/70 text-[14px] leading-relaxed">
-                  Working Hours
-                  <br />
+                  Working Hours <br />
                   Sat - Thu: 9:00 AM - 6:30 PM
                 </span>
               </li>
@@ -282,23 +353,25 @@ const FooterSection = () => {
             viewport={{ once: true }}
             transition={{ duration: 0.5, delay: 0.4 }}
           >
-            <h4 className="text-[15px] font-bold text-white uppercase tracking-wider mb-6">
+            <h3 className="text-[15px] font-bold text-white uppercase tracking-wider mb-6">
               Follow Us
-            </h4>
+            </h3>
             <div className="flex items-center gap-3 mb-8">
-              {[Linkedin, Facebook, Instagram, Twitter, Youtube].map(
-                (Icon, idx) => (
-                  <button
-                    key={idx}
-                    className="w-10 h-10 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-white/80 hover:bg-primary hover:text-white hover:border-primary hover:-translate-y-1 hover:shadow-[0_0_15px_rgba(21,101,192,0.5)] transition-all duration-300 group"
-                  >
-                    <Icon
-                      size={18}
-                      className="group-hover:scale-110 transition-transform"
-                    />
-                  </button>
-                ),
-              )}
+              {SOCIAL_LINKS.map(({ icon: Icon, name, href }) => (
+                <a
+                  key={name}
+                  href={href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label={`Follow CargoTrack on ${name}`}
+                  className="w-10 h-10 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-white/80 hover:bg-primary hover:text-white hover:border-primary hover:-translate-y-1 hover:shadow-[0_0_15px_rgba(21,101,192,0.5)] transition-all duration-300 group"
+                >
+                  <Icon
+                    size={18}
+                    className="group-hover:scale-110 transition-transform"
+                  />
+                </a>
+              ))}
             </div>
           </motion.div>
         </div>
@@ -325,8 +398,8 @@ const FooterSection = () => {
             }}
             whileTap={{ scale: 0.9 }}
             onClick={scrollToTop}
-            className="fixed bottom-22 right-8 z-50 w-12 h-12 rounded-full bg-primary text-white flex items-center justify-center shadow-lg hover:bg-brightblue transition-colors focus:outline-none focus:ring-4 focus:ring-primary/30"
-            aria-label="Scroll to top"
+            className="fixed bottom-8 right-8 z-50 w-12 h-12 rounded-full bg-primary text-white flex items-center justify-center shadow-lg hover:bg-brightblue transition-colors focus:outline-none focus:ring-4 focus:ring-primary/30"
+            aria-label="Scroll to top of page"
           >
             <ChevronUp size={24} />
           </motion.button>

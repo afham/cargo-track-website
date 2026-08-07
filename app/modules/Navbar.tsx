@@ -1,8 +1,8 @@
 "use client";
 
+import React, { useEffect, useState, useCallback } from "react";
 import { Mail, Menu, Phone, X } from "lucide-react";
-import { AnimatePresence, motion } from "motion/react";
-import { useEffect, useState } from "react";
+import { AnimatePresence, motion } from "framer-motion"; // Fixed import to standard framer-motion
 import Image from "next/image";
 
 const NAV_ITEMS = [
@@ -16,7 +16,7 @@ const NAV_ITEMS = [
 ];
 
 const CONTACT_INFO = {
-  email: " enquiry@cargotrack.co",
+  email: "enquiry@cargotrack.co",
   phone: "+966 55 365 9763",
   cleanPhone: "966553659763",
 };
@@ -38,35 +38,43 @@ export const Navbar = () => {
   const [activeSection, setActiveSection] = useState("home");
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
+  // Throttled scroll listener using requestAnimationFrame to eliminate jank
   useEffect(() => {
+    let ticking = false;
+
     const handleScroll = () => {
-      setScrolled(window.scrollY > 20);
+      if (!ticking) {
+        window.requestAnimationFrame(() => {
+          setScrolled(window.scrollY > 20);
 
-      const sections = NAV_ITEMS.map((item) =>
-        item.toLowerCase().replace(/\s+/g, "-"),
-      );
+          const sections = NAV_ITEMS.map((item) =>
+            item.toLowerCase().replace(/\s+/g, "-"),
+          );
 
-      let currentSection = "home";
-
-      for (const section of sections) {
-        const element = document.getElementById(section);
-        if (element) {
-          const rect = element.getBoundingClientRect();
-          if (rect.top <= 250) {
-            currentSection = section;
+          let currentSection = "home";
+          for (const section of sections) {
+            const element = document.getElementById(section);
+            if (element) {
+              const rect = element.getBoundingClientRect();
+              if (rect.top <= 250) {
+                currentSection = section;
+              }
+            }
           }
-        }
+          setActiveSection(currentSection);
+          ticking = false;
+        });
+        ticking = true;
       }
-      setActiveSection(currentSection);
     };
 
-    window.addEventListener("scroll", handleScroll);
+    window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
   return (
     <nav
-      className={`fixed top-0 w-full z-50 transition-all duration-500 ${
+      className={`fixed top-0 w-full z-50 transition-all duration-300 ${
         scrolled
           ? "bg-white/95 backdrop-blur-md shadow-sm py-3.5 border-b border-slate-100"
           : "bg-gradient-to-b from-slate-950/80 via-slate-950/40 to-transparent py-5"
@@ -77,6 +85,7 @@ export const Navbar = () => {
         <a
           href="#home"
           className="flex items-center gap-2 shrink-0 scale-125 translate-x-3"
+          aria-label="CargoTrack Home"
         >
           <Image
             src={
@@ -126,10 +135,9 @@ export const Navbar = () => {
           })}
         </div>
 
-        {/* Desktop Contacts Bar - Single Column Layout */}
+        {/* Desktop Contacts Bar */}
         <div className="hidden lg:flex items-center gap-4 xl:gap-5 shrink-0">
           <div className="flex flex-col items-start gap-1">
-            {/* Call Us */}
             <a
               href={`tel:${CONTACT_INFO.cleanPhone}`}
               className={`flex items-center gap-2 transition-colors duration-200 ${
@@ -144,7 +152,6 @@ export const Navbar = () => {
               </span>
             </a>
 
-            {/* Email Us */}
             <a
               href={`mailto:${CONTACT_INFO.email}`}
               className={`flex items-center gap-2 transition-colors duration-200 ${
@@ -160,24 +167,21 @@ export const Navbar = () => {
             </a>
           </div>
 
-          {/* WhatsApp Button with Quicker Scaling Animation */}
           <a
             href={`https://wa.me/${CONTACT_INFO.cleanPhone}`}
             target="_blank"
             rel="noopener noreferrer"
             title="Chat on WhatsApp"
             className="relative flex items-center justify-center p-2.5 rounded-full bg-emerald-500 text-white hover:bg-emerald-600 transition-transform duration-300 hover:scale-105 active:scale-95 group"
-            aria-label="WhatsApp"
+            aria-label="Chat on WhatsApp"
           >
             <span className="absolute inset-0 rounded-full bg-emerald-500/60 animate-[ping_1.4s_cubic-bezier(0,0,0.2,1)_infinite] scale-90 pointer-events-none" />
-            <span className="absolute -inset-0.5 rounded-full bg-emerald-400/20 animate-pulse pointer-events-none" />
             <WhatsAppIcon className="w-4 h-4 relative z-10" />
           </a>
         </div>
 
         {/* Mobile Header Actions */}
         <div className="flex lg:hidden items-center gap-1.5 sm:gap-2">
-          {/* Phone */}
           <a
             href={`tel:${CONTACT_INFO.cleanPhone}`}
             className={`p-2 rounded-xl transition-colors ${
@@ -190,7 +194,6 @@ export const Navbar = () => {
             <Phone size={18} className="text-blue-500" />
           </a>
 
-          {/* WhatsApp Mobile Button with Quicker Scaling Animation */}
           <a
             href={`https://wa.me/${CONTACT_INFO.cleanPhone}`}
             target="_blank"
@@ -202,7 +205,6 @@ export const Navbar = () => {
             <WhatsAppIcon className="w-4 h-4 relative z-10" />
           </a>
 
-          {/* Email */}
           <a
             href={`mailto:${CONTACT_INFO.email}`}
             className={`p-2 rounded-xl transition-colors ${
@@ -215,7 +217,6 @@ export const Navbar = () => {
             <Mail size={18} className="text-blue-400" />
           </a>
 
-          {/* Mobile Menu Hamburger Toggle */}
           <button
             className={`p-2 rounded-xl transition-colors ml-1 ${
               scrolled
@@ -223,7 +224,8 @@ export const Navbar = () => {
                 : "text-white hover:bg-white/10 backdrop-blur-sm"
             }`}
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-            aria-label="Toggle Menu"
+            aria-expanded={isMobileMenuOpen}
+            aria-label="Toggle navigation menu"
           >
             {isMobileMenuOpen ? <X size={22} /> : <Menu size={22} />}
           </button>
@@ -237,7 +239,7 @@ export const Navbar = () => {
             initial={{ opacity: 0, y: -10 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -10 }}
-            transition={{ duration: 0.25, ease: "easeOut" }}
+            transition={{ duration: 0.2, ease: "easeOut" }}
             className="lg:hidden absolute top-full left-0 w-full px-4 pt-2 pb-6"
           >
             <div className="backdrop-blur-xl bg-slate-900/95 border border-white/15 rounded-2xl p-5 shadow-[0_20px_50px_rgba(0,0,0,0.5)] text-white space-y-2 relative overflow-hidden">

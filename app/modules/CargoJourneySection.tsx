@@ -18,9 +18,9 @@ import {
 const stations = [
   {
     id: 1,
-    title: "Survey & Planning",
-    icon: FileText,
-    desc: "Pre-move assessment & inventory listing.",
+    title: "Origin Pickup",
+    icon: Truck,
+    desc: "Items surveyed & packed at doorstep.",
   },
   {
     id: 2,
@@ -166,7 +166,7 @@ const CargoJourneySection = () => {
           <div className="w-full lg:w-[250px] shrink-0 flex flex-col z-20">
             <div className="bg-[#F7FAFD] rounded-[24px] overflow-hidden border border-slate-100 h-full flex flex-col shadow-sm group">
               <div
-                className="h-[150px] w-full bg-cover bg-center opacity-90 group-hover:scale-105 group-hover:opacity-100 transition-all duration-700"
+                className="h-[200px] w-full bg-cover bg-center opacity-90 group-hover:scale-105 group-hover:opacity-100 transition-all duration-700"
                 style={{
                   backgroundImage: `url(${"/assets/photos8.webp"})`,
                 }}
@@ -174,13 +174,13 @@ const CargoJourneySection = () => {
               <div className="p-6 flex-1 flex flex-col justify-between">
                 <div>
                   <div className="w-12 h-12 rounded-xl bg-white text-primary flex items-center justify-center shadow-sm mb-4 group-hover:scale-110 transition-transform">
-                    <Truck size={24} />
+                    <FileText size={24} />
                   </div>
                   <h4 className="font-heading font-extrabold text-[22px] text-navy mb-2">
-                    Origin Pickup
+                    Survey & Planning
                   </h4>
                   <p className="text-slate-500 text-[14px] font-medium leading-relaxed mb-4">
-                    Items surveyed & packed at doorstep.
+                    Pre-move assessment & inventory listing.
                   </p>
                 </div>
                 <ul className="space-y-3 mt-2">
@@ -303,7 +303,7 @@ const CargoJourneySection = () => {
           <div className="w-full lg:w-[300px] shrink-0 z-20 h-full flex flex-col justify-end">
             <div className="bg-[#0B3A66] rounded-[24px] overflow-hidden shadow-lg border border-[#1565C0] h-full flex flex-col text-white group">
               <div
-                className="h-[180px] w-full bg-cover bg-center opacity-80 group-hover:scale-105 group-hover:opacity-100 transition-all duration-700"
+                className="h-[200px] w-full bg-cover bg-center opacity-80 group-hover:scale-105 group-hover:opacity-100 transition-all duration-700"
                 style={{
                   backgroundImage: `url(${"/assets/photos9.webp"})`,
                 }}
@@ -333,87 +333,6 @@ const CargoJourneySection = () => {
                 </ul>
               </div>
             </div>
-          </div>
-        </motion.div>
-
-        {/* BOTTOM: Dashboard */}
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-100px" }}
-          transition={{ duration: 0.8, delay: 0.2 }}
-          className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-4xl mx-auto mb-20"
-        >
-          <div className="bg-white rounded-[20px] p-6 shadow-sm border border-slate-100 hover:border-primary/30 hover:shadow-md transition-all group">
-            <div className="text-[12px] font-bold text-slate-400 uppercase tracking-widest mb-1">
-              Current Focus
-            </div>
-            <div className="font-heading font-bold text-primary text-[18px] group-hover:text-brightblue">
-              Customs & Flight/Ship Coordination
-            </div>
-          </div>
-          <div className="bg-white rounded-[20px] p-6 shadow-sm border border-slate-100 hover:border-primary/30 hover:shadow-md transition-all group">
-            <div className="text-[12px] font-bold text-slate-400 uppercase tracking-widest mb-1 flex items-center gap-2">
-              <span className="w-2 h-2 rounded-full bg-amber-400 animate-pulse" />{" "}
-              Operational Standard
-            </div>
-            <div className="font-heading font-bold text-navy text-[18px]">
-              End-to-End Tracking
-            </div>
-          </div>
-          <div className="bg-white rounded-[20px] p-6 shadow-sm border border-slate-100 hover:border-primary/30 hover:shadow-md transition-all group">
-            <div className="text-[12px] font-bold text-slate-400 uppercase tracking-widest mb-1">
-              Coverage Network
-            </div>
-            <div className="font-heading font-bold text-navy text-[18px]">
-              Saudi Arabia, GCC & Global
-            </div>
-          </div>
-        </motion.div>
-
-        {/* CTA Banner */}
-        <motion.div
-          initial={{ opacity: 0, y: 40 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-100px" }}
-          transition={{ duration: 0.8 }}
-          className="w-full bg-gradient-to-br from-[#0B3A66] to-[#1565C0] rounded-[32px] p-10 md:p-14 lg:p-16 relative overflow-hidden flex flex-col md:flex-row items-center justify-between gap-10 shadow-xl group"
-        >
-          <div className="absolute inset-0 opacity-20 mix-blend-overlay transition-transform duration-700 group-hover:scale-105">
-            <Image
-              src={"/assets/photos10.webp"}
-              alt="Cargo Background"
-              className="w-full h-full object-cover"
-              fill
-            />
-          </div>
-          <div
-            className="absolute inset-0 opacity-[0.05]"
-            style={{
-              backgroundImage:
-                "radial-gradient(circle at center, white 1px, transparent 1px)",
-              backgroundSize: "30px 30px",
-            }}
-          />
-
-          <div className="relative z-10 max-w-xl text-center md:text-left">
-            <h3 className="font-heading font-extrabold text-[32px] md:text-[40px] text-white mb-4 leading-tight">
-              Your Belongings. <br className="hidden sm:block" />
-              Our Absolute Priority.
-            </h3>
-            <p className="text-white/80 font-medium text-[16px] md:text-[18px]">
-              Plan your household, office, or specialized relocation with
-              CargoTrack's experienced global logistics team.
-            </p>
-          </div>
-
-          <div className="relative z-10 flex flex-col w-full md:w-auto gap-4 shrink-0">
-            <a
-              href="#contact"
-              className="bg-transparent border-2 border-white/30 text-white px-8 py-4 rounded-xl font-bold text-[16px] hover:bg-white/10 transition-all flex justify-center items-center"
-            >
-              Request a Relocation Quote
-            </a>
           </div>
         </motion.div>
       </div>

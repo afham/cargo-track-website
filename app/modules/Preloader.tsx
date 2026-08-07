@@ -3,27 +3,28 @@
 import React, { useEffect, useState } from "react";
 import { motion, AnimatePresence, useReducedMotion } from "framer-motion";
 import Image from "next/image";
+
 const Preloader = () => {
-  const [isVisible, setIsVisible] = useState(true);
+  const [isVisible, setIsVisible] = useState(false);
   const shouldReduceMotion = useReducedMotion();
 
   useEffect(() => {
-    // Check if user has already visited in this session
+    // 1. Check session storage immediately
     const hasVisited = sessionStorage.getItem("hasVisited");
     if (hasVisited) {
-      setIsVisible(false);
       return;
     }
 
-    // Lock body scroll while preloader is active
+    // 2. Show preloader only for new sessions
+    setIsVisible(true);
     document.body.style.overflow = "hidden";
 
-    // Sequence timing (total ~2.8s)
+    // Reduced duration (1.8s) for faster First Meaningful Render
     const timer = setTimeout(() => {
       setIsVisible(false);
       sessionStorage.setItem("hasVisited", "true");
       document.body.style.overflow = "";
-    }, 2800);
+    }, 1800);
 
     return () => {
       clearTimeout(timer);
@@ -31,24 +32,26 @@ const Preloader = () => {
     };
   }, []);
 
+  if (!isVisible) return null;
+
   return (
     <AnimatePresence>
       {isVisible && (
         <motion.div
           initial={{ opacity: 1 }}
           exit={{ opacity: 0 }}
-          transition={{ duration: 0.8, ease: "easeInOut" }}
-          className="fixed inset-0 z-[100] flex items-center justify-center bg-white"
+          transition={{ duration: 0.5, ease: "easeInOut" }}
+          className="fixed inset-0 z-[100] flex items-center justify-center bg-white pointer-events-auto"
         >
-          {/* Subtle blue radial glow behind the logo */}
+          {/* Subtle blue radial glow behind logo */}
           <motion.div
             initial={{ opacity: 0, scale: 0.8 }}
             animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 1.5, delay: 0.5, ease: "easeOut" }}
+            transition={{ duration: 1, delay: 0.2, ease: "easeOut" }}
             className="absolute w-[300px] h-[300px] bg-primary/5 rounded-full blur-[60px] pointer-events-none"
           />
 
-          {/* Logo container */}
+          {/* Animated Logo Container */}
           <motion.div
             initial={{
               opacity: 0,
@@ -57,16 +60,17 @@ const Preloader = () => {
             animate={{
               opacity: 1,
               scale: 1,
-              y: shouldReduceMotion ? 0 : [0, -8, 0], // Gentle float
+              y: shouldReduceMotion ? 0 : [0, -8, 0],
             }}
             transition={{
-              opacity: { duration: 0.8, ease: "easeOut" },
-              scale: { duration: 1.2, ease: "easeOut" },
+              opacity: { duration: 0.5, ease: "easeOut" },
+              scale: { duration: 0.8, ease: "easeOut" },
               y: {
-                duration: 2,
-                delay: 0.4,
+                duration: 1.6,
+                delay: 0.2,
                 ease: "easeInOut",
-                times: [0, 0.5, 1],
+                repeat: Infinity,
+                repeatType: "reverse",
               },
             }}
             exit={{
@@ -76,10 +80,11 @@ const Preloader = () => {
             className="relative z-10"
           >
             <Image
-              src={"assets/truck-moving.svg"}
+              src="/assets/loader.svg"
               width={160}
               height={160}
-              alt=""
+              alt="CargoTrack Loading"
+              priority
             />
           </motion.div>
         </motion.div>
