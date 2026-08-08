@@ -1,13 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import {
-  Activity,
-  Award,
-  Building,
-  Globe,
-  type LucideIcon,
-} from "lucide-react";
+import { type LucideIcon } from "lucide-react";
 import { motion } from "framer-motion";
 
 interface Affiliation {

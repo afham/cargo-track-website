@@ -8,7 +8,6 @@ import {
   ShieldCheck,
   type LucideIcon,
 } from "lucide-react";
-import { motion } from "framer-motion";
 import { memo } from "react";
 
 interface TrustItem {
@@ -54,13 +53,7 @@ export const TrustStrip = memo(() => {
       aria-label="Trust Signals and Certifications"
       className="relative z-20 max-w-[1440px] mx-auto px-6 lg:px-12 -mt-16 lg:-mt-24 mb-2"
     >
-      <motion.ul
-        initial={{ opacity: 0, y: 30 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true, margin: "-100px" }}
-        transition={{ duration: 0.7, ease: "easeOut" }}
-        className="bg-white rounded-[24px] lg:rounded-[28px] shadow-[0_20px_40px_rgba(11,58,102,0.06)] border border-brand-bg/50 p-6 lg:p-8 flex flex-col lg:flex-row items-start lg:items-center justify-between gap-8 lg:gap-4 list-none m-0"
-      >
+      <ul className="bg-white rounded-[24px] lg:rounded-[28px] shadow-[0_20px_40px_rgba(11,58,102,0.06)] border border-brand-bg/50 p-6 lg:p-8 flex flex-col lg:flex-row items-start lg:items-center justify-between gap-8 lg:gap-4 list-none m-0">
         {TRUST_ITEMS.map((item, i) => {
           const IconComponent = item.icon;
 
@@ -95,7 +88,7 @@ export const TrustStrip = memo(() => {
             </li>
           );
         })}
-      </motion.ul>
+      </ul>
     </section>
   );
 });

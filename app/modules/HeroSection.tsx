@@ -1,7 +1,6 @@
 "use client";
 
 import { ArrowRight, CheckCircle2 } from "lucide-react";
-import { motion, AnimatePresence } from "framer-motion";
 import { useEffect, useState, memo } from "react";
 
 const slides = [
@@ -124,25 +123,16 @@ const HeroTextSlider = memo(() => {
       <div className="flex flex-col gap-6 lg:gap-8">
         {/* Animated Headline and Subline */}
         <div className="min-h-[200px] sm:min-h-[170px] lg:min-h-[180px]">
-          <AnimatePresence mode="wait">
-            <motion.div
-              key={activeSlide}
-              initial={{ opacity: 0, y: 12 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -12 }}
-              transition={{ duration: 0.35, ease: "easeOut" }}
-              className="will-change-transform"
-            >
-              {/* Primary H1 Tag kept stable for accessibility/SEO */}
-              <h1 className="font-heading font-extrabold text-[32px] sm:text-[44px] lg:text-[50px] leading-[1.15] text-white tracking-tight">
-                {slides[activeSlide].headline}
-              </h1>
+          <div key={activeSlide} className="will-change-transform">
+            {/* Primary H1 Tag kept stable for accessibility/SEO */}
+            <h1 className="font-heading font-extrabold text-[32px] sm:text-[44px] lg:text-[50px] leading-[1.15] text-white tracking-tight">
+              {slides[activeSlide].headline}
+            </h1>
 
-              <p className="mt-4 lg:mt-6 text-[15px] lg:text-[17px] text-slate-200 font-sans max-w-[580px] leading-relaxed">
-                {slides[activeSlide].subline}
-              </p>
-            </motion.div>
-          </AnimatePresence>
+            <p className="mt-4 lg:mt-6 text-[15px] lg:text-[17px] text-slate-200 font-sans max-w-[580px] leading-relaxed">
+              {slides[activeSlide].subline}
+            </p>
+          </div>
         </div>
 
         {/* Slide Indicator Dots */}
@@ -168,12 +158,7 @@ const HeroTextSlider = memo(() => {
         </div>
 
         {/* Action Buttons */}
-        <motion.div
-          initial={{ opacity: 0, y: 15 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, delay: 0.2, ease: "easeOut" }}
-          className="flex flex-col sm:flex-row gap-4 lg:gap-5"
-        >
+        <div className="flex flex-col sm:flex-row gap-4 lg:gap-5">
           <a
             href="#quote-form"
             className="lg:hidden group flex items-center justify-center gap-2 bg-primary text-white px-8 py-4 rounded-xl font-semibold text-[15px] transition-all duration-300 shadow-[0_8px_25px_rgba(21,101,192,0.4)]"
@@ -206,7 +191,7 @@ const HeroTextSlider = memo(() => {
               className="group-hover:translate-x-1 transition-transform opacity-80"
             />
           </a>
-        </motion.div>
+        </div>
       </div>
     </div>
   );
@@ -266,12 +251,8 @@ const QuoteForm = memo(() => {
   };
 
   return (
-    <motion.div
+    <div
       id="quote-form"
-      initial={{ opacity: 0, y: 30 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, margin: "-50px" }}
-      transition={{ duration: 0.8 }}
       className="w-full lg:max-w-[26rem] lg:min-w-[26rem] pt-8 lg:pt-0 mb-8 lg:mb-0 scroll-mt-24"
     >
       <div className="backdrop-blur-md bg-slate-900/60 lg:bg-slate-900/40 border border-white/20 rounded-2xl p-6 shadow-[0_20px_50px_rgba(0,0,0,0.4)] text-white relative overflow-hidden">
@@ -475,7 +456,7 @@ const QuoteForm = memo(() => {
           </button>
         </form>
       </div>
-    </motion.div>
+    </div>
   );
 });
 
