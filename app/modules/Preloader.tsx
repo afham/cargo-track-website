@@ -10,10 +10,10 @@ const Preloader = () => {
 
   useEffect(() => {
     // 1. Check session storage immediately
-    const hasVisited = sessionStorage.getItem("hasVisited");
-    if (hasVisited) {
-      return;
-    }
+    // const hasVisited = sessionStorage.getItem("hasVisited");
+    // if (hasVisited) {
+    //   return;
+    // }
 
     // 2. Show preloader only for new sessions
     setIsVisible(true);
@@ -22,7 +22,7 @@ const Preloader = () => {
     // Reduced duration (1.8s) for faster First Meaningful Render
     const timer = setTimeout(() => {
       setIsVisible(false);
-      sessionStorage.setItem("hasVisited", "true");
+      // sessionStorage.setItem("hasVisited", "true");
       document.body.style.overflow = "";
     }, 1800);
 

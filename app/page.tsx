@@ -34,21 +34,19 @@ const FooterSection = dynamic(() => import("./modules/FooterSection"));
 export default function Home() {
   return (
     <main className="w-full min-h-screen bg-brand-bg relative selection:bg-primary/20 selection:text-primary overflow-x-hidden">
-      <Preloader />
+      {/* <Preloader /> */}
       <Navbar />
-      <main>
-        <HeroSection />
-        <TrustStrip />
-        <ClientLogos />
-        <AboutSection />
-        <ServicesSection />
-        <CargoJourneySection />
-        <WhyChooseSection />
-        <GlobalNetworkSection />
-        <GallerySection />
-        <TestimonialsSection />
-        <FooterSection />
-      </main>
+      <HeroSection />
+      <TrustStrip />
+      <ClientLogos />
+      <AboutSection />
+      <ServicesSection />
+      <CargoJourneySection />
+      <WhyChooseSection />
+      <GlobalNetworkSection />
+      <GallerySection />
+      <TestimonialsSection />
+      <FooterSection />
     </main>
   );
 }
