@@ -3,7 +3,7 @@
 import React from "react";
 import { motion } from "framer-motion";
 import { Shield, Clock, Globe, Zap, Users, BarChart } from "lucide-react";
-
+import Image from "next/image";
 const features = [
   {
     icon: Shield,
@@ -42,9 +42,10 @@ const WhyChooseSection = () => {
     <section className="w-full bg-navy py-16 lg:py-16 relative overflow-hidden">
       {/* Background Image & Overlay */}
       <div className="absolute inset-0 pointer-events-none z-0">
-        <img
+        <Image
           src={"/assets/photos11.webp"}
-          alt="Logistics Background"
+          alt={"Logistics Background"}
+          fill
           className="w-full h-full object-cover opacity-30 mix-blend-luminosity"
         />
         <div className="absolute inset-0 bg-navy/85" />
