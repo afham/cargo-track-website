@@ -1,23 +1,10 @@
-"use client";
-
 import Image from "next/image";
-import { type LucideIcon } from "lucide-react";
-import { motion } from "framer-motion";
 
 interface Affiliation {
   src: string;
   name: string;
 }
 
-interface MetricItem {
-  icon: LucideIcon;
-  value: string;
-  label: string;
-  bg: string;
-  color: string;
-}
-
-// 1. Move static data outside component scope to avoid re-creation on re-render
 const AFFILIATIONS: Affiliation[] = [
   {
     src: "/assets/affiliations-1.webp",
@@ -81,18 +68,10 @@ export const ClientLogos = () => {
           className="absolute right-0 top-0 bottom-0 w-24 bg-gradient-to-l from-brand-bg to-transparent z-10 pointer-events-none"
         />
 
-        {/* Continuous Loop Track with Framer Motion */}
+        {/* Continuous Loop Track via Pure CSS */}
         <div className="flex w-max">
-          <motion.div
-            animate={{ x: ["0%", "-50%"] }}
-            transition={{
-              duration: 35,
-              ease: "linear",
-              repeat: Infinity,
-            }}
-            className="flex items-center gap-12 lg:gap-20 pr-12 lg:pr-20 shrink-0"
-          >
-            {/* 2. Primary Track: Rendered once for search engine indexing & screen readers */}
+          <div className="flex items-center gap-12 lg:gap-20 pr-12 lg:pr-20 shrink-0 animate-marquee">
+            {/* Primary Track */}
             {AFFILIATIONS.map((logo, i) => (
               <div
                 key={`primary-${i}`}
@@ -108,7 +87,7 @@ export const ClientLogos = () => {
               </div>
             ))}
 
-            {/* 3. Duplicate Track: Visual filler for infinite scroll, hidden from screen readers */}
+            {/* Duplicate Track for Seamless Seamless Loop */}
             {AFFILIATIONS.map((logo, i) => (
               <div
                 key={`duplicate-${i}`}
@@ -124,7 +103,7 @@ export const ClientLogos = () => {
                 />
               </div>
             ))}
-          </motion.div>
+          </div>
         </div>
       </div>
     </section>

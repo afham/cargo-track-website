@@ -29,6 +29,8 @@ button,
   cursor: pointer;
 }
 
+/* hero section */
+
 @keyframes heroSlideIn {
   from {
     opacity: 0;
@@ -42,4 +44,23 @@ button,
 
 .animate-hero-slide {
   animation: heroSlideIn 2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* client logo section */
+
+@keyframes marquee {
+  0% {
+    transform: translateX(0%);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+.animate-marquee {
+  animation: marquee 35s linear infinite;
+}
+
+.animate-marquee:hover {
+  animation-play-state: paused;
 }

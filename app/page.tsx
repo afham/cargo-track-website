@@ -2,13 +2,10 @@ import dynamic from "next/dynamic";
 
 // Standard imports for Above-The-Fold (Critical path)
 import { Navbar } from "./modules/Navbar";
-import { HeroSection } from "./modules/HeroSection";
 import { TrustStrip } from "./modules/TrustStrip";
+import { HeroSection } from "./modules/HeroSection/HeroSection";
+import { ClientLogos } from "./modules/ClientLogos";
 
-// Dynamic imports for Below-The-Fold sections
-const ClientLogos = dynamic(() =>
-  import("./modules/ClientLogos").then((mod) => mod.ClientLogos),
-);
 const AboutSection = dynamic(() =>
   import("./modules/AboutSection").then((mod) => mod.AboutSection),
 );
