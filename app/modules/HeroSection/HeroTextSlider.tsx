@@ -72,7 +72,7 @@ export const HeroTextSlider = memo(() => {
         if (!document.hidden) {
           setActiveSlide((prev) => (prev + 1) % slides.length);
         }
-      }, 5000);
+      }, 4000);
     };
 
     startTimer();
@@ -108,11 +108,10 @@ export const HeroTextSlider = memo(() => {
       </div>
 
       <div className="flex flex-col gap-6 lg:gap-8">
-        {/* Animated Headline and Subline */}
+        {/* Animated Headline and Subline - MOUNTED STABLY WITHOUT KEY */}
         <div className="min-h-[200px] sm:min-h-[170px] lg:min-h-[180px]">
           <div
-            key={activeSlide}
-            className="will-change-transform animate-hero-slide"
+          // className="will-change-transform animate-hero-slide"
           >
             <h1 className="font-heading font-extrabold text-[32px] sm:text-[44px] lg:text-[50px] leading-[1.15] text-white tracking-tight">
               {slides[activeSlide].headline}
@@ -123,6 +122,7 @@ export const HeroTextSlider = memo(() => {
             </p>
           </div>
         </div>
+
         {/* Slide Indicator Dots */}
         <div
           className="flex items-center gap-2"
