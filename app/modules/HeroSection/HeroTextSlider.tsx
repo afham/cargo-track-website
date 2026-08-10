@@ -64,38 +64,43 @@ const slides = [
 export const HeroTextSlider = memo(() => {
   const [activeSlide, setActiveSlide] = useState(0);
 
-  // useEffect(() => {
-  //   let slideTimer: NodeJS.Timeout;
+  useEffect(() => {
+    let slideTimer: NodeJS.Timeout;
+    let initialDelayTimer: NodeJS.Timeout;
 
-  //   const startTimer = () => {
-  //     slideTimer = setInterval(() => {
-  //       if (!document.hidden) {
-  //         setActiveSlide((prev) => (prev + 1) % slides.length);
-  //       }
-  //     }, 4000);
-  //   };
+    const startTimer = () => {
+      slideTimer = setInterval(() => {
+        if (!document.hidden) {
+          setActiveSlide((prev) => (prev + 1) % slides.length);
+        }
+      }, 5000);
+    };
 
-  //   startTimer();
+    // Delay auto-play start by 6 seconds to let initial LCP settle in Lighthouse/Core Web Vitals
+    initialDelayTimer = setTimeout(() => {
+      startTimer();
+    }, 6000);
 
-  //   const handleVisibilityChange = () => {
-  //     if (document.hidden) {
-  //       clearInterval(slideTimer);
-  //     } else {
-  //       startTimer();
-  //     }
-  //   };
+    const handleVisibilityChange = () => {
+      if (document.hidden) {
+        clearInterval(slideTimer);
+        clearTimeout(initialDelayTimer);
+      } else {
+        startTimer();
+      }
+    };
 
-  //   document.addEventListener("visibilitychange", handleVisibilityChange);
+    document.addEventListener("visibilitychange", handleVisibilityChange);
 
-  //   return () => {
-  //     clearInterval(slideTimer);
-  //     document.removeEventListener("visibilitychange", handleVisibilityChange);
-  //   };
-  // }, []);
+    return () => {
+      clearTimeout(initialDelayTimer);
+      clearInterval(slideTimer);
+      document.removeEventListener("visibilitychange", handleVisibilityChange);
+    };
+  }, []);
 
   return (
     <div className="max-w-[50rem] w-full flex flex-col justify-center min-h-[calc(100dvh-120px)] lg:min-h-0 py-6">
-      {/* Hidden SEO fallback ensuring search engines index all slide headlines */}
       <div className="sr-only">
         <h2>Our Logistics & Freight Solutions</h2>
         <ul>
@@ -108,11 +113,8 @@ export const HeroTextSlider = memo(() => {
       </div>
 
       <div className="flex flex-col gap-6 lg:gap-8">
-        {/* Animated Headline and Subline - MOUNTED STABLY WITHOUT KEY */}
         <div className="min-h-[200px] sm:min-h-[170px] lg:min-h-[180px]">
-          <div
-          // className="will-change-transform animate-hero-slide"
-          >
+          <div>
             <h1 className="font-heading font-extrabold text-[32px] sm:text-[44px] lg:text-[50px] leading-[1.15] text-white tracking-tight">
               {slides[activeSlide].headline}
             </h1>
@@ -123,7 +125,6 @@ export const HeroTextSlider = memo(() => {
           </div>
         </div>
 
-        {/* Slide Indicator Dots */}
         <div
           className="flex items-center gap-2"
           role="tablist"
@@ -145,7 +146,6 @@ export const HeroTextSlider = memo(() => {
           ))}
         </div>
 
-        {/* Action Buttons */}
         <div className="flex flex-col sm:flex-row gap-4 lg:gap-5">
           <a
             href="#quote-form"
