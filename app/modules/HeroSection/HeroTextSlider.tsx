@@ -73,13 +73,13 @@ export const HeroTextSlider = memo(() => {
         if (!document.hidden) {
           setActiveSlide((prev) => (prev + 1) % slides.length);
         }
-      }, 5000);
+      }, 3000);
     };
 
     // Delay auto-play start by 6 seconds to let initial LCP settle in Lighthouse/Core Web Vitals
     initialDelayTimer = setTimeout(() => {
       startTimer();
-    }, 6000);
+    }, 3000);
 
     const handleVisibilityChange = () => {
       if (document.hidden) {
@@ -114,7 +114,7 @@ export const HeroTextSlider = memo(() => {
 
       <div className="flex flex-col gap-6 lg:gap-8">
         <div className="min-h-[200px] sm:min-h-[170px] lg:min-h-[180px]">
-          <div>
+          <div className="will-change-transform animate-hero-slide">
             <h1 className="font-heading font-extrabold text-[32px] sm:text-[44px] lg:text-[50px] leading-[1.15] text-white tracking-tight">
               {slides[activeSlide].headline}
             </h1>
