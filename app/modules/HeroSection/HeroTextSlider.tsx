@@ -63,31 +63,59 @@ const slides = [
 
 export const HeroTextSlider = memo(() => {
   const [activeSlide, setActiveSlide] = useState(0);
+  const [isFading, setIsFading] = useState(false);
 
+  // Helper function to change slide with a smooth fade effect
+  const changeSlide = (nextIndex: number) => {
+    setIsFading(true);
+    setTimeout(() => {
+      setActiveSlide(nextIndex);
+      setIsFading(false);
+    }, 200); // Brief 200ms fade-out before swapping text
+  };
   useEffect(() => {
     let slideTimer: NodeJS.Timeout;
+    let initialTimer: NodeJS.Timeout;
 
-    const startTimer = () => {
+    const startRegularInterval = () => {
       slideTimer = setInterval(() => {
         if (!document.hidden) {
-          setActiveSlide((prev) => (prev + 1) % slides.length);
+          setIsFading(true);
+          setTimeout(() => {
+            setActiveSlide((prev) => (prev + 1) % slides.length);
+            setIsFading(false);
+          }, 300);
         }
-      }, 4000);
+      }, 4000); // Subsequent slide changes every 4 seconds
     };
 
-    startTimer();
+    // First slide change happens after 2.5 seconds
+    initialTimer = setTimeout(() => {
+      if (!document.hidden) {
+        setIsFading(true);
+        setTimeout(() => {
+          setActiveSlide(1);
+          setIsFading(false);
+          startRegularInterval(); // Start 4s loop after first change
+        }, 300);
+      } else {
+        startRegularInterval();
+      }
+    }, 2500);
 
     const handleVisibilityChange = () => {
       if (document.hidden) {
+        clearTimeout(initialTimer);
         clearInterval(slideTimer);
       } else {
-        startTimer();
+        startRegularInterval();
       }
     };
 
     document.addEventListener("visibilitychange", handleVisibilityChange);
 
     return () => {
+      clearTimeout(initialTimer);
       clearInterval(slideTimer);
       document.removeEventListener("visibilitychange", handleVisibilityChange);
     };
@@ -95,7 +123,6 @@ export const HeroTextSlider = memo(() => {
 
   return (
     <div className="max-w-[50rem] w-full flex flex-col justify-center min-h-[calc(100dvh-120px)] lg:min-h-0 py-6">
-      {/* Hidden SEO fallback ensuring search engines index all slide headlines */}
       <div className="sr-only">
         <h2>Our Logistics & Freight Solutions</h2>
         <ul>
@@ -108,9 +135,13 @@ export const HeroTextSlider = memo(() => {
       </div>
 
       <div className="flex flex-col gap-6 lg:gap-8">
-        {/* Animated Headline and Subline - MOUNTED STABLY WITHOUT KEY */}
         <div className="min-h-[200px] sm:min-h-[170px] lg:min-h-[180px]">
-          <div className="will-change-transform animate-hero-slide">
+          {/* Smooth CSS transition that triggers whenever isFading updates */}
+          <div
+            className={`transition-all duration-300 ease-out transform ${
+              isFading ? "opacity-0 translate-y-3" : "opacity-100 translate-y-0"
+            }`}
+          >
             <h1 className="font-heading font-extrabold text-[32px] sm:text-[44px] lg:text-[50px] leading-[1.15] text-white tracking-tight">
               {slides[activeSlide].headline}
             </h1>
@@ -132,7 +163,7 @@ export const HeroTextSlider = memo(() => {
               key={index}
               role="tab"
               aria-selected={activeSlide === index}
-              onClick={() => setActiveSlide(index)}
+              onClick={() => changeSlide(index)}
               aria-label={`Go to slide ${index + 1}: ${slides[index].title}`}
               className={`h-2 rounded-full transition-all duration-300 ${
                 activeSlide === index
