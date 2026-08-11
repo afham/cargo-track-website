@@ -19,7 +19,7 @@ const SERVICES_DATA = [
     id: "02",
     title: "Vehicle Relocation & Road Transportation",
     description:
-      "We provide highly professional and flexible road transportation services. We also provide Smooth and easy vehicle relocation worldwide at affordable prices.",
+      "We provide professional, reliable, and flexible road transportation solutions tailored to your needs. We also offer seamless vehicle relocation services worldwide, ensuring safe, efficient, and cost-effective transportation.",
     tags: [
       "Flexible Road Transport",
       "Worldwide Vehicle Moves",
@@ -39,7 +39,7 @@ const SERVICES_DATA = [
     id: "04",
     title: "Artwork Packing and Handling Service",
     description:
-      "We ensure expert care, secure packing and safe transport for your valuable artwork, providing peace of mind from start to finish.",
+      "We provide specialized artwork relocation with expert handling, secure packing, and safe transportation, ensuring your valuable pieces are protected and carefully managed from start to finish.",
     tags: ["Expert Artwork Care", "Secure Packing", "Safe Transport"],
     image: "/assets/photos18.webp",
   },
@@ -47,7 +47,7 @@ const SERVICES_DATA = [
     id: "05",
     title: "Pet Relocation",
     description:
-      "Pet relocation services can include pick-up and delivery of the pet, preparation of required documentation and provision of appropriate travel containers and facilities.",
+      "Our pet relocation services cover every aspect of your pet’s journey, including safe pick-up and delivery, preparation of required documentation, and provision of suitable travel crates and facilities for a smooth and comfortable relocation.",
     tags: [
       "Pet Pick-up & Delivery",
       "Travel Documentation",
@@ -67,7 +67,7 @@ const SERVICES_DATA = [
     id: "07",
     title: "Industrial Packing",
     description:
-      "Our industrial packing services offer secure solutions for transporting heavy machinery, using premium materials to ensure your equipment arrives in perfect condition.",
+      "Our industrial packing services provide secure, reliable solutions for transporting heavy machinery and valuable equipment, using high-quality packing materials and specialized techniques to ensure maximum protection throughout the journey.",
     tags: ["Heavy Machinery", "Premium Materials", "Equipment Protection"],
     image: "/assets/photos6.webp",
   },
@@ -75,7 +75,7 @@ const SERVICES_DATA = [
     id: "08",
     title: "Office Relocation",
     description:
-      "Professional services aimed at assisting businesses in moving their offices from one location to another. These services typically include planning, packing, transportation, and setup of office equipment and furniture.",
+      "Our professional office relocation services are designed to make business moves seamless and efficient. From detailed planning and secure packing to transportation, unpacking, and setup, we handle your office equipment, furniture, and belongings with care and precision.",
     tags: ["Strategic Planning", "Equipment Setup", "Commercial Transport"],
     image: "/assets/photos7.webp",
   },
@@ -190,9 +190,10 @@ export const ServicesSection = () => {
               transition={{ delay: 0.2 }}
               className="text-slate-600 text-[15px] lg:text-[16px] leading-relaxed lg:text-right mb-4"
             >
-              From household shifting and office relocation to artwork care, pet
-              moves, and deep cleaning services, Cargotrack coordinates every
-              step with precision.
+              From seamless household moves and office relocations to
+              specialized artwork handling, pet relocation, and deep cleaning,
+              Cargotrack manages every detail with precision, care, and
+              professionalism.
             </motion.p>
             <motion.div
               initial={{ opacity: 0, y: 20 }}
@@ -312,7 +313,7 @@ export const ServicesSection = () => {
                   <h3 className="font-heading font-extrabold text-navy text-xl sm:text-2xl mb-2 group-hover:text-primary transition-colors">
                     {service.title}
                   </h3>
-                  <p className="text-slate-800 font-medium text-xs sm:text-sm leading-relaxed mb-4">
+                  <p className="text-slate-800 font-medium text-[12px] sm:text-[12px] leading-relaxed mb-4">
                     {service.description}
                   </p>
 

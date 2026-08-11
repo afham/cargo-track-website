@@ -172,11 +172,11 @@ export const Navbar = () => {
             target="_blank"
             rel="noopener noreferrer"
             title="Chat on WhatsApp"
-            className="relative flex items-center justify-center p-2.5 rounded-full bg-emerald-500 text-white hover:bg-emerald-600 transition-transform duration-300 hover:scale-105 active:scale-95 group"
+            className="relative scale-125 flex items-center justify-center p-2.5 rounded-full bg-emerald-500 text-white hover:bg-emerald-600 transition-transform duration-300 hover:scale-105 active:scale-95 group"
             aria-label="Chat on WhatsApp"
           >
             <span className="absolute inset-0 rounded-full bg-emerald-500/60 animate-[ping_1.4s_cubic-bezier(0,0,0.2,1)_infinite] scale-90 pointer-events-none" />
-            <WhatsAppIcon className="w-4 h-4 relative z-10" />
+            <WhatsAppIcon className="w-4 h-4 relative z-10 scale-125" />
           </a>
         </div>
 
@@ -198,11 +198,11 @@ export const Navbar = () => {
             href={`https://wa.me/${CONTACT_INFO.cleanPhone}`}
             target="_blank"
             rel="noopener noreferrer"
-            className="relative flex items-center justify-center p-2 rounded-full bg-emerald-500 text-white hover:bg-emerald-600 transition-transform duration-300"
+            className="relative scale-125  flex items-center justify-center p-2 rounded-full bg-emerald-500 text-white hover:bg-emerald-600 transition-transform duration-300"
             aria-label="WhatsApp"
           >
-            <span className="absolute inset-0 rounded-full bg-emerald-500/60 animate-[ping_1.4s_cubic-bezier(0,0,0.2,1)_infinite] scale-90 pointer-events-none" />
-            <WhatsAppIcon className="w-4 h-4 relative z-10" />
+            <span className="absolute  inset-0 rounded-full bg-emerald-500/60 animate-[ping_1.4s_cubic-bezier(0,0,0.2,1)_infinite] scale-90 pointer-events-none" />
+            <WhatsAppIcon className="w-4 h-4 relative z-10 scale-125" />
           </a>
 
           <a

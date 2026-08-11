@@ -40,8 +40,7 @@ const SERVICES = [
 const BRANCHES = [
   {
     name: "Jeddah (Head Office)",
-    address:
-      "G53P+VV, Al Sharafeyah, 2nd Floor, ADVANCE BUSINESS CENTER, KHALID BIN ALWALEED STREET, Door Number 213B, Jeddah 22234, Saudi Arabia",
+    address: " ADVANCE BUSINESS CENTER, KHALID BIN ALWALEED STREET",
     telephone: "+966553659763",
   },
   {
@@ -51,7 +50,7 @@ const BRANCHES = [
   {
     name: "Dammam",
     address:
-      "5600 1st Street, 6th Floor, Al Zoabi Tower, Prince Mohammed Bin Fahd Road, Dammam 32241, Saudi Arabia",
+      "5600 1st Street, Al Zoabi Tower, Prince Mohammed Bin Fahd Road, Dammam 32241, Saudi Arabia",
   },
 ];
 

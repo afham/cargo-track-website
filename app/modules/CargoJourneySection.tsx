@@ -177,20 +177,32 @@ const CargoJourneySection = () => {
                     <FileText size={24} />
                   </div>
                   <h4 className="font-heading font-extrabold text-[22px] text-navy mb-2">
-                    Survey & Planning
+                    Origin
                   </h4>
-                  <p className="text-slate-500 text-[14px] font-medium leading-relaxed mb-4">
+                  {/* <p className="text-slate-500 text-[14px] font-medium leading-relaxed mb-4">
                     Pre-move assessment & inventory listing.
-                  </p>
+                  </p> */}
                 </div>
                 <ul className="space-y-3 mt-2">
-                  <li className="flex items-center gap-2 text-[13px] font-semibold text-slate-700">
-                    <div className="w-1.5 h-1.5 rounded-full bg-[#4ade80]" />{" "}
-                    Custom Crating
+                  <li className="flex items-center gap-2 text-[10px] font-semibold text-slate-700">
+                    <div className="min-w-1.5 h-1.5 rounded-full bg-[#4ade80]" />{" "}
+                    Pre-Move Survey – Assessing your shipment and planning the
+                    move.
                   </li>
-                  <li className="flex items-center gap-2 text-[13px] font-semibold text-slate-700">
-                    <div className="w-1.5 h-1.5 rounded-full bg-[#4ade80]" />{" "}
-                    Inventory Logging
+                  <li className="flex items-center gap-2 text-[10px] font-semibold text-slate-700">
+                    <div className="min-w-1.5 h-1.5 rounded-full bg-[#4ade80]" />{" "}
+                    Professional Packing – Safe and secure packing of your
+                    belongings.
+                  </li>
+                  <li className="flex items-center gap-2 text-[10px] font-semibold text-slate-700">
+                    <div className="min-w-1.5 h-1.5 rounded-full bg-[#4ade80]" />{" "}
+                    Freight Services – Reliable transportation from origin to
+                    destination.
+                  </li>
+                  <li className="flex items-center gap-2 text-[10px] font-semibold text-slate-700">
+                    <div className="min-w-1.5 h-1.5 rounded-full bg-[#4ade80]" />{" "}
+                    Move Coordination – Managing and coordinating every step of
+                    the shipment.
                   </li>
                 </ul>
               </div>
@@ -310,25 +322,37 @@ const CargoJourneySection = () => {
               />
               <div className="p-6 flex-1 flex flex-col justify-between">
                 <div>
-                  <div className="inline-flex items-center gap-1.5 px-3 py-1 bg-[#4ade80]/20 text-[#4ade80] rounded-full text-[12px] font-bold tracking-wider uppercase mb-4">
+                  <div className="inline-flex items-center gap-1.5 px-4 py-3 bg-[#4ade80]/20 text-[#4ade80] rounded-full text-[12px] font-bold tracking-wider uppercase mb-4">
                     <CheckCircle size={14} /> Safely Delivered
                   </div>
                   <h4 className="font-heading font-extrabold text-[22px] leading-tight mb-3">
-                    Relocation Completed Smoothly
+                    Destination
                   </h4>
                 </div>
                 <ul className="space-y-2 mt-4">
-                  <li className="flex items-start gap-2 text-[13px] text-white/70">
-                    <div className="mt-1 w-1.5 h-1.5 rounded-full bg-primary" />{" "}
-                    Destination unmounting & assembly
+                  <li className="flex items-start gap-2 text-[10px] text-white/70">
+                    <div className="mt-1 min-w-1.5 h-1.5 rounded-full bg-primary" />{" "}
+                    Customs Clearance – Handling the required customs procedures
+                    and documentation.
                   </li>
-                  <li className="flex items-start gap-2 text-[13px] text-white/70">
-                    <div className="mt-1 w-1.5 h-1.5 rounded-full bg-primary" />{" "}
-                    Zero-damage handling assurance
+                  <li className="flex items-start gap-2 text-[10px] text-white/70">
+                    <div className="mt-1 min-w-1.5 h-1.5 rounded-full bg-primary" />{" "}
+                    Transportation – Safe delivery of your shipment to the final
+                    destination.
                   </li>
-                  <li className="flex items-start gap-2 text-[13px] text-white/70">
-                    <div className="mt-1 w-1.5 h-1.5 rounded-full bg-primary" />{" "}
-                    Complete client satisfaction
+                  <li className="flex items-start gap-2 text-[10px] text-white/70">
+                    <div className="mt-1 min-w-1.5 h-1.5 rounded-full bg-primary" />{" "}
+                    Offloading – Careful unloading of your belongings at the
+                    delivery location.
+                  </li>
+                  <li className="flex items-start gap-2 text-[10px] text-white/70">
+                    <div className="mt-1 min-w-1.5 h-1.5 rounded-full bg-primary" />{" "}
+                    Unpacking – Unpacking and placing your items as required.
+                  </li>
+                  <li className="flex items-start gap-2 text-[10px] text-white/70">
+                    <div className="mt-1 min-w-1.5 h-1.5 rounded-full bg-primary" />{" "}
+                    Furniture Assembly & Fixing – Reassembling furniture and
+                    other items at your new location.
                   </li>
                 </ul>
               </div>

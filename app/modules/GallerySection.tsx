@@ -70,7 +70,7 @@ const DEFAULT_IMAGES: GalleryImage[] = [
     src: "/assets/photos15.webp",
     alt: "Customs documentation inspection stage",
   },
-  { src: "/assets/photos16.webp", alt: "Commercial relocation logistics team" },
+  { src: "/assets/photos17.webp", alt: "Commercial relocation logistics team" },
   {
     src: "/assets/photos18.webp",
     alt: "Container freight station cargo inspection",

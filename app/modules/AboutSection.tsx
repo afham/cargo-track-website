@@ -8,6 +8,7 @@ import { motion } from "framer-motion";
 const STRENGTHS = [
   "Dedicated supervisors & carpenters",
   "Jeddah, Riyadh & Dammam hubs",
+  "FIDI Affiliated",
   "IAM & IATA global networks",
   "Comprehensive insurance coverage",
 ] as const;
