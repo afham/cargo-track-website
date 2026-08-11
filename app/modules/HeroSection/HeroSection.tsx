@@ -28,7 +28,11 @@ export const HeroSection = () => {
           preload="metadata"
           className="hidden sm:block absolute inset-0 w-full h-full object-cover transform-gpu"
         >
-          <source src="/assets/videos/banner-full2.webm" type="video/webm" />
+          <source
+            src="/assets/videos/banner-full2.webm"
+            type="video/webm"
+            media="(min-width: 640px)"
+          />
         </video>
       </div>
 
