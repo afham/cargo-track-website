@@ -40,17 +40,26 @@ const SERVICES = [
 const BRANCHES = [
   {
     name: "Jeddah (Head Office)",
-    address: " ADVANCE BUSINESS CENTER, KHALID BIN ALWALEED STREET",
-    telephone: "+966553659763",
+    address: "ADVANCE BUSINESS CENTER, KHALID BIN ALWALEED STREET",
+    telephones: ["+966596929917", "+966590967593"],
+    emails: ["info@cargotrack.co", "wafa.kamil@cargotrack.co"],
   },
   {
     name: "Riyadh",
     address: "7027 Al-Iqdam, Al Mashael, Near, Riyadh 14322, Saudi Arabia",
+    telephones: ["+966583180756", "+966580593809", "+966591545934"],
+    emails: [
+      "rashif@cargotrack.co",
+      "operation@cargotrack.co",
+      "Pricing@cargotrack.co",
+    ],
   },
   {
     name: "Dammam",
     address:
       "5600 1st Street, Al Zoabi Tower, Prince Mohammed Bin Fahd Road, Dammam 32241, Saudi Arabia",
+    telephones: ["+966599380132", "+966597480313"],
+    emails: ["Shiba@cargotrack.co", "Dmm@cargotrack.co"],
   },
 ];
 
@@ -190,7 +199,7 @@ const FooterSection = () => {
 
       <div className="max-w-[1440px] mx-auto px-6 sm:px-8 lg:px-12 relative z-10">
         {/* MAIN FOOTER GRID */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-12 lg:gap-8 mb-16">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-6 gap-12 lg:gap-8 mb-16">
           {/* Column 1: Company Info */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -235,6 +244,7 @@ const FooterSection = () => {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.5, delay: 0.1 }}
+            className="lg:col-span-1"
           >
             <h3 className="text-[15px] font-bold text-white uppercase tracking-wider mb-6">
               Quick Links
@@ -264,6 +274,7 @@ const FooterSection = () => {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.5, delay: 0.2 }}
+            className="lg:col-span-1"
           >
             <h3 className="text-[15px] font-bold text-white uppercase tracking-wider mb-6">
               Our Services
@@ -283,59 +294,85 @@ const FooterSection = () => {
             </ul>
           </motion.div>
 
-          {/* Column 4: Contact & Hubs */}
+          {/* Column 4: Contact & Hubs (2 Columns Wide) */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.5, delay: 0.3 }}
+            className="lg:col-span-2"
             id="contact-info"
           >
             <h3 className="text-[15px] font-bold text-white uppercase tracking-wider mb-6">
               Headquarters & Hubs
             </h3>
-            <ul className="flex flex-col gap-5">
+            <ul className="grid grid-cols-1 sm:grid-cols-2 gap-6">
               {BRANCHES.map((branch) => (
                 <li key={branch.name} className="flex gap-3">
                   <MapPin size={18} className="text-primary shrink-0 mt-0.5" />
                   <div className="text-white/70 text-[13px] leading-relaxed">
-                    <strong className="text-white text-[14px] block">
+                    <strong className="text-white text-[14px] block mb-0.5">
                       {branch.name}
                     </strong>
-                    <address className="not-italic mt-0.5 text-white/60 text-[12px]">
+                    <address className="not-italic text-white/60 text-[12px] mb-2">
                       {branch.address}
                     </address>
+
+                    {/* Telephones */}
+                    {branch.telephones && branch.telephones.length > 0 && (
+                      <div className="flex items-start gap-1.5 text-[12px] text-white/80 mt-1">
+                        <PhoneCallIcon
+                          size={13}
+                          className="text-primary shrink-0 mt-0.5"
+                        />
+                        <div className="flex flex-wrap gap-x-2 gap-y-0.5">
+                          {branch.telephones.map((tel, idx) => (
+                            <a
+                              key={idx}
+                              href={`tel:${tel}`}
+                              className="hover:text-white transition-colors"
+                            >
+                              {tel}
+                              {idx < branch.telephones.length - 1 && ","}
+                            </a>
+                          ))}
+                        </div>
+                      </div>
+                    )}
+
+                    {/* Emails */}
+                    {branch.emails && branch.emails.length > 0 && (
+                      <div className="flex items-start gap-1.5 text-[12px] text-white/80 mt-1">
+                        <Mail
+                          size={13}
+                          className="text-primary shrink-0 mt-0.5"
+                        />
+                        <div className="flex flex-wrap gap-x-2 gap-y-0.5">
+                          {branch.emails.map((email, idx) => (
+                            <a
+                              key={idx}
+                              href={`mailto:${email}`}
+                              className="hover:text-white transition-colors break-all"
+                            >
+                              {email}
+                              {idx < branch.emails.length - 1 && ","}
+                            </a>
+                          ))}
+                        </div>
+                      </div>
+                    )}
                   </div>
                 </li>
               ))}
 
-              <li className="flex items-center gap-3 pt-2 border-t border-white/10">
+              <li className="flex items-center gap-3 pt-2 border-t border-white/10 sm:col-span-2">
                 <Globe size={18} className="text-primary shrink-0" />
                 <span className="text-white/70 text-[14px]">
                   Coverage: Middle East, Asia & Worldwide
                 </span>
               </li>
 
-              {/* SEO Tel & Mailto Clickable Attributes */}
-              <li className="flex items-center gap-3">
-                <Mail size={18} className="text-primary shrink-0" />
-                <a
-                  href="mailto:enquiry@cargotrack.co"
-                  className="text-white/70 text-[14px] hover:text-white transition-colors"
-                >
-                  enquiry@cargotrack.co
-                </a>
-              </li>
-              <li className="flex items-center gap-3">
-                <PhoneCallIcon size={18} className="text-primary shrink-0" />
-                <a
-                  href="tel:+966553659763"
-                  className="text-white/70 text-[14px] hover:text-white transition-colors"
-                >
-                  +966 55 365 9763
-                </a>
-              </li>
-              <li className="flex gap-3">
+              <li className="flex gap-3 sm:col-span-2">
                 <Clock size={18} className="text-primary shrink-0 mt-0.5" />
                 <span className="text-white/70 text-[14px] leading-relaxed">
                   Working Hours <br />
@@ -351,6 +388,7 @@ const FooterSection = () => {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.5, delay: 0.4 }}
+            className="lg:col-span-1"
           >
             <h3 className="text-[15px] font-bold text-white uppercase tracking-wider mb-6">
               Follow Us
