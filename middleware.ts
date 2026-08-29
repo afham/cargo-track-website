@@ -4,6 +4,6 @@ import { routing } from "./i18n/routing";
 export default createMiddleware(routing);
 
 export const config = {
-  // Match all pathnames except for static files, _next, and asset folders
-  matcher: ["/", "/(ar|en)/:path*", "/((?!_next|_vercel|.*\\..*).*)"],
+  // Match all pathnames except for /api, _next, _vercel, and static files
+  matcher: ["/((?!api|_next|_vercel|.*\\..*).*)"],
 };
