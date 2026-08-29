@@ -17,36 +17,14 @@ import {
   Globe,
   PhoneCallIcon,
 } from "lucide-react";
+import { useTranslations } from "next-intl";
 
-// ----------------------------------------------------------------------
-// 1. PERFORMANCE: Hoist Static Data Outside Render Function
-// Prevents heap allocations and garbage collection on every state update
-// ----------------------------------------------------------------------
-const SERVICES = [
-  { name: "Household Goods Relocation", slug: "household-goods" },
-  { name: "Vehicle Relocation & Transport", slug: "vehicle-relocation" },
-  { name: "Packing & Crating Services", slug: "packing-crating" },
-  { name: "Artwork Packing & Handling", slug: "artwork-packing" },
-  { name: "Pet Relocation", slug: "pet-relocation" },
-  { name: "Storage & Warehousing", slug: "storage-warehousing" },
-  { name: "Industrial Packing", slug: "industrial-packing" },
-  { name: "Office Relocation", slug: "office-relocation" },
-  { name: "Groupage Services", slug: "groupage-services" },
-  { name: "Pilgrim Baggage Handling", slug: "pilgrim-baggage" },
-  { name: "Mobility & Destination Services", slug: "mobility-services" },
-  { name: "Deep Cleaning Service", slug: "deep-cleaning" },
-];
-
-const BRANCHES = [
+const BRANCH_CONTACT_DETAILS = [
   {
-    name: "Jeddah (Head Office)",
-    address: "ADVANCE BUSINESS CENTER, KHALID BIN ALWALEED STREET",
     telephones: ["+966596929917", "+966590967593"],
     emails: ["info@cargotrack.co", "wafa.kamil@cargotrack.co"],
   },
   {
-    name: "Riyadh",
-    address: "7027 Al-Iqdam, Al Mashael, Near, Riyadh 14322, Saudi Arabia",
     telephones: ["+966583180756", "+966580593809", "+966591545934"],
     emails: [
       "rashif@cargotrack.co",
@@ -55,24 +33,20 @@ const BRANCHES = [
     ],
   },
   {
-    name: "Dammam",
-    address:
-      "5600 1st Street, Al Zoabi Tower, Prince Mohammed Bin Fahd Road, Dammam 32241, Saudi Arabia",
     telephones: ["+966599380132", "+966597480313"],
     emails: ["Shiba@cargotrack.co", "Dmm@cargotrack.co"],
   },
 ];
 
-// Synchronized with Navbar NAV_ITEMS
-const QUICK_LINKS = [
-  { label: "Home", href: "#home", id: "home" },
-  { label: "About Us", href: "#about-us", id: "about-us" },
-  { label: "Services", href: "#services", id: "services" },
-  { label: "Workflow", href: "#workflow", id: "workflow" },
-  { label: "Network", href: "#network", id: "network" },
-  { label: "Gallery", href: "#gallery", id: "gallery" },
-  { label: "Contact", href: "#contact", id: "contact" },
-];
+const QUICK_LINK_KEYS = [
+  { key: "home", id: "home", href: "#home" },
+  { key: "aboutUs", id: "about-us", href: "#about-us" },
+  { key: "services", id: "services", href: "#services" },
+  { key: "workflow", id: "workflow", href: "#workflow" },
+  { key: "network", id: "network", href: "#network" },
+  { key: "gallery", id: "gallery", href: "#gallery" },
+  { key: "contact", id: "contact", href: "#contact" },
+] as const;
 
 const SOCIAL_LINKS = [
   {
@@ -97,12 +71,12 @@ const SOCIAL_LINKS = [
   },
 ];
 
-const FooterSection = () => {
+const TOTAL_SERVICES = 12;
+
+export const FooterSection = () => {
+  const t = useTranslations("FooterSection");
   const [showScrollTop, setShowScrollTop] = useState(false);
 
-  // ----------------------------------------------------------------------
-  // 2. PERFORMANCE: Passive & Throttled Scroll Handler
-  // ----------------------------------------------------------------------
   useEffect(() => {
     let ticking = false;
 
@@ -131,9 +105,6 @@ const FooterSection = () => {
     }
   }, []);
 
-  // ----------------------------------------------------------------------
-  // 3. SEO: LocalBusiness JSON-LD Schema
-  // ----------------------------------------------------------------------
   const schemaData = useMemo(
     () => ({
       "@context": "https://schema.org",
@@ -218,22 +189,20 @@ const FooterSection = () => {
               />
             </div>
             <p className="text-white/70 text-[14px] leading-relaxed mb-6">
-              Based in Jeddah with branches in Riyadh and Dammam, CargoTrack
-              delivers trusted relocation, storage, mobility, and logistics
-              solutions locally and internationally.
+              {t("company.description")}
             </p>
             <div className="flex flex-col gap-3">
               <div className="flex items-center gap-2 bg-white/5 border border-white/10 px-3 py-2 rounded-lg text-[12px] font-semibold text-white/80 w-fit">
-                <Award size={14} className="text-[#4ade80]" /> FIDI & IATA
-                Accredited
+                <Award size={14} className="text-[#4ade80]" />
+                {t("company.fidi")}
               </div>
               <div className="flex items-center gap-2 bg-white/5 border border-white/10 px-3 py-2 rounded-lg text-[12px] font-semibold text-white/80 w-fit">
-                <ShieldCheck size={14} className="text-[#4ade80]" /> IAM & GEM
-                Member
+                <ShieldCheck size={14} className="text-[#4ade80]" />
+                {t("company.iam")}
               </div>
               <div className="flex items-center gap-2 bg-white/5 border border-white/10 px-3 py-2 rounded-lg text-[12px] font-semibold text-white/80 w-fit">
-                <Clock size={14} className="text-[#4ade80]" /> 10+ Years
-                Experience
+                <Clock size={14} className="text-[#4ade80]" />
+                {t("company.experience")}
               </div>
             </div>
           </motion.div>
@@ -247,21 +216,21 @@ const FooterSection = () => {
             className="lg:col-span-1"
           >
             <h3 className="text-[15px] font-bold text-white uppercase tracking-wider mb-6">
-              Quick Links
+              {t("titles.quickLinks")}
             </h3>
             <ul className="flex flex-col gap-3">
-              {QUICK_LINKS.map((item) => (
-                <li key={item.id}>
+              {QUICK_LINK_KEYS.map(({ key, id, href }) => (
+                <li key={id}>
                   <a
-                    href={item.href}
+                    href={href}
                     onClick={(e) => {
                       e.preventDefault();
-                      scrollToSection(item.id);
+                      scrollToSection(id);
                     }}
-                    className="text-white/70 text-[14px] hover:text-white transition-colors relative group w-fit text-left inline-block focus:outline-none focus:ring-1 focus:ring-primary"
+                    className="text-white/70 text-[14px] hover:text-white transition-colors relative group w-fit text-start inline-block focus:outline-none focus:ring-1 focus:ring-primary"
                   >
-                    {item.label}
-                    <span className="absolute -bottom-0.5 left-0 w-0 h-[1px] bg-primary group-hover:w-full transition-all duration-300" />
+                    {t(`nav.${key}`)}
+                    <span className="absolute -bottom-0.5 start-0 w-0 h-[1px] bg-primary group-hover:w-full transition-all duration-300" />
                   </a>
                 </li>
               ))}
@@ -277,24 +246,28 @@ const FooterSection = () => {
             className="lg:col-span-1"
           >
             <h3 className="text-[15px] font-bold text-white uppercase tracking-wider mb-6">
-              Our Services
+              {t("titles.services")}
             </h3>
             <ul className="flex flex-col gap-2.5">
-              {SERVICES.map((service) => (
-                <li key={service.slug}>
-                  <a
-                    href={`#${service.slug}`}
-                    className="text-white/70 text-[13px] hover:text-white transition-colors relative group w-fit text-left inline-block"
-                  >
-                    {service.name}
-                    <span className="absolute -bottom-0.5 left-0 w-0 h-[1px] bg-primary group-hover:w-full transition-all duration-300" />
-                  </a>
-                </li>
-              ))}
+              {Array.from({ length: TOTAL_SERVICES }).map((_, idx) => {
+                const name = t(`servicesList.${idx}.name`);
+                const slug = t(`servicesList.${idx}.slug`);
+                return (
+                  <li key={slug}>
+                    <a
+                      href={`#${slug}`}
+                      className="text-white/70 text-[13px] hover:text-white transition-colors relative group w-fit text-start inline-block"
+                    >
+                      {name}
+                      <span className="absolute -bottom-0.5 start-0 w-0 h-[1px] bg-primary group-hover:w-full transition-all duration-300" />
+                    </a>
+                  </li>
+                );
+              })}
             </ul>
           </motion.div>
 
-          {/* Column 4: Contact & Hubs (2 Columns Wide) */}
+          {/* Column 4: Contact & Hubs */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -304,79 +277,112 @@ const FooterSection = () => {
             id="contact-info"
           >
             <h3 className="text-[15px] font-bold text-white uppercase tracking-wider mb-6">
-              Headquarters & Hubs
+              {t("titles.branches")}
             </h3>
             <ul className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-              {BRANCHES.map((branch) => (
-                <li key={branch.name} className="flex gap-3">
-                  <MapPin size={18} className="text-primary shrink-0 mt-0.5" />
-                  <div className="text-white/70 text-[13px] leading-relaxed">
-                    <strong className="text-white text-[14px] block mb-0.5">
-                      {branch.name}
-                    </strong>
-                    <address className="not-italic text-white/60 text-[12px] mb-2">
-                      {branch.address}
-                    </address>
+              {[0, 1, 2].map((idx) => {
+                const name = t(`branches.${idx}.name`);
+                const address = t(`branches.${idx}.address`);
+                const contacts = BRANCH_CONTACT_DETAILS[idx];
 
-                    {/* Telephones */}
-                    {branch.telephones && branch.telephones.length > 0 && (
-                      <div className="flex items-start gap-1.5 text-[12px] text-white/80 mt-1">
-                        <PhoneCallIcon
-                          size={13}
-                          className="text-primary shrink-0 mt-0.5"
-                        />
-                        <div className="flex flex-wrap gap-x-2 gap-y-0.5">
-                          {branch.telephones.map((tel, idx) => (
-                            <a
-                              key={idx}
-                              href={`tel:${tel}`}
-                              className="hover:text-white transition-colors"
-                            >
-                              {tel}
-                              {idx < branch.telephones.length - 1 && ","}
-                            </a>
-                          ))}
-                        </div>
-                      </div>
-                    )}
+                return (
+                  <li key={idx} className="flex gap-3">
+                    <MapPin
+                      size={18}
+                      className="text-primary shrink-0 mt-0.5"
+                    />
+                    <div className="text-white/70 text-[13px] leading-relaxed w-full">
+                      <strong className="text-white text-[14px] block mb-0.5">
+                        {name}
+                      </strong>
+                      <address className="not-italic text-white/60 text-[12px] mb-2">
+                        {address}
+                      </address>
 
-                    {/* Emails */}
-                    {branch.emails && branch.emails.length > 0 && (
-                      <div className="flex items-start gap-1.5 text-[12px] text-white/80 mt-1">
-                        <Mail
-                          size={13}
-                          className="text-primary shrink-0 mt-0.5"
-                        />
-                        <div className="flex flex-wrap gap-x-2 gap-y-0.5">
-                          {branch.emails.map((email, idx) => (
-                            <a
-                              key={idx}
-                              href={`mailto:${email}`}
-                              className="hover:text-white transition-colors break-all"
-                            >
-                              {email}
-                              {idx < branch.emails.length - 1 && ","}
-                            </a>
-                          ))}
+                      {/* Telephones */}
+                      {contacts.telephones.length > 0 && (
+                        <div className="flex items-start gap-1.5 text-[12px] text-white/80 mt-1.5">
+                          <PhoneCallIcon
+                            size={13}
+                            className="text-primary shrink-0 mt-0.5 rtl:scale-x-[-1]"
+                          />
+                          <div
+                            dir="ltr"
+                            className="flex flex-wrap items-center gap-x-1.5 gap-y-0.5 text-start [unicode-bidi:isolate]"
+                          >
+                            {contacts.telephones.map((tel, telIdx) => (
+                              <span
+                                key={telIdx}
+                                className="inline-flex items-center"
+                              >
+                                <a
+                                  href={`tel:${tel}`}
+                                  dir="ltr"
+                                  className="hover:text-white transition-colors [unicode-bidi:isolate]"
+                                >
+                                  {tel}
+                                </a>
+                                {telIdx < contacts.telephones.length - 1 && (
+                                  <span className="text-white/40 ms-1 me-0.5">
+                                    ,
+                                  </span>
+                                )}
+                              </span>
+                            ))}
+                          </div>
                         </div>
-                      </div>
-                    )}
-                  </div>
-                </li>
-              ))}
+                      )}
+
+                      {/* Emails */}
+                      {contacts.emails.length > 0 && (
+                        <div className="flex items-start gap-1.5 text-[12px] text-white/80 mt-1.5">
+                          <Mail
+                            size={13}
+                            className="text-primary shrink-0 mt-0.5"
+                          />
+                          <div
+                            dir="ltr"
+                            className="flex flex-wrap items-center gap-x-1.5 gap-y-0.5 text-start [unicode-bidi:isolate]"
+                          >
+                            {contacts.emails.map((email, emailIdx) => (
+                              <span
+                                key={emailIdx}
+                                className="inline-flex items-center"
+                              >
+                                <a
+                                  href={`mailto:${email}`}
+                                  dir="ltr"
+                                  className="hover:text-white transition-colors break-all [unicode-bidi:isolate]"
+                                >
+                                  {email}
+                                </a>
+                                {emailIdx < contacts.emails.length - 1 && (
+                                  <span className="text-white/40 ms-1 me-0.5">
+                                    ,
+                                  </span>
+                                )}
+                              </span>
+                            ))}
+                          </div>
+                        </div>
+                      )}
+                    </div>
+                  </li>
+                );
+              })}
 
               <li className="flex items-center gap-3 pt-2 border-t border-white/10 sm:col-span-2">
                 <Globe size={18} className="text-primary shrink-0" />
                 <span className="text-white/70 text-[14px]">
-                  Coverage: Middle East, Asia & Worldwide
+                  {t("coverage")}
                 </span>
               </li>
 
               <li className="flex gap-3 sm:col-span-2">
                 <Clock size={18} className="text-primary shrink-0 mt-0.5" />
                 <span className="text-white/70 text-[14px] leading-relaxed">
-                  Working Hours <br />
-                  Sat - Thu: 9:00 AM - 6:30 PM
+                  {t("workingHours.title")} <br />
+                  {t("workingHours.time")}
                 </span>
               </li>
             </ul>
@@ -391,7 +397,7 @@ const FooterSection = () => {
             className="lg:col-span-1"
           >
             <h3 className="text-[15px] font-bold text-white uppercase tracking-wider mb-6">
-              Follow Us
+              {t("titles.followUs")}
             </h3>
             <div className="flex items-center gap-3 mb-8">
               {SOCIAL_LINKS.map(({ icon: Icon, name, href }) => (
@@ -400,7 +406,7 @@ const FooterSection = () => {
                   href={href}
                   target="_blank"
                   rel="noopener noreferrer"
-                  aria-label={`Follow CargoTrack on ${name}`}
+                  aria-label={`${t("socialAria")} ${name}`}
                   className="w-10 h-10 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-white/80 hover:bg-primary hover:text-white hover:border-primary hover:-translate-y-1 hover:shadow-[0_0_15px_rgba(21,101,192,0.5)] transition-all duration-300 group"
                 >
                   <Icon
@@ -416,8 +422,7 @@ const FooterSection = () => {
         {/* BOTTOM BAR */}
         <div className="flex flex-col lg:flex-row items-center justify-between gap-6 text-white/50 text-[13px] font-medium border-t border-white/10 pt-8">
           <div>
-            © {new Date().getFullYear()} CargoTrack Relocations. All Rights
-            Reserved.
+            {t("copyright", { year: new Date().getFullYear().toString() })}
           </div>
         </div>
       </div>
@@ -435,8 +440,8 @@ const FooterSection = () => {
             }}
             whileTap={{ scale: 0.9 }}
             onClick={scrollToTop}
-            className="fixed bottom-8 right-8 z-50 w-12 h-12 rounded-full bg-primary text-white flex items-center justify-center shadow-lg hover:bg-brightblue transition-colors focus:outline-none focus:ring-4 focus:ring-primary/30"
-            aria-label="Scroll to top of page"
+            className="fixed bottom-8 end-8 z-50 w-12 h-12 rounded-full bg-primary text-white flex items-center justify-center shadow-lg hover:bg-brightblue transition-colors focus:outline-none focus:ring-4 focus:ring-primary/30"
+            aria-label={t("scrollToTop")}
           >
             <ChevronUp size={24} />
           </motion.button>

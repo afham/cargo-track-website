@@ -1,19 +1,21 @@
 "use client";
 
-import React, { useEffect, useState, useCallback } from "react";
+import React, { useEffect, useState } from "react";
 import { Mail, Menu, Phone, X } from "lucide-react";
-import { AnimatePresence, motion } from "framer-motion"; // Fixed import to standard framer-motion
+import { AnimatePresence, motion } from "framer-motion";
 import Image from "next/image";
+import { useTranslations } from "next-intl";
+import { LanguageSwitcher } from "../components/LanguageSwitcher"; // Adjust path as needed
 
-const NAV_ITEMS = [
-  "Home",
-  "About Us",
-  "Services",
-  "Workflow",
-  "Network",
-  "Gallery",
-  "Contact",
-];
+const NAV_KEYS = [
+  { key: "home", id: "home" },
+  { key: "aboutUs", id: "about-us" },
+  { key: "services", id: "services" },
+  { key: "workflow", id: "workflow" },
+  { key: "network", id: "network" },
+  { key: "gallery", id: "gallery" },
+  { key: "contact", id: "contact" },
+] as const;
 
 const CONTACT_INFO = {
   email: "enquiry@cargotrack.co",
@@ -34,11 +36,11 @@ const WhatsAppIcon = ({ className = "w-4 h-4" }: { className?: string }) => (
 );
 
 export const Navbar = () => {
+  const t = useTranslations("Navbar");
   const [scrolled, setScrolled] = useState(false);
   const [activeSection, setActiveSection] = useState("home");
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
-  // Throttled scroll listener using requestAnimationFrame to eliminate jank
   useEffect(() => {
     let ticking = false;
 
@@ -47,17 +49,13 @@ export const Navbar = () => {
         window.requestAnimationFrame(() => {
           setScrolled(window.scrollY > 20);
 
-          const sections = NAV_ITEMS.map((item) =>
-            item.toLowerCase().replace(/\s+/g, "-"),
-          );
-
           let currentSection = "home";
-          for (const section of sections) {
-            const element = document.getElementById(section);
+          for (const item of NAV_KEYS) {
+            const element = document.getElementById(item.id);
             if (element) {
               const rect = element.getBoundingClientRect();
               if (rect.top <= 250) {
-                currentSection = section;
+                currentSection = item.id;
               }
             }
           }
@@ -80,12 +78,12 @@ export const Navbar = () => {
           : "bg-gradient-to-b from-slate-950/80 via-slate-950/40 to-transparent py-5"
       }`}
     >
-      <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-12 flex items-center justify-between gap-2 sm:gap-4">
+      <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-12 flex items-center justify-between gap-2 sm:gap-4 relative">
         {/* Logo */}
         <a
           href="#home"
-          className="flex items-center gap-2 shrink-0 scale-125 translate-x-3"
-          aria-label="CargoTrack Home"
+          className="flex items-center gap-2 shrink-0 scale-125 translate-x-3 rtl:-translate-x-3"
+          aria-label={t("aria.home")}
         >
           <Image
             src={
@@ -101,16 +99,15 @@ export const Navbar = () => {
           />
         </a>
 
-        {/* Desktop Navigation Links */}
-        <div className="hidden xl:flex items-center gap-6">
-          {NAV_ITEMS.map((item) => {
-            const sectionId = item.toLowerCase().replace(/\s+/g, "-");
-            const isActive = activeSection === sectionId;
+        {/* Desktop Navigation Links - Centered */}
+        <div className="hidden xl:flex items-center gap-6 absolute left-1/2 -translate-x-1/2">
+          {NAV_KEYS.map(({ key, id }) => {
+            const isActive = activeSection === id;
             return (
               <a
-                key={item}
-                href={`#${sectionId}`}
-                className={`font-sans text-sm font-semibold relative py-1 transition-colors duration-300 ${
+                key={key}
+                href={`#${id}`}
+                className={`font-sans text-sm font-semibold relative py-1 transition-colors duration-300 whitespace-nowrap ${
                   scrolled
                     ? isActive
                       ? "text-primary font-bold"
@@ -120,11 +117,11 @@ export const Navbar = () => {
                       : "text-slate-200 hover:text-white"
                 }`}
               >
-                {item}
+                {t(`nav.${key}`)}
                 {isActive && (
                   <motion.span
                     layoutId="activeNavIndicator"
-                    className={`absolute bottom-0 left-0 w-full h-[2.5px] rounded-full ${
+                    className={`absolute bottom-0 start-0 w-full h-[2.5px] rounded-full ${
                       scrolled ? "bg-primary" : "bg-blue-400"
                     }`}
                     transition={{ type: "spring", stiffness: 380, damping: 30 }}
@@ -135,11 +132,14 @@ export const Navbar = () => {
           })}
         </div>
 
-        {/* Desktop Contacts Bar */}
-        <div className="hidden lg:flex items-center gap-4 xl:gap-5 shrink-0">
+        {/* Desktop Contacts Bar & Language Switcher */}
+        <div className="hidden xl:flex items-center gap-4 xl:gap-5 shrink-0">
+          <LanguageSwitcher scrolled={scrolled} />
+
           <div className="flex flex-col items-start gap-1">
             <a
               href={`tel:${CONTACT_INFO.cleanPhone}`}
+              aria-label={t("aria.callUs")}
               className={`flex items-center gap-2 transition-colors duration-200 ${
                 scrolled
                   ? "text-slate-800 hover:text-primary"
@@ -147,13 +147,17 @@ export const Navbar = () => {
               }`}
             >
               <Phone size={14} className="text-blue-500 shrink-0" />
-              <span className="font-semibold text-xs leading-none">
+              <span
+                dir="ltr"
+                className="font-semibold text-xs leading-none [unicode-bidi:isolate]"
+              >
                 {CONTACT_INFO.phone}
               </span>
             </a>
 
             <a
               href={`mailto:${CONTACT_INFO.email}`}
+              aria-label={t("aria.emailUs")}
               className={`flex items-center gap-2 transition-colors duration-200 ${
                 scrolled
                   ? "text-slate-800 hover:text-primary"
@@ -161,7 +165,10 @@ export const Navbar = () => {
               }`}
             >
               <Mail size={14} className="text-blue-400 shrink-0" />
-              <span className="font-semibold text-xs leading-none">
+              <span
+                dir="ltr"
+                className="font-semibold text-xs leading-none [unicode-bidi:isolate]"
+              >
                 {CONTACT_INFO.email}
               </span>
             </a>
@@ -171,17 +178,19 @@ export const Navbar = () => {
             href={`https://wa.me/${CONTACT_INFO.cleanPhone}`}
             target="_blank"
             rel="noopener noreferrer"
-            title="Chat on WhatsApp"
+            title={t("aria.whatsapp")}
             className="relative scale-125 flex items-center justify-center p-2.5 rounded-full bg-emerald-500 text-white hover:bg-emerald-600 transition-transform duration-300 hover:scale-105 active:scale-95 group"
-            aria-label="Chat on WhatsApp"
+            aria-label={t("aria.whatsapp")}
           >
             <span className="absolute inset-0 rounded-full bg-emerald-500/60 animate-[ping_1.4s_cubic-bezier(0,0,0.2,1)_infinite] scale-90 pointer-events-none" />
             <WhatsAppIcon className="w-4 h-4 relative z-10 scale-125" />
           </a>
         </div>
 
-        {/* Mobile Header Actions */}
-        <div className="flex lg:hidden items-center gap-1.5 sm:gap-2">
+        {/* Mobile / Tablet Header Actions */}
+        <div className="flex xl:hidden items-center gap-1.5 sm:gap-2">
+          <LanguageSwitcher scrolled={scrolled} />
+
           <a
             href={`tel:${CONTACT_INFO.cleanPhone}`}
             className={`p-2 rounded-xl transition-colors ${
@@ -189,7 +198,7 @@ export const Navbar = () => {
                 ? "text-slate-700 hover:bg-slate-100"
                 : "text-white hover:bg-white/10"
             }`}
-            aria-label="Call Us"
+            aria-label={t("aria.callUs")}
           >
             <Phone size={18} className="text-blue-500" />
           </a>
@@ -198,10 +207,10 @@ export const Navbar = () => {
             href={`https://wa.me/${CONTACT_INFO.cleanPhone}`}
             target="_blank"
             rel="noopener noreferrer"
-            className="relative scale-125  flex items-center justify-center p-2 rounded-full bg-emerald-500 text-white hover:bg-emerald-600 transition-transform duration-300"
-            aria-label="WhatsApp"
+            className="relative scale-125 flex items-center justify-center p-2 rounded-full bg-emerald-500 text-white hover:bg-emerald-600 transition-transform duration-300"
+            aria-label={t("aria.whatsapp")}
           >
-            <span className="absolute  inset-0 rounded-full bg-emerald-500/60 animate-[ping_1.4s_cubic-bezier(0,0,0.2,1)_infinite] scale-90 pointer-events-none" />
+            <span className="absolute inset-0 rounded-full bg-emerald-500/60 animate-[ping_1.4s_cubic-bezier(0,0,0.2,1)_infinite] scale-90 pointer-events-none" />
             <WhatsAppIcon className="w-4 h-4 relative z-10 scale-125" />
           </a>
 
@@ -212,27 +221,27 @@ export const Navbar = () => {
                 ? "text-slate-700 hover:bg-slate-100"
                 : "text-white hover:bg-white/10"
             }`}
-            aria-label="Email Us"
+            aria-label={t("aria.emailUs")}
           >
             <Mail size={18} className="text-blue-400" />
           </a>
 
           <button
-            className={`p-2 rounded-xl transition-colors ml-1 ${
+            className={`p-2 rounded-xl transition-colors ms-1 ${
               scrolled
                 ? "text-slate-900 hover:bg-slate-100"
                 : "text-white hover:bg-white/10 backdrop-blur-sm"
             }`}
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
             aria-expanded={isMobileMenuOpen}
-            aria-label="Toggle navigation menu"
+            aria-label={t("aria.toggleMenu")}
           >
             {isMobileMenuOpen ? <X size={22} /> : <Menu size={22} />}
           </button>
         </div>
       </div>
 
-      {/* Mobile Navigation Dropdown Menu */}
+      {/* Mobile / Tablet Navigation Dropdown Menu */}
       <AnimatePresence>
         {isMobileMenuOpen && (
           <motion.div
@@ -240,17 +249,16 @@ export const Navbar = () => {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -10 }}
             transition={{ duration: 0.2, ease: "easeOut" }}
-            className="lg:hidden absolute top-full left-0 w-full px-4 pt-2 pb-6"
+            className="xl:hidden absolute top-full start-0 w-full px-4 pt-2 pb-6"
           >
             <div className="backdrop-blur-xl bg-slate-900/95 border border-white/15 rounded-2xl p-5 shadow-[0_20px_50px_rgba(0,0,0,0.5)] text-white space-y-2 relative overflow-hidden">
               <div className="flex flex-col space-y-1 relative z-10">
-                {NAV_ITEMS.map((item) => {
-                  const sectionId = item.toLowerCase().replace(/\s+/g, "-");
-                  const isActive = activeSection === sectionId;
+                {NAV_KEYS.map(({ key, id }) => {
+                  const isActive = activeSection === id;
                   return (
                     <a
-                      key={item}
-                      href={`#${sectionId}`}
+                      key={key}
+                      href={`#${id}`}
                       onClick={() => setIsMobileMenuOpen(false)}
                       className={`font-sans text-[15px] font-medium transition-all px-4 py-2.5 rounded-xl flex items-center justify-between ${
                         isActive
@@ -258,7 +266,7 @@ export const Navbar = () => {
                           : "text-slate-200 hover:text-white hover:bg-white/10"
                       }`}
                     >
-                      {item}
+                      {t(`nav.${key}`)}
                       {isActive && (
                         <span className="w-1.5 h-1.5 rounded-full bg-blue-400" />
                       )}
