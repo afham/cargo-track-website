@@ -1,0 +1,552 @@
+{
+  "Metadata": {
+    "title": "CargoTrack | Global Logistics & Cargo Solutions",
+    "description": "Reliable tracking, freight forwarding, and supply chain solutions worldwide."
+  },
+
+  "Navbar": {
+    "nav": {
+      "home": "Home",
+      "aboutUs": "About Us",
+      "services": "Services",
+      "workflow": "Workflow",
+      "network": "Network",
+      "gallery": "Gallery",
+      "contact": "Contact"
+    },
+    "aria": {
+      "home": "CargoTrack Home",
+      "callUs": "Call Us",
+      "emailUs": "Email Us",
+      "whatsapp": "Chat on WhatsApp",
+      "toggleMenu": "Toggle navigation menu",
+      "switchLanguage": "Switch language"
+    },
+    "language": {
+      "en": "English",
+      "ar": "العربية"
+    }
+  },
+  "HeroSlider": {
+    "srTitle": "Our Logistics & Freight Solutions",
+    "buttons": {
+      "getQuote": "Get a Free Quote",
+      "exploreServices": "Explore Services",
+      "contactUs": "Contact Us"
+    },
+    "slides": [
+      {
+        "title": "Global Relocation Made Fast, Safe & Seamless.",
+        "headlinePart1": "Global Relocation Made",
+        "headlineHighlight": "Fast, Safe & Seamless.",
+        "subline": "Your trusted partner for local and corporate moves, delivering every shipment efficiently and strictly on schedule."
+      },
+      {
+        "title": "Shared Container Shipping To USA, EU, CA & AUS.",
+        "headlinePart1": "Shared Container Shipping",
+        "headlineHighlight": "To USA, EU, CA & AUS.",
+        "subline": "Direct groupage service for small consignments and partial loads, offering cost-efficient routes for international moves."
+      },
+      {
+        "title": "End-to-End Supply Chain Optimized For Your Growth.",
+        "headlinePart1": "End-to-End Supply Chain",
+        "headlineHighlight": "Optimized For Your Growth.",
+        "subline": "Complete logistics management featuring modern warehousing, live cargo tracking, and dedicated air-sea transport lines."
+      },
+      {
+        "title": "Global Freight Forwarding & Customs Clearance.",
+        "headlinePart1": "Global Freight Forwarding",
+        "headlineHighlight": "& Customs Clearance.",
+        "subline": "Expert air, sea, and land cargo handling with seamless brokerage clearance, preventing costly border delays worldwide."
+      },
+      {
+        "title": "Direct Road Freight Lines Across The UAE Region.",
+        "headlinePart1": "Direct Road Freight Lines",
+        "headlineHighlight": "Across The UAE Region.",
+        "subline": "Weekly overland transport for single packages or full house moves, backed by reliable schedules and expert handling."
+      }
+    ]
+  },
+  "QuoteForm": {
+    "title": "Request a Quote",
+    "subtitle": "Get a competitive rate for your logistics needs in minutes.",
+    "fields": {
+      "fullName": "Full Name *",
+      "selectService": "Select Service *",
+      "email": "Email Address *",
+      "phone": "Phone Number",
+      "origin": "Origin (e.g. Mumbai)",
+      "destination": "Destination (e.g. Dubai)",
+      "message": "Additional shipment details (weight, dimensions, cargo type)..."
+    },
+    "services": {
+      "movingRelocation": "Moving & Relocation",
+      "customsClearance": "Customs Clearance",
+      "freightForwarding": "Freight Forwarding",
+      "transportation": "Transportation",
+      "warehousing": "Warehousing",
+      "importExport": "Import & Export",
+      "other": "Other"
+    },
+    "button": {
+      "submit": "Request Free Quote",
+      "success": "Quote Request Sent!"
+    },
+    "errors": {
+      "default": "Something went wrong. Please try again."
+    }
+  },
+  "TrustStrip": {
+    "ariaLabel": "Trust Signals and Certifications",
+    "items": [
+      {
+        "title": "10+ Years",
+        "sub": "Trusted Industry Experience"
+      },
+      {
+        "title": "KSA Network",
+        "sub": "Jeddah, Riyadh & Dammam"
+      },
+      {
+        "title": "IAM & IATA Member",
+        "sub": "Global Mobility Affiliations"
+      },
+      {
+        "title": "Worldwide Reach",
+        "sub": "End-to-End Relocations"
+      },
+      {
+        "title": "Specialized Care",
+        "sub": "Secure Packing & Storage"
+      }
+    ]
+  },
+  "ClientLogos": {
+    "heading": "Our Memberships & Affiliations",
+    "affiliations": [
+      { "name": "IAM - International Association of Movers" },
+      { "name": "IATA Cargo Member Certification" },
+      { "name": "FIDI Global Alliance Certification" },
+      { "name": "ISO 9001 Quality Management Certified" },
+      { "name": "FIATA Logistics Federation Member" },
+      { "name": "Customs-Trade Partnership Against Terrorism" }
+    ],
+    "altSuffix": "membership logo"
+  },
+  "AboutSection": {
+    "badge": {
+      "experience": "10+ Years",
+      "subtitle": "Trusted Relocation Leaders"
+    },
+    "alts": {
+      "mainImage": "Cargo Track professional relocation crew handling safe packing",
+      "secondaryImage": "Cargo Track secure warehouse and international logistics packing facility"
+    },
+    "tagline": "Who We Are",
+    "headingPart1": "Your trusted partner for",
+    "headingHighlight": "seamless global mobility.",
+    "description": "For over a decade, Cargo Track Relocations has delivered premier relocation, freight, and logistics solutions across Saudi Arabia and worldwide. With major branches in Jeddah, Riyadh, and Dammam, we simplify international moves, corporate mobility, and storage through an end-to-end, stress-free approach.",
+    "mission": {
+      "title": "Our Mission",
+      "description": "To provide secure, tailored, and hassle-free relocation solutions backed by expert craftsmanship and global standards."
+    },
+    "vision": {
+      "title": "Our Vision",
+      "description": "To be the regional leader in mobility, recognized for total reliability, safety, and worldwide logistics alliances."
+    },
+    "strengthsTitle": "Built for complete peace of mind",
+    "strengths": [
+      "Dedicated supervisors & carpenters",
+      "Jeddah, Riyadh & Dammam hubs",
+      "FIDI Affiliated",
+      "IAM & IATA global networks",
+      "Comprehensive insurance coverage"
+    ],
+    "cta": "Explore Our Relocation Services"
+  },
+  "ServicesSection": {
+    "badge": "Our Core Services",
+    "headingPart1": "End-to-end relocation &",
+    "headingHighlight": "specialized logistics solutions.",
+    "introText": "From seamless household moves and office relocations to specialized artwork handling, pet relocation, and deep cleaning, Cargotrack manages every detail with precision, care, and professionalism.",
+    "getQuote": "Get a Custom Quote",
+    "serviceBadge": "Cargotrack Service",
+    "services": [
+      {
+        "id": "01",
+        "title": "Household Goods Relocation",
+        "description": "Our household relocation service includes packing and assembling furniture and other household items, transportation, unpacking and placing your household belongings.",
+        "tags": [
+          "Packing & Assembly",
+          "Safe Transport",
+          "Unpacking & Placement"
+        ]
+      },
+      {
+        "id": "02",
+        "title": "Vehicle Relocation & Road Transportation",
+        "description": "We provide professional, reliable, and flexible road transportation solutions tailored to your needs. We also offer seamless vehicle relocation services worldwide, ensuring safe, efficient, and cost-effective transportation.",
+        "tags": [
+          "Flexible Road Transport",
+          "Worldwide Vehicle Moves",
+          "Affordable Shipping"
+        ]
+      },
+      {
+        "id": "03",
+        "title": "Transportation",
+        "description": "CargoTrack provides safe and reliable transportation services across Saudi Arabia and the GCC. We handle local transport, container shipping, FTL, LTL, and smooth customs clearance for import/export cargo.",
+        "tags": [
+          "Saudi & GCC Network",
+          "FTL & LTL Transport",
+          "Customs Clearance"
+        ]
+      },
+      {
+        "id": "04",
+        "title": "Artwork Packing and Handling Service",
+        "description": "We provide specialized artwork relocation with expert handling, secure packing, and safe transportation, ensuring your valuable pieces are protected and carefully managed from start to finish.",
+        "tags": ["Expert Artwork Care", "Secure Packing", "Safe Transport"]
+      },
+      {
+        "id": "05",
+        "title": "Pet Relocation",
+        "description": "Our pet relocation services cover every aspect of your pet’s journey, including safe pick-up and delivery, preparation of required documentation, and provision of suitable travel crates and facilities for a smooth and comfortable relocation.",
+        "tags": [
+          "Pet Pick-up & Delivery",
+          "Travel Documentation",
+          "Approved Containers"
+        ]
+      },
+      {
+        "id": "06",
+        "title": "Storage Services",
+        "description": "Cargotrack offers secure and convenient storage solutions to meet your short or long-term needs, giving you peace of mind that your belongings are safe and protected.",
+        "tags": ["Short & Long-term", "Secure Storage", "Protected Belongings"]
+      },
+      {
+        "id": "07",
+        "title": "Industrial Packing",
+        "description": "Our industrial packing services provide secure, reliable solutions for transporting heavy machinery and valuable equipment, using high-quality packing materials and specialized techniques to ensure maximum protection throughout the journey.",
+        "tags": ["Heavy Machinery", "Premium Materials", "Equipment Protection"]
+      },
+      {
+        "id": "08",
+        "title": "Office Relocation",
+        "description": "Our professional office relocation services are designed to make business moves seamless and efficient. From detailed planning and secure packing to transportation, unpacking, and setup, we handle your office equipment, furniture, and belongings with care and precision.",
+        "tags": [
+          "Strategic Planning",
+          "Equipment Setup",
+          "Commercial Transport"
+        ]
+      },
+      {
+        "id": "09",
+        "title": "Freight Forwarding",
+        "description": "CargoTrack delivers complete air, sea, and land freight forwarding services across Saudi Arabia and globally. We manage everything from cargo booking and documentation to customs clearance and final delivery.",
+        "tags": ["Air, Sea & Land", "End-to-End Shipping", "Global Logistics"]
+      },
+      {
+        "id": "10",
+        "title": "Pilgrim Baggage Handling",
+        "description": "Pilgrim baggage handling services play a crucial role in ensuring a hassle-free and smooth pilgrimage experience for those visiting the holy cities of Mecca and Medina in Saudi Arabia.",
+        "tags": [
+          "Hassle-Free Pilgrim Care",
+          "Mecca & Medina Transit",
+          "Doorstep Shipping"
+        ]
+      },
+      {
+        "id": "11",
+        "title": "Mobility Services",
+        "description": "We offer comprehensive mobility services to simplify your relocation process, including immigration, settling-in and destination services.",
+        "tags": [
+          "Immigration Assistance",
+          "Settling-In Help",
+          "Destination Services"
+        ]
+      },
+      {
+        "id": "12",
+        "title": "Deep Cleaning Service",
+        "description": "We provide deep cleaning for homes, offices and facilities using eco-friendly products and equipment for spotless & hygienic results.",
+        "tags": ["Homes & Offices", "Eco-Friendly Products", "Spotless Results"]
+      }
+    ]
+  },
+  "CargoJourneySection": {
+    "badge": "How We Execute Relocations",
+    "headingPart1": "Every Moving Step,",
+    "headingHighlight": "Managed with Precision.",
+    "description": "From specialized packing and customs coordination to international air/ocean freight and destination doorstep setup, CargoTrack streamlines your entire moving journey.",
+    "originCard": {
+      "title": "Origin",
+      "points": [
+        "Pre-Move Survey – Assessing your shipment and planning the move.",
+        "Professional Packing – Safe and secure packing of your belongings.",
+        "Freight Services – Reliable transportation from origin to destination.",
+        "Move Coordination – Managing and coordinating every step of the shipment."
+      ]
+    },
+    "destinationCard": {
+      "badge": "Safely Delivered",
+      "title": "Destination",
+      "points": [
+        "Customs Clearance – Handling the required customs procedures and documentation.",
+        "Transportation – Safe delivery of your shipment to the final destination.",
+        "Offloading – Careful unloading of your belongings at the delivery location.",
+        "Unpacking – Unpacking and placing your items as required.",
+        "Furniture Assembly & Fixing – Reassembling furniture and other items at your new location."
+      ]
+    },
+    "stations": [
+      {
+        "title": "Origin Pickup",
+        "desc": "Items surveyed & packed at doorstep."
+      },
+      {
+        "title": "Customs Clearance",
+        "desc": "Seamless import & export compliance."
+      },
+      {
+        "title": "Air & Sea Freight",
+        "desc": "Optimized global transit routing."
+      },
+      {
+        "title": "Road Transportation",
+        "desc": "GPS-tracked fleet distribution."
+      },
+      {
+        "title": "Warehousing & Care",
+        "desc": "Climate-controlled storage solutions."
+      },
+      {
+        "title": "Doorstep Delivery",
+        "desc": "Unpacking & assembly at destination."
+      }
+    ]
+  },
+  "WhyChooseSection": {
+    "badge": "Why Choose CargoTrack",
+    "headingPart1": "Logistics & Relocation,",
+    "headingHighlight": "Engineered for Reliability.",
+    "description": "We go beyond moving shipments—we simplify your entire supply chain and relocation journey with industry-leading care, global coverage, and unyielding precision.",
+    "altBg": "Logistics Background",
+    "features": [
+      {
+        "title": "Uncompromising Security",
+        "desc": "Advanced tracking and secure packing protocols ensure your cargo and personal belongings are protected at every stage."
+      },
+      {
+        "title": "Global Reach, Local Expertise",
+        "desc": "Extensive international network paired with deep regional customs knowledge for effortless cross-border moves."
+      },
+      {
+        "title": "Time-Definite Delivery",
+        "desc": "Optimized route planning and priority freight handling to ensure precise, on-time arrivals every time."
+      },
+      {
+        "title": "End-to-End Visibility",
+        "desc": "Real-time tracking, proactive status updates, and transparent logistics management from pickup to placement."
+      },
+      {
+        "title": "Dedicated Moving Experts",
+        "desc": "Tailored customer support and personalized care from dedicated account managers available whenever you need them."
+      },
+      {
+        "title": "Cost & Value Efficiency",
+        "desc": "Transparent pricing structures and strategic consolidation solutions that maximize convenience without hidden fees."
+      }
+    ]
+  },
+  "GlobalNetworkSection": {
+    "badge": "Global Mobility & Relocation Network",
+    "headingPart1": "Trusted Moving & Storage Solutions",
+    "headingHighlight": "Across Saudi Arabia & Worldwide",
+    "description": "Headquartered in Jeddah with branches in Riyadh and Dammam, CargoTrack provides end-to-end household moves, corporate relocations, industrial packing, and pilgrim baggage handling across the Middle East, Asia, Europe, Australia, Africa, and the Americas.",
+    "kpiTitle": "Operational Reach & Strategic Hubs",
+    "kpis": [
+      { "val": "10+", "label": "Years Experience" },
+      { "val": "3", "label": "Saudi Hubs (HQ Jeddah)" },
+      { "val": "Middle East", "label": "Core Coverage" },
+      { "val": "7+", "label": "Global Affiliations" }
+    ],
+    "branches": [
+      {
+        "name": "Jeddah",
+        "role": "Headquarters",
+        "desc": "G53P+VV, Al Sharafeyah, 2nd Floor, ADVANCE BUSINESS CENETER ,KHALID BIN ALWALEED STREET, Door Number 213B, Jeddah 22234, Saudi Arabia"
+      },
+      {
+        "name": "Riyadh",
+        "role": "Central Region",
+        "desc": "7027 الإقدام, Al Mashael, Near, Riyadh 14322, Saudi Arabia"
+      },
+      {
+        "name": "Dammam",
+        "role": "Eastern Region",
+        "desc": "5600 شارع 1، 6th floor, Al Zoabi Tower, Prince Mohammed Bin Fahd Road, Dammam 32241, Saudi Arabia"
+      }
+    ],
+    "routes": [
+      { "to": "UK & Europe" },
+      { "to": "USA & Canada" },
+      { "to": "UAE & Gulf" },
+      { "to": "India" },
+      { "to": "Singapore" },
+      { "to": "Malaysia" },
+      { "to": "Australia" },
+      { "to": "South Africa" },
+      { "to": "Makkah & Madinah" }
+    ],
+    "officeAltSuffix": "office"
+  },
+  "GallerySection": {
+    "badge": "Media & Fleet",
+    "titlePart1": "CargoTrack",
+    "titleHighlight": "in Action",
+    "description": "A look inside our fleet, facilities, and daily operations across Saudi Arabia.",
+    "modal": {
+      "dialogAria": "Image Lightbox Modal",
+      "close": "Close",
+      "prev": "Previous",
+      "next": "Next",
+      "viewEnlarged": "View enlarged view of"
+    },
+    "images": [
+      { "alt": "CargoTrack transportation fleet lined up in Saudi Arabia" },
+      { "alt": "CargoTrack logistics warehouse inventory operations" },
+      { "alt": "Customs clearance process for air freight shipment" },
+      { "alt": "Heavy cargo truck distribution in transit" },
+      { "alt": "Doorstep delivery crew unloading freight" },
+      { "alt": "Climate-controlled warehousing facilities" },
+      { "alt": "Global logistics container loading at port" },
+      { "alt": "Relocation packing and inventory management" },
+      { "alt": "Air freight dispatch for international delivery" },
+      { "alt": "Sea freight container ship loading" },
+      { "alt": "Logistics tracking operations dashboard" },
+      { "alt": "Warehouse management system in operation" },
+      { "alt": "Truck fleet ready for long haul distribution" },
+      { "alt": "Doorstep delivery service packaging" },
+      { "alt": "Customs documentation inspection stage" },
+      { "alt": "Commercial relocation logistics team" },
+      { "alt": "Container freight station cargo inspection" },
+      { "alt": "Global logistics network transport route" },
+      { "alt": "Secure climate storage facility" },
+      { "alt": "Destination unpack and assembly service" }
+    ]
+  },
+  "TestimonialsSection": {
+    "badge": "Relocation Experience",
+    "headingPart1": "What Our Relocation",
+    "headingHighlight": "Customers Say About Us.",
+    "description": "Real feedback from families, professionals, and businesses who relied on our packing, moving, and hassle-free relocation services.",
+    "navigation": {
+      "prev": "Previous Testimonial",
+      "next": "Next Testimonial",
+      "goToSlide": "Go to slide"
+    },
+    "items": [
+      {
+        "company": "Kanwal Saya",
+        "industry": "Relocation Client",
+        "quote": "They were great! The team is very helpful and did an amazing job! Definitely recommend them."
+      },
+      {
+        "company": "Saud Bazarah",
+        "industry": "Home Relocation",
+        "quote": "Totally recommend the cargo track team. Best relocation and movers in town."
+      },
+      {
+        "company": "Rameez Rahman",
+        "industry": "Intercity Relocation",
+        "quote": "I've used their service twice for relocations within Saudi and both times I was extremely impressed by their professionalism and customer service. Their packaging was thorough, and everything arrived undamaged."
+      },
+      {
+        "company": "Simo Simo",
+        "industry": "Relocation Client",
+        "quote": "Perfect job done withing limit time."
+      },
+      {
+        "company": "Dilsha Adil",
+        "industry": "Packing & Moving",
+        "quote": "Appreciate their team work. Friendly staffs. Nicely packed and delivered it on time.undamaged."
+      },
+      {
+        "company": "Munir Metassan",
+        "industry": "Shipping & Cargo",
+        "quote": "Our go to Cargo/shipping agent. Very reasonable price and very dependable. Always 5star service and ready assist with any issues."
+      },
+      {
+        "company": "Asim Jaan",
+        "industry": "Relocation Client",
+        "quote": "Very convenient and helpfull.Wafa and her team were are extremely professional."
+      }
+    ]
+  },
+  "FooterSection": {
+    "company": {
+      "description": "Based in Jeddah with branches in Riyadh and Dammam, CargoTrack delivers trusted relocation, storage, mobility, and logistics solutions locally and internationally.",
+      "fidi": "FIDI & IATA Accredited",
+      "iam": "IAM & GEM Member",
+      "experience": "10+ Years Experience"
+    },
+    "titles": {
+      "quickLinks": "Quick Links",
+      "services": "Our Services",
+      "branches": "Headquarters & Hubs",
+      "followUs": "Follow Us"
+    },
+    "nav": {
+      "home": "Home",
+      "aboutUs": "About Us",
+      "services": "Services",
+      "workflow": "Workflow",
+      "network": "Network",
+      "gallery": "Gallery",
+      "contact": "Contact"
+    },
+    "servicesList": [
+      { "name": "Household Goods Relocation", "slug": "household-goods" },
+      {
+        "name": "Vehicle Relocation & Transport",
+        "slug": "vehicle-relocation"
+      },
+      { "name": "Packing & Crating Services", "slug": "packing-crating" },
+      { "name": "Artwork Packing & Handling", "slug": "artwork-packing" },
+      { "name": "Pet Relocation", "slug": "pet-relocation" },
+      { "name": "Storage & Warehousing", "slug": "storage-warehousing" },
+      { "name": "Industrial Packing", "slug": "industrial-packing" },
+      { "name": "Office Relocation", "slug": "office-relocation" },
+      { "name": "Groupage Services", "slug": "groupage-services" },
+      { "name": "Pilgrim Baggage Handling", "slug": "pilgrim-baggage" },
+      {
+        "name": "Mobility & Destination Services",
+        "slug": "mobility-services"
+      },
+      { "name": "Deep Cleaning Service", "slug": "deep-cleaning" }
+    ],
+    "branches": [
+      {
+        "name": "Jeddah (Head Office)",
+        "address": "ADVANCE BUSINESS CENTER, KHALID BIN ALWALEED STREET"
+      },
+      {
+        "name": "Riyadh",
+        "address": "7027 Al-Iqdam, Al Mashael, Near, Riyadh 14322, Saudi Arabia"
+      },
+      {
+        "name": "Dammam",
+        "address": "5600 1st Street, Al Zoabi Tower, Prince Mohammed Bin Fahd Road, Dammam 32241, Saudi Arabia"
+      }
+    ],
+    "coverage": "Coverage: Middle East, Asia & Worldwide",
+    "workingHours": {
+      "title": "Working Hours",
+      "time": "Sat - Thu: 9:00 AM - 6:30 PM"
+    },
+    "socialAria": "Follow CargoTrack on",
+    "copyright": "© {year} CargoTrack Relocations. All Rights Reserved.",
+    "scrollToTop": "Scroll to top of page"
+  }
+}

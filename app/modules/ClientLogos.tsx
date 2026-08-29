@@ -1,38 +1,18 @@
 import Image from "next/image";
+import { useTranslations } from "next-intl";
 
-interface Affiliation {
-  src: string;
-  name: string;
-}
-
-const AFFILIATIONS: Affiliation[] = [
-  {
-    src: "/assets/affiliations-1.webp",
-    name: "IAM - International Association of Movers",
-  },
-  {
-    src: "/assets/affiliations-2.webp",
-    name: "IATA Cargo Member Certification",
-  },
-  {
-    src: "/assets/affiliations-3.webp",
-    name: "FIDI Global Alliance Certification",
-  },
-  {
-    src: "/assets/affiliations-4.webp",
-    name: "ISO 9001 Quality Management Certified",
-  },
-  {
-    src: "/assets/affiliations-5.webp",
-    name: "FIATA Logistics Federation Member",
-  },
-  {
-    src: "/assets/affiliations-6.webp",
-    name: "Customs-Trade Partnership Against Terrorism",
-  },
+const AFFILIATION_IMAGES = [
+  "/assets/affiliations-1.webp",
+  "/assets/affiliations-2.webp",
+  "/assets/affiliations-3.webp",
+  "/assets/affiliations-4.webp",
+  "/assets/affiliations-5.webp",
+  "/assets/affiliations-6.webp",
 ];
 
 export const ClientLogos = () => {
+  const t = useTranslations("ClientLogos");
+
   return (
     <section
       aria-labelledby="affiliations-heading"
@@ -48,7 +28,7 @@ export const ClientLogos = () => {
           id="affiliations-heading"
           className="text-[12px] sm:text-[13px] font-bold text-brand-muted uppercase tracking-[0.15em] text-center"
         >
-          Our Memberships & Affiliations
+          {t("heading")}
         </h2>
         <span
           aria-hidden="true"
@@ -57,7 +37,8 @@ export const ClientLogos = () => {
       </div>
 
       {/* Infinite Logo Marquee */}
-      <div className="relative w-full overflow-hidden py-2">
+      {/* Force dir="ltr" on the scrolling container to keep X-transform calculations identical in RTL */}
+      <div className="relative w-full overflow-hidden py-2" dir="ltr">
         {/* Left & Right Fade Gradients */}
         <div
           aria-hidden="true"
@@ -72,14 +53,14 @@ export const ClientLogos = () => {
         <div className="flex w-max">
           <div className="flex items-center gap-12 lg:gap-20 pr-12 lg:pr-20 shrink-0 animate-marquee">
             {/* Primary Track */}
-            {AFFILIATIONS.map((logo, i) => (
+            {AFFILIATION_IMAGES.map((src, i) => (
               <div
                 key={`primary-${i}`}
                 className="transition-transform duration-300 cursor-default select-none shrink-0 flex items-center justify-center h-12 lg:h-20 hover:scale-105"
               >
                 <Image
-                  src={logo.src}
-                  alt={`${logo.name} membership logo`}
+                  src={src}
+                  alt={`${t(`affiliations.${i}.name`)} ${t("altSuffix")}`}
                   width={160}
                   height={80}
                   className="h-full w-auto object-contain max-w-[140px] lg:max-w-[160px]"
@@ -87,15 +68,15 @@ export const ClientLogos = () => {
               </div>
             ))}
 
-            {/* Duplicate Track for Seamless Seamless Loop */}
-            {AFFILIATIONS.map((logo, i) => (
+            {/* Duplicate Track for Seamless Loop */}
+            {AFFILIATION_IMAGES.map((src, i) => (
               <div
                 key={`duplicate-${i}`}
                 aria-hidden="true"
                 className="transition-transform duration-300 cursor-default select-none shrink-0 flex items-center justify-center h-12 lg:h-20 hover:scale-105"
               >
                 <Image
-                  src={logo.src}
+                  src={src}
                   alt=""
                   width={160}
                   height={80}

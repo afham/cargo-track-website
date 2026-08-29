@@ -2,6 +2,8 @@
 
 import { ArrowRight, CheckCircle2 } from "lucide-react";
 import { memo, useState } from "react";
+import { useTranslations } from "next-intl";
+
 const INITIAL_FORM_STATE = {
   name: "",
   service: "",
@@ -13,6 +15,7 @@ const INITIAL_FORM_STATE = {
 };
 
 export const QuoteForm = memo(() => {
+  const t = useTranslations("QuoteForm");
   const [formData, setFormData] = useState(INITIAL_FORM_STATE);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
@@ -42,7 +45,7 @@ export const QuoteForm = memo(() => {
       const data = await res.json();
 
       if (!res.ok) {
-        throw new Error(data.error || "Failed to submit request.");
+        throw new Error(data.error || t("errors.default"));
       }
 
       setIsSuccess(true);
@@ -50,11 +53,7 @@ export const QuoteForm = memo(() => {
 
       setTimeout(() => setIsSuccess(false), 5000);
     } catch (err) {
-      setErrorMessage(
-        err instanceof Error
-          ? err.message
-          : "Something went wrong. Please try again.",
-      );
+      setErrorMessage(err instanceof Error ? err.message : t("errors.default"));
     } finally {
       setIsSubmitting(false);
     }
@@ -66,22 +65,20 @@ export const QuoteForm = memo(() => {
       className="w-full lg:max-w-[26rem] lg:min-w-[26rem] pt-8 lg:pt-0 mb-8 lg:mb-0 scroll-mt-24"
     >
       <div className="backdrop-blur-md bg-slate-900/60 lg:bg-slate-900/40 border border-white/20 rounded-2xl p-6 shadow-[0_20px_50px_rgba(0,0,0,0.4)] text-white relative overflow-hidden">
-        <div className="absolute -top-12 -right-12 w-32 h-32 bg-primary/30 rounded-full blur-2xl pointer-events-none" />
+        <div className="absolute -top-12 -end-12 w-32 h-32 bg-primary/30 rounded-full blur-2xl pointer-events-none" />
 
         <div className="mb-5 relative z-10">
           <h2 className="font-heading font-extrabold text-[1.5rem] tracking-tight text-white">
-            Request a Quote
+            {t("title")}
           </h2>
-          <p className="text-xs text-slate-300 mt-1">
-            Get a competitive rate for your logistics needs in minutes.
-          </p>
+          <p className="text-xs text-slate-300 mt-1">{t("subtitle")}</p>
         </div>
 
         <form onSubmit={handleSubmit} className="space-y-3.5 relative z-10">
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
             <div className="space-y-1">
               <label htmlFor="name" className="sr-only">
-                Full Name
+                {t("fields.fullName")}
               </label>
               <input
                 id="name"
@@ -90,13 +87,13 @@ export const QuoteForm = memo(() => {
                 name="name"
                 value={formData.name}
                 onChange={handleChange}
-                placeholder="Full Name *"
+                placeholder={t("fields.fullName")}
                 className="w-full bg-white/10 border border-white/15 rounded-xl px-3.5 py-2.5 text-sm text-white placeholder:text-slate-300/70 outline-none focus:bg-white/20 focus:border-white/40 focus:ring-2 focus:ring-white/20 transition-all backdrop-blur-md"
               />
             </div>
             <div className="space-y-1">
               <label htmlFor="service" className="sr-only">
-                Select Service
+                {t("fields.selectService")}
               </label>
               <select
                 id="service"
@@ -104,50 +101,50 @@ export const QuoteForm = memo(() => {
                 name="service"
                 value={formData.service}
                 onChange={handleChange}
-                className="w-full bg-white/10 border border-white/15 rounded-xl px-3.5 py-2.5 text-sm text-white outline-none focus:bg-white/20 focus:border-white/40 focus:ring-2 focus:ring-white/20 transition-all backdrop-blur-md appearance-none bg-[url('data:image/svg+xml;base64,PHN2ZyBmaWxsPSJub25lIiBoZWlnaHQ9IjI0IiBzdHJva2U9IiNmZmZmZmYiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIgc3Ryb2tlLWdpZHRoPSIyIiB2aWV3Qm94PSIwIDAgMjQgMjQiIHdpZHRoPSIyNCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnPg==')] bg-no-repeat bg-[position:calc(100%-0.8rem)_center]"
+                className="w-full bg-white/10 border border-white/15 rounded-xl px-3.5 py-2.5 text-sm text-white outline-none focus:bg-white/20 focus:border-white/40 focus:ring-2 focus:ring-white/20 transition-all backdrop-blur-md appearance-none bg-[url('data:image/svg+xml;base64,PHN2ZyBmaWxsPSJub25lIiBoZWlnaHQ9IjI0IiBzdHJva2U9IiNmZmZmZmYiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIgc3Ryb2tlLWdpZHRoPSIyIiB2aWV3Qm94PSIwIDAgMjQgMjQiIHdpZHRoPSIyNCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnPg==')] bg-no-repeat bg-[position:calc(100%-0.8rem)_center] rtl:bg-[position:0.8rem_center]"
               >
                 <option
                   value=""
                   disabled
                   className="bg-slate-900 text-slate-300"
                 >
-                  Select Service *
+                  {t("fields.selectService")}
                 </option>
                 <option
                   value="Moving and relocation services"
                   className="bg-slate-900 text-white"
                 >
-                  Moving & Relocation
+                  {t("services.movingRelocation")}
                 </option>
                 <option
                   value="Customs Clearance"
                   className="bg-slate-900 text-white"
                 >
-                  Customs Clearance
+                  {t("services.customsClearance")}
                 </option>
                 <option
                   value="Freight Forwarding"
                   className="bg-slate-900 text-white"
                 >
-                  Freight Forwarding
+                  {t("services.freightForwarding")}
                 </option>
                 <option
                   value="Transportation"
                   className="bg-slate-900 text-white"
                 >
-                  Transportation
+                  {t("services.transportation")}
                 </option>
                 <option value="Warehousing" className="bg-slate-900 text-white">
-                  Warehousing
+                  {t("services.warehousing")}
                 </option>
                 <option
                   value="Import & Export"
                   className="bg-slate-900 text-white"
                 >
-                  Import & Export
+                  {t("services.importExport")}
                 </option>
                 <option value="Other" className="bg-slate-900 text-white">
-                  Other
+                  {t("services.other")}
                 </option>
               </select>
             </div>
@@ -156,7 +153,7 @@ export const QuoteForm = memo(() => {
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
             <div className="space-y-1">
               <label htmlFor="email" className="sr-only">
-                Email Address
+                {t("fields.email")}
               </label>
               <input
                 id="email"
@@ -165,13 +162,13 @@ export const QuoteForm = memo(() => {
                 name="email"
                 value={formData.email}
                 onChange={handleChange}
-                placeholder="Email Address *"
+                placeholder={t("fields.email")}
                 className="w-full bg-white/10 border border-white/15 rounded-xl px-3.5 py-2.5 text-sm text-white placeholder:text-slate-300/70 outline-none focus:bg-white/20 focus:border-white/40 focus:ring-2 focus:ring-white/20 transition-all backdrop-blur-md"
               />
             </div>
             <div className="space-y-1">
               <label htmlFor="phone" className="sr-only">
-                Phone Number
+                {t("fields.phone")}
               </label>
               <input
                 id="phone"
@@ -179,7 +176,7 @@ export const QuoteForm = memo(() => {
                 name="phone"
                 value={formData.phone}
                 onChange={handleChange}
-                placeholder="Phone Number"
+                placeholder={t("fields.phone")}
                 className="w-full bg-white/10 border border-white/15 rounded-xl px-3.5 py-2.5 text-sm text-white placeholder:text-slate-300/70 outline-none focus:bg-white/20 focus:border-white/40 focus:ring-2 focus:ring-white/20 transition-all backdrop-blur-md"
               />
             </div>
@@ -188,7 +185,7 @@ export const QuoteForm = memo(() => {
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
             <div className="space-y-1">
               <label htmlFor="origin" className="sr-only">
-                Origin
+                {t("fields.origin")}
               </label>
               <input
                 id="origin"
@@ -196,13 +193,13 @@ export const QuoteForm = memo(() => {
                 name="origin"
                 value={formData.origin}
                 onChange={handleChange}
-                placeholder="Origin (e.g. Mumbai)"
+                placeholder={t("fields.origin")}
                 className="w-full bg-white/10 border border-white/15 rounded-xl px-3.5 py-2.5 text-sm text-white placeholder:text-slate-300/70 outline-none focus:bg-white/20 focus:border-white/40 focus:ring-2 focus:ring-white/20 transition-all backdrop-blur-md"
               />
             </div>
             <div className="space-y-1">
               <label htmlFor="destination" className="sr-only">
-                Destination
+                {t("fields.destination")}
               </label>
               <input
                 id="destination"
@@ -210,7 +207,7 @@ export const QuoteForm = memo(() => {
                 name="destination"
                 value={formData.destination}
                 onChange={handleChange}
-                placeholder="Destination (e.g. Dubai)"
+                placeholder={t("fields.destination")}
                 className="w-full bg-white/10 border border-white/15 rounded-xl px-3.5 py-2.5 text-sm text-white placeholder:text-slate-300/70 outline-none focus:bg-white/20 focus:border-white/40 focus:ring-2 focus:ring-white/20 transition-all backdrop-blur-md"
               />
             </div>
@@ -218,7 +215,7 @@ export const QuoteForm = memo(() => {
 
           <div className="space-y-1">
             <label htmlFor="message" className="sr-only">
-              Additional Details
+              {t("fields.message")}
             </label>
             <textarea
               id="message"
@@ -227,7 +224,7 @@ export const QuoteForm = memo(() => {
               onChange={handleChange}
               maxLength={500}
               rows={3}
-              placeholder="Additional shipment details (weight, dimensions, cargo type)..."
+              placeholder={t("fields.message")}
               className="w-full bg-white/10 border border-white/15 rounded-xl px-3.5 py-2.5 text-sm text-white placeholder:text-slate-300/70 outline-none focus:bg-white/20 focus:border-white/40 focus:ring-2 focus:ring-white/20 transition-all resize-none backdrop-blur-md"
             />
           </div>
@@ -255,12 +252,12 @@ export const QuoteForm = memo(() => {
             ) : isSuccess ? (
               <>
                 <CheckCircle2 className="w-5 h-5" />
-                Quote Request Sent!
+                {t("button.success")}
               </>
             ) : (
               <>
-                Request Free Quote
-                <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                {t("button.submit")}
+                <ArrowRight className="w-4 h-4 group-hover:translate-x-1 rtl:group-hover:-translate-x-1 rtl:rotate-180 transition-transform" />
               </>
             )}
           </button>

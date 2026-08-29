@@ -21,7 +21,7 @@ export const HeroSection = () => {
         </video>
       </div>
 
-      <div className="absolute inset-0 bg-gradient-to-r from-slate-950/85 via-slate-900/60 to-slate-950/80 lg:to-transparent z-[2] pointer-events-none" />
+      <div className="absolute inset-0 bg-gradient-to-r rtl:bg-gradient-to-l from-slate-950/85 via-slate-900/60 to-slate-950/80 lg:to-transparent z-[2] pointer-events-none" />
 
       <div
         className="absolute inset-0 z-[2] opacity-[0.05] pointer-events-none"

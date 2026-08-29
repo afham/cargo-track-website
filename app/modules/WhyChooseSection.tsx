@@ -4,47 +4,20 @@ import React from "react";
 import { motion } from "framer-motion";
 import { Shield, Clock, Globe, Zap, Users, BarChart } from "lucide-react";
 import Image from "next/image";
-const features = [
-  {
-    icon: Shield,
-    title: "Uncompromising Security",
-    desc: "Advanced tracking and secure packing protocols ensure your cargo and personal belongings are protected at every stage.",
-  },
-  {
-    icon: Globe,
-    title: "Global Reach, Local Expertise",
-    desc: "Extensive international network paired with deep regional customs knowledge for effortless cross-border moves.",
-  },
-  {
-    icon: Clock,
-    title: "Time-Definite Delivery",
-    desc: "Optimized route planning and priority freight handling to ensure precise, on-time arrivals every time.",
-  },
-  {
-    icon: Zap,
-    title: "End-to-End Visibility",
-    desc: "Real-time tracking, proactive status updates, and transparent logistics management from pickup to placement.",
-  },
-  {
-    icon: Users,
-    title: "Dedicated Moving Experts",
-    desc: "Tailored customer support and personalized care from dedicated account managers available whenever you need them.",
-  },
-  {
-    icon: BarChart,
-    title: "Cost & Value Efficiency",
-    desc: "Transparent pricing structures and strategic consolidation solutions that maximize convenience without hidden fees.",
-  },
-];
+import { useTranslations } from "next-intl";
 
-const WhyChooseSection = () => {
+const FEATURE_ICONS = [Shield, Globe, Clock, Zap, Users, BarChart];
+
+export const WhyChooseSection = () => {
+  const t = useTranslations("WhyChooseSection");
+
   return (
     <section className="w-full bg-navy py-16 lg:py-16 relative overflow-hidden">
       {/* Background Image & Overlay */}
       <div className="absolute inset-0 pointer-events-none z-0">
         <Image
-          src={"/assets/photos11.webp"}
-          alt={"Logistics Background"}
+          src="/assets/photos11.webp"
+          alt={t("altBg")}
           fill
           className="w-full h-full object-cover opacity-30 mix-blend-luminosity"
         />
@@ -55,22 +28,22 @@ const WhyChooseSection = () => {
         <div className="text-center max-w-3xl mx-auto mb-16 lg:mb-24">
           <div className="inline-flex items-center gap-2 px-3 py-1 bg-white/10 rounded-full text-white text-[11px] font-bold tracking-widest uppercase mb-6">
             <span className="w-2 h-2 rounded-full bg-primary animate-pulse" />
-            Why Choose CargoTrack
+            {t("badge")}
           </div>
           <h2 className="font-heading font-extrabold text-[32px] sm:text-[40px] lg:text-[48px] text-white leading-tight mb-6">
-            Logistics & Relocation, <br className="hidden sm:block" />
-            <span className="text-primary">Engineered for Reliability.</span>
+            {t("headingPart1")} <br className="hidden sm:block" />
+            <span className="text-primary">{t("headingHighlight")}</span>
           </h2>
           <p className="text-white/70 text-[16px] lg:text-[18px] leading-relaxed">
-            We go beyond moving shipments—we simplify your entire supply chain
-            and relocation journey with industry-leading care, global coverage,
-            and unyielding precision.
+            {t("description")}
           </p>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
-          {features.map((feature, i) => {
-            const Icon = feature.icon;
+          {FEATURE_ICONS.map((Icon, i) => {
+            const title = t(`features.${i}.title`);
+            const desc = t(`features.${i}.desc`);
+
             return (
               <motion.div
                 key={i}
@@ -85,10 +58,10 @@ const WhyChooseSection = () => {
                   <Icon size={28} />
                 </div>
                 <h3 className="font-heading font-bold text-white text-[20px] mb-3">
-                  {feature.title}
+                  {title}
                 </h3>
                 <p className="text-white/60 text-[15px] leading-relaxed">
-                  {feature.desc}
+                  {desc}
                 </p>
               </motion.div>
             );

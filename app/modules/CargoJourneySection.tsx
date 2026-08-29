@@ -1,61 +1,36 @@
 "use client";
-import Image from "next/image";
+
 import React, { useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion } from "framer-motion";
 import {
   Truck,
   FileText,
   ShieldCheck,
-  Plane,
   Package,
   MapPin,
   CheckCircle,
   Ship,
-  ArrowRight,
-  ArrowRightCircle,
 } from "lucide-react";
+import { useLocale, useTranslations } from "next-intl";
 
-const stations = [
-  {
-    id: 1,
-    title: "Origin Pickup",
-    icon: Truck,
-    desc: "Items surveyed & packed at doorstep.",
-  },
-  {
-    id: 2,
-    title: "Customs Clearance",
-    icon: ShieldCheck,
-    desc: "Seamless import & export compliance.",
-  },
-  {
-    id: 3,
-    title: "Air & Sea Freight",
-    icon: Ship,
-    desc: "Optimized global transit routing.",
-  },
-  {
-    id: 4,
-    title: "Road Transportation",
-    icon: Truck,
-    desc: "GPS-tracked fleet distribution.",
-  },
-  {
-    id: 5,
-    title: "Warehousing & Care",
-    icon: Package,
-    desc: "Climate-controlled storage solutions.",
-  },
-  {
-    id: 6,
-    title: "Doorstep Delivery",
-    icon: MapPin,
-    desc: "Unpacking & assembly at destination.",
-  },
+const STATION_ICONS = [Truck, ShieldCheck, Ship, Truck, Package, MapPin];
+
+// Single unified coordinate map along the curve (1 to 6)
+// Using `start` will anchor 12% from Left in LTR, and 12% from Right in RTL
+const STATION_POSITIONS = [
+  { x: "12%", y: "45%" },
+  { x: "28%", y: "20%" },
+  { x: "46%", y: "45%" },
+  { x: "62%", y: "75%" },
+  { x: "80%", y: "65%" },
+  { x: "92%", y: "45%" },
 ];
 
-const CargoJourneySection = () => {
-  const [hoveredStation, setHoveredStation] = useState<number | null>(null);
+export const CargoJourneySection = () => {
+  const t = useTranslations("CargoJourneySection");
+  const locale = useLocale();
+  const isRTL = locale === "ar";
+  const [, setHoveredStation] = useState<number | null>(null);
 
   return (
     <section
@@ -72,7 +47,7 @@ const CargoJourneySection = () => {
           }}
         />
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-primary/5 blur-[120px] rounded-full" />
-        <div className="absolute top-0 right-0 w-[400px] h-[400px] bg-[#4ade80]/5 blur-[100px] rounded-full" />
+        <div className="absolute top-0 end-0 w-[400px] h-[400px] bg-[#4ade80]/5 blur-[100px] rounded-full" />
       </div>
 
       <div className="max-w-[1440px] mx-auto px-6 sm:px-8 lg:px-12 relative z-10">
@@ -87,7 +62,7 @@ const CargoJourneySection = () => {
               transition={{ duration: 0.5 }}
               className="text-[12px] font-bold text-primary uppercase tracking-[0.2em]"
             >
-              How We Execute Relocations
+              {t("badge")}
             </motion.span>
             <span className="w-6 h-[2px] bg-[#4ade80]" />
           </div>
@@ -98,8 +73,8 @@ const CargoJourneySection = () => {
             transition={{ duration: 0.6, delay: 0.1 }}
             className="font-heading font-extrabold text-[36px] sm:text-[44px] lg:text-[56px] leading-[1.1] mb-6 text-navy"
           >
-            Every Moving Step, <br className="hidden sm:block" />
-            <span className="text-primary">Managed with Precision.</span>
+            {t("headingPart1")} <br className="hidden sm:block" />
+            <span className="text-primary">{t("headingHighlight")}</span>
           </motion.h2>
           <motion.p
             initial={{ opacity: 0, y: 20 }}
@@ -108,9 +83,7 @@ const CargoJourneySection = () => {
             transition={{ duration: 0.6, delay: 0.2 }}
             className="text-slate-600 text-[18px] lg:text-[20px] leading-relaxed font-medium"
           >
-            From specialized packing and customs coordination to international
-            air/ocean freight and destination doorstep setup, CargoTrack
-            streamlines your entire moving journey.
+            {t("description")}
           </motion.p>
         </div>
 
@@ -136,7 +109,6 @@ const CargoJourneySection = () => {
               }}
             >
               <g>
-                {/* Latitudes & Longitudes */}
                 <circle cx="100" cy="100" r="90" />
                 <circle cx="100" cy="100" r="90" strokeDasharray="3 3" />
                 <ellipse cx="100" cy="100" rx="90" ry="30" />
@@ -152,7 +124,6 @@ const CargoJourneySection = () => {
                   strokeDasharray="2 2"
                 />
 
-                {/* Nodes / Dots representing hubs */}
                 <circle cx="130" cy="70" r="2" fill="#4ade80" />
                 <circle cx="70" cy="130" r="2" fill="#1565C0" />
                 <circle cx="150" cy="110" r="2.5" fill="#4ade80" />
@@ -162,7 +133,7 @@ const CargoJourneySection = () => {
             </svg>
           </div>
 
-          {/* LEFT: Start Point */}
+          {/* START: Origin Card (Right in RTL, Left in LTR) */}
           <div className="w-full lg:w-[250px] shrink-0 flex flex-col z-20">
             <div className="bg-[#F7FAFD] rounded-[24px] overflow-hidden border border-slate-100 h-full flex flex-col shadow-sm group">
               <div
@@ -177,33 +148,19 @@ const CargoJourneySection = () => {
                     <FileText size={24} />
                   </div>
                   <h4 className="font-heading font-extrabold text-[22px] text-navy mb-2">
-                    Origin
+                    {t("originCard.title")}
                   </h4>
-                  {/* <p className="text-slate-500 text-[14px] font-medium leading-relaxed mb-4">
-                    Pre-move assessment & inventory listing.
-                  </p> */}
                 </div>
                 <ul className="space-y-3 mt-2">
-                  <li className="flex items-center gap-2 text-[10px] font-semibold text-slate-700">
-                    <div className="min-w-1.5 h-1.5 rounded-full bg-[#4ade80]" />{" "}
-                    Pre-Move Survey – Assessing your shipment and planning the
-                    move.
-                  </li>
-                  <li className="flex items-center gap-2 text-[10px] font-semibold text-slate-700">
-                    <div className="min-w-1.5 h-1.5 rounded-full bg-[#4ade80]" />{" "}
-                    Professional Packing – Safe and secure packing of your
-                    belongings.
-                  </li>
-                  <li className="flex items-center gap-2 text-[10px] font-semibold text-slate-700">
-                    <div className="min-w-1.5 h-1.5 rounded-full bg-[#4ade80]" />{" "}
-                    Freight Services – Reliable transportation from origin to
-                    destination.
-                  </li>
-                  <li className="flex items-center gap-2 text-[10px] font-semibold text-slate-700">
-                    <div className="min-w-1.5 h-1.5 rounded-full bg-[#4ade80]" />{" "}
-                    Move Coordination – Managing and coordinating every step of
-                    the shipment.
-                  </li>
+                  {[0, 1, 2, 3].map((pointIdx) => (
+                    <li
+                      key={pointIdx}
+                      className="flex items-center gap-2 text-[10px] font-semibold text-slate-700"
+                    >
+                      <div className="min-w-1.5 h-1.5 rounded-full bg-[#4ade80] shrink-0" />
+                      {t(`originCard.points.${pointIdx}`)}
+                    </li>
+                  ))}
                 </ul>
               </div>
             </div>
@@ -216,93 +173,91 @@ const CargoJourneySection = () => {
               {/* SVG Path Background */}
               <div className="absolute inset-0 pointer-events-none hidden lg:block">
                 <svg viewBox="0 0 800 400" className="w-full h-full">
-                  <path
-                    id="logisticsRoute"
-                    d="M 0,200 C 150,200 200,100 300,100 C 400,100 450,300 550,300 C 650,300 700,200 800,200"
-                    fill="none"
-                    stroke="#E2E8F0"
-                    strokeWidth="4"
-                    strokeLinecap="round"
-                    strokeDasharray="8 8"
-                  />
-                  <motion.path
-                    d="M 0,200 C 150,200 200,100 300,100 C 400,100 450,300 550,300 C 650,300 700,200 800,200"
-                    fill="none"
-                    stroke="#1565C0"
-                    strokeWidth="4"
-                    strokeLinecap="round"
-                    initial={{ pathLength: 0 }}
-                    whileInView={{ pathLength: 1 }}
-                    viewport={{ once: true }}
-                    transition={{ duration: 3, ease: "easeInOut" }}
-                  />
-
-                  {/* Traveling Cargo Dot */}
-                  <circle
-                    r="6"
-                    fill="#4ade80"
-                    className="hidden lg:block shadow-lg"
+                  <g
+                    transform={
+                      isRTL ? "scale(-1, 1) translate(-800, 0)" : undefined
+                    }
                   >
-                    <animateMotion
-                      dur="6s"
-                      repeatCount="indefinite"
-                      path="M 0,200 C 150,200 200,100 300,100 C 400,100 450,300 550,300 C 650,300 700,200 800,200"
+                    <path
+                      id="logisticsRoute"
+                      d="M 0,200 C 150,200 200,100 300,100 C 400,100 450,300 550,300 C 650,300 700,200 800,200"
+                      fill="none"
+                      stroke="#E2E8F0"
+                      strokeWidth="4"
+                      strokeLinecap="round"
+                      strokeDasharray="8 8"
                     />
-                  </circle>
+                    <motion.path
+                      d="M 0,200 C 150,200 200,100 300,100 C 400,100 450,300 550,300 C 650,300 700,200 800,200"
+                      fill="none"
+                      stroke="#1565C0"
+                      strokeWidth="4"
+                      strokeLinecap="round"
+                      initial={{ pathLength: 0 }}
+                      whileInView={{ pathLength: 1 }}
+                      viewport={{ once: true }}
+                      transition={{ duration: 3, ease: "easeInOut" }}
+                    />
+
+                    {/* Traveling Cargo Dot */}
+                    <circle
+                      r="6"
+                      fill="#4ade80"
+                      className="hidden lg:block shadow-lg"
+                    >
+                      <animateMotion
+                        dur="6s"
+                        repeatCount="indefinite"
+                        path="M 0,200 C 150,200 200,100 300,100 C 400,100 450,300 550,300 C 650,300 700,200 800,200"
+                      />
+                    </circle>
+                  </g>
                 </svg>
               </div>
 
               {/* Mobile Vertical Line */}
-              <div className="absolute top-0 bottom-0 left-[35px] w-1 bg-slate-100 lg:hidden" />
+              <div className="absolute top-0 bottom-0 start-[35px] w-1 bg-slate-100 lg:hidden" />
               <motion.div
-                className="absolute top-0 bottom-0 left-[35px] w-1 bg-primary lg:hidden origin-top"
+                className="absolute top-0 bottom-0 start-[35px] w-1 bg-primary lg:hidden origin-top"
                 initial={{ scaleY: 0 }}
                 whileInView={{ scaleY: 1 }}
                 viewport={{ once: true }}
                 transition={{ duration: 2, ease: "easeInOut" }}
               />
 
-              {/* Stations */}
-              {stations.map((station, index) => {
-                const Icon = station.icon;
-
-                const desktopPositions = [
-                  { x: "12%", y: "45%" },
-                  { x: "28%", y: "20%" },
-                  { x: "46%", y: "45%" },
-                  { x: "62%", y: "75%" },
-                  { x: "80%", y: "65%" },
-                  { x: "92%", y: "45%" },
-                ];
+              {/* Stations 1 to 6 */}
+              {STATION_ICONS.map((Icon, index) => {
+                const title = t(`stations.${index}.title`);
+                const desc = t(`stations.${index}.desc`);
 
                 return (
                   <motion.div
-                    key={station.id}
+                    key={index}
                     initial={{ opacity: 0, scale: 0.8 }}
                     whileInView={{ opacity: 1, scale: 1 }}
                     viewport={{ once: true }}
                     transition={{ duration: 0.5, delay: index * 0.2 }}
-                    onMouseEnter={() => setHoveredStation(station.id)}
+                    onMouseEnter={() => setHoveredStation(index)}
                     onMouseLeave={() => setHoveredStation(null)}
-                    className="relative lg:absolute flex items-center lg:block lg:-translate-x-1/2 lg:-translate-y-1/2 group z-20 cursor-pointer ml-4 lg:ml-0 lg:left-[var(--lg-x)] lg:top-[var(--lg-y)]"
+                    className="relative lg:absolute flex items-center lg:block -translate-y-0 lg:-translate-y-1/2 -translate-x-0 lg:-translate-x-1/2 rtl:lg:translate-x-1/2 group z-20 cursor-pointer ms-4 lg:ms-0 lg:start-[var(--lg-x)] lg:top-[var(--lg-y)]"
                     style={
                       {
-                        "--lg-x": desktopPositions[index].x,
-                        "--lg-y": desktopPositions[index].y,
+                        "--lg-x": STATION_POSITIONS[index].x,
+                        "--lg-y": STATION_POSITIONS[index].y,
                       } as React.CSSProperties
                     }
                   >
-                    <div className="w-14 h-14 lg:w-16 lg:h-16 rounded-2xl bg-white/80 backdrop-blur-md border border-slate-200 shadow-sm flex items-center justify-center text-primary group-hover:scale-110 group-hover:shadow-lg group-hover:bg-primary group-hover:text-white transition-all duration-300 relative z-10">
+                    <div className="w-14 h-14 lg:w-16 lg:h-16 rounded-2xl bg-white/80 backdrop-blur-md border border-slate-200 shadow-sm flex items-center justify-center text-primary group-hover:scale-110 group-hover:shadow-lg group-hover:bg-primary group-hover:text-white transition-all duration-300 relative z-10 shrink-0">
                       <Icon size={24} />
                     </div>
 
                     {/* Tooltip / Label */}
-                    <div className="mb-5 ml-6 lg:ml-0 lg:absolute lg:top-full lg:left-1/2 lg:-translate-x-1/2 lg:mt-4 bg-white p-3 lg:p-4 rounded-xl shadow-[0_10px_30px_rgba(0,0,0,0.1)] border border-slate-100 opacity-100 lg:opacity-0 lg:group-hover:opacity-100 lg:pointer-events-none transition-all duration-300 w-[200px] lg:w-[180px] lg:-translate-y-2 lg:group-hover:translate-y-0 text-left lg:text-center">
+                    <div className="mb-5 ms-6 lg:ms-0 lg:absolute lg:top-full lg:start-1/2 lg:-translate-x-1/2 rtl:lg:translate-x-1/2 lg:mt-4 bg-white p-3 lg:p-4 rounded-xl shadow-[0_10px_30px_rgba(0,0,0,0.1)] border border-slate-100 opacity-100 lg:opacity-0 lg:group-hover:opacity-100 lg:pointer-events-none transition-all duration-300 w-[200px] lg:w-[180px] lg:-translate-y-2 lg:group-hover:translate-y-0 text-start lg:text-center">
                       <h5 className="font-bold text-[14px] text-navy mb-1">
-                        {station.title}
+                        {title}
                       </h5>
                       <p className="text-[12px] text-slate-500 font-medium leading-tight">
-                        {station.desc}
+                        {desc}
                       </p>
                     </div>
                   </motion.div>
@@ -311,7 +266,7 @@ const CargoJourneySection = () => {
             </div>
           </div>
 
-          {/* RIGHT: Destination Card */}
+          {/* END: Destination Card (Left in RTL, Right in LTR) */}
           <div className="w-full lg:w-[300px] shrink-0 z-20 h-full flex flex-col justify-end">
             <div className="bg-[#0B3A66] rounded-[24px] overflow-hidden shadow-lg border border-[#1565C0] h-full flex flex-col text-white group">
               <div
@@ -323,37 +278,22 @@ const CargoJourneySection = () => {
               <div className="p-6 flex-1 flex flex-col justify-between">
                 <div>
                   <div className="inline-flex items-center gap-1.5 px-4 py-3 bg-[#4ade80]/20 text-[#4ade80] rounded-full text-[12px] font-bold tracking-wider uppercase mb-4">
-                    <CheckCircle size={14} /> Safely Delivered
+                    <CheckCircle size={14} /> {t("destinationCard.badge")}
                   </div>
                   <h4 className="font-heading font-extrabold text-[22px] leading-tight mb-3">
-                    Destination
+                    {t("destinationCard.title")}
                   </h4>
                 </div>
                 <ul className="space-y-2 mt-4">
-                  <li className="flex items-start gap-2 text-[10px] text-white/70">
-                    <div className="mt-1 min-w-1.5 h-1.5 rounded-full bg-primary" />{" "}
-                    Customs Clearance – Handling the required customs procedures
-                    and documentation.
-                  </li>
-                  <li className="flex items-start gap-2 text-[10px] text-white/70">
-                    <div className="mt-1 min-w-1.5 h-1.5 rounded-full bg-primary" />{" "}
-                    Transportation – Safe delivery of your shipment to the final
-                    destination.
-                  </li>
-                  <li className="flex items-start gap-2 text-[10px] text-white/70">
-                    <div className="mt-1 min-w-1.5 h-1.5 rounded-full bg-primary" />{" "}
-                    Offloading – Careful unloading of your belongings at the
-                    delivery location.
-                  </li>
-                  <li className="flex items-start gap-2 text-[10px] text-white/70">
-                    <div className="mt-1 min-w-1.5 h-1.5 rounded-full bg-primary" />{" "}
-                    Unpacking – Unpacking and placing your items as required.
-                  </li>
-                  <li className="flex items-start gap-2 text-[10px] text-white/70">
-                    <div className="mt-1 min-w-1.5 h-1.5 rounded-full bg-primary" />{" "}
-                    Furniture Assembly & Fixing – Reassembling furniture and
-                    other items at your new location.
-                  </li>
+                  {[0, 1, 2, 3, 4].map((pointIdx) => (
+                    <li
+                      key={pointIdx}
+                      className="flex items-start gap-2 text-[10px] text-white/70"
+                    >
+                      <div className="mt-1 min-w-1.5 h-1.5 rounded-full bg-primary shrink-0" />
+                      {t(`destinationCard.points.${pointIdx}`)}
+                    </li>
+                  ))}
                 </ul>
               </div>
             </div>

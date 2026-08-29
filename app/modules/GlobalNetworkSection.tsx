@@ -4,89 +4,35 @@ import React, { useState } from "react";
 import { motion } from "framer-motion";
 import { Building2, Anchor, Truck } from "lucide-react";
 import Image from "next/image";
+import { useTranslations } from "next-intl";
 
-const GlobalNetworkSection = () => {
+const BRANCH_CONFIGS = [
+  { id: "jeddah", icon: Building2 },
+  { id: "riyadh", icon: Truck },
+  { id: "dammam", icon: Anchor },
+];
+
+const LOCATION_COORDS = [
+  { id: "jeddah", x: 605, y: 285, icon: Building2 },
+  { id: "riyadh", x: 630, y: 270, icon: Truck },
+  { id: "dammam", x: 645, y: 265, icon: Anchor },
+];
+
+const INTL_ROUTES_CONFIG = [
+  { x: 480, y: 160, path: "M 605 285 Q 530 190 480 160" },
+  { x: 220, y: 220, path: "M 605 285 Q 400 150 220 220" },
+  { x: 650, y: 280, path: "M 605 285 Q 630 280 650 280" },
+  { x: 710, y: 300, path: "M 605 285 Q 660 300 710 300" },
+  { x: 770, y: 350, path: "M 605 285 Q 700 330 770 350" },
+  { x: 760, y: 340, path: "M 605 285 Q 690 320 760 340" },
+  { x: 880, y: 460, path: "M 605 285 Q 780 420 880 460" },
+  { x: 570, y: 450, path: "M 605 285 Q 560 380 570 450" },
+  { x: 595, y: 295, path: "M 605 285 Q 600 290 595 295" },
+];
+
+export const GlobalNetworkSection = () => {
+  const t = useTranslations("GlobalNetworkSection");
   const [activeCity, setActiveCity] = useState<string | null>(null);
-
-  const kpis = [
-    { val: "10+", label: "Years Experience" },
-    { val: "3", label: "Saudi Hubs (HQ Jeddah)" },
-    { val: "Middle East", label: "Core Coverage" },
-    { val: "7+", label: "Global Affiliations" },
-  ];
-
-  const branches = [
-    {
-      id: "jeddah",
-      name: "Jeddah",
-      role: "Headquarters",
-      desc: "G53P+VV, Al Sharafeyah, 2nd Floor, ADVANCE BUSINESS CENETER ,KHALID BIN ALWALEED STREET, Door Number 213B, Jeddah 22234, Saudi Arabia",
-      icon: Building2,
-    },
-    {
-      id: "riyadh",
-      name: "Riyadh",
-      role: "Central Region",
-      desc: "7027 الإقدام, Al Mashael, Near, Riyadh 14322, Saudi Arabia",
-      icon: Truck,
-    },
-    {
-      id: "dammam",
-      name: "Dammam",
-      role: "Eastern Region",
-      desc: "5600 شارع 1، 6th floor, Al Zoabi Tower, Prince Mohammed Bin Fahd Road, Dammam 32241, Saudi Arabia",
-      icon: Anchor,
-    },
-  ];
-
-  // Coordinates on a 1000x600 viewBox centered around Saudi Arabia / Middle East
-  const locations = [
-    {
-      id: "jeddah",
-      name: "Jeddah (HQ)",
-      x: 605,
-      y: 285,
-      role: "Headquarters",
-      desc: "G53P+VV, Al Sharafeyah, 2nd Floor, ADVANCE BUSINESS CENETER ,KHALID BIN ALWALEED STREET, Door Number 213B, Jeddah 22234, Saudi Arabia",
-      icon: Building2,
-    },
-    {
-      id: "riyadh",
-      name: "Riyadh",
-      x: 630,
-      y: 270,
-      role: "Central Hub",
-      desc: "7027 الإقدام, Al Mashael, Near, Riyadh 14322, Saudi Arabia",
-      icon: Truck,
-    },
-    {
-      id: "dammam",
-      name: "Dammam",
-      x: 645,
-      y: 265,
-      role: "Eastern Hub",
-      desc: "5600 شارع 1، 6th floor, Al Zoabi Tower, Prince Mohammed Bin Fahd Road, Dammam 32241, Saudi Arabia",
-      icon: Anchor,
-    },
-  ];
-
-  // Global routes connecting Jeddah HQ across continents
-  const intlRoutes = [
-    { to: "UK & Europe", x: 480, y: 160, path: "M 605 285 Q 530 190 480 160" },
-    { to: "USA & Canada", x: 220, y: 220, path: "M 605 285 Q 400 150 220 220" },
-    { to: "UAE & Gulf", x: 650, y: 280, path: "M 605 285 Q 630 280 650 280" },
-    { to: "India", x: 710, y: 300, path: "M 605 285 Q 660 300 710 300" },
-    { to: "Singapore", x: 770, y: 350, path: "M 605 285 Q 700 330 770 350" },
-    { to: "Malaysia", x: 760, y: 340, path: "M 605 285 Q 690 320 760 340" },
-    { to: "Australia", x: 880, y: 460, path: "M 605 285 Q 780 420 880 460" },
-    { to: "South Africa", x: 570, y: 450, path: "M 605 285 Q 560 380 570 450" },
-    {
-      to: "Makkah & Madinah",
-      x: 595,
-      y: 295,
-      path: "M 605 285 Q 600 290 595 295",
-    },
-  ];
 
   return (
     <section
@@ -95,7 +41,7 @@ const GlobalNetworkSection = () => {
     >
       {/* Background Elements */}
       <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-primary/5 via-[#F7FAFD] to-[#F7FAFD] pointer-events-none z-0" />
-      <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-primary/5 rounded-full blur-[120px] pointer-events-none -translate-y-1/2 translate-x-1/3 z-0" />
+      <div className="absolute top-0 end-0 w-[600px] h-[600px] bg-primary/5 rounded-full blur-[120px] pointer-events-none -translate-y-1/2 translate-x-1/3 rtl:-translate-x-1/3 z-0" />
 
       <div className="max-w-[1440px] mx-auto px-6 lg:px-12 relative z-10">
         {/* Header */}
@@ -107,7 +53,7 @@ const GlobalNetworkSection = () => {
             transition={{ duration: 0.5 }}
             className="text-[11px] lg:text-[12px] font-bold text-primary uppercase tracking-[0.15em] mb-4 block"
           >
-            Global Mobility & Relocation Network
+            {t("badge")}
           </motion.span>
           <motion.h2
             initial={{ opacity: 0, y: 20 }}
@@ -116,12 +62,9 @@ const GlobalNetworkSection = () => {
             transition={{ duration: 0.6, delay: 0.1 }}
             className="font-heading font-extrabold text-[32px] sm:text-[40px] lg:text-[48px] leading-[1.15] text-navy mb-5"
           >
-            Trusted Moving & Storage Solutions
+            {t("headingPart1")}
             <br className="hidden sm:block" />
-            <span className="text-primary">
-              {" "}
-              Across Saudi Arabia & Worldwide
-            </span>
+            <span className="text-primary"> {t("headingHighlight")}</span>
           </motion.h2>
           <motion.p
             initial={{ opacity: 0, y: 20 }}
@@ -130,17 +73,17 @@ const GlobalNetworkSection = () => {
             transition={{ duration: 0.6, delay: 0.2 }}
             className="text-brand-muted text-[16px] lg:text-[18px] leading-relaxed"
           >
-            Headquartered in Jeddah with branches in Riyadh and Dammam,
-            CargoTrack provides end-to-end household moves, corporate
-            relocations, industrial packing, and pilgrim baggage handling across
-            the Middle East, Asia, Europe, Australia, Africa, and the Americas.
+            {t("description")}
           </motion.p>
         </div>
 
         {/* Main Layout */}
         <div className="flex flex-col lg:flex-row gap-8 lg:gap-12 mb-16 lg:mb-20">
-          {/* LEFT: Interactive Map */}
-          <div className="w-full lg:w-[60%] bg-white rounded-[32px] p-4 lg:p-8 shadow-[0_20px_50px_rgba(11,58,102,0.05)] border border-brand-text/5 relative h-[400px] lg:h-[600px] overflow-hidden flex items-center justify-center">
+          {/* LEFT: Interactive Map (dir="ltr" ensures geographic coordinate alignment) */}
+          <div
+            dir="ltr"
+            className="w-full lg:w-[60%] bg-white rounded-[32px] p-4 lg:p-8 shadow-[0_20px_50px_rgba(11,58,102,0.05)] border border-brand-text/5 relative h-[400px] lg:h-[600px] overflow-hidden flex items-center justify-center"
+          >
             {/* Aspect Ratio Container for Map */}
             <div className="w-full h-auto aspect-[700/600] max-h-full relative flex items-center justify-center">
               {/* World Map Vector Mask */}
@@ -166,7 +109,7 @@ const GlobalNetworkSection = () => {
                 className="absolute inset-0 w-full h-full pointer-events-none z-10"
               >
                 {/* International Routes */}
-                {intlRoutes.map((route, i) => (
+                {INTL_ROUTES_CONFIG.map((route, i) => (
                   <g key={i}>
                     <motion.path
                       d={route.path}
@@ -221,7 +164,7 @@ const GlobalNetworkSection = () => {
                       viewport={{ once: true }}
                       transition={{ delay: 1.2 + i * 0.1 }}
                     >
-                      {route.to}
+                      {t(`routes.${i}.to`)}
                     </motion.text>
                   </g>
                 ))}
@@ -229,11 +172,14 @@ const GlobalNetworkSection = () => {
 
               {/* Interactive Saudi Hubs */}
               <div className="absolute inset-0 w-full h-full z-20 pointer-events-none">
-                {locations.map((loc) => {
+                {LOCATION_COORDS.map((loc, i) => {
                   const leftPct = (loc.x / 1000) * 100;
                   const topPct = (loc.y / 600) * 100;
                   const isActive = activeCity === loc.id;
                   const Icon = loc.icon;
+                  const cityName = t(`branches.${i}.name`);
+                  const cityRole = t(`branches.${i}.role`);
+                  const cityDesc = t(`branches.${i}.desc`);
 
                   return (
                     <div
@@ -251,7 +197,7 @@ const GlobalNetworkSection = () => {
                           }`}
                         />
 
-                        {/* White circular badge with added inner padding for icon/logo */}
+                        {/* White circular badge */}
                         <div
                           className={`relative w-5 h-5 lg:w-8 lg:h-8 rounded-full bg-white border flex items-center justify-center p-1 lg:p-1.5 shadow-md transition-all duration-300 transform group-hover:scale-110 ${
                             isActive
@@ -259,10 +205,9 @@ const GlobalNetworkSection = () => {
                               : "border-primary/40 hover:border-primary"
                           }`}
                         >
-                          {/* Logo Image */}
                           <Image
                             src="/assets/cargo-track-icon.png"
-                            alt={`${loc.name} office`}
+                            alt={`${cityName} ${t("officeAltSuffix")}`}
                             className="w-full h-full object-contain"
                             width={16}
                             height={16}
@@ -279,14 +224,14 @@ const GlobalNetworkSection = () => {
                           }`}
                         >
                           <div className="font-heading font-bold text-navy text-[14px] lg:text-[15px] mb-1 flex items-center gap-2">
-                            <span className="w-2 h-2 rounded-full bg-primary inline-block" />
-                            {loc.name}
+                            <span className="w-2 h-2 rounded-full bg-primary inline-block shrink-0" />
+                            {cityName}
                           </div>
                           <div className="text-primary text-[11px] lg:text-[12px] font-semibold mb-2">
-                            {loc.role}
+                            {cityRole}
                           </div>
                           <div className="text-brand-muted text-[11px] lg:text-[12px] leading-relaxed">
-                            {loc.desc}
+                            {cityDesc}
                           </div>
                           <div className="absolute -bottom-2 left-1/2 -translate-x-1/2 border-8 border-transparent border-t-white" />
                         </div>
@@ -308,12 +253,12 @@ const GlobalNetworkSection = () => {
               className="bg-white rounded-[24px] p-6 lg:p-8 shadow-[0_15px_40px_rgba(11,58,102,0.05)] border border-brand-text/5 lg:h-full flex flex-col justify-between"
             >
               <h3 className="font-heading font-extrabold text-[20px] lg:text-[24px] text-navy mb-6">
-                Operational Reach & Strategic Hubs
+                {t("kpiTitle")}
               </h3>
 
               {/* KPI Grid */}
               <div className="grid grid-cols-2 gap-4 lg:gap-6 mb-8">
-                {kpis.map((kpi, i) => (
+                {[0, 1, 2, 3].map((i) => (
                   <motion.div
                     key={i}
                     initial={{ opacity: 0, y: 15 }}
@@ -322,11 +267,11 @@ const GlobalNetworkSection = () => {
                     transition={{ duration: 0.5, delay: i * 0.1 }}
                     className="flex flex-col group cursor-default"
                   >
-                    <div className="font-heading font-extrabold text-[22px] lg:text-[24px] text-primary mb-1 group-hover:scale-105 transition-transform origin-left">
-                      {kpi.val}
+                    <div className="font-heading font-extrabold text-[22px] lg:text-[24px] text-primary mb-1 group-hover:scale-105 transition-transform origin-start">
+                      {t(`kpis.${i}.val`)}
                     </div>
                     <div className="text-brand-muted text-[13px] lg:text-[14px] font-medium leading-tight">
-                      {kpi.label}
+                      {t(`kpis.${i}.label`)}
                     </div>
                   </motion.div>
                 ))}
@@ -336,46 +281,50 @@ const GlobalNetworkSection = () => {
 
               {/* Branch List */}
               <div className="flex flex-col gap-3">
-                {branches.map((branch, i) => (
-                  <motion.div
-                    key={i}
-                    initial={{ opacity: 0, x: 20 }}
-                    whileInView={{ opacity: 1, x: 0 }}
-                    viewport={{ once: true, margin: "-100px" }}
-                    transition={{ duration: 0.5, delay: 0.3 + i * 0.05 }}
-                    onMouseEnter={() => setActiveCity(branch.id)}
-                    onMouseLeave={() => setActiveCity(null)}
-                    className={`flex items-start gap-3 p-2 lg:p-3 rounded-[16px] transition-all duration-300 border-l-[3px] cursor-pointer ${
-                      activeCity === branch.id
-                        ? "bg-[#F7FAFD] border-primary shadow-sm"
-                        : "bg-transparent border-transparent hover:bg-brand-bg/50"
-                    }`}
-                  >
-                    {/* Icon Container with padding */}
-                    <div
-                      className={`w-8 h-8 rounded-full flex items-center justify-center p-1.5 shrink-0 transition-colors ${
+                {BRANCH_CONFIGS.map((branch, i) => {
+                  const Icon = branch.icon;
+                  const name = t(`branches.${i}.name`);
+                  const role = t(`branches.${i}.role`);
+                  const desc = t(`branches.${i}.desc`);
+
+                  return (
+                    <motion.div
+                      key={branch.id}
+                      initial={{ opacity: 0, x: 20 }}
+                      whileInView={{ opacity: 1, x: 0 }}
+                      viewport={{ once: true, margin: "-100px" }}
+                      transition={{ duration: 0.5, delay: 0.3 + i * 0.05 }}
+                      onMouseEnter={() => setActiveCity(branch.id)}
+                      onMouseLeave={() => setActiveCity(null)}
+                      className={`flex items-start gap-3 p-2 lg:p-3 rounded-[16px] transition-all duration-300 border-s-[3px] cursor-pointer ${
                         activeCity === branch.id
-                          ? "bg-primary text-white"
-                          : "bg-brand-bg text-primary"
+                          ? "bg-[#F7FAFD] border-primary shadow-sm"
+                          : "bg-transparent border-transparent hover:bg-brand-bg/50"
                       }`}
                     >
-                      <branch.icon className="w-full h-full" />
-                    </div>
-                    <div>
-                      <div className="flex items-center gap-2 mb-0.5">
-                        <span className="font-heading font-bold text-navy text-[15px]">
-                          {branch.name}
-                        </span>
-                        <span className="text-[10px] bg-primary/10 text-primary px-2 py-0.5 rounded-full font-semibold">
-                          {branch.role}
-                        </span>
+                      <div
+                        className={`w-8 h-8 rounded-full flex items-center justify-center p-1.5 shrink-0 transition-colors ${
+                          activeCity === branch.id
+                            ? "bg-primary text-white"
+                            : "bg-brand-bg text-primary"
+                        }`}
+                      >
+                        <Icon className="w-full h-full" />
                       </div>
-                      <p className="text-brand-muted text-[12px]">
-                        {branch.desc}
-                      </p>
-                    </div>
-                  </motion.div>
-                ))}
+                      <div>
+                        <div className="flex items-center gap-2 mb-0.5">
+                          <span className="font-heading font-bold text-navy text-[15px]">
+                            {name}
+                          </span>
+                          <span className="text-[10px] bg-primary/10 text-primary px-2 py-0.5 rounded-full font-semibold">
+                            {role}
+                          </span>
+                        </div>
+                        <p className="text-brand-muted text-[12px]">{desc}</p>
+                      </div>
+                    </motion.div>
+                  );
+                })}
               </div>
             </motion.div>
           </div>
