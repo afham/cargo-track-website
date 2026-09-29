@@ -1,8 +1,9 @@
 "use client";
 
+import { sendGAEvent } from "@next/third-parties/google";
 import { ArrowRight, CheckCircle2 } from "lucide-react";
 import { memo, useState } from "react";
-import { useTranslations } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
 
 const INITIAL_FORM_STATE = {
   name: "",
@@ -16,6 +17,7 @@ const INITIAL_FORM_STATE = {
 
 export const QuoteForm = memo(() => {
   const t = useTranslations("QuoteForm");
+  const locale = useLocale();
   const [formData, setFormData] = useState(INITIAL_FORM_STATE);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
@@ -47,6 +49,14 @@ export const QuoteForm = memo(() => {
       if (!res.ok) {
         throw new Error(data.error || t("errors.default"));
       }
+
+      // Track lead event in Google Analytics 4
+      sendGAEvent("event", "generate_lead", {
+        form_name: "quote_form",
+        service: formData.service,
+        locale: locale,
+        has_message: Boolean(formData.message?.trim()),
+      });
 
       setIsSuccess(true);
       setFormData(INITIAL_FORM_STATE);
