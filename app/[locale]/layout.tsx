@@ -1,39 +1,4 @@
-// import type { Metadata } from "next";
-// import { Plus_Jakarta_Sans, JetBrains_Mono } from "next/font/google";
-// import "./globals.css";
-
-// const plusJakarta = Plus_Jakarta_Sans({
-//   variable: "--font-sans",
-//   subsets: ["latin"],
-//   display: "swap",
-//   weight: ["400", "500", "600", "700"],
-// });
-
-// export const metadata: Metadata = {
-//   title: "CargoTrack | Global Logistics & Cargo Solutions",
-//   description:
-//     "Reliable tracking, freight forwarding, and supply chain solutions worldwide.",
-//   icons: {
-//     icon: "/assets/cargo-track-icon.png",
-//     shortcut: "/assets/cargo-track-icon.png",
-//     apple: "/assets/cargo-track-icon.png",
-//   },
-// };
-
-// export default function RootLayout({
-//   children,
-// }: Readonly<{
-//   children: React.ReactNode;
-// }>) {
-//   return (
-//     <html
-//       lang="en"
-//       className={`${plusJakarta.variable}  h-full antialiased font-sans`}
-//     >
-//       <body className="min-h-full flex flex-col">{children}</body>
-//     </html>
-//   );
-// }
+import { GoogleAnalytics } from "@next/third-parties/google";
 
 import type { Metadata } from "next";
 import { Plus_Jakarta_Sans, Cairo } from "next/font/google";
@@ -104,6 +69,7 @@ export default async function RootLayout({
         <NextIntlClientProvider messages={messages}>
           {children}
         </NextIntlClientProvider>
+        <GoogleAnalytics gaId={process.env.NEXT_PUBLIC_GA_ID!} />
       </body>
     </html>
   );
