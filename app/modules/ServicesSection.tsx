@@ -101,7 +101,7 @@ export const ServicesSection = () => {
               transition={{ delay: 0.3 }}
             >
               <Link
-                href="#contact"
+                href="request-a-quote"
                 className="inline-flex items-center gap-2 text-primary font-semibold text-[14px] lg:text-[15px] group hover:text-navy transition-colors"
               >
                 {t("getQuote")}

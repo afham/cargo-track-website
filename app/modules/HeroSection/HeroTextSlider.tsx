@@ -125,8 +125,8 @@ export const HeroTextSlider = memo(() => {
         {/* Action Buttons */}
         <div className="flex flex-col sm:flex-row gap-4 lg:gap-5">
           <a
-            href="#quote-form"
-            className="lg:hidden group flex items-center justify-center gap-2 bg-primary text-white px-8 py-4 rounded-xl font-semibold text-[15px] transition-all duration-300 shadow-[0_8px_25px_rgba(21,101,192,0.4)]"
+            href="/request-a-quote"
+            className=" group flex items-center justify-center gap-2 bg-primary text-white px-8 py-4 rounded-xl font-semibold text-[15px] transition-all duration-300 shadow-[0_8px_25px_rgba(21,101,192,0.4)]"
           >
             {t("buttons.getQuote")}
             <ArrowRight

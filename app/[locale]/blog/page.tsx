@@ -60,27 +60,6 @@ export default async function BlogIndexPage({
       </div>
 
       <div className="max-w-[1440px] mx-auto px-6 lg:px-12 relative z-10">
-        {/* Back to Home Button */}
-        <div className="mb-8">
-          <Link
-            href={`/${locale}`}
-            className="inline-flex items-center gap-2 text-[14px] font-semibold text-primary hover:text-navy transition-colors group"
-          >
-            {isAr ? (
-              <ArrowRight
-                size={16}
-                className="group-hover:translate-x-1 transition-transform"
-              />
-            ) : (
-              <ArrowLeft
-                size={16}
-                className="group-hover:-translate-x-1 transition-transform"
-              />
-            )}
-            <span>{isAr ? "العودة إلى الرئيسية" : "Back to Home"}</span>
-          </Link>
-        </div>
-
         {/* Header Section */}
         <div className="max-w-3xl mb-12 lg:mb-16">
           <div className="flex items-center gap-3 mb-4">
