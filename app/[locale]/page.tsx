@@ -1,7 +1,7 @@
 import dynamic from "next/dynamic";
 
 // Standard imports for Above-The-Fold (Critical path)
-import { Navbar } from "../modules/Navbar";
+// import { Navbar } from "../modules/Navbar";
 import { TrustStrip } from "../modules/TrustStrip";
 import { HeroSection } from "../modules/HeroSection/HeroSection";
 import { ClientLogos } from "../modules/ClientLogos";
@@ -30,7 +30,7 @@ const FooterSection = dynamic(() => import("../modules/FooterSection"));
 export default function Home() {
   return (
     <main className="w-full min-h-screen bg-brand-bg relative selection:bg-primary/20 selection:text-primary overflow-x-hidden">
-      <Navbar />
+      {/* <Navbar /> */}
       <HeroSection />
       <TrustStrip />
       <ClientLogos />

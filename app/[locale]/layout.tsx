@@ -1,11 +1,11 @@
 import { GoogleAnalytics } from "@next/third-parties/google";
-
 import type { Metadata } from "next";
 import { Plus_Jakarta_Sans, Cairo } from "next/font/google";
 import { NextIntlClientProvider } from "next-intl";
 import { getMessages, getTranslations } from "next-intl/server";
 import { notFound } from "next/navigation";
 import { routing } from "@/i18n/routing";
+import { Navbar } from "@/app/modules/Navbar"; // Adjust path if needed
 import "./globals.css";
 
 const plusJakarta = Plus_Jakarta_Sans({
@@ -67,6 +67,7 @@ export default async function RootLayout({
     >
       <body className="min-h-full flex flex-col">
         <NextIntlClientProvider messages={messages}>
+          <Navbar />
           {children}
         </NextIntlClientProvider>
         <GoogleAnalytics gaId={process.env.NEXT_PUBLIC_GA_ID!} />

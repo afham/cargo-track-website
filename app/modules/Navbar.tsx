@@ -4,8 +4,10 @@ import React, { useEffect, useState } from "react";
 import { Mail, Menu, Phone, X } from "lucide-react";
 import { AnimatePresence, motion } from "framer-motion";
 import Image from "next/image";
-import { useTranslations } from "next-intl";
-import { LanguageSwitcher } from "../components/LanguageSwitcher"; // Adjust path as needed
+import Link from "next/link";
+import { usePathname } from "next/navigation";
+import { useLocale, useTranslations } from "next-intl";
+import { LanguageSwitcher } from "../components/LanguageSwitcher";
 
 const NAV_KEYS = [
   { key: "home", id: "home" },
@@ -23,7 +25,6 @@ const CONTACT_INFO = {
   cleanPhone: "966553659763",
 };
 
-// WhatsApp Brand Icon SVG
 const WhatsAppIcon = ({ className = "w-4 h-4" }: { className?: string }) => (
   <svg
     className={className}
@@ -37,13 +38,25 @@ const WhatsAppIcon = ({ className = "w-4 h-4" }: { className?: string }) => (
 
 export const Navbar = () => {
   const t = useTranslations("Navbar");
+  const locale = useLocale();
+  const pathname = usePathname();
+
+  // Check if current route is the homepage (e.g. "/en", "/ar", or "/")
+  const isHomePage =
+    pathname === `/${locale}` || pathname === `/${locale}/` || pathname === "/";
+  const isBlogPage = pathname.includes("/blog");
+
   const [scrolled, setScrolled] = useState(false);
   const [activeSection, setActiveSection] = useState("home");
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
-  useEffect(() => {
-    let ticking = false;
+  // If not on homepage, keep the navbar in solid light mode for contrast against bg-brand-bg
+  const isSolid = scrolled || !isHomePage;
 
+  useEffect(() => {
+    if (!isHomePage) return;
+
+    let ticking = false;
     const handleScroll = () => {
       if (!ticking) {
         window.requestAnimationFrame(() => {
@@ -68,26 +81,26 @@ export const Navbar = () => {
 
     window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
+  }, [isHomePage]);
 
   return (
     <nav
       className={`fixed top-0 w-full z-50 transition-all duration-300 ${
-        scrolled
+        isSolid
           ? "bg-white/95 backdrop-blur-md shadow-sm py-3.5 border-b border-slate-100"
           : "bg-gradient-to-b from-slate-950/80 via-slate-950/40 to-transparent py-5"
       }`}
     >
       <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-12 flex items-center justify-between gap-2 sm:gap-4 relative">
         {/* Logo */}
-        <a
-          href="#home"
+        <Link
+          href={`/${locale}`}
           className="flex items-center gap-2 shrink-0 scale-125 translate-x-3 rtl:-translate-x-3"
           aria-label={t("aria.home")}
         >
           <Image
             src={
-              !scrolled
+              !isSolid
                 ? "/assets/cargo-track-logo-white.svg"
                 : "/assets/cargo-track-logo.svg"
             }
@@ -97,18 +110,21 @@ export const Navbar = () => {
             className="h-8 sm:h-9 xl:h-10 w-auto object-contain transition-all duration-300"
             priority
           />
-        </a>
+        </Link>
 
-        {/* Desktop Navigation Links - Centered */}
+        {/* Desktop Navigation Links */}
         <div className="hidden xl:flex items-center gap-6 absolute left-1/2 -translate-x-1/2">
           {NAV_KEYS.map(({ key, id }) => {
-            const isActive = activeSection === id;
+            const isActive = isHomePage && activeSection === id;
+            // On sub-pages, route back to homepage anchor: "/en#about-us"
+            const href = isHomePage ? `#${id}` : `/${locale}#${id}`;
+
             return (
               <a
                 key={key}
-                href={`#${id}`}
+                href={href}
                 className={`font-sans text-sm font-semibold relative py-1 transition-colors duration-300 whitespace-nowrap ${
-                  scrolled
+                  isSolid
                     ? isActive
                       ? "text-primary font-bold"
                       : "text-slate-700 hover:text-primary"
@@ -122,7 +138,7 @@ export const Navbar = () => {
                   <motion.span
                     layoutId="activeNavIndicator"
                     className={`absolute bottom-0 start-0 w-full h-[2.5px] rounded-full ${
-                      scrolled ? "bg-primary" : "bg-blue-400"
+                      isSolid ? "bg-primary" : "bg-blue-400"
                     }`}
                     transition={{ type: "spring", stiffness: 380, damping: 30 }}
                   />
@@ -130,18 +146,41 @@ export const Navbar = () => {
               </a>
             );
           })}
+
+          {/* Blog Nav Link */}
+          <Link
+            href={`/${locale}/blog`}
+            className={`font-sans text-sm font-semibold relative py-1 transition-colors duration-300 whitespace-nowrap ${
+              isSolid
+                ? isBlogPage
+                  ? "text-primary font-bold"
+                  : "text-slate-700 hover:text-primary"
+                : isBlogPage
+                  ? "text-primary font-bold"
+                  : "text-slate-200 hover:text-white"
+            }`}
+          >
+            {locale === "ar" ? "المدونة" : "Blog"}
+            {isBlogPage && (
+              <motion.span
+                layoutId="activeNavIndicator"
+                className="absolute bottom-0 start-0 w-full h-[2.5px] rounded-full bg-primary"
+                transition={{ type: "spring", stiffness: 380, damping: 30 }}
+              />
+            )}
+          </Link>
         </div>
 
         {/* Desktop Contacts Bar & Language Switcher */}
         <div className="hidden xl:flex items-center gap-4 xl:gap-5 shrink-0">
-          <LanguageSwitcher scrolled={scrolled} />
+          <LanguageSwitcher scrolled={isSolid} />
 
           <div className="flex flex-col items-start gap-1">
             <a
               href={`tel:${CONTACT_INFO.cleanPhone}`}
               aria-label={t("aria.callUs")}
               className={`flex items-center gap-2 transition-colors duration-200 ${
-                scrolled
+                isSolid
                   ? "text-slate-800 hover:text-primary"
                   : "text-white hover:text-blue-300"
               }`}
@@ -159,7 +198,7 @@ export const Navbar = () => {
               href={`mailto:${CONTACT_INFO.email}`}
               aria-label={t("aria.emailUs")}
               className={`flex items-center gap-2 transition-colors duration-200 ${
-                scrolled
+                isSolid
                   ? "text-slate-800 hover:text-primary"
                   : "text-white hover:text-blue-300"
               }`}
@@ -189,12 +228,12 @@ export const Navbar = () => {
 
         {/* Mobile / Tablet Header Actions */}
         <div className="flex xl:hidden items-center gap-1.5 sm:gap-2">
-          <LanguageSwitcher scrolled={scrolled} />
+          <LanguageSwitcher scrolled={isSolid} />
 
           <a
             href={`tel:${CONTACT_INFO.cleanPhone}`}
             className={`p-2 rounded-xl transition-colors ${
-              scrolled
+              isSolid
                 ? "text-slate-700 hover:bg-slate-100"
                 : "text-white hover:bg-white/10"
             }`}
@@ -217,7 +256,7 @@ export const Navbar = () => {
           <a
             href={`mailto:${CONTACT_INFO.email}`}
             className={`p-2 rounded-xl transition-colors ${
-              scrolled
+              isSolid
                 ? "text-slate-700 hover:bg-slate-100"
                 : "text-white hover:bg-white/10"
             }`}
@@ -228,7 +267,7 @@ export const Navbar = () => {
 
           <button
             className={`p-2 rounded-xl transition-colors ms-1 ${
-              scrolled
+              isSolid
                 ? "text-slate-900 hover:bg-slate-100"
                 : "text-white hover:bg-white/10 backdrop-blur-sm"
             }`}
@@ -254,11 +293,13 @@ export const Navbar = () => {
             <div className="backdrop-blur-xl bg-slate-900/95 border border-white/15 rounded-2xl p-5 shadow-[0_20px_50px_rgba(0,0,0,0.5)] text-white space-y-2 relative overflow-hidden">
               <div className="flex flex-col space-y-1 relative z-10">
                 {NAV_KEYS.map(({ key, id }) => {
-                  const isActive = activeSection === id;
+                  const isActive = isHomePage && activeSection === id;
+                  const href = isHomePage ? `#${id}` : `/${locale}#${id}`;
+
                   return (
                     <a
                       key={key}
-                      href={`#${id}`}
+                      href={href}
                       onClick={() => setIsMobileMenuOpen(false)}
                       className={`font-sans text-[15px] font-medium transition-all px-4 py-2.5 rounded-xl flex items-center justify-between ${
                         isActive
@@ -273,6 +314,22 @@ export const Navbar = () => {
                     </a>
                   );
                 })}
+
+                {/* Mobile Blog Link */}
+                <Link
+                  href={`/${locale}/blog`}
+                  onClick={() => setIsMobileMenuOpen(false)}
+                  className={`font-sans text-[15px] font-medium transition-all px-4 py-2.5 rounded-xl flex items-center justify-between ${
+                    isBlogPage
+                      ? "bg-white/15 text-blue-400 font-bold border border-white/10"
+                      : "text-slate-200 hover:text-white hover:bg-white/10"
+                  }`}
+                >
+                  {locale === "ar" ? "المدونة" : "Blog"}
+                  {isBlogPage && (
+                    <span className="w-1.5 h-1.5 rounded-full bg-blue-400" />
+                  )}
+                </Link>
               </div>
             </div>
           </motion.div>
