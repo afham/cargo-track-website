@@ -41,16 +41,15 @@ export const Navbar = () => {
   const locale = useLocale();
   const pathname = usePathname();
 
-  // Check if current route is the homepage (e.g. "/en", "/ar", or "/")
   const isHomePage =
     pathname === `/${locale}` || pathname === `/${locale}/` || pathname === "/";
-  const isBlogPage = pathname.includes("/blog");
+  const isAboutPage = pathname.startsWith(`/${locale}/about-us`);
+  const isBlogPage = pathname.startsWith(`/${locale}/blog`);
 
   const [scrolled, setScrolled] = useState(false);
   const [activeSection, setActiveSection] = useState("home");
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
-  // If not on homepage, keep the navbar in solid light mode for contrast against bg-brand-bg
   const isSolid = scrolled || !isHomePage;
 
   useEffect(() => {
@@ -83,6 +82,48 @@ export const Navbar = () => {
     return () => window.removeEventListener("scroll", handleScroll);
   }, [isHomePage]);
 
+  // Unified helper for URL and highlighting
+  const getNavProps = (item: (typeof NAV_KEYS)[number]) => {
+    if (item.key === "aboutUs") {
+      return {
+        href: `/${locale}/about-us`,
+        isLink: true,
+        // Highlights on /about-us page OR when scrolled to #about-us on homepage
+        isActive: isAboutPage || (isHomePage && activeSection === "about-us"),
+      };
+    }
+
+    if (item.key === "home") {
+      return {
+        href: isHomePage ? "#home" : `/${locale}`,
+        isLink: !isHomePage,
+        isActive: isHomePage && activeSection === "home",
+      };
+    }
+
+    if (item.key === "services") {
+      return {
+        href: `/${locale}/services`,
+        isLink: true,
+        isActive:
+          pathname.startsWith(`/${locale}/services`) ||
+          (isHomePage && activeSection === "services"),
+      };
+    }
+    if (item.key === "contact") {
+      return {
+        href: `/${locale}/contact-us`,
+        isLink: true,
+        isActive: pathname.startsWith(`/${locale}/contact-us`),
+      };
+    }
+    return {
+      href: isHomePage ? `#${item.id}` : `/${locale}#${item.id}`,
+      isLink: false,
+      isActive: isHomePage && activeSection === item.id,
+    };
+  };
+
   return (
     <nav
       className={`fixed top-0 w-full z-50 transition-all duration-300 ${
@@ -114,35 +155,37 @@ export const Navbar = () => {
 
         {/* Desktop Navigation Links */}
         <div className="hidden xl:flex items-center gap-6 absolute left-1/2 -translate-x-1/2">
-          {NAV_KEYS.map(({ key, id }) => {
-            const isActive = isHomePage && activeSection === id;
-            // On sub-pages, route back to homepage anchor: "/en#about-us"
-            const href = isHomePage ? `#${id}` : `/${locale}#${id}`;
+          {NAV_KEYS.map((item) => {
+            const { href, isActive, isLink } = getNavProps(item);
+            const className = `font-sans text-sm font-semibold relative py-1 transition-colors duration-300 whitespace-nowrap ${
+              isSolid
+                ? isActive
+                  ? "text-primary font-bold"
+                  : "text-slate-700 hover:text-primary"
+                : isActive
+                  ? "text-primary font-bold"
+                  : "text-slate-200 hover:text-white"
+            }`;
 
-            return (
-              <a
-                key={key}
-                href={href}
-                className={`font-sans text-sm font-semibold relative py-1 transition-colors duration-300 whitespace-nowrap ${
-                  isSolid
-                    ? isActive
-                      ? "text-primary font-bold"
-                      : "text-slate-700 hover:text-primary"
-                    : isActive
-                      ? "text-primary font-bold"
-                      : "text-slate-200 hover:text-white"
+            const indicator = isActive && (
+              <motion.span
+                layoutId="activeNavIndicator"
+                className={`absolute bottom-0 start-0 w-full h-[2.5px] rounded-full ${
+                  isSolid ? "bg-primary" : "bg-blue-400"
                 }`}
-              >
-                {t(`nav.${key}`)}
-                {isActive && (
-                  <motion.span
-                    layoutId="activeNavIndicator"
-                    className={`absolute bottom-0 start-0 w-full h-[2.5px] rounded-full ${
-                      isSolid ? "bg-primary" : "bg-blue-400"
-                    }`}
-                    transition={{ type: "spring", stiffness: 380, damping: 30 }}
-                  />
-                )}
+                transition={{ type: "spring", stiffness: 380, damping: 30 }}
+              />
+            );
+
+            return isLink ? (
+              <Link key={item.key} href={href} className={className}>
+                {t(`nav.${item.key}`)}
+                {indicator}
+              </Link>
+            ) : (
+              <a key={item.key} href={href} className={className}>
+                {t(`nav.${item.key}`)}
+                {indicator}
               </a>
             );
           })}
@@ -280,7 +323,7 @@ export const Navbar = () => {
         </div>
       </div>
 
-      {/* Mobile / Tablet Navigation Dropdown Menu */}
+      {/* Mobile Dropdown Menu */}
       <AnimatePresence>
         {isMobileMenuOpen && (
           <motion.div
@@ -292,22 +335,34 @@ export const Navbar = () => {
           >
             <div className="backdrop-blur-xl bg-slate-900/95 border border-white/15 rounded-2xl p-5 shadow-[0_20px_50px_rgba(0,0,0,0.5)] text-white space-y-2 relative overflow-hidden">
               <div className="flex flex-col space-y-1 relative z-10">
-                {NAV_KEYS.map(({ key, id }) => {
-                  const isActive = isHomePage && activeSection === id;
-                  const href = isHomePage ? `#${id}` : `/${locale}#${id}`;
+                {NAV_KEYS.map((item) => {
+                  const { href, isActive, isLink } = getNavProps(item);
+                  const className = `font-sans text-[15px] font-medium transition-all px-4 py-2.5 rounded-xl flex items-center justify-between ${
+                    isActive
+                      ? "bg-white/15 text-blue-400 font-bold border border-white/10"
+                      : "text-slate-200 hover:text-white hover:bg-white/10"
+                  }`;
 
-                  return (
-                    <a
-                      key={key}
+                  return isLink ? (
+                    <Link
+                      key={item.key}
                       href={href}
                       onClick={() => setIsMobileMenuOpen(false)}
-                      className={`font-sans text-[15px] font-medium transition-all px-4 py-2.5 rounded-xl flex items-center justify-between ${
-                        isActive
-                          ? "bg-white/15 text-blue-400 font-bold border border-white/10"
-                          : "text-slate-200 hover:text-white hover:bg-white/10"
-                      }`}
+                      className={className}
                     >
-                      {t(`nav.${key}`)}
+                      {t(`nav.${item.key}`)}
+                      {isActive && (
+                        <span className="w-1.5 h-1.5 rounded-full bg-blue-400" />
+                      )}
+                    </Link>
+                  ) : (
+                    <a
+                      key={item.key}
+                      href={href}
+                      onClick={() => setIsMobileMenuOpen(false)}
+                      className={className}
+                    >
+                      {t(`nav.${item.key}`)}
                       {isActive && (
                         <span className="w-1.5 h-1.5 rounded-full bg-blue-400" />
                       )}
