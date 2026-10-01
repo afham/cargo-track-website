@@ -9,7 +9,12 @@ import { usePathname } from "next/navigation";
 import { useLocale, useTranslations } from "next-intl";
 import { LanguageSwitcher } from "../components/LanguageSwitcher";
 
-const NAV_KEYS = [
+interface NavItem {
+  key: string;
+  id: string;
+}
+
+const NAV_KEYS: NavItem[] = [
   { key: "home", id: "home" },
   { key: "aboutUs", id: "about-us" },
   { key: "services", id: "services" },
@@ -17,7 +22,7 @@ const NAV_KEYS = [
   { key: "network", id: "network" },
   { key: "gallery", id: "gallery" },
   { key: "contact", id: "contact" },
-] as const;
+];
 
 const CONTACT_INFO = {
   email: "enquiry@cargotrack.co",
@@ -122,6 +127,20 @@ export const Navbar = () => {
         href: `/${locale}/network`,
         isLink: true,
         isActive: pathname.startsWith(`/${locale}/network`),
+      };
+    }
+    if (item.key === "workflow") {
+      return {
+        href: `/${locale}/workflow`,
+        isLink: true,
+        isActive: pathname.startsWith(`/${locale}/workflow`),
+      };
+    }
+    if (item.key === "gallery") {
+      return {
+        href: `/${locale}/gallery`,
+        isLink: true,
+        isActive: pathname.startsWith(`/${locale}/gallery`),
       };
     }
     return {
