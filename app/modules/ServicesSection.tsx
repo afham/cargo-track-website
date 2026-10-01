@@ -4,29 +4,16 @@ import Image from "next/image";
 import Link from "next/link";
 import { ArrowRight, Check, Sparkles } from "lucide-react";
 import { motion } from "framer-motion";
-import { useTranslations } from "next-intl";
-
-const SERVICE_IMAGES = [
-  "/assets/photos4.webp", // 01
-  "/assets/photos5.webp", // 02
-  "/assets/photos6.webp", // 03
-  "/assets/photos18.webp", // 04
-  "/assets/photos4.webp", // 05
-  "/assets/photos17.webp", // 06
-  "/assets/photos6.webp", // 07
-  "/assets/photos7.webp", // 08
-  "/assets/photos15.webp", // 09
-  "/assets/photos14.webp", // 10
-  "/assets/photos13.webp", // 11
-  "/assets/photos12.webp", // 12
-];
+import { useLocale, useTranslations } from "next-intl";
+import { SERVICE_ITEMS } from "@/lib/services-data";
 
 const TOTAL_SERVICES = 12;
 
 export const ServicesSection = () => {
   const t = useTranslations("ServicesSection");
+  const locale = useLocale();
 
-  // Schema.org Structured Data for SEO with localized values
+  // Schema.org Structured Data with direct URLs to each individual service page
   const jsonLd = {
     "@context": "https://schema.org",
     "@type": "ItemList",
@@ -37,6 +24,7 @@ export const ServicesSection = () => {
         "@type": "Service",
         name: t(`services.${idx}.title`),
         description: t(`services.${idx}.description`),
+        url: `https://cargotrack.co/${locale}/services/${SERVICE_ITEMS[idx]?.slug || ""}`,
         provider: {
           "@type": "Organization",
           name: "CargoTrack",
@@ -48,7 +36,7 @@ export const ServicesSection = () => {
   return (
     <section
       id="services"
-      className="w-full pt-16 pb-20 bg-slate-50/50 relative"
+      className="w-full pt-16 pb-20 bg-slate-50/50 relative scroll-mt-24 lg:scroll-mt-28"
     >
       {/* JSON-LD Rich Snippet for Search Engines */}
       <script
@@ -101,7 +89,7 @@ export const ServicesSection = () => {
               transition={{ delay: 0.3 }}
             >
               <Link
-                href="request-a-quote"
+                href={`/${locale}/request-a-quote`}
                 className="inline-flex items-center gap-2 text-primary font-semibold text-[14px] lg:text-[15px] group hover:text-navy transition-colors"
               >
                 {t("getQuote")}
@@ -121,7 +109,9 @@ export const ServicesSection = () => {
             const serviceId = t(`services.${index}.id`);
             const title = t(`services.${index}.title`);
             const description = t(`services.${index}.description`);
-            const imageSrc = SERVICE_IMAGES[index];
+            const serviceItem = SERVICE_ITEMS[index];
+            const imageSrc = serviceItem?.image || "/assets/photos4.webp";
+            const serviceHref = `/${locale}/services/${serviceItem?.slug || ""}`;
 
             if (isDarkOverlayCard) {
               return (
@@ -132,49 +122,59 @@ export const ServicesSection = () => {
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
                   transition={{ duration: 0.4, delay: (index % 3) * 0.1 }}
-                  className="group relative min-h-[400px] rounded-[24px] overflow-hidden bg-navy flex flex-col justify-between p-6 sm:p-7 shadow-lg shadow-navy/10 hover:shadow-xl transition-all duration-300 border border-navy/20"
                 >
-                  <Image
-                    src={imageSrc}
-                    alt={`${title} - CargoTrack Logistics`}
-                    fill
-                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                    quality={80}
-                    className="object-cover opacity-60 group-hover:scale-105 group-hover:opacity-75 transition-all duration-500 ease-out"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-navy via-navy/80 to-navy/30 pointer-events-none" />
+                  <Link
+                    href={serviceHref}
+                    className="group relative min-h-[400px] h-full rounded-[24px] overflow-hidden bg-navy flex flex-col justify-between p-6 sm:p-7 shadow-lg shadow-navy/10 hover:shadow-2xl transition-all duration-300 border border-navy/20 cursor-pointer block"
+                  >
+                    <Image
+                      src={imageSrc}
+                      alt={`${title} - CargoTrack Logistics`}
+                      fill
+                      sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                      quality={80}
+                      className="object-cover opacity-60 group-hover:scale-105 group-hover:opacity-75 transition-all duration-500 ease-out"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-navy via-navy/80 to-navy/30 pointer-events-none" />
 
-                  {/* Top Header Badge */}
-                  <div className="relative z-10 flex justify-between items-center mb-6">
-                    <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-white/15 backdrop-blur-md border border-white/20 text-white text-[11px] font-semibold uppercase tracking-wider">
-                      <Sparkles size={12} className="text-primary" />{" "}
-                      {t("serviceBadge")}
-                    </span>
-                    <span className="font-mono text-xs font-bold text-white/70">
-                      #{serviceId}
-                    </span>
-                  </div>
-
-                  {/* Body Content */}
-                  <div className="relative z-10 mt-auto">
-                    <h3 className="font-heading font-extrabold text-white text-xl sm:text-2xl mb-2 group-hover:text-primary transition-colors">
-                      {title}
-                    </h3>
-                    <p className="text-white/90 text-xs sm:text-sm leading-relaxed mb-4">
-                      {description}
-                    </p>
-
-                    <div className="flex flex-wrap gap-1.5 pt-3 border-t border-white/15">
-                      {[0, 1, 2].map((tagIdx) => (
-                        <span
-                          key={tagIdx}
-                          className="px-2.5 py-1 rounded-md bg-white/15 backdrop-blur-md border border-white/20 text-white text-[11px] font-medium"
-                        >
-                          {t(`services.${index}.tags.${tagIdx}`)}
-                        </span>
-                      ))}
+                    {/* Top Header Badge */}
+                    <div className="relative z-10 flex justify-between items-center mb-6">
+                      <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-white/15 backdrop-blur-md border border-white/20 text-white text-[11px] font-semibold uppercase tracking-wider">
+                        <Sparkles size={12} className="text-primary" />{" "}
+                        {t("serviceBadge")}
+                      </span>
+                      <span className="font-mono text-xs font-bold text-white/70">
+                        #{serviceId}
+                      </span>
                     </div>
-                  </div>
+
+                    {/* Body Content */}
+                    <div className="relative z-10 mt-auto">
+                      <div className="flex items-center justify-between gap-2 mb-2">
+                        <h3 className="font-heading font-extrabold text-white text-xl sm:text-2xl group-hover:text-primary transition-colors">
+                          {title}
+                        </h3>
+                        <div className="w-8 h-8 rounded-full bg-white/10 flex items-center justify-center text-white shrink-0 group-hover:bg-primary group-hover:text-white transition-all group-hover:translate-x-0.5 rtl:group-hover:-translate-x-0.5">
+                          <ArrowRight size={14} className="rtl:rotate-180" />
+                        </div>
+                      </div>
+
+                      <p className="text-white/90 text-xs sm:text-sm leading-relaxed mb-4 line-clamp-3">
+                        {description}
+                      </p>
+
+                      <div className="flex flex-wrap gap-1.5 pt-3 border-t border-white/15">
+                        {[0, 1, 2].map((tagIdx) => (
+                          <span
+                            key={tagIdx}
+                            className="px-2.5 py-1 rounded-md bg-white/15 backdrop-blur-md border border-white/20 text-white text-[11px] font-medium"
+                          >
+                            {t(`services.${index}.tags.${tagIdx}`)}
+                          </span>
+                        ))}
+                      </div>
+                    </div>
+                  </Link>
                 </motion.div>
               );
             }
@@ -187,51 +187,64 @@ export const ServicesSection = () => {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.4, delay: (index % 3) * 0.1 }}
-                className="group relative min-h-[400px] rounded-[24px] overflow-hidden bg-slate-900 flex flex-col justify-between p-6 sm:p-7 shadow-md hover:shadow-xl transition-all duration-300 border border-slate-200"
               >
-                <Image
-                  src={imageSrc}
-                  alt={`${title} - CargoTrack Services`}
-                  fill
-                  sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                  quality={80}
-                  className="object-cover opacity-80 brightness-[0.92] group-hover:scale-105 group-hover:opacity-95 transition-all duration-500 ease-out"
-                />
+                <Link
+                  href={serviceHref}
+                  className="group relative min-h-[400px] h-full rounded-[24px] overflow-hidden bg-slate-900 flex flex-col justify-between p-6 sm:p-7 shadow-md hover:shadow-2xl transition-all duration-300 border border-slate-200 cursor-pointer block"
+                >
+                  <Image
+                    src={imageSrc}
+                    alt={`${title} - CargoTrack Services`}
+                    fill
+                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                    quality={80}
+                    className="object-cover opacity-80 brightness-[0.92] group-hover:scale-105 group-hover:opacity-95 transition-all duration-500 ease-out"
+                  />
 
-                <div className="absolute inset-0 bg-gradient-to-t from-white via-white/90 via-50% to-transparent pointer-events-none" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-white via-white/90 via-50% to-transparent pointer-events-none" />
 
-                {/* Top Header Badge */}
-                <div className="relative z-10 flex justify-between items-center mb-6">
-                  <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-slate-900/80 backdrop-blur-md text-white text-[11px] font-semibold uppercase tracking-wider shadow-sm">
-                    <Sparkles size={12} className="text-primary" />{" "}
-                    {t("serviceBadge")}
-                  </span>
-                  <span className="font-mono text-xs font-extrabold text-navy bg-white/90 backdrop-blur-md px-2 py-0.5 rounded-md shadow-sm">
-                    #{serviceId}
-                  </span>
-                </div>
-
-                {/* Body Content */}
-                <div className="relative z-10 mt-auto">
-                  <h3 className="font-heading font-extrabold text-navy text-xl sm:text-2xl mb-2 group-hover:text-primary transition-colors">
-                    {title}
-                  </h3>
-                  <p className="text-slate-800 font-medium text-[12px] sm:text-[12px] leading-relaxed mb-4">
-                    {description}
-                  </p>
-
-                  <div className="flex flex-wrap gap-1.5 pt-3 border-t border-slate-300/80">
-                    {[0, 1, 2].map((tagIdx) => (
-                      <span
-                        key={tagIdx}
-                        className="inline-flex items-center gap-1 text-[11px] font-bold text-navy bg-white/95 backdrop-blur-md border border-slate-200/90 shadow-sm px-2.5 py-1 rounded-md"
-                      >
-                        <Check size={10} className="text-primary stroke-[3]" />
-                        {t(`services.${index}.tags.${tagIdx}`)}
-                      </span>
-                    ))}
+                  {/* Top Header Badge */}
+                  <div className="relative z-10 flex justify-between items-center mb-6">
+                    <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-slate-900/80 backdrop-blur-md text-white text-[11px] font-semibold uppercase tracking-wider shadow-sm">
+                      <Sparkles size={12} className="text-primary" />{" "}
+                      {t("serviceBadge")}
+                    </span>
+                    <span className="font-mono text-xs font-extrabold text-navy bg-white/90 backdrop-blur-md px-2 py-0.5 rounded-md shadow-sm">
+                      #{serviceId}
+                    </span>
                   </div>
-                </div>
+
+                  {/* Body Content */}
+                  <div className="relative z-10 mt-auto">
+                    <div className="flex items-center justify-between gap-2 mb-2">
+                      <h3 className="font-heading font-extrabold text-navy text-xl sm:text-2xl group-hover:text-primary transition-colors">
+                        {title}
+                      </h3>
+                      <div className="w-8 h-8 rounded-full bg-navy/5 flex items-center justify-center text-navy shrink-0 group-hover:bg-primary group-hover:text-white transition-all group-hover:translate-x-0.5 rtl:group-hover:-translate-x-0.5">
+                        <ArrowRight size={14} className="rtl:rotate-180" />
+                      </div>
+                    </div>
+
+                    <p className="text-slate-800 font-medium text-[12px] sm:text-[12px] leading-relaxed mb-4 line-clamp-3">
+                      {description}
+                    </p>
+
+                    <div className="flex flex-wrap gap-1.5 pt-3 border-t border-slate-300/80">
+                      {[0, 1, 2].map((tagIdx) => (
+                        <span
+                          key={tagIdx}
+                          className="inline-flex items-center gap-1 text-[11px] font-bold text-navy bg-white/95 backdrop-blur-md border border-slate-200/90 shadow-sm px-2.5 py-1 rounded-md"
+                        >
+                          <Check
+                            size={10}
+                            className="text-primary stroke-[3]"
+                          />
+                          {t(`services.${index}.tags.${tagIdx}`)}
+                        </span>
+                      ))}
+                    </div>
+                  </div>
+                </Link>
               </motion.div>
             );
           })}
@@ -240,3 +253,5 @@ export const ServicesSection = () => {
     </section>
   );
 };
+
+export default ServicesSection;

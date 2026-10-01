@@ -192,19 +192,9 @@ export default async function RequestQuotePage({
 
           {/* Right Column: QuoteForm Card Container */}
           <div className="lg:col-span-5 w-full flex justify-center lg:justify-end sticky top-28">
-            <div className="w-full max-w-[460px]">
+            <div className="w-fit bg-navy max-w-[460px] rounded-[28px]">
               {/* Form Component */}
               <QuoteForm />
-
-              {/* Guarantees Note below form */}
-              <div className="mt-4 px-2 flex items-center justify-center gap-2 text-[12px] text-brand-muted text-center">
-                <CheckCircle2 className="w-4 h-4 text-emerald-500 shrink-0" />
-                <span>
-                  {isAr
-                    ? "بياناتك الشخصية سرية ومحمية 100% ولن تتم مشاركتها إطلاقاً."
-                    : "No spam. Your contact details remain 100% confidential."}
-                </span>
-              </div>
             </div>
           </div>
         </div>
