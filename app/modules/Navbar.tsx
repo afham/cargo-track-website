@@ -117,6 +117,13 @@ export const Navbar = () => {
         isActive: pathname.startsWith(`/${locale}/contact-us`),
       };
     }
+    if (item.key === "network") {
+      return {
+        href: `/${locale}/network`,
+        isLink: true,
+        isActive: pathname.startsWith(`/${locale}/network`),
+      };
+    }
     return {
       href: isHomePage ? `#${item.id}` : `/${locale}#${item.id}`,
       isLink: false,

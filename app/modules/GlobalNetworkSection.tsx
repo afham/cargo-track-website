@@ -2,9 +2,10 @@
 
 import React, { useState } from "react";
 import { motion } from "framer-motion";
-import { Building2, Anchor, Truck } from "lucide-react";
+import { Building2, Anchor, Truck, ArrowRight, ArrowLeft } from "lucide-react";
 import Image from "next/image";
-import { useTranslations } from "next-intl";
+import Link from "next/link";
+import { useLocale, useTranslations } from "next-intl";
 
 const BRANCH_CONFIGS = [
   { id: "jeddah", icon: Building2 },
@@ -32,12 +33,14 @@ const INTL_ROUTES_CONFIG = [
 
 export const GlobalNetworkSection = () => {
   const t = useTranslations("GlobalNetworkSection");
+  const locale = useLocale();
+  const isAr = locale === "ar";
   const [activeCity, setActiveCity] = useState<string | null>(null);
 
   return (
     <section
       id="network"
-      className="w-full py-16 lg:py-16 bg-[#F7FAFD] relative overflow-hidden"
+      className="w-full py-16 lg:py-16 bg-[#F7FAFD] relative overflow-hidden scroll-mt-24 lg:scroll-mt-28"
     >
       {/* Background Elements */}
       <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-primary/5 via-[#F7FAFD] to-[#F7FAFD] pointer-events-none z-0" />
@@ -79,12 +82,11 @@ export const GlobalNetworkSection = () => {
 
         {/* Main Layout */}
         <div className="flex flex-col lg:flex-row gap-8 lg:gap-12 mb-16 lg:mb-20">
-          {/* LEFT: Interactive Map (dir="ltr" ensures geographic coordinate alignment) */}
+          {/* LEFT: Interactive Map */}
           <div
             dir="ltr"
             className="w-full lg:w-[60%] bg-white rounded-[32px] p-4 lg:p-8 shadow-[0_20px_50px_rgba(11,58,102,0.05)] border border-brand-text/5 relative h-[400px] lg:h-[600px] overflow-hidden flex items-center justify-center"
           >
-            {/* Aspect Ratio Container for Map */}
             <div className="w-full h-auto aspect-[700/600] max-h-full relative flex items-center justify-center">
               {/* World Map Vector Mask */}
               <div
@@ -108,7 +110,6 @@ export const GlobalNetworkSection = () => {
                 viewBox="0 0 1000 600"
                 className="absolute inset-0 w-full h-full pointer-events-none z-10"
               >
-                {/* International Routes */}
                 {INTL_ROUTES_CONFIG.map((route, i) => (
                   <g key={i}>
                     <motion.path
@@ -127,7 +128,6 @@ export const GlobalNetworkSection = () => {
                         ease: "easeOut",
                       }}
                     />
-                    {/* Route particle animation */}
                     <motion.circle
                       r="2.5"
                       fill="#1565C0"
@@ -141,7 +141,6 @@ export const GlobalNetworkSection = () => {
                       }}
                       style={{ offsetPath: `path('${route.path}')` } as any}
                     />
-                    {/* International Destination Dot */}
                     <motion.circle
                       cx={route.x}
                       cy={route.y}
@@ -170,34 +169,31 @@ export const GlobalNetworkSection = () => {
                 ))}
               </svg>
 
-              {/* Interactive Saudi Hubs */}
+              {/* Clickable Map Pins */}
               <div className="absolute inset-0 w-full h-full z-20 pointer-events-none">
                 {LOCATION_COORDS.map((loc, i) => {
                   const leftPct = (loc.x / 1000) * 100;
                   const topPct = (loc.y / 600) * 100;
                   const isActive = activeCity === loc.id;
-                  const Icon = loc.icon;
                   const cityName = t(`branches.${i}.name`);
                   const cityRole = t(`branches.${i}.role`);
                   const cityDesc = t(`branches.${i}.desc`);
 
                   return (
-                    <div
+                    <Link
                       key={loc.id}
+                      href={`/${locale}/network/${loc.id}`}
                       className="absolute pointer-events-auto transform -translate-x-1/2 -translate-y-1/2 cursor-pointer group"
                       style={{ left: `${leftPct}%`, top: `${topPct}%` }}
                       onMouseEnter={() => setActiveCity(loc.id)}
                       onMouseLeave={() => setActiveCity(null)}
                     >
                       <div className="relative flex items-center justify-center">
-                        {/* Pulse animation ring */}
                         <div
                           className={`absolute inset-0 rounded-full bg-primary/30 animate-ping ${
                             isActive ? "scale-150" : ""
                           }`}
                         />
-
-                        {/* White circular badge */}
                         <div
                           className={`relative w-5 h-5 lg:w-8 lg:h-8 rounded-full bg-white border flex items-center justify-center p-1 lg:p-1.5 shadow-md transition-all duration-300 transform group-hover:scale-110 ${
                             isActive
@@ -212,12 +208,11 @@ export const GlobalNetworkSection = () => {
                             width={16}
                             height={16}
                           />
-                          <Icon size={12} className="text-primary hidden" />
                         </div>
 
-                        {/* Hover Card */}
+                        {/* Hover Preview Card */}
                         <div
-                          className={`absolute bottom-full left-1/2 -translate-x-1/2 mb-3 lg:mb-4 w-[180px] lg:w-[220px] bg-white rounded-xl shadow-[0_15px_35px_rgba(11,58,102,0.15)] border border-brand-text/5 p-3 lg:p-4 transition-all duration-300 pointer-events-none z-30 ${
+                          className={`absolute bottom-full left-1/2 -translate-x-1/2 mb-3 lg:mb-4 w-[190px] lg:w-[220px] bg-white rounded-xl shadow-[0_15px_35px_rgba(11,58,102,0.15)] border border-brand-text/5 p-3 lg:p-4 transition-all duration-300 pointer-events-none z-30 ${
                             isActive
                               ? "opacity-100 translate-y-0 scale-100"
                               : "opacity-0 translate-y-4 scale-95"
@@ -230,20 +225,32 @@ export const GlobalNetworkSection = () => {
                           <div className="text-primary text-[11px] lg:text-[12px] font-semibold mb-2">
                             {cityRole}
                           </div>
-                          <div className="text-brand-muted text-[11px] lg:text-[12px] leading-relaxed">
+                          <div className="text-brand-muted text-[11px] lg:text-[12px] leading-relaxed mb-2">
                             {cityDesc}
+                          </div>
+                          <div className="text-[11px] font-bold text-primary flex items-center gap-1">
+                            <span>
+                              {isAr
+                                ? "عرض تفاصيل الفرع"
+                                : "View Branch Details"}
+                            </span>
+                            {isAr ? (
+                              <ArrowLeft size={12} />
+                            ) : (
+                              <ArrowRight size={12} />
+                            )}
                           </div>
                           <div className="absolute -bottom-2 left-1/2 -translate-x-1/2 border-8 border-transparent border-t-white" />
                         </div>
                       </div>
-                    </div>
+                    </Link>
                   );
                 })}
               </div>
             </div>
           </div>
 
-          {/* RIGHT: Info Panel */}
+          {/* RIGHT: Clickable Branch List Tiles */}
           <div className="w-full lg:w-[40%] flex flex-col">
             <motion.div
               initial={{ opacity: 0, x: 20 }}
@@ -256,7 +263,7 @@ export const GlobalNetworkSection = () => {
                 {t("kpiTitle")}
               </h3>
 
-              {/* KPI Grid */}
+              {/* KPI Numbers */}
               <div className="grid grid-cols-2 gap-4 lg:gap-6 mb-8">
                 {[0, 1, 2, 3].map((i) => (
                   <motion.div
@@ -279,7 +286,7 @@ export const GlobalNetworkSection = () => {
 
               <div className="h-[1px] w-full bg-brand-text/5 mb-6" />
 
-              {/* Branch List */}
+              {/* Branch Cards Linking Directly to the Page */}
               <div className="flex flex-col gap-3">
                 {BRANCH_CONFIGS.map((branch, i) => {
                   const Icon = branch.icon;
@@ -294,34 +301,50 @@ export const GlobalNetworkSection = () => {
                       whileInView={{ opacity: 1, x: 0 }}
                       viewport={{ once: true, margin: "-100px" }}
                       transition={{ duration: 0.5, delay: 0.3 + i * 0.05 }}
-                      onMouseEnter={() => setActiveCity(branch.id)}
-                      onMouseLeave={() => setActiveCity(null)}
-                      className={`flex items-start gap-3 p-2 lg:p-3 rounded-[16px] transition-all duration-300 border-s-[3px] cursor-pointer ${
-                        activeCity === branch.id
-                          ? "bg-[#F7FAFD] border-primary shadow-sm"
-                          : "bg-transparent border-transparent hover:bg-brand-bg/50"
-                      }`}
                     >
-                      <div
-                        className={`w-8 h-8 rounded-full flex items-center justify-center p-1.5 shrink-0 transition-colors ${
+                      <Link
+                        href={`/${locale}/network/${branch.id}`}
+                        onMouseEnter={() => setActiveCity(branch.id)}
+                        onMouseLeave={() => setActiveCity(null)}
+                        className={`flex items-start justify-between gap-3 p-3 lg:p-4 rounded-[16px] transition-all duration-300 border-s-[3px] group ${
                           activeCity === branch.id
-                            ? "bg-primary text-white"
-                            : "bg-brand-bg text-primary"
+                            ? "bg-[#F7FAFD] border-primary shadow-sm"
+                            : "bg-transparent border-transparent hover:bg-brand-bg/50"
                         }`}
                       >
-                        <Icon className="w-full h-full" />
-                      </div>
-                      <div>
-                        <div className="flex items-center gap-2 mb-0.5">
-                          <span className="font-heading font-bold text-navy text-[15px]">
-                            {name}
-                          </span>
-                          <span className="text-[10px] bg-primary/10 text-primary px-2 py-0.5 rounded-full font-semibold">
-                            {role}
-                          </span>
+                        <div className="flex items-start gap-3">
+                          <div
+                            className={`w-9 h-9 rounded-full flex items-center justify-center p-2 shrink-0 transition-colors ${
+                              activeCity === branch.id
+                                ? "bg-primary text-white"
+                                : "bg-brand-bg text-primary group-hover:bg-primary group-hover:text-white"
+                            }`}
+                          >
+                            <Icon className="w-full h-full" />
+                          </div>
+                          <div>
+                            <div className="flex items-center gap-2 mb-0.5">
+                              <span className="font-heading font-bold text-navy text-[15px] group-hover:text-primary transition-colors">
+                                {name}
+                              </span>
+                              <span className="text-[10px] bg-primary/10 text-primary px-2 py-0.5 rounded-full font-semibold">
+                                {role}
+                              </span>
+                            </div>
+                            <p className="text-brand-muted text-[12px] leading-relaxed">
+                              {desc}
+                            </p>
+                          </div>
                         </div>
-                        <p className="text-brand-muted text-[12px]">{desc}</p>
-                      </div>
+
+                        <div className="shrink-0 self-center text-brand-muted group-hover:text-primary group-hover:translate-x-1 rtl:group-hover:-translate-x-1 transition-transform">
+                          {isAr ? (
+                            <ArrowLeft size={16} />
+                          ) : (
+                            <ArrowRight size={16} />
+                          )}
+                        </div>
+                      </Link>
                     </motion.div>
                   );
                 })}
