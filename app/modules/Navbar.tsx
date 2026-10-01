@@ -136,13 +136,13 @@ export const Navbar = () => {
         isActive: pathname.startsWith(`/${locale}/workflow`),
       };
     }
-    //     if (item.key === "gallery") {
-    //   return {
-    //     href: `/${locale}/gallery`,
-    //     isLink: true,
-    //     isActive: pathname.startsWith(`/${locale}/gallery`),
-    //   };
-    // }
+    if (item.key === "gallery") {
+      return {
+        href: `/${locale}/gallery`,
+        isLink: true,
+        isActive: pathname.startsWith(`/${locale}/gallery`),
+      };
+    }
     return {
       href: isHomePage ? `#${item.id}` : `/${locale}#${item.id}`,
       isLink: false,

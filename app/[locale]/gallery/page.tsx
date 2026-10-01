@@ -47,27 +47,6 @@ export default async function GalleryPage({
       </div>
 
       <div className="max-w-[1440px] mx-auto px-6 lg:px-12 relative z-10">
-        {/* Breadcrumb Navigation */}
-        <div className="mb-6">
-          <Link
-            href={`/${locale}`}
-            className="inline-flex items-center gap-2 text-[14px] font-semibold text-primary hover:text-navy transition-colors group"
-          >
-            {isAr ? (
-              <ArrowRight
-                size={16}
-                className="group-hover:translate-x-1 transition-transform"
-              />
-            ) : (
-              <ArrowLeft
-                size={16}
-                className="group-hover:-translate-x-1 transition-transform"
-              />
-            )}
-            <span>{isAr ? "العودة إلى الرئيسية" : "Back to Home"}</span>
-          </Link>
-        </div>
-
         {/* Page Hero Header */}
         <div className="max-w-3xl mb-12">
           <div className="flex items-center gap-3 mb-3">
