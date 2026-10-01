@@ -325,7 +325,9 @@ export default async function ContactPage({
                   {isAr ? "إرسال استفسار فوري" : "Quick Message & Quote"}
                 </span>
               </div>
-              <QuoteForm />
+              <div className="bg-navy rounded-[28px] w-fit">
+                <QuoteForm />
+              </div>
             </div>
           </div>
         </div>
