@@ -89,20 +89,18 @@ export const Navbar = () => {
 
   // Unified helper for URL and highlighting
   const getNavProps = (item: (typeof NAV_KEYS)[number]) => {
-    if (item.key === "aboutUs") {
-      return {
-        href: `/${locale}/about-us`,
-        isLink: true,
-        // Highlights on /about-us page OR when scrolled to #about-us on homepage
-        isActive: isAboutPage || (isHomePage && activeSection === "about-us"),
-      };
-    }
-
     if (item.key === "home") {
       return {
         href: isHomePage ? "#home" : `/${locale}`,
         isLink: !isHomePage,
         isActive: isHomePage && activeSection === "home",
+      };
+    }
+    if (item.key === "aboutUs") {
+      return {
+        href: `/${locale}/about-us`,
+        isLink: true,
+        isActive: isAboutPage || (isHomePage && activeSection === "about-us"),
       };
     }
 
@@ -119,28 +117,36 @@ export const Navbar = () => {
       return {
         href: `/${locale}/contact-us`,
         isLink: true,
-        isActive: pathname.startsWith(`/${locale}/contact-us`),
+        isActive:
+          pathname.startsWith(`/${locale}/contact-us`) ||
+          (isHomePage && activeSection === "contact"),
       };
     }
     if (item.key === "network") {
       return {
         href: `/${locale}/network`,
         isLink: true,
-        isActive: pathname.startsWith(`/${locale}/network`),
+        isActive:
+          pathname.startsWith(`/${locale}/network`) ||
+          (isHomePage && activeSection === "network"),
       };
     }
     if (item.key === "workflow") {
       return {
         href: `/${locale}/workflow`,
         isLink: true,
-        isActive: pathname.startsWith(`/${locale}/workflow`),
+        isActive:
+          pathname.startsWith(`/${locale}/workflow`) ||
+          (isHomePage && activeSection === "workflow"),
       };
     }
     if (item.key === "gallery") {
       return {
         href: `/${locale}/gallery`,
         isLink: true,
-        isActive: pathname.startsWith(`/${locale}/gallery`),
+        isActive:
+          pathname.startsWith(`/${locale}/gallery`) ||
+          (isHomePage && activeSection === "gallery"),
       };
     }
     return {
