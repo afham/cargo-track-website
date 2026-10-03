@@ -232,7 +232,7 @@ export const QuoteForm = memo(() => {
               name="message"
               value={formData.message}
               onChange={handleChange}
-              maxLength={500}
+              maxLength={1500}
               rows={3}
               placeholder={t("fields.message")}
               className="w-full bg-white/10 border border-white/15 rounded-xl px-3.5 py-2.5 text-sm text-white placeholder:text-slate-300/70 outline-none focus:bg-white/20 focus:border-white/40 focus:ring-2 focus:ring-white/20 transition-all resize-none backdrop-blur-md"
