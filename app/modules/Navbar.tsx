@@ -7,6 +7,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useLocale, useTranslations } from "next-intl";
+import { sendGAEvent } from "@next/third-parties/google";
 import { LanguageSwitcher } from "../components/LanguageSwitcher";
 
 interface NavItem {
@@ -56,6 +57,34 @@ export const Navbar = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   const isSolid = scrolled || !isHomePage;
+
+  // --- Tracking Handlers for Google Ads & GA4 ---
+  const trackCall = (location: string) => {
+    sendGAEvent("event", "click_to_call", {
+      method: "phone",
+      button_location: location,
+      phone_number: CONTACT_INFO.phone,
+      locale: locale,
+    });
+  };
+
+  const trackWhatsApp = (location: string) => {
+    sendGAEvent("event", "click_whatsapp", {
+      method: "whatsapp",
+      button_location: location,
+      phone_number: CONTACT_INFO.cleanPhone,
+      locale: locale,
+    });
+  };
+
+  const trackEmail = (location: string) => {
+    sendGAEvent("event", "click_email", {
+      method: "email",
+      button_location: location,
+      email_address: CONTACT_INFO.email,
+      locale: locale,
+    });
+  };
 
   useEffect(() => {
     if (!isHomePage) return;
@@ -253,6 +282,7 @@ export const Navbar = () => {
           <div className="flex flex-col items-start gap-1">
             <a
               href={`tel:${CONTACT_INFO.cleanPhone}`}
+              onClick={() => trackCall("desktop_navbar")}
               aria-label={t("aria.callUs")}
               className={`flex items-center gap-2 transition-colors duration-200 ${
                 isSolid
@@ -271,6 +301,7 @@ export const Navbar = () => {
 
             <a
               href={`mailto:${CONTACT_INFO.email}`}
+              onClick={() => trackEmail("desktop_navbar")}
               aria-label={t("aria.emailUs")}
               className={`flex items-center gap-2 transition-colors duration-200 ${
                 isSolid
@@ -290,6 +321,7 @@ export const Navbar = () => {
 
           <a
             href={`https://wa.me/${CONTACT_INFO.cleanPhone}`}
+            onClick={() => trackWhatsApp("desktop_navbar")}
             target="_blank"
             rel="noopener noreferrer"
             title={t("aria.whatsapp")}
@@ -307,6 +339,7 @@ export const Navbar = () => {
 
           <a
             href={`tel:${CONTACT_INFO.cleanPhone}`}
+            onClick={() => trackCall("mobile_topbar")}
             className={`p-2 rounded-xl transition-colors ${
               isSolid
                 ? "text-slate-700 hover:bg-slate-100"
@@ -319,6 +352,7 @@ export const Navbar = () => {
 
           <a
             href={`https://wa.me/${CONTACT_INFO.cleanPhone}`}
+            onClick={() => trackWhatsApp("mobile_topbar")}
             target="_blank"
             rel="noopener noreferrer"
             className="relative scale-125 flex items-center justify-center p-2 rounded-full bg-emerald-500 text-white hover:bg-emerald-600 transition-transform duration-300"
@@ -330,6 +364,7 @@ export const Navbar = () => {
 
           <a
             href={`mailto:${CONTACT_INFO.email}`}
+            onClick={() => trackEmail("mobile_topbar")}
             className={`p-2 rounded-xl transition-colors ${
               isSolid
                 ? "text-slate-700 hover:bg-slate-100"

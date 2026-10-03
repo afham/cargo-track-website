@@ -1,6 +1,7 @@
 "use client";
 
 import Image from "next/image";
+import Link from "next/link";
 import React, { useState, useEffect, useCallback, useMemo } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import {
@@ -17,7 +18,7 @@ import {
   Globe,
   PhoneCallIcon,
 } from "lucide-react";
-import { useTranslations } from "next-intl";
+import { useTranslations, useLocale } from "next-intl";
 
 const BRANCH_CONTACT_DETAILS = [
   {
@@ -75,6 +76,7 @@ const TOTAL_SERVICES = 12;
 
 export const FooterSection = () => {
   const t = useTranslations("FooterSection");
+  const locale = useLocale();
   const [showScrollTop, setShowScrollTop] = useState(false);
 
   useEffect(() => {
@@ -420,9 +422,27 @@ export const FooterSection = () => {
         </div>
 
         {/* BOTTOM BAR */}
-        <div className="flex flex-col lg:flex-row items-center justify-between gap-6 text-white/50 text-[13px] font-medium border-t border-white/10 pt-8">
+        <div className="flex flex-col lg:flex-row items-center justify-between gap-4 sm:gap-6 text-white/50 text-[13px] font-medium border-t border-white/10 pt-8">
           <div>
             {t("copyright", { year: new Date().getFullYear().toString() })}
+          </div>
+
+          <div className="flex items-center gap-4 sm:gap-6 text-xs sm:text-[13px]">
+            <Link
+              href={`/${locale}/terms`}
+              className="text-white/60 hover:text-white transition-colors duration-200"
+            >
+              {locale === "ar" ? "الشروط والأحكام" : "Terms & Conditions"}
+            </Link>
+
+            <span className="text-white/20 select-none">•</span>
+
+            <Link
+              href={`/${locale}/privacy-policy`}
+              className="text-white/60 hover:text-white transition-colors duration-200"
+            >
+              {locale === "ar" ? "سياسة الخصوصية" : "Privacy Policy"}
+            </Link>
           </div>
         </div>
       </div>
