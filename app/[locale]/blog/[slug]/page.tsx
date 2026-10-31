@@ -135,6 +135,14 @@ export default async function BlogPostPage({
                   {...props}
                 />
               ),
+              a: ({ node, ...props }) => (
+                <a
+                  className="text-primary underline font-medium hover:text-blue-700 transition-colors cursor-pointer"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  {...props}
+                />
+              ),
               ul: ({ node, ...props }) => (
                 <ul
                   className="list-disc list-outside space-y-2 mb-6 ms-6 text-brand-muted text-[16px]"
