@@ -64,14 +64,3 @@ button,
 .animate-marquee:hover {
   animation-play-state: paused;
 }
-
-/* Target anchor tags inside your blog wrapper */
-.blog-content a {
-  color: #0066cc; /* Change to your desired brand color */
-  text-decoration: underline; /* Adds the explicit underline */
-  font-weight: 500;
-}
-
-.blog-content a:hover {
-  color: #004499; /* Hover color */
-}
