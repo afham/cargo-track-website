@@ -40,45 +40,18 @@ export default async function WorkflowPage({
   const isAr = locale === "ar";
 
   return (
-    <main className="w-full min-h-screen bg-brand-bg relative overflow-hidden pt-24 lg:pt-28 pb-20">
+    <main className="w-full min-h-screen bg-brand-bg relative overflow-hidden pt-12 lg:pt-14 pb-10">
       {/* Background Ambience */}
       <div className="absolute inset-0 pointer-events-none" aria-hidden="true">
         <div className="absolute top-0 end-0 w-[600px] h-[600px] bg-primary/[0.03] rounded-full blur-[110px] -translate-y-1/3 translate-x-1/4 rtl:-translate-x-1/4" />
         <div className="absolute bottom-10 start-0 w-[500px] h-[500px] bg-primary/[0.02] rounded-full blur-[90px] translate-y-1/4 -translate-x-1/4 rtl:translate-x-1/4" />
       </div>
 
-      <div className="max-w-[1440px] mx-auto px-6 lg:px-12 relative z-10">
-        {/* Page Hero Header */}
-        <div className="max-w-3xl mb-10">
-          <div className="flex items-center gap-3 mb-3">
-            <span
-              className="w-8 h-[2px] bg-primary/40 rounded-full"
-              aria-hidden="true"
-            />
-            <span className="text-[12px] font-bold text-primary uppercase tracking-[0.15em]">
-              {isAr ? "منهجية العمل المتكاملة" : "Operational Standards"}
-            </span>
-          </div>
-
-          <h1 className="font-heading font-extrabold text-[32px] sm:text-[42px] lg:text-[48px] leading-[1.15] text-navy mb-4">
-            {isAr
-              ? "رحلة شحنتك خطوة بخطوة من الباب إلى الباب"
-              : "A Seamless, End-to-End Moving Experience"}
-          </h1>
-
-          <p className="text-brand-muted text-[16px] lg:text-[18px] leading-relaxed">
-            {isAr
-              ? "نعتمد نظاماً تشغيلياً دقيقاً يضمن سلامة مقتنياتك وأثاثك في كل مرحلة، مع توفير متابعة مستمرة وتنسيق جمركي مباشر."
-              : "Our structured relocation process eliminates uncertainty. We handle inspection, export packing, Saudi customs clearance, multimodal transit, and white-glove setup."}
-          </p>
-        </div>
-      </div>
-
       {/* Interactive Cargo Journey Section */}
       <CargoJourneySection />
 
       {/* Operational Assurance Cards */}
-      <section className="max-w-[1440px] mx-auto px-6 lg:px-12 mt-16">
+      <section className="max-w-[1440px] mx-auto px-6 lg:px-12 mt-8">
         <div className="text-center max-w-2xl mx-auto mb-10">
           <h2 className="font-heading font-extrabold text-2xl lg:text-3xl text-navy mb-3">
             {isAr

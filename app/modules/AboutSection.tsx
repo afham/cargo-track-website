@@ -24,9 +24,9 @@ export const AboutSection = () => {
       </div>
 
       <div className="max-w-[1440px] mx-auto px-6 lg:px-12 relative z-10">
-        <div className="flex flex-col lg:flex-row gap-16 lg:gap-24 items-center">
-          {/* Left Column - Visual Story */}
-          <div className="w-full lg:w-[54%] relative mb-6 lg:mb-0">
+        <div className="flex flex-col lg:flex-row gap-12 lg:gap-24 items-center">
+          {/* 🟢 IMAGE COLUMN: Appears 2nd on Mobile (Order 2), Left on Desktop */}
+          <div className="w-full lg:w-[54%] relative order-2 lg:order-1 mb-6 lg:mb-0">
             {/* Main Image Container */}
             <motion.div
               initial={{ opacity: 0, scale: 0.95 }}
@@ -91,143 +91,149 @@ export const AboutSection = () => {
             />
           </div>
 
-          {/* Right Column - Content */}
-          <div className="w-full lg:w-[46%] flex flex-col">
-            <motion.div
-              initial={{ opacity: 0, y: 15 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-100px" }}
-              transition={{ duration: 0.5 }}
-              className="flex items-center gap-3 mb-4"
-            >
-              <span
-                className="w-8 h-[2px] bg-primary/40 rounded-full"
-                aria-hidden="true"
-              />
-              <span className="text-[12px] font-bold text-primary uppercase tracking-[0.15em]">
-                {t("tagline")}
-              </span>
-            </motion.div>
-
-            <motion.h2
-              id="about-heading"
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-100px" }}
-              transition={{ duration: 0.6, delay: 0.1 }}
-              className="font-heading font-extrabold text-[32px] sm:text-[36px] lg:text-[42px] leading-[1.15] text-navy mb-5 lg:mb-6"
-            >
-              {t("headingPart1")} <br className="hidden lg:block" />
-              <span className="text-primary">{t("headingHighlight")}</span>
-            </motion.h2>
-
-            <motion.p
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-100px" }}
-              transition={{ duration: 0.6, delay: 0.2 }}
-              className="text-brand-muted text-[16px] lg:text-[17px] leading-relaxed max-w-[600px] mb-8 lg:mb-10"
-            >
-              {t("description")}
-            </motion.p>
-
-            <div className="grid sm:grid-cols-2 gap-4 lg:gap-5 mb-8 lg:mb-10">
-              {/* Mission Card */}
+          {/* 🔵 CONTENT COLUMN: Split into orders so Heading/Description stay on top on Mobile */}
+          <div className="w-full lg:w-[46%] flex flex-col order-1 lg:order-2">
+            {/* TOP BLOCK (Mobile Order 1): Tagline, Heading, Description */}
+            <div className="flex flex-col">
               <motion.div
-                initial={{ opacity: 0, y: 20 }}
+                initial={{ opacity: 0, y: 15 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, margin: "-100px" }}
-                transition={{ duration: 0.6, delay: 0.3 }}
-                className="bg-white rounded-[18px] p-5 lg:p-6 border border-brand-text/[0.04] shadow-[0_4px_20px_rgba(11,58,102,0.02)] hover:shadow-[0_12px_30px_rgba(11,58,102,0.06)] hover:-translate-y-1 hover:border-primary/20 transition-all duration-300 group"
+                transition={{ duration: 0.5 }}
+                className="flex items-center gap-3 mb-4"
               >
-                <div className="w-10 h-10 rounded-full bg-primary/5 flex items-center justify-center mb-4 text-primary group-hover:bg-primary group-hover:text-white transition-colors relative">
-                  <Target size={20} aria-hidden="true" />
-                  <span
-                    className="absolute top-0 end-0 w-2 h-2 rounded-full bg-accent border-2 border-white"
-                    aria-hidden="true"
-                  />
-                </div>
-                <h3 className="font-heading font-bold text-navy text-[16px] lg:text-[17px] mb-2">
-                  {t("mission.title")}
-                </h3>
-                <p className="text-brand-muted text-[13.5px] leading-relaxed">
-                  {t("mission.description")}
-                </p>
-              </motion.div>
-
-              {/* Vision Card */}
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, margin: "-100px" }}
-                transition={{ duration: 0.6, delay: 0.4 }}
-                className="bg-white rounded-[18px] p-5 lg:p-6 border border-brand-text/[0.04] shadow-[0_4px_20px_rgba(11,58,102,0.02)] hover:shadow-[0_12px_30px_rgba(11,58,102,0.06)] hover:-translate-y-1 hover:border-primary/20 transition-all duration-300 group"
-              >
-                <div className="w-10 h-10 rounded-full bg-primary/5 flex items-center justify-center mb-4 text-primary group-hover:bg-primary group-hover:text-white transition-colors relative">
-                  <Globe size={20} aria-hidden="true" />
-                  <span
-                    className="absolute top-0 end-0 w-2 h-2 rounded-full bg-accent border-2 border-white opacity-0 group-hover:opacity-100 transition-opacity"
-                    aria-hidden="true"
-                  />
-                </div>
-                <h3 className="font-heading font-bold text-navy text-[16px] lg:text-[17px] mb-2">
-                  {t("vision.title")}
-                </h3>
-                <p className="text-brand-muted text-[13.5px] leading-relaxed">
-                  {t("vision.description")}
-                </p>
-              </motion.div>
-            </div>
-
-            {/* Operational Strengths */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-100px" }}
-              transition={{ duration: 0.6, delay: 0.5 }}
-              className="mb-8 lg:mb-10"
-            >
-              <h3 className="font-heading font-bold text-navy text-[15px] lg:text-[16px] mb-4">
-                {t("strengthsTitle")}
-              </h3>
-              <ul className="grid sm:grid-cols-2 gap-y-3 gap-x-6 list-none p-0 m-0">
-                {Array.from({ length: TOTAL_STRENGTHS }).map((_, idx) => (
-                  <li key={idx} className="flex items-start gap-2.5">
-                    <div className="w-4 h-4 lg:w-5 lg:h-5 rounded-full bg-primary/10 flex items-center justify-center shrink-0 mt-[2px] lg:mt-[1px]">
-                      <Check
-                        size={12}
-                        className="text-primary"
-                        strokeWidth={3}
-                        aria-hidden="true"
-                      />
-                    </div>
-                    <span className="text-[14px] lg:text-[15px] font-sans text-brand-muted font-medium">
-                      {t(`strengths.${idx}`)}
-                    </span>
-                  </li>
-                ))}
-              </ul>
-            </motion.div>
-
-            {/* CTA */}
-            <motion.div
-              initial={{ opacity: 0, y: 15 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-100px" }}
-              transition={{ duration: 0.6, delay: 0.6 }}
-            >
-              <a
-                href="#services"
-                className="inline-flex items-center gap-2 text-primary font-semibold text-[14px] lg:text-[15px] group"
-              >
-                {t("cta")}
-                <ArrowRight
-                  size={18}
-                  className="group-hover:translate-x-1 rtl:group-hover:-translate-x-1 rtl:rotate-180 transition-transform"
+                <span
+                  className="w-8 h-[2px] bg-primary/40 rounded-full"
                   aria-hidden="true"
                 />
-              </a>
-            </motion.div>
+                <span className="text-[12px] font-bold text-primary uppercase tracking-[0.15em]">
+                  {t("tagline")}
+                </span>
+              </motion.div>
+
+              <motion.h2
+                id="about-heading"
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: "-100px" }}
+                transition={{ duration: 0.6, delay: 0.1 }}
+                className="font-heading font-extrabold text-[32px] sm:text-[36px] lg:text-[42px] leading-[1.15] text-navy mb-5 lg:mb-6"
+              >
+                {t("headingPart1")} <br className="hidden lg:block" />
+                <span className="text-primary">{t("headingHighlight")}</span>
+              </motion.h2>
+
+              <motion.p
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: "-100px" }}
+                transition={{ duration: 0.6, delay: 0.2 }}
+                className="text-brand-muted text-[16px] lg:text-[17px] leading-relaxed max-w-[600px] mb-8 lg:mb-10"
+              >
+                {t("description")}
+              </motion.p>
+            </div>
+
+            {/* BOTTOM BLOCK (Mobile Order 3): Cards, Strengths, and CTA */}
+            <div className="flex flex-col order-3 lg:order-none">
+              <div className="grid sm:grid-cols-2 gap-4 lg:gap-5 mb-8 lg:mb-10">
+                {/* Mission Card */}
+                <motion.div
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true, margin: "-100px" }}
+                  transition={{ duration: 0.6, delay: 0.3 }}
+                  className="bg-white rounded-[18px] p-5 lg:p-6 border border-brand-text/[0.04] shadow-[0_4px_20px_rgba(11,58,102,0.02)] hover:shadow-[0_12px_30px_rgba(11,58,102,0.06)] hover:-translate-y-1 hover:border-primary/20 transition-all duration-300 group"
+                >
+                  <div className="w-10 h-10 rounded-full bg-primary/5 flex items-center justify-center mb-4 text-primary group-hover:bg-primary group-hover:text-white transition-colors relative">
+                    <Target size={20} aria-hidden="true" />
+                    <span
+                      className="absolute top-0 end-0 w-2 h-2 rounded-full bg-accent border-2 border-white"
+                      aria-hidden="true"
+                    />
+                  </div>
+                  <h3 className="font-heading font-bold text-navy text-[16px] lg:text-[17px] mb-2">
+                    {t("mission.title")}
+                  </h3>
+                  <p className="text-brand-muted text-[13.5px] leading-relaxed">
+                    {t("mission.description")}
+                  </p>
+                </motion.div>
+
+                {/* Vision Card */}
+                <motion.div
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true, margin: "-100px" }}
+                  transition={{ duration: 0.6, delay: 0.4 }}
+                  className="bg-white rounded-[18px] p-5 lg:p-6 border border-brand-text/[0.04] shadow-[0_4px_20px_rgba(11,58,102,0.02)] hover:shadow-[0_12px_30px_rgba(11,58,102,0.06)] hover:-translate-y-1 hover:border-primary/20 transition-all duration-300 group"
+                >
+                  <div className="w-10 h-10 rounded-full bg-primary/5 flex items-center justify-center mb-4 text-primary group-hover:bg-primary group-hover:text-white transition-colors relative">
+                    <Globe size={20} aria-hidden="true" />
+                    <span
+                      className="absolute top-0 end-0 w-2 h-2 rounded-full bg-accent border-2 border-white opacity-0 group-hover:opacity-100 transition-opacity"
+                      aria-hidden="true"
+                    />
+                  </div>
+                  <h3 className="font-heading font-bold text-navy text-[16px] lg:text-[17px] mb-2">
+                    {t("vision.title")}
+                  </h3>
+                  <p className="text-brand-muted text-[13.5px] leading-relaxed">
+                    {t("vision.description")}
+                  </p>
+                </motion.div>
+              </div>
+
+              {/* Operational Strengths */}
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: "-100px" }}
+                transition={{ duration: 0.6, delay: 0.5 }}
+                className="mb-8 lg:mb-10"
+              >
+                <h3 className="font-heading font-bold text-navy text-[15px] lg:text-[16px] mb-4">
+                  {t("strengthsTitle")}
+                </h3>
+                <ul className="grid sm:grid-cols-2 gap-y-3 gap-x-6 list-none p-0 m-0">
+                  {Array.from({ length: TOTAL_STRENGTHS }).map((_, idx) => (
+                    <li key={idx} className="flex items-start gap-2.5">
+                      <div className="w-4 h-4 lg:w-5 lg:h-5 rounded-full bg-primary/10 flex items-center justify-center shrink-0 mt-[2px] lg:mt-[1px]">
+                        <Check
+                          size={12}
+                          className="text-primary"
+                          strokeWidth={3}
+                          aria-hidden="true"
+                        />
+                      </div>
+                      <span className="text-[14px] lg:text-[15px] font-sans text-brand-muted font-medium">
+                        {t(`strengths.${idx}`)}
+                      </span>
+                    </li>
+                  ))}
+                </ul>
+              </motion.div>
+
+              {/* CTA */}
+              <motion.div
+                initial={{ opacity: 0, y: 15 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: "-100px" }}
+                transition={{ duration: 0.6, delay: 0.6 }}
+              >
+                <a
+                  href="#services"
+                  className="inline-flex items-center gap-2 text-primary font-semibold text-[14px] lg:text-[15px] group"
+                >
+                  {t("cta")}
+                  <ArrowRight
+                    size={18}
+                    className="group-hover:translate-x-1 rtl:group-hover:-translate-x-1 rtl:rotate-180 transition-transform"
+                    aria-hidden="true"
+                  />
+                </a>
+              </motion.div>
+            </div>
           </div>
         </div>
       </div>

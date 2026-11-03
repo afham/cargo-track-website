@@ -37,7 +37,7 @@ export default async function ServicesPage({
   const isAr = locale === "ar";
 
   return (
-    <main className="w-full min-h-screen bg-brand-bg relative overflow-hidden pt-24 lg:pt-28 pb-20">
+    <main className="w-full min-h-screen bg-brand-bg relative overflow-hidden pt-10 lg:pt-12 pb-10">
       {/* Background Ambience Elements */}
       <div className="absolute inset-0 pointer-events-none" aria-hidden="true">
         <div className="absolute top-0 end-0 w-[600px] h-[600px] bg-primary/[0.03] rounded-full blur-[100px] -translate-y-1/3 translate-x-1/4 rtl:-translate-x-1/4" />
@@ -48,7 +48,7 @@ export default async function ServicesPage({
       <ServicesSection />
 
       {/* SEO Value Blocks: Why Choose Our Services */}
-      <section className="max-w-[1440px] mx-auto px-6 lg:px-12 mt-16">
+      <section className="max-w-[1440px] mx-auto px-6 lg:px-12 mt-0">
         <div className="text-center max-w-2xl mx-auto mb-10">
           <h2 className="font-heading font-extrabold text-2xl lg:text-3xl text-navy mb-3">
             {isAr

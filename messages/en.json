@@ -36,22 +36,22 @@
     },
     "slides": [
       {
-        "title": "Global Relocation Made Fast, Safe & Seamless.",
-        "headlinePart1": "Global Relocation Made",
-        "headlineHighlight": "Fast, Safe & Seamless.",
+        "title": "Packing, Moving & Relocation Made Fast, Safe & Simple.",
+        "headlinePart1": "Packing, Moving & Relocation",
+        "headlineHighlight": "Made Fast, Safe & Simple.",
         "subline": "Your trusted partner for local and corporate moves, delivering every shipment efficiently and strictly on schedule."
       },
       {
-        "title": "Shared Container Shipping To USA, EU, CA & AUS.",
-        "headlinePart1": "Shared Container Shipping",
+        "title": "Groupage Container Shipping To USA, EU, CA & AUS.",
+        "headlinePart1": "Groupage Container Shipping",
         "headlineHighlight": "To USA, EU, CA & AUS.",
         "subline": "Direct groupage service for small consignments and partial loads, offering cost-efficient routes for international moves."
       },
       {
-        "title": "End-to-End Supply Chain Optimized For Your Growth.",
-        "headlinePart1": "End-to-End Supply Chain",
-        "headlineHighlight": "Optimized For Your Growth.",
-        "subline": "Complete logistics management featuring modern warehousing, live cargo tracking, and dedicated air-sea transport lines."
+        "title": "Warehousing & Storage Solutions for Your Goods.",
+        "headlinePart1": "Warehousing & Storage",
+        "headlineHighlight": "Solutions for Your Goods.",
+        "subline": "Secure, climate-controlled storage for short or long-term needs, with inventory management and easy access to your belongings."
       },
       {
         "title": "Global Freight Forwarding & Customs Clearance.",
@@ -60,10 +60,10 @@
         "subline": "Expert air, sea, and land cargo handling with seamless brokerage clearance, preventing costly border delays worldwide."
       },
       {
-        "title": "Direct Road Freight Lines Across The UAE Region.",
-        "headlinePart1": "Direct Road Freight Lines",
-        "headlineHighlight": "Across The UAE Region.",
-        "subline": "Weekly overland transport for single packages or full house moves, backed by reliable schedules and expert handling."
+        "title": "Shared & Full Truck Road Transport Across the UAE & GCC.",
+        "headlinePart1": "Shared & Full Truck Road Transport",
+        "headlineHighlight": "Across The UAE & GCC.",
+        "subline": "Flexible road transport solutions for both partial and full truckloads, ensuring timely delivery across the region."
       }
     ]
   },
@@ -100,7 +100,7 @@
     "ariaLabel": "Trust Signals and Certifications",
     "items": [
       {
-        "title": "10+ Years",
+        "title": "35+ Years",
         "sub": "Trusted Industry Experience"
       },
       {
@@ -108,7 +108,7 @@
         "sub": "Jeddah, Riyadh & Dammam"
       },
       {
-        "title": "IAM & IATA Member",
+        "title": "FIDI & IAM Member",
         "sub": "Global Mobility Affiliations"
       },
       {
@@ -135,7 +135,7 @@
   },
   "AboutSection": {
     "badge": {
-      "experience": "10+ Years",
+      "experience": "35+ Years",
       "subtitle": "Trusted Relocation Leaders"
     },
     "alts": {
@@ -366,7 +366,7 @@
     "description": "Headquartered in Jeddah with branches in Riyadh and Dammam, CargoTrack provides end-to-end household moves, corporate relocations, industrial packing, and pilgrim baggage handling across the Middle East, Asia, Europe, Australia, Africa, and the Americas.",
     "kpiTitle": "Operational Reach & Strategic Hubs",
     "kpis": [
-      { "val": "10+", "label": "Years Experience" },
+      { "val": "35+", "label": "Years Experience" },
       { "val": "3", "label": "Saudi Hubs (HQ Jeddah)" },
       { "val": "Middle East", "label": "Core Coverage" },
       { "val": "7+", "label": "Global Affiliations" }
@@ -489,7 +489,7 @@
       "description": "Based in Jeddah with branches in Riyadh and Dammam, CargoTrack delivers trusted relocation, storage, mobility, and logistics solutions locally and internationally.",
       "fidi": "FIDI & IATA Accredited",
       "iam": "IAM & GEM Member",
-      "experience": "10+ Years Experience"
+      "experience": "35+ Years Experience"
     },
     "titles": {
       "quickLinks": "Quick Links",

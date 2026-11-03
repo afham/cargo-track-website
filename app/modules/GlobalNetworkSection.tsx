@@ -48,7 +48,7 @@ export const GlobalNetworkSection = () => {
 
       <div className="max-w-[1440px] mx-auto px-6 lg:px-12 relative z-10">
         {/* Header */}
-        <div className="flex flex-col items-center text-center max-w-[760px] mx-auto mb-16 lg:mb-24">
+        <div className="flex flex-col items-center text-center max-w-[960px] mx-auto mb-16 lg:mb-24">
           <motion.span
             initial={{ opacity: 0, y: 15 }}
             whileInView={{ opacity: 1, y: 0 }}
