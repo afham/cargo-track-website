@@ -3,6 +3,7 @@
 import { ArrowRight } from "lucide-react";
 import { useEffect, useState, memo } from "react";
 import { useTranslations } from "next-intl";
+import { GoogleReviewCard } from "@/app/components/GoogleReviewCard";
 
 const TOTAL_SLIDES = 5;
 
@@ -126,7 +127,7 @@ export const HeroTextSlider = memo(() => {
         <div className="flex flex-col sm:flex-row gap-4 lg:gap-5">
           <a
             href="/request-a-quote"
-            className=" group flex items-center justify-center gap-2 bg-primary text-white px-8 py-4 rounded-xl font-semibold text-[15px] transition-all duration-300 shadow-[0_8px_25px_rgba(21,101,192,0.4)]"
+            className=" group flex flex-grow items-center justify-center gap-2 bg-primary text-white px-8 py-4 rounded-xl font-semibold text-[15px] transition-all duration-300 shadow-[0_8px_25px_rgba(21,101,192,0.4)]"
           >
             {t("buttons.getQuote")}
             <ArrowRight
@@ -137,7 +138,7 @@ export const HeroTextSlider = memo(() => {
 
           <a
             href="/services"
-            className="group flex items-center justify-center gap-2 bg-primary text-white px-8 py-4 rounded-xl font-semibold text-[15px] transition-all duration-300 shadow-[0_8px_25px_rgba(21,101,192,0.4)] hover:-translate-y-0.5"
+            className="group flex flex-grow items-center justify-center gap-2 bg-primary text-white px-8 py-4 rounded-xl font-semibold text-[15px] transition-all duration-300 shadow-[0_8px_25px_rgba(21,101,192,0.4)] hover:-translate-y-0.5"
           >
             {t("buttons.exploreServices")}
             <ArrowRight
@@ -148,7 +149,7 @@ export const HeroTextSlider = memo(() => {
 
           <a
             href="/contact-us"
-            className="group flex items-center justify-center gap-2 backdrop-blur-md bg-white/10 text-white border border-white/20 px-8 py-4 rounded-xl font-semibold text-[15px] transition-all duration-300 hover:border-white/50 hover:bg-white/20 hover:-translate-y-0.5"
+            className="group flex flex-grow items-center justify-center gap-2 backdrop-blur-md bg-white/10 text-white border border-white/20 px-8 py-4 rounded-xl font-semibold text-[15px] transition-all duration-300 hover:border-white/50 hover:bg-white/20 hover:-translate-y-0.5"
           >
             {t("buttons.contactUs")}
             <ArrowRight
@@ -156,6 +157,12 @@ export const HeroTextSlider = memo(() => {
               className="group-hover:translate-x-1 rtl:group-hover:-translate-x-1 rtl:rotate-180 transition-transform opacity-80"
             />
           </a>
+        </div>
+        <div className="flex w-full justify-center">
+          <GoogleReviewCard
+            reviewUrl="https://search.google.com/local/reviews?placeid=ChIJAVlmYZIFLz4R-9YA16zxkmc"
+            isAr={false}
+          />
         </div>
       </div>
     </div>
