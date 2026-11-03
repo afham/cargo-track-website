@@ -37,28 +37,7 @@ export default async function AboutPage({
   const isAr = locale === "ar";
 
   return (
-    <main className="w-full min-h-screen bg-brand-bg relative overflow-hidden pt-24 lg:pt-28 pb-16">
-      {/* Hero / Page Headline */}
-      <section className="max-w-[1440px] mx-auto px-6 lg:px-12 mb-4">
-        <div className="max-w-3xl">
-          <div className="flex items-center gap-3 mb-3">
-            <span
-              className="w-8 h-[2px] bg-primary/40 rounded-full"
-              aria-hidden="true"
-            />
-            <span className="text-[12px] font-bold text-primary uppercase tracking-[0.15em]">
-              {isAr ? "من نحن" : "Company Profile"}
-            </span>
-          </div>
-
-          <h1 className="font-heading font-extrabold text-[32px] sm:text-[42px] lg:text-[48px] leading-[1.15] text-navy mb-4">
-            {isAr
-              ? "شريكك الموثوق للنقل والشحن حول العالم"
-              : "Connecting Riyadh to the World with Integrity & Care"}
-          </h1>
-        </div>
-      </section>
-
+    <main className="w-full min-h-screen bg-brand-bg relative overflow-hidden pt-8 lg:pt-12 pb-4">
       {/* Your Existing AboutSection Visual Component */}
       <AboutSection />
 

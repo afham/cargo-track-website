@@ -46,33 +46,6 @@ export default async function GalleryPage({
         <div className="absolute bottom-10 start-0 w-[500px] h-[500px] bg-primary/[0.02] rounded-full blur-[90px] translate-y-1/4 -translate-x-1/4 rtl:translate-x-1/4" />
       </div>
 
-      <div className="max-w-[1440px] mx-auto px-6 lg:px-12 relative z-10">
-        {/* Page Hero Header */}
-        <div className="max-w-3xl mb-12">
-          <div className="flex items-center gap-3 mb-3">
-            <span
-              className="w-8 h-[2px] bg-primary/40 rounded-full"
-              aria-hidden="true"
-            />
-            <span className="text-[12px] font-bold text-primary uppercase tracking-[0.15em]">
-              {isAr ? "معرض أعمالنا الميدانية" : "Operations in Action"}
-            </span>
-          </div>
-
-          <h1 className="font-heading font-extrabold text-[32px] sm:text-[42px] lg:text-[48px] leading-[1.15] text-navy mb-4">
-            {isAr
-              ? "شاهد جودة التغليف والتنفيذ بأعين خبرائنا"
-              : "Real Operations, Uncompromising Packing Standards"}
-          </h1>
-
-          <p className="text-brand-muted text-[16px] lg:text-[18px] leading-relaxed">
-            {isAr
-              ? "نلتقط صوراً حقيقية من مواقع العمل في الرياض وجدة والدمام توثق الصناديق الخشبية المصممة خصيصاً، تغليف الأثاث الحساس، وتحميل الحاويات البحرية والجوية."
-              : "Explore genuine behind-the-scenes documentation of our field specialists: multi-layered furniture protection, heavy-duty wooden crating, and seaport container dispatch."}
-          </p>
-        </div>
-      </div>
-
       {/* Interactive Gallery Component */}
       <GallerySection />
 
