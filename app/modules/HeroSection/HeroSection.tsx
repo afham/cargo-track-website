@@ -6,7 +6,7 @@ export const HeroSection = () => {
   return (
     <section
       id="home"
-      className="relative w-full min-h-[100dvh] lg:min-h-[880px] lg:h-[85vh] flex flex-col justify-between lg:justify-center overflow-hidden"
+      className="relative w-full min-h-[100dvh] lg:h-[100vh] flex flex-col justify-between lg:justify-center overflow-hidden"
     >
       <div className="relative lg:absolute lg:inset-0 w-full min-h-[100vh] lg:min-h-full flex items-center pt-24 lg:pt-0 px-6 lg:px-12 z-0">
         <div className="absolute inset-0 w-full h-full z-0">
@@ -32,12 +32,7 @@ export const HeroSection = () => {
             backgroundSize: "30px 30px",
           }}
         />
-        <div className="absolute top-20 sm:top-24 left-1/2 -translate-x-1/2  z-10 scale-75 sm:scale-100">
-          <GoogleReviewCard
-            reviewUrl="https://search.google.com/local/reviews?placeid=ChIJAVlmYZIFLz4R-9YA16zxkmc"
-            isAr={false}
-          />
-        </div>
+
         {/* Hero Text Slider displays inside the video on mobile */}
         <div className="relative z-10 max-w-[1440px] mx-auto w-full block lg:hidden my-auto">
           <HeroTextSlider />

@@ -40,7 +40,7 @@ export const TrustStrip = memo(() => {
   return (
     <section
       aria-label={t("ariaLabel")}
-      className="relative z-20 max-w-[1440px] mx-auto px-6 lg:px-12 -mt-16 lg:-mt-24 mb-2"
+      className="relative z-20 max-w-[1440px] mx-auto px-6 lg:px-12 -mt-16 lg:-mt-16 mb-2"
     >
       <ul className="bg-white rounded-[24px] lg:rounded-[28px] shadow-[0_20px_40px_rgba(11,58,102,0.06)] border border-brand-bg/50 p-6 lg:p-8 flex flex-col lg:flex-row items-start lg:items-center justify-between gap-8 lg:gap-4 list-none m-0">
         {TRUST_CONFIGS.map((config, i) => {

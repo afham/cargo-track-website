@@ -14,7 +14,7 @@ export const GoogleReviewCard = ({
       href={reviewUrl}
       target="_blank"
       rel="noopener noreferrer"
-      className="block w-full max-w-[420px] bg-white/95 hover:bg-white border border-slate-200/80 hover:border-primary/30 px-3.5 py-2 rounded-2xl shadow-[0_4px_20px_rgba(11,58,102,0.06)] hover:shadow-[0_8px_25px_rgba(11,58,102,0.12)] hover:-translate-y-0.5 transition-all duration-300 group"
+      className="block w-full max-w-[17rem] px-3.5 py-2 rounded-2xl  backdrop-blur-md bg-white/10 text-white border border-white/20  font-semibold text-[15px] transition-all duration-300 hover:border-white/50 hover:bg-white/20 hover:-translate-y-0.5 transition-all duration-300 group"
     >
       <div className="flex items-center justify-between gap-4">
         {/* Left Side: Google Logo & Rating Text */}
@@ -46,7 +46,7 @@ export const GoogleReviewCard = ({
           </div>
 
           <div>
-            <h4 className="font-heading font-bold text-navy text-[12px] leading-tight">
+            <h4 className="font-heading font-bold text-white text-[12px] leading-tight">
               {isAr ? "تقييمات العملاء على جوجل" : "Google Rating"}
             </h4>
             <div className="flex items-center gap-1.5 mt-0.5">
@@ -69,7 +69,7 @@ export const GoogleReviewCard = ({
 
         {/* Right Side: Total Reviews & Action Arrow */}
         <div className="text-end">
-          <span className="block text-[11px] whitespace-pre text-slate-500 font-medium">
+          <span className="block text-[11px] whitespace-pre text-gray-100 font-medium">
             270+ {isAr ? "تقييم" : "Reviews"}
           </span>
           <span className="inline-flex items-center gap-1 text-[11px] text-primary font-bold group-hover:underline">
