@@ -27,11 +27,11 @@ export const FidiAffiliationsCard = ({
             height={32}
           />
 
-          <div>
+          <div className="">
             <h4 className="font-heading font-bold text-white text-[12px] leading-tight">
               {isAr ? "معتمد من الاتحاد الدولي" : "FIDI Affiliated"}
             </h4>
-            <div className="flex items-center gap-1.5 mt-0.5 text-[8px] text-gray-200 font-medium whitespace-pre">
+            <div className="items-center gap-1.5 mt-0.5 text-[8px] text-gray-200 font-medium hidden min-[360px]:flex ">
               {isAr ? "أعلى معايير الجودة العالمية" : "Global Quality Standard"}
             </div>
           </div>
