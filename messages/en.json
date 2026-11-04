@@ -11,6 +11,7 @@
       "services": "Services",
       "workflow": "Workflow",
       "network": "Network",
+      "reviews": "Reviews",
       "gallery": "Gallery",
       "contact": "Contact"
     },
@@ -437,8 +438,8 @@
     ]
   },
   "TestimonialsSection": {
-    "badge": "Relocation Experience",
-    "headingPart1": "What Our Relocation",
+    "badge": "Reviews And Testimonials",
+    "headingPart1": "What Our",
     "headingHighlight": "Customers Say About Us.",
     "description": "Real feedback from families, professionals, and businesses who relied on our packing, moving, and hassle-free relocation services.",
     "navigation": {

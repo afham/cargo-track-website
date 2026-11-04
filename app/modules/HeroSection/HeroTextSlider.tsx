@@ -2,7 +2,7 @@
 
 import { ArrowRight } from "lucide-react";
 import { useEffect, useState, memo } from "react";
-import { useTranslations } from "next-intl";
+import { useTranslations, useLocale } from "next-intl";
 import { GoogleReviewCard } from "@/app/components/GoogleReviewCard";
 import Image from "next/image";
 import { FidiAffiliationsCard } from "@/app/components/FidiAffiliationsCard";
@@ -11,6 +11,10 @@ const TOTAL_SLIDES = 5;
 
 export const HeroTextSlider = memo(() => {
   const t = useTranslations("HeroSlider");
+  const locale = useLocale();
+  const isAr = locale === "ar";
+
+  console.log(locale, isAr, "locale");
   const [activeSlide, setActiveSlide] = useState(0);
   const [isFading, setIsFading] = useState(false);
 
@@ -160,14 +164,14 @@ export const HeroTextSlider = memo(() => {
             />
           </a>
         </div>
-        <div className="flex w-full justify-center gap-4">
+        <div className="flex w-full justify-center gap-4 ">
           <GoogleReviewCard
             reviewUrl="https://share.google/YwXo78vg3b4wYjBGE"
-            isAr={false}
+            isAr={isAr}
           />
           <FidiAffiliationsCard
             reviewUrl="https://www.fidi.org/find-fidi-affiliate/cargo-track-relocations"
-            isAr={false}
+            isAr={isAr}
           />
         </div>
       </div>

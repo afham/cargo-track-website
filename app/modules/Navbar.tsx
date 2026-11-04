@@ -22,6 +22,7 @@ const NAV_KEYS: NavItem[] = [
   { key: "workflow", id: "workflow" },
   { key: "network", id: "network" },
   { key: "gallery", id: "gallery" },
+  { key: "reviews", id: "reviews" },
   { key: "contact", id: "contact" },
 ];
 
@@ -169,6 +170,7 @@ export const Navbar = () => {
           (isHomePage && activeSection === "workflow"),
       };
     }
+
     if (item.key === "gallery") {
       return {
         href: `/${locale}/gallery`,
@@ -176,6 +178,15 @@ export const Navbar = () => {
         isActive:
           pathname.startsWith(`/${locale}/gallery`) ||
           (isHomePage && activeSection === "gallery"),
+      };
+    }
+    if (item.key === "reviews") {
+      return {
+        href: `/${locale}/reviews`,
+        isLink: true,
+        isActive:
+          pathname.startsWith(`/${locale}/reviews`) ||
+          (isHomePage && activeSection === "reviews"),
       };
     }
     return {
@@ -197,7 +208,7 @@ export const Navbar = () => {
         {/* Logo */}
         <Link
           href={`/${locale}`}
-          className="flex items-center gap-2 shrink-0 scale-125 translate-x-3 rtl:-translate-x-3"
+          className="flex items-center gap-2 shrink-0 scale-125 translate-x-3 rtl:-translate-x-3 "
           aria-label={t("aria.home")}
         >
           <Image
@@ -215,7 +226,7 @@ export const Navbar = () => {
         </Link>
 
         {/* Desktop Navigation Links */}
-        <div className="hidden xl:flex items-center gap-6 absolute left-1/2 -translate-x-1/2">
+        <div className="hidden xl:flex items-center gap-6 absolute left-1/2 -translate-x-[calc(50%+35px)]">
           {NAV_KEYS.map((item) => {
             const { href, isActive, isLink } = getNavProps(item);
             const className = `font-sans text-sm font-semibold relative py-1 transition-colors duration-300 whitespace-nowrap ${
@@ -334,7 +345,7 @@ export const Navbar = () => {
         </div>
 
         {/* Mobile / Tablet Header Actions */}
-        <div className="flex xl:hidden items-center gap-1.5 sm:gap-2">
+        <div className="flex xl:hidden items-center gap-1.5 sm:gap-2 scale-80 min-[360px]:scale-100">
           <LanguageSwitcher scrolled={isSolid} />
 
           <a

@@ -68,11 +68,11 @@ export const GoogleReviewCard = ({
         {/* Right Side: Total Reviews & Action Arrow */}
         <div className="text-end hidden sm:block">
           <span className="block text-[11px] whitespace-pre text-gray-100 font-medium">
-            270+ {isAr ? "تقييم" : "Reviews"}
+            540+ {isAr ? "تقييم" : "Reviews"}
           </span>
-          {/* <span className="inline-flex items-center gap-1 text-[11px] text-primary font-bold group-hover:underline">
-            {isAr ? "اقرأ الكل" : "View"}
-          </span> */}
+          <span className="inline-flex items-center gap-1 text-[11px] text-primary font-bold ">
+            {isAr ? "اقرأ الكل" : "Jeddah | Riyadh"}
+          </span>
         </div>
       </div>
     </a>
