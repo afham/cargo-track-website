@@ -4,6 +4,8 @@ import { ArrowRight } from "lucide-react";
 import { useEffect, useState, memo } from "react";
 import { useTranslations } from "next-intl";
 import { GoogleReviewCard } from "@/app/components/GoogleReviewCard";
+import Image from "next/image";
+import { FidiAffiliationsCard } from "@/app/components/FidiAffiliationsCard";
 
 const TOTAL_SLIDES = 5;
 
@@ -138,7 +140,7 @@ export const HeroTextSlider = memo(() => {
 
           <a
             href="/services"
-            className="group flex flex-grow items-center justify-center gap-2 bg-primary text-white px-8 py-4 rounded-xl font-semibold text-[15px] transition-all duration-300 shadow-[0_8px_25px_rgba(21,101,192,0.4)] hover:-translate-y-0.5"
+            className="group flex flex-grow items-center justify-center gap-2 backdrop-blur-md bg-white/10 text-white border border-white/20 px-8 py-4 rounded-xl font-semibold text-[15px] transition-all duration-300 hover:border-white/50 hover:bg-white/20 hover:-translate-y-0.5"
           >
             {t("buttons.exploreServices")}
             <ArrowRight
@@ -158,9 +160,13 @@ export const HeroTextSlider = memo(() => {
             />
           </a>
         </div>
-        <div className="flex w-full justify-center">
+        <div className="flex w-full justify-center gap-4">
           <GoogleReviewCard
-            reviewUrl="https://search.google.com/local/reviews?placeid=ChIJAVlmYZIFLz4R-9YA16zxkmc"
+            reviewUrl="https://share.google/YwXo78vg3b4wYjBGE"
+            isAr={false}
+          />
+          <FidiAffiliationsCard
+            reviewUrl="https://www.fidi.org/find-fidi-affiliate/cargo-track-relocations"
             isAr={false}
           />
         </div>
