@@ -6,9 +6,9 @@ export const HeroSection = () => {
   return (
     <section
       id="home"
-      className="relative w-full min-h-[100dvh] lg:h-[100vh] flex flex-col justify-between lg:justify-center overflow-hidden"
+      className="relative w-full min-h-[100dvh] lg:h-[100dvh] flex flex-col justify-between lg:justify-center overflow-hidden"
     >
-      <div className="relative lg:absolute lg:inset-0 w-full min-h-[100vh] lg:min-h-full flex items-center pt-24 lg:pt-0 px-6 lg:px-12 z-0">
+      <div className="relative lg:absolute lg:inset-0 w-full min-h-[100dvh] lg:min-h-full flex items-center pt-16 lg:pt-0 px-6 lg:px-12 z-0">
         <div className="absolute inset-0 w-full h-full z-0">
           <video
             poster="/assets/banner-first-frame.webp"
