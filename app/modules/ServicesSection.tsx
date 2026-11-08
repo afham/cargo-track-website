@@ -110,7 +110,7 @@ export const ServicesSection = () => {
             const title = t(`services.${index}.title`);
             const description = t(`services.${index}.description`);
             const serviceItem = SERVICE_ITEMS[index];
-            const imageSrc = serviceItem?.image || "/assets/photos4.webp";
+            const imageSrc = serviceItem?.image || "/assets/photos2.webp";
             const serviceHref = `/${locale}/services/${serviceItem?.slug || ""}`;
 
             if (isDarkOverlayCard) {

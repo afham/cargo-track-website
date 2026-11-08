@@ -3,7 +3,7 @@ export const SERVICE_ITEMS = [
   {
     slug: "household-goods-relocation",
     index: 0,
-    image: "/assets/photos4.webp",
+    image: "/assets/photos2.webp",
   },
   {
     slug: "vehicle-relocation-and-transportation",
@@ -12,7 +12,7 @@ export const SERVICE_ITEMS = [
   },
   { slug: "transportation", index: 2, image: "/assets/photos6.webp" },
   { slug: "artwork-moving", index: 3, image: "/assets/photos18.webp" },
-  { slug: "pet-relocation", index: 4, image: "/assets/photos4.webp" },
+  { slug: "pet-relocation", index: 4, image: "/assets/photos2.webp" },
   { slug: "storage-services", index: 5, image: "/assets/photos17.webp" },
   { slug: "industrial-packing", index: 6, image: "/assets/photos6.webp" },
   {

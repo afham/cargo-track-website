@@ -1,64 +1,117 @@
 "use client";
 
 import { AnimatePresence, motion } from "framer-motion";
-import { ChevronLeft, ChevronRight, Expand, X } from "lucide-react";
-import { useState, useEffect, useCallback, useMemo } from "react";
+import { ChevronLeft, ChevronRight, Expand, Play, X } from "lucide-react";
+import { useState, useEffect, useCallback, useMemo, useRef } from "react";
 import Image from "next/image";
 import { useTranslations } from "next-intl";
 
 export interface GalleryItemConfig {
   src: string;
+  type: "image" | "video";
 }
 
-const DEFAULT_IMAGE_SRCS: GalleryItemConfig[] = [
-  { src: "/assets/photos1.webp" },
-  { src: "/assets/photos2.webp" },
-  { src: "/assets/photos3.webp" },
-  { src: "/assets/photos4.webp" },
-  { src: "/assets/photos5.webp" },
-  { src: "/assets/photos6.webp" },
-  { src: "/assets/photos7.webp" },
-  { src: "/assets/photos8.webp" },
-  { src: "/assets/photos9.webp" },
-  { src: "/assets/photos10.webp" },
-  { src: "/assets/photos11.webp" },
-  { src: "/assets/photos12.webp" },
-  { src: "/assets/photos13.webp" },
-  { src: "/assets/photos14.webp" },
-  { src: "/assets/photos15.webp" },
-  { src: "/assets/photos17.webp" },
-  { src: "/assets/photos18.webp" },
-  { src: "/assets/photos19.webp" },
-  { src: "/assets/photos20.webp" },
-  { src: "/assets/photos21.webp" },
+const DEFAULT_GALLERY_ITEMS: GalleryItemConfig[] = [
+  { src: "/assets/photos1.webp", type: "image" },
+  { src: "/assets/photos2.webp", type: "image" },
+  { src: "/assets/photos3.webp", type: "image" },
+  { src: "/assets/photos4.webp", type: "image" },
+  { src: "/assets/photos5.webp", type: "image" },
+  { src: "/assets/photos6.webp", type: "image" },
+  { src: "/assets/photos7.webp", type: "image" },
+  { src: "/assets/photos8.webp", type: "image" },
+  { src: "/assets/photos9.webp", type: "image" },
+  { src: "/assets/photos10.webp", type: "image" },
+  { src: "/assets/photos11.webp", type: "image" },
+  { src: "/assets/photos12.webp", type: "image" },
+  { src: "/assets/photos13.webp", type: "image" },
+  { src: "/assets/photos14.webp", type: "image" },
+  { src: "/assets/photos15.webp", type: "image" },
+  { src: "/assets/photos16.webp", type: "image" },
+  { src: "/assets/photos17.webp", type: "image" },
+  { src: "/assets/photos18.webp", type: "image" },
+  { src: "/assets/photos19.webp", type: "image" },
+  { src: "/assets/photos20.webp", type: "image" },
+  { src: "/assets/photos21.webp", type: "image" },
+  { src: "/assets/photos22.webp", type: "image" },
+  { src: "/assets/photos23.webp", type: "image" },
+  { src: "/assets/photos24.webp", type: "image" },
+  { src: "/assets/photos25.webp", type: "image" },
+  { src: "/assets/photos26.webp", type: "image" },
+  { src: "/assets/photos27.webp", type: "image" },
+  { src: "/assets/photos28.webp", type: "image" },
+  { src: "/assets/photos29.webp", type: "image" },
+  { src: "/assets/photos30.webp", type: "image" },
+  { src: "/assets/photos31.webp", type: "image" },
+  { src: "/assets/photos32.webp", type: "image" },
+  { src: "/assets/photos33.webp", type: "image" },
+  { src: "/assets/photos34.webp", type: "image" },
+  { src: "/assets/photos35.webp", type: "image" },
+  { src: "/assets/photos36.webp", type: "image" },
+  { src: "/assets/photos37.webp", type: "image" },
+  { src: "/assets/photos38.webp", type: "image" },
+  { src: "/assets/photos39.webp", type: "image" },
+  { src: "/assets/photos40.webp", type: "image" },
+  { src: "/assets/photos41.webp", type: "image" },
+  { src: "/assets/photos43.webp", type: "image" },
+  { src: "/assets/photos44.webp", type: "image" },
+  { src: "/assets/photos45.webp", type: "image" },
+  { src: "/assets/photos46.webp", type: "image" },
+  { src: "/assets/photos47.webp", type: "image" },
+  { src: "/assets/photos48.webp", type: "image" },
+  { src: "/assets/photos49.webp", type: "image" },
+  { src: "/assets/photos50.webp", type: "image" },
+  { src: "/assets/videos1.mp4", type: "video" },
+  { src: "/assets/videos3.mp4", type: "video" },
+  { src: "/assets/videos4.mp4", type: "video" },
+  { src: "/assets/videos5.mp4", type: "video" },
 ];
-
 export const GallerySection = () => {
   const t = useTranslations("GallerySection");
   const [selectedIndex, setSelectedIndex] = useState<number | null>(null);
+  const videoRef = useRef<HTMLVideoElement>(null);
 
-  const images = useMemo(
+  const items = useMemo(
     () =>
-      DEFAULT_IMAGE_SRCS.map((item, idx) => ({
-        src: item.src,
-        alt: t(`images.${idx}.alt`),
-      })),
+      DEFAULT_GALLERY_ITEMS.map((item, idx) => {
+        const altText = `Gallery item ${idx + 1}`;
+
+        return {
+          src: item.src,
+          type: item.type,
+          alt: altText,
+        };
+      }),
     [t],
   );
 
-  const carouselImages = useMemo(() => [...images, ...images], [images]);
+  // Triple the array for seamless infinite looping
+  const carouselItems = useMemo(() => [...items, ...items, ...items], [items]);
 
   const handleNext = useCallback(() => {
     if (selectedIndex !== null) {
-      setSelectedIndex((selectedIndex + 1) % images.length);
+      setSelectedIndex((selectedIndex + 1) % items.length);
     }
-  }, [selectedIndex, images.length]);
+  }, [selectedIndex, items.length]);
 
   const handlePrev = useCallback(() => {
     if (selectedIndex !== null) {
-      setSelectedIndex((selectedIndex - 1 + images.length) % images.length);
+      setSelectedIndex((selectedIndex - 1 + items.length) % items.length);
     }
-  }, [selectedIndex, images.length]);
+  }, [selectedIndex, items.length]);
+
+  // Programmatically trigger video play in modal if type is video
+  useEffect(() => {
+    if (
+      selectedIndex !== null &&
+      items[selectedIndex]?.type === "video" &&
+      videoRef.current
+    ) {
+      videoRef.current.play().catch(() => {
+        // Autoplay policy fallback handle
+      });
+    }
+  }, [selectedIndex, items]);
 
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
@@ -115,24 +168,25 @@ export const GallerySection = () => {
         </motion.p>
       </div>
 
-      {/* Auto-moving Infinite Carousel Track (dir="ltr" isolates animation axis across locales) */}
+      {/* Auto-moving Infinite Carousel Track with Horizontal Scroll Enabled */}
       <div
         dir="ltr"
-        className="w-full overflow-hidden flex [mask-image:linear-gradient(to_right,transparent,white_10%,white_90%,transparent)]"
+        className="w-full overflow-x-auto flex [mask-image:linear-gradient(to_right,transparent,white_10%,white_90%,transparent)] no-scrollbar"
+        style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}
       >
         <motion.div
-          className="flex gap-4 sm:gap-6 shrink-0 py-4"
-          animate={{ x: ["0%", "-50%"] }}
+          className="flex gap-4 sm:gap-6 shrink-0 py-4 cursor-grab active:cursor-grabbing"
+          animate={{ x: ["0%", "-33.333%"] }}
           transition={{
             ease: "linear",
-            duration: Math.max(images.length * 6, 24),
+            duration: 120, // Slower sliding speed
             repeat: Infinity,
           }}
           whileHover={{ animationPlayState: "paused" }}
           style={{ willChange: "transform" }}
         >
-          {carouselImages.map((item, index) => {
-            const actualIndex = index % images.length;
+          {carouselItems.map((item, index) => {
+            const actualIndex = index % items.length;
 
             return (
               <button
@@ -142,18 +196,36 @@ export const GallerySection = () => {
                 aria-label={`${t("modal.viewEnlarged")} ${item.alt}`}
                 className="group relative w-60 sm:w-72 lg:w-80 aspect-square rounded-2xl overflow-hidden bg-slate-900 border border-white/10 cursor-pointer shrink-0 text-start focus:outline-none focus:ring-2 focus:ring-primary"
               >
-                <Image
-                  src={item.src}
-                  alt={item.alt}
-                  fill
-                  sizes="(max-width: 640px) 240px, (max-width: 1024px) 288px, 320px"
-                  loading={index < 4 ? "eager" : "lazy"}
-                  className="object-cover group-hover:scale-105 transition-transform duration-500 ease-out"
-                />
+                {item.type === "image" ? (
+                  <Image
+                    src={item.src}
+                    alt={item.alt}
+                    fill
+                    sizes="(max-width: 640px) 240px, (max-width: 1024px) 288px, 320px"
+                    loading={index < 4 ? "eager" : "lazy"}
+                    className="object-cover group-hover:scale-105 transition-transform duration-500 ease-out"
+                  />
+                ) : (
+                  <div className="relative w-full h-full bg-slate-950 flex items-center justify-center">
+                    <video
+                      src={item.src}
+                      muted
+                      playsInline
+                      loop
+                      autoPlay
+                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 ease-out"
+                    />
+                    <div className="absolute inset-0 bg-black/20" />
+                  </div>
+                )}
 
                 <div className="absolute inset-0 bg-slate-950/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
                   <div className="p-3 rounded-full bg-slate-900/80 text-white backdrop-blur-md border border-white/20 transform scale-90 group-hover:scale-100 transition-transform duration-300">
-                    <Expand size={18} />
+                    {item.type === "video" ? (
+                      <Play size={18} />
+                    ) : (
+                      <Expand size={18} />
+                    )}
                   </div>
                 </div>
               </button>
@@ -164,7 +236,7 @@ export const GallerySection = () => {
 
       {/* Fullscreen Lightbox Modal */}
       <AnimatePresence>
-        {selectedIndex !== null && images[selectedIndex] && (
+        {selectedIndex !== null && items[selectedIndex] && (
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
@@ -198,20 +270,31 @@ export const GallerySection = () => {
               <ChevronLeft size={24} className="rtl:rotate-180" />
             </button>
 
-            {/* Main Preview Image */}
+            {/* Main Preview Container */}
             <div
-              className="relative max-w-6xl w-full h-[80vh] overflow-hidden rounded-2xl"
+              className="relative max-w-6xl w-full h-[80vh] overflow-hidden rounded-2xl flex items-center justify-center"
               onClick={(e) => e.stopPropagation()}
             >
-              <Image
-                src={images[selectedIndex].src}
-                alt={images[selectedIndex].alt}
-                fill
-                sizes="100vw"
-                quality={90}
-                priority
-                className="object-contain"
-              />
+              {items[selectedIndex].type === "image" ? (
+                <Image
+                  src={items[selectedIndex].src}
+                  alt={items[selectedIndex].alt}
+                  fill
+                  sizes="100vw"
+                  quality={90}
+                  priority
+                  className="object-contain"
+                />
+              ) : (
+                <video
+                  ref={videoRef}
+                  src={items[selectedIndex].src}
+                  controls
+                  autoPlay
+                  playsInline
+                  className="max-w-full max-h-[80vh] object-contain rounded-xl"
+                />
+              )}
             </div>
 
             {/* Navigation Next */}
@@ -227,9 +310,9 @@ export const GallerySection = () => {
               <ChevronRight size={24} className="rtl:rotate-180" />
             </button>
 
-            {/* Image Counter Badge */}
+            {/* Item Counter Badge */}
             <div className="absolute bottom-6 left-1/2 -translate-x-1/2 text-xs font-semibold text-slate-400 bg-slate-900/80 border border-white/10 px-4 py-1.5 rounded-full backdrop-blur-md">
-              {selectedIndex + 1} / {images.length}
+              {selectedIndex + 1} / {items.length}
             </div>
           </motion.div>
         )}
