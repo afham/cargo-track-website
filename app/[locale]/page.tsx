@@ -39,7 +39,7 @@ export default function Home() {
       <CargoJourneySection />
       <WhyChooseSection />
       <GlobalNetworkSection />
-      <GallerySection />
+      <GallerySection limit={20} />
       <TestimonialsSection />
       <FooterSection />
     </main>
