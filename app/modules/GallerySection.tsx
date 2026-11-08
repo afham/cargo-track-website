@@ -27,7 +27,6 @@ const DEFAULT_GALLERY_ITEMS: GalleryItemConfig[] = [
   { src: "/assets/photos13.webp", type: "image" },
   { src: "/assets/photos14.webp", type: "image" },
   { src: "/assets/photos15.webp", type: "image" },
-  { src: "/assets/photos16.webp", type: "image" },
   { src: "/assets/photos17.webp", type: "image" },
   { src: "/assets/photos18.webp", type: "image" },
   { src: "/assets/photos19.webp", type: "image" },
