@@ -65,39 +65,55 @@ const DEFAULT_GALLERY_ITEMS: GalleryItemConfig[] = [
   { src: "/assets/videos4.mp4", type: "video" },
   { src: "/assets/videos5.mp4", type: "video" },
 ];
-export const GallerySection = () => {
+
+interface GallerySectionProps {
+  limit?: number;
+}
+
+export const GallerySection = ({ limit }: GallerySectionProps) => {
   const t = useTranslations("GallerySection");
   const [selectedIndex, setSelectedIndex] = useState<number | null>(null);
   const videoRef = useRef<HTMLVideoElement>(null);
+  const scrollContainerRef = useRef<HTMLDivElement>(null);
 
-  const items = useMemo(
-    () =>
-      DEFAULT_GALLERY_ITEMS.map((item, idx) => {
-        const altText = `Gallery item ${idx + 1}`;
+  const items = useMemo(() => {
+    const sourceItems = limit
+      ? DEFAULT_GALLERY_ITEMS.slice(0, limit)
+      : DEFAULT_GALLERY_ITEMS;
 
-        return {
-          src: item.src,
-          type: item.type,
-          alt: altText,
-        };
-      }),
-    [t],
-  );
-
-  // Triple the array for seamless infinite looping
-  const carouselItems = useMemo(() => [...items, ...items, ...items], [items]);
+    return sourceItems.map((item, idx) => {
+      const altText = `Gallery item ${idx + 1}`;
+      return {
+        src: item.src,
+        type: item.type,
+        alt: altText,
+      };
+    });
+  }, [limit, t]);
 
   const handleNext = useCallback(() => {
     if (selectedIndex !== null) {
-      setSelectedIndex((selectedIndex + 1) % items.length);
+      setSelectedIndex((prev) =>
+        prev !== null && prev < items.length - 1 ? prev + 1 : prev,
+      );
     }
-  }, [selectedIndex, items.length]);
+  }, [items.length]);
 
   const handlePrev = useCallback(() => {
     if (selectedIndex !== null) {
-      setSelectedIndex((selectedIndex - 1 + items.length) % items.length);
+      setSelectedIndex((prev) => (prev !== null && prev > 0 ? prev - 1 : prev));
     }
-  }, [selectedIndex, items.length]);
+  }, []);
+
+  // Performance-optimized manual scrolling handler using native scroll behavior
+  const scrollByAmount = useCallback((direction: "left" | "right") => {
+    if (!scrollContainerRef.current) return;
+    const scrollAmount = 340; // Roughly the width of one card + gap
+    scrollContainerRef.current.scrollBy({
+      left: direction === "left" ? -scrollAmount : scrollAmount,
+      behavior: "smooth",
+    });
+  }, []);
 
   // Programmatically trigger video play in modal if type is video
   useEffect(() => {
@@ -167,70 +183,81 @@ export const GallerySection = () => {
         </motion.p>
       </div>
 
-      {/* Auto-moving Infinite Carousel Track with Horizontal Scroll Enabled */}
+      {/* Scrollable Gallery Track with hardware acceleration optimization */}
       <div
+        ref={scrollContainerRef}
         dir="ltr"
-        className="w-full overflow-x-auto flex [mask-image:linear-gradient(to_right,transparent,white_10%,white_90%,transparent)] no-scrollbar"
-        style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}
+        className="w-full overflow-x-auto flex [mask-image:linear-gradient(to_right,transparent,white_10%,white_90%,transparent)] no-scrollbar scroll-smooth"
+        style={{
+          scrollbarWidth: "none",
+          msOverflowStyle: "none",
+          willChange: "scroll-position",
+        }}
       >
-        <motion.div
-          className="flex gap-4 sm:gap-6 shrink-0 py-4 cursor-grab active:cursor-grabbing"
-          animate={{ x: ["0%", "-33.333%"] }}
-          transition={{
-            ease: "linear",
-            duration: 120, // Slower sliding speed
-            repeat: Infinity,
-          }}
-          whileHover={{ animationPlayState: "paused" }}
-          style={{ willChange: "transform" }}
-        >
-          {carouselItems.map((item, index) => {
-            const actualIndex = index % items.length;
-
-            return (
-              <button
-                key={`${item.src}-${index}`}
-                type="button"
-                onClick={() => setSelectedIndex(actualIndex)}
-                aria-label={`${t("modal.viewEnlarged")} ${item.alt}`}
-                className="group relative w-60 sm:w-72 lg:w-80 aspect-square rounded-2xl overflow-hidden bg-slate-900 border border-white/10 cursor-pointer shrink-0 text-start focus:outline-none focus:ring-2 focus:ring-primary"
-              >
-                {item.type === "image" ? (
-                  <Image
+        <div className="flex gap-4 sm:gap-6 shrink-0 py-4 px-6">
+          {items.map((item, index) => (
+            <button
+              key={`${item.src}-${index}`}
+              type="button"
+              onClick={() => setSelectedIndex(index)}
+              aria-label={`${t("modal.viewEnlarged")} ${item.alt}`}
+              className="group relative w-60 sm:w-72 lg:w-80 aspect-square rounded-2xl overflow-hidden bg-slate-900 border border-white/10 cursor-pointer shrink-0 text-start focus:outline-none focus:ring-2 focus:ring-primary"
+            >
+              {item.type === "image" ? (
+                <Image
+                  src={item.src}
+                  alt={item.alt}
+                  fill
+                  sizes="(max-width: 640px) 240px, (max-width: 1024px) 288px, 320px"
+                  loading={index < 4 ? "eager" : "lazy"}
+                  className="object-cover group-hover:scale-105 transition-transform duration-500 ease-out"
+                />
+              ) : (
+                <div className="relative w-full h-full bg-slate-950 flex items-center justify-center">
+                  <video
                     src={item.src}
-                    alt={item.alt}
-                    fill
-                    sizes="(max-width: 640px) 240px, (max-width: 1024px) 288px, 320px"
-                    loading={index < 4 ? "eager" : "lazy"}
-                    className="object-cover group-hover:scale-105 transition-transform duration-500 ease-out"
+                    muted
+                    playsInline
+                    loop
+                    autoPlay
+                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 ease-out"
                   />
-                ) : (
-                  <div className="relative w-full h-full bg-slate-950 flex items-center justify-center">
-                    <video
-                      src={item.src}
-                      muted
-                      playsInline
-                      loop
-                      autoPlay
-                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 ease-out"
-                    />
-                    <div className="absolute inset-0 bg-black/20" />
-                  </div>
-                )}
-
-                <div className="absolute inset-0 bg-slate-950/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
-                  <div className="p-3 rounded-full bg-slate-900/80 text-white backdrop-blur-md border border-white/20 transform scale-90 group-hover:scale-100 transition-transform duration-300">
-                    {item.type === "video" ? (
-                      <Play size={18} />
-                    ) : (
-                      <Expand size={18} />
-                    )}
-                  </div>
+                  <div className="absolute inset-0 bg-black/20" />
                 </div>
-              </button>
-            );
-          })}
-        </motion.div>
+              )}
+
+              <div className="absolute inset-0 bg-slate-950/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
+                <div className="p-3 rounded-full bg-slate-900/80 text-white backdrop-blur-md border border-white/20 transform scale-90 group-hover:scale-100 transition-transform duration-300">
+                  {item.type === "video" ? (
+                    <Play size={18} />
+                  ) : (
+                    <Expand size={18} />
+                  )}
+                </div>
+              </div>
+            </button>
+          ))}
+        </div>
+      </div>
+
+      {/* Bottom Navigation Left/Right Buttons */}
+      <div className="flex items-center justify-center gap-4 mt-8 px-6">
+        <button
+          type="button"
+          onClick={() => scrollByAmount("left")}
+          className="p-3 rounded-full bg-white/10 hover:bg-white/20 text-navy border border-black/10 backdrop-blur-md transition-transform active:scale-95 shadow-sm"
+          aria-label="Scroll left"
+        >
+          <ChevronLeft size={22} className="rtl:rotate-180" />
+        </button>
+        <button
+          type="button"
+          onClick={() => scrollByAmount("right")}
+          className="p-3 rounded-full bg-white/10 hover:bg-white/20 text-navy border border-black/10 backdrop-blur-md transition-transform active:scale-95 shadow-sm"
+          aria-label="Scroll right"
+        >
+          <ChevronRight size={22} className="rtl:rotate-180" />
+        </button>
       </div>
 
       {/* Fullscreen Lightbox Modal */}
@@ -257,17 +284,19 @@ export const GallerySection = () => {
             </button>
 
             {/* Navigation Previous */}
-            <button
-              type="button"
-              onClick={(e) => {
-                e.stopPropagation();
-                handlePrev();
-              }}
-              className="absolute start-4 sm:start-8 top-1/2 -translate-y-1/2 z-10 p-3 rounded-full bg-white/10 hover:bg-white/20 text-white backdrop-blur-md transition-transform active:scale-95"
-              aria-label={t("modal.prev")}
-            >
-              <ChevronLeft size={24} className="rtl:rotate-180" />
-            </button>
+            {selectedIndex > 0 && (
+              <button
+                type="button"
+                onClick={(e) => {
+                  e.stopPropagation();
+                  handlePrev();
+                }}
+                className="absolute start-4 sm:start-8 top-1/2 -translate-y-1/2 z-10 p-3 rounded-full bg-white/10 hover:bg-white/20 text-white backdrop-blur-md transition-transform active:scale-95"
+                aria-label={t("modal.prev")}
+              >
+                <ChevronLeft size={24} className="rtl:rotate-180" />
+              </button>
+            )}
 
             {/* Main Preview Container */}
             <div
@@ -297,17 +326,19 @@ export const GallerySection = () => {
             </div>
 
             {/* Navigation Next */}
-            <button
-              type="button"
-              onClick={(e) => {
-                e.stopPropagation();
-                handleNext();
-              }}
-              className="absolute end-4 sm:end-8 top-1/2 -translate-y-1/2 z-10 p-3 rounded-full bg-white/10 hover:bg-white/20 text-white backdrop-blur-md transition-transform active:scale-95"
-              aria-label={t("modal.next")}
-            >
-              <ChevronRight size={24} className="rtl:rotate-180" />
-            </button>
+            {selectedIndex < items.length - 1 && (
+              <button
+                type="button"
+                onClick={(e) => {
+                  e.stopPropagation();
+                  handleNext();
+                }}
+                className="absolute end-4 sm:end-8 top-1/2 -translate-y-1/2 z-10 p-3 rounded-full bg-white/10 hover:bg-white/20 text-white backdrop-blur-md transition-transform active:scale-95"
+                aria-label={t("modal.next")}
+              >
+                <ChevronRight size={24} className="rtl:rotate-180" />
+              </button>
+            )}
 
             {/* Item Counter Badge */}
             <div className="absolute bottom-6 left-1/2 -translate-x-1/2 text-xs font-semibold text-slate-400 bg-slate-900/80 border border-white/10 px-4 py-1.5 rounded-full backdrop-blur-md">
