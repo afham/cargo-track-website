@@ -17,7 +17,7 @@ import { QuoteForm } from "@/app/modules/HeroSection/QuoteForm";
 
 const BRANCH_HUBS = [
   {
-    cityEn: "Jeddah (Head Office)",
+    cityEn: "Jeddah Branch & Operations",
     cityAr: "جدة (المكتب الرئيسي)",
     addressEn: "KHALID BIN ALWALEED STREET, Door Number 213B, Jeddah 22234",
     addressAr: "شارع خالد بن الوليد، مبنى رقم 213B، جدة 22234",
@@ -30,15 +30,15 @@ const BRANCH_HUBS = [
     addressEn: "Logistics Hub & Relocation Services, Riyadh, Saudi Arabia",
     addressAr:
       "مركز العمليات اللوجستية ونقل الأثاث، الرياض، المملكة العربية السعودية",
-    telephones: ["+966583180756", "+966580593809", "+966591545934"],
+    telephones: ["+966580593809", "+966597480313", "+966 55 365 9763"],
     emails: [
-      "rashif@cargotrack.co",
       "operation@cargotrack.co",
       "Pricing@cargotrack.co",
+      "enquiry@cargotrack.co",
     ],
   },
   {
-    cityEn: "Dammam / Eastern Province",
+    cityEn: "Dammam Branch & Operations",
     cityAr: "الدمام / المنطقة الشرقية",
     addressEn: "Cargo Terminal & Freight Clearing, Dammam, Saudi Arabia",
     addressAr: "محطة الشحن والتخليص الجمركي، الدمام، المملكة العربية السعودية",
