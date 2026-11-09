@@ -47,7 +47,7 @@ export default async function AboutPage({
           <div className="bg-white rounded-2xl p-6 border border-brand-text/[0.05] shadow-[0_4px_20px_rgba(11,58,102,0.03)] text-center">
             <Award className="w-6 h-6 text-primary mx-auto mb-2" />
             <div className="font-heading font-extrabold text-2xl lg:text-3xl text-navy">
-              15+
+              35+
             </div>
             <p className="text-xs lg:text-sm text-brand-muted mt-1">
               {isAr ? "سنوات خبرة لوجستية" : "Years Industry Experience"}
@@ -57,7 +57,7 @@ export default async function AboutPage({
           <div className="bg-white rounded-2xl p-6 border border-brand-text/[0.05] shadow-[0_4px_20px_rgba(11,58,102,0.03)] text-center">
             <Truck className="w-6 h-6 text-primary mx-auto mb-2" />
             <div className="font-heading font-extrabold text-2xl lg:text-3xl text-navy">
-              5,000+
+              15,000+
             </div>
             <p className="text-xs lg:text-sm text-brand-muted mt-1">
               {isAr ? "عملية نقل ناجحة" : "Moves Completed"}
