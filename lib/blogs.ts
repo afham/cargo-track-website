@@ -55,7 +55,9 @@ export async function getPostBySlug(
   slug: string,
   locale: string = "en",
 ): Promise<BlogPost | null> {
-  const fullPath = path.join(blogsDirectory, locale, `${slug}.md`);
+  // Decode percent-encoded Arabic strings back to standard unicode characters
+  const decodedSlug = decodeURIComponent(slug);
+  const fullPath = path.join(blogsDirectory, locale, `${decodedSlug}.md`);
 
   if (!fs.existsSync(fullPath)) {
     return null;
@@ -65,7 +67,7 @@ export async function getPostBySlug(
   const { data, content } = matter(fileContents);
 
   return {
-    slug,
+    slug: decodedSlug,
     title: data.title || "Untitled Post",
     description: data.description || "",
     date: data.date || "",
