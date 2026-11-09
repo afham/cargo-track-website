@@ -29,7 +29,8 @@ export async function generateMetadata({
   params: Promise<{ locale: string; slug: string }>;
 }): Promise<Metadata> {
   const { locale, slug } = await params;
-  const post = await getPostBySlug(slug, locale);
+  const decodedSlug = decodeURIComponent(slug);
+  const post = await getPostBySlug(decodedSlug, locale);
 
   if (!post) return {};
 
@@ -45,8 +46,9 @@ export default async function BlogPostPage({
   params: Promise<{ locale: string; slug: string }>;
 }) {
   const { locale, slug } = await params;
+  const decodedSlug = decodeURIComponent(slug);
   const isAr = locale === "ar";
-  const post = await getPostBySlug(slug, locale);
+  const post = await getPostBySlug(decodedSlug, locale);
 
   if (!post) {
     notFound();
