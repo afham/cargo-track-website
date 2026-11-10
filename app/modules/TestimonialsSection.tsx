@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState, useEffect, useMemo, useRef } from "react";
-import { motion, useMotionValue, useTransform, animate } from "framer-motion";
+import { motion } from "framer-motion";
 import {
   Quote,
   ChevronLeft,
@@ -132,28 +132,19 @@ export const TestimonialsSection = () => {
     [t],
   );
 
-  const testimonials = useMemo(
-    () => [...rawTestimonials, ...rawTestimonials, ...rawTestimonials],
-    [rawTestimonials],
-  );
-
-  const videoClips = useMemo(
-    () => [...RAW_VIDEO_CLIPS, ...RAW_VIDEO_CLIPS, ...RAW_VIDEO_CLIPS],
-    [],
-  );
-
-  // Independent Slider 1 States & Transforms
-  const [currentIndex, setCurrentIndex] = useState(TOTAL_TESTIMONIALS);
-  const x = useMotionValue(0);
-  const xTransform = useTransform(x, (val) => `${val}%`);
-
-  // Independent Slider 2 States & Transforms
-  const [videoIndex, setVideoIndex] = useState(TOTAL_VIDEOS);
-  const videoX = useMotionValue(0);
-  const videoXTransform = useTransform(videoX, (val) => `${val}%`);
+  const testimonials = useMemo(() => rawTestimonials, [rawTestimonials]);
+  const videoClips = useMemo(() => RAW_VIDEO_CLIPS, []);
 
   // Shared responsive calculation for cards to show
   const [cardsToShow, setCardsToShow] = useState(3);
+
+  // References to scroll containers
+  const reviewsContainerRef = useRef<HTMLDivElement>(null);
+  const videosContainerRef = useRef<HTMLDivElement>(null);
+
+  // Independent Slider States
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const [videoIndex, setVideoIndex] = useState(0);
 
   useEffect(() => {
     const updateCardsToShow = () => {
@@ -171,78 +162,78 @@ export const TestimonialsSection = () => {
     return () => window.removeEventListener("resize", updateCardsToShow);
   }, []);
 
-  // Independent Spring Animation for Review Slider
+  // Max valid index stops
+  const maxReviewIndex = Math.max(0, testimonials.length - cardsToShow);
+  const maxVideoIndex = Math.max(0, videoClips.length - cardsToShow);
+
   useEffect(() => {
-    const cardPercentage = 100 / cardsToShow;
-    const targetX = -currentIndex * cardPercentage;
+    if (currentIndex > maxReviewIndex) {
+      setCurrentIndex(maxReviewIndex);
+    }
+  }, [cardsToShow, maxReviewIndex, currentIndex]);
 
-    const controls = animate(x, targetX, {
-      type: "spring",
-      stiffness: 250,
-      damping: 30,
-    });
-
-    return () => controls.stop();
-  }, [currentIndex, cardsToShow, x]);
-
-  // Independent Spring Animation for Video Slider
   useEffect(() => {
-    const cardPercentage = 100 / cardsToShow;
-    const targetX = -videoIndex * cardPercentage;
+    if (videoIndex > maxVideoIndex) {
+      setVideoIndex(maxVideoIndex);
+    }
+  }, [cardsToShow, maxVideoIndex, videoIndex]);
 
-    const controls = animate(videoX, targetX, {
-      type: "spring",
-      stiffness: 250,
-      damping: 30,
+  // Handle scroll sync to button state for Reviews
+  const handleReviewsScroll = () => {
+    if (!reviewsContainerRef.current) return;
+    const { scrollLeft, clientWidth } = reviewsContainerRef.current;
+    const itemWidth = clientWidth / cardsToShow;
+    const newIdx = Math.round(scrollLeft / itemWidth);
+    setCurrentIndex(Math.min(maxReviewIndex, Math.max(0, newIdx)));
+  };
+
+  // Handle scroll sync to button state for Videos
+  const handleVideosScroll = () => {
+    if (!videosContainerRef.current) return;
+    const { scrollLeft, clientWidth } = videosContainerRef.current;
+    const itemWidth = clientWidth / cardsToShow;
+    const newIdx = Math.round(scrollLeft / itemWidth);
+    setVideoIndex(Math.min(maxVideoIndex, Math.max(0, newIdx)));
+  };
+
+  // Scroll smoothly when button or dot is clicked
+  const scrollToReviewIndex = (index: number) => {
+    if (!reviewsContainerRef.current) return;
+    const itemWidth = reviewsContainerRef.current.clientWidth / cardsToShow;
+    reviewsContainerRef.current.scrollTo({
+      left: index * itemWidth,
+      behavior: "smooth",
     });
+    setCurrentIndex(index);
+  };
 
-    return () => controls.stop();
-  }, [videoIndex, cardsToShow, videoX]);
+  const scrollToVideoIndex = (index: number) => {
+    if (!videosContainerRef.current) return;
+    const itemWidth = videosContainerRef.current.clientWidth / cardsToShow;
+    videosContainerRef.current.scrollTo({
+      left: index * itemWidth,
+      behavior: "smooth",
+    });
+    setVideoIndex(index);
+  };
 
   // Review Slider Manual Navigation Handlers
   const handlePrev = () => {
-    setCurrentIndex((prev) => {
-      const prevIndex = prev - 1;
-      if (prevIndex < 0) {
-        return rawTestimonials.length - 1;
-      }
-      return prevIndex;
-    });
+    scrollToReviewIndex(Math.max(0, currentIndex - 1));
   };
 
   const handleNext = () => {
-    setCurrentIndex((prev) => {
-      const nextIndex = prev + 1;
-      if (nextIndex >= testimonials.length - cardsToShow) {
-        return rawTestimonials.length;
-      }
-      return nextIndex;
-    });
+    scrollToReviewIndex(Math.min(maxReviewIndex, currentIndex + 1));
   };
 
   // Video Slider Manual Navigation Handlers
   const handleVideoPrev = () => {
-    setVideoIndex((prev) => {
-      const prevIndex = prev - 1;
-      if (prevIndex < 0) {
-        return TOTAL_VIDEOS - 1;
-      }
-      return prevIndex;
-    });
+    scrollToVideoIndex(Math.max(0, videoIndex - 1));
   };
 
   const handleVideoNext = () => {
-    setVideoIndex((prev) => {
-      const nextIndex = prev + 1;
-      if (nextIndex >= videoClips.length - cardsToShow) {
-        return TOTAL_VIDEOS;
-      }
-      return nextIndex;
-    });
+    scrollToVideoIndex(Math.min(maxVideoIndex, videoIndex + 1));
   };
-
-  const activeDotIndex = currentIndex % rawTestimonials.length;
-  const activeVideoDotIndex = videoIndex % TOTAL_VIDEOS;
 
   return (
     <section
@@ -285,90 +276,87 @@ export const TestimonialsSection = () => {
         {/* --- SLIDER 1: GOOGLE TEXT REVIEWS --- */}
         <div
           dir="ltr"
-          className="relative max-w-[1280px] mx-auto overflow-hidden px-2 mb-8"
+          ref={reviewsContainerRef}
+          onScroll={handleReviewsScroll}
+          className="relative max-w-[1180px] mx-auto overflow-x-auto px-2 mb-8 [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden snap-x snap-mandatory flex scroll-smooth"
         >
-          <motion.div
-            style={{ x: xTransform }}
-            className="flex transition-transform ease-out"
-          >
-            {testimonials.map((item, idx) => {
-              const Icon = item.icon;
-              return (
-                <div
-                  key={`review-${item.id}-${idx}`}
-                  style={{ flex: `0 0 ${100 / cardsToShow}%` }}
-                  className="px-3 shrink-0"
+          {testimonials.map((item, idx) => {
+            const Icon = item.icon;
+            return (
+              <div
+                key={`review-${item.id}-${idx}`}
+                style={{ flex: `0 0 ${100 / cardsToShow}%` }}
+                className="px-3 shrink-0 snap-start"
+              >
+                <a
+                  href={item.reviewUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="group bg-white rounded-3xl p-8 border border-slate-100 shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300 flex flex-col h-full relative overflow-hidden text-start block cursor-pointer"
                 >
-                  <a
-                    href={item.reviewUrl}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="group bg-white rounded-3xl p-8 border border-slate-100 shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300 flex flex-col h-full relative overflow-hidden text-start block cursor-pointer"
-                  >
-                    <div className="absolute top-0 end-0 w-[160px] h-[160px] bg-primary/5 rounded-full blur-[50px] pointer-events-none" />
+                  <div className="absolute top-0 end-0 w-[160px] h-[160px] bg-primary/5 rounded-full blur-[50px] pointer-events-none" />
 
-                    <div className="flex items-center justify-between mb-5 relative z-10">
-                      {/* Official Google G Logo Badge */}
-                      <div className="flex items-center gap-2">
-                        <div className="w-7 h-7 rounded-full bg-slate-50 border border-slate-100 flex items-center justify-center shrink-0">
-                          <svg
-                            className="w-4 h-4"
-                            viewBox="0 0 24 24"
-                            xmlns="http://www.w3.org/2000/svg"
-                          >
-                            <path
-                              fill="#4285F4"
-                              d="M23.745 12.27c0-.7-.06-1.4-.19-2.07H12v4.51h6.6c-.29 1.52-1.14 2.82-2.4 3.68v3.05h3.88c2.27-2.09 3.66-5.17 3.66-9.17z"
-                            />
-                            <path
-                              fill="#34A853"
-                              d="M12 24c3.24 0 5.95-1.08 7.93-2.91l-3.88-3.05c-1.08.72-2.45 1.16-4.05 1.16-3.12 0-5.77-2.1-6.72-4.93H1.19v3.15C3.17 21.36 7.24 24 12 24z"
-                            />
-                            <path
-                              fill="#FBBC05"
-                              d="M5.28 14.27c-.25-.72-.38-1.49-.38-2.27s.13-1.55.38-2.27V6.58H1.19C.43 8.12 0 9.87 0 11.75s.43 3.63 1.19 5.17l4.09-2.65z"
-                            />
-                            <path
-                              fill="#EA4335"
-                              d="M12 4.75c1.76 0 3.34.61 4.6 1.8l3.42-3.42C17.95 1.19 15.24 0 12 0 7.24 0 3.17 2.64 1.19 6.58l4.09 3.15c.95-2.83 3.6-4.98 6.72-4.98z"
-                            />
-                          </svg>
-                        </div>
-                        <span className="text-[11px] font-semibold text-slate-400">
-                          Google Review
-                        </span>
+                  <div className="flex items-center justify-between mb-5 relative z-10">
+                    {/* Official Google G Logo Badge */}
+                    <div className="flex items-center gap-2">
+                      <div className="w-7 h-7 rounded-full bg-slate-50 border border-slate-100 flex items-center justify-center shrink-0">
+                        <svg
+                          className="w-4 h-4"
+                          viewBox="0 0 24 24"
+                          xmlns="http://www.w3.org/2000/svg"
+                        >
+                          <path
+                            fill="#4285F4"
+                            d="M23.745 12.27c0-.7-.06-1.4-.19-2.07H12v4.51h6.6c-.29 1.52-1.14 2.82-2.4 3.68v3.05h3.88c2.27-2.09 3.66-5.17 3.66-9.17z"
+                          />
+                          <path
+                            fill="#34A853"
+                            d="M12 24c3.24 0 5.95-1.08 7.93-2.91l-3.88-3.05c-1.08.72-2.45 1.16-4.05 1.16-3.12 0-5.77-2.1-6.72-4.93H1.19v3.15C3.17 21.36 7.24 24 12 24z"
+                          />
+                          <path
+                            fill="#FBBC05"
+                            d="M5.28 14.27c-.25-.72-.38-1.49-.38-2.27s.13-1.55.38-2.27V6.58H1.19C.43 8.12 0 9.87 0 11.75s.43 3.63 1.19 5.17l4.09-2.65z"
+                          />
+                          <path
+                            fill="#EA4335"
+                            d="M12 4.75c1.76 0 3.34.61 4.6 1.8l3.42-3.42C17.95 1.19 15.24 0 12 0 7.24 0 3.17 2.64 1.19 6.58l4.09 3.15c.95-2.83 3.6-4.98 6.72-4.98z"
+                          />
+                        </svg>
                       </div>
-                      <StarRating count={item.rating} />
+                      <span className="text-[11px] font-semibold text-slate-400">
+                        Google Review
+                      </span>
+                    </div>
+                    <StarRating count={item.rating} />
+                  </div>
+
+                  <p className="text-[15px] text-brand-muted leading-relaxed mb-8 grow relative z-10">
+                    "{item.quote}"
+                  </p>
+
+                  <div className="flex items-center justify-between gap-3.5 mt-auto pt-6 border-t border-slate-100 relative z-10">
+                    <div className="flex items-center gap-3.5">
+                      <div className="w-11 h-11 rounded-xl bg-primary/10 flex items-center justify-center text-primary shrink-0 group-hover:scale-105 transition-transform border border-primary/10">
+                        <Icon className="w-5 h-5" />
+                      </div>
+                      <div>
+                        <h5 className="font-bold text-navy text-[15px] leading-tight">
+                          {item.company}
+                        </h5>
+                        {item.industry && (
+                          <p className="text-[12px] text-primary font-semibold mt-0.5">
+                            {item.industry}
+                          </p>
+                        )}
+                      </div>
                     </div>
 
-                    <p className="text-[15px] text-brand-muted leading-relaxed mb-8 grow relative z-10">
-                      "{item.quote}"
-                    </p>
-
-                    <div className="flex items-center justify-between gap-3.5 mt-auto pt-6 border-t border-slate-100 relative z-10">
-                      <div className="flex items-center gap-3.5">
-                        <div className="w-11 h-11 rounded-xl bg-primary/10 flex items-center justify-center text-primary shrink-0 group-hover:scale-105 transition-transform border border-primary/10">
-                          <Icon className="w-5 h-5" />
-                        </div>
-                        <div>
-                          <h5 className="font-bold text-navy text-[15px] leading-tight">
-                            {item.company}
-                          </h5>
-                          {item.industry && (
-                            <p className="text-[12px] text-primary font-semibold mt-0.5">
-                              {item.industry}
-                            </p>
-                          )}
-                        </div>
-                      </div>
-
-                      <ExternalLink className="w-4 h-4 text-slate-400 group-hover:text-primary transition-colors shrink-0" />
-                    </div>
-                  </a>
-                </div>
-              );
-            })}
-          </motion.div>
+                    <ExternalLink className="w-4 h-4 text-slate-400 group-hover:text-primary transition-colors shrink-0" />
+                  </div>
+                </a>
+              </div>
+            );
+          })}
         </div>
 
         {/* Navigation Controls for Review Slider */}
@@ -376,21 +364,22 @@ export const TestimonialsSection = () => {
           <button
             type="button"
             onClick={handlePrev}
+            disabled={currentIndex === 0}
             aria-label="Previous review"
-            className="p-3 rounded-full bg-white border border-slate-200 text-navy hover:bg-primary hover:text-white hover:border-primary transition-all duration-200 shadow-sm focus:outline-none focus:ring-2 focus:ring-primary/50"
+            className="p-3 rounded-full bg-white border border-slate-200 text-navy hover:bg-primary hover:text-white hover:border-primary transition-all duration-200 shadow-sm focus:outline-none focus:ring-2 focus:ring-primary/50 disabled:opacity-40 disabled:hover:bg-white disabled:hover:text-navy disabled:hover:border-slate-200 disabled:cursor-not-allowed"
           >
             <ChevronLeft className="w-5 h-5 rtl:rotate-180" />
           </button>
 
           <div className="flex items-center gap-2">
-            {rawTestimonials.map((_, index) => (
+            {Array.from({ length: maxReviewIndex + 1 }).map((_, index) => (
               <button
                 key={index}
                 type="button"
-                onClick={() => setCurrentIndex(rawTestimonials.length + index)}
-                aria-label={`Go to review slide ${index + 1}`}
+                onClick={() => scrollToReviewIndex(index)}
+                aria-label={`Go to review slide position ${index + 1}`}
                 className={`h-2.5 rounded-full transition-all duration-300 ${
-                  index === activeDotIndex
+                  index === currentIndex
                     ? "w-8 bg-primary"
                     : "w-2.5 bg-slate-300 hover:bg-slate-400"
                 }`}
@@ -401,8 +390,9 @@ export const TestimonialsSection = () => {
           <button
             type="button"
             onClick={handleNext}
+            disabled={currentIndex >= maxReviewIndex}
             aria-label="Next review"
-            className="p-3 rounded-full bg-white border border-slate-200 text-navy hover:bg-primary hover:text-white hover:border-primary transition-all duration-200 shadow-sm focus:outline-none focus:ring-2 focus:ring-primary/50"
+            className="p-3 rounded-full bg-white border border-slate-200 text-navy hover:bg-primary hover:text-white hover:border-primary transition-all duration-200 shadow-sm focus:outline-none focus:ring-2 focus:ring-primary/50 disabled:opacity-40 disabled:hover:bg-white disabled:hover:text-navy disabled:hover:border-slate-200 disabled:cursor-not-allowed"
           >
             <ChevronRight className="w-5 h-5 rtl:rotate-180" />
           </button>
@@ -411,22 +401,19 @@ export const TestimonialsSection = () => {
         {/* --- SLIDER 2: VERTICAL CUSTOMER VIDEO CLIPS --- */}
         <div
           dir="ltr"
-          className="relative max-w-[1280px] mx-auto overflow-hidden px-2 mb-8"
+          ref={videosContainerRef}
+          onScroll={handleVideosScroll}
+          className="relative max-w-[400px] sm:max-w-[880px] mx-auto overflow-x-auto px-2 mb-8 [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden snap-x snap-mandatory flex scroll-smooth"
         >
-          <motion.div
-            style={{ x: videoXTransform }}
-            className="flex transition-transform ease-out"
-          >
-            {videoClips.map((clip, idx) => (
-              <div
-                key={`video-${clip.id}-${idx}`}
-                style={{ flex: `0 0 ${100 / cardsToShow}%` }}
-                className="px-3 shrink-0"
-              >
-                <VerticalVideoCard item={clip} />
-              </div>
-            ))}
-          </motion.div>
+          {videoClips.map((clip, idx) => (
+            <div
+              key={`video-${clip.id}-${idx}`}
+              style={{ flex: `0 0 ${100 / cardsToShow}%` }}
+              className="px-3 shrink-0 snap-start"
+            >
+              <VerticalVideoCard item={clip} />
+            </div>
+          ))}
         </div>
 
         {/* Navigation Controls for Video Slider */}
@@ -434,21 +421,22 @@ export const TestimonialsSection = () => {
           <button
             type="button"
             onClick={handleVideoPrev}
+            disabled={videoIndex === 0}
             aria-label="Previous video"
-            className="p-3 rounded-full bg-white border border-slate-200 text-navy hover:bg-primary hover:text-white hover:border-primary transition-all duration-200 shadow-sm focus:outline-none focus:ring-2 focus:ring-primary/50"
+            className="p-3 rounded-full bg-white border border-slate-200 text-navy hover:bg-primary hover:text-white hover:border-primary transition-all duration-200 shadow-sm focus:outline-none focus:ring-2 focus:ring-primary/50 disabled:opacity-40 disabled:hover:bg-white disabled:hover:text-navy disabled:hover:border-slate-200 disabled:cursor-not-allowed"
           >
             <ChevronLeft className="w-5 h-5 rtl:rotate-180" />
           </button>
 
           <div className="flex items-center gap-2">
-            {RAW_VIDEO_CLIPS.map((_, index) => (
+            {Array.from({ length: maxVideoIndex + 1 }).map((_, index) => (
               <button
                 key={index}
                 type="button"
-                onClick={() => setVideoIndex(TOTAL_VIDEOS + index)}
-                aria-label={`Go to video slide ${index + 1}`}
+                onClick={() => scrollToVideoIndex(index)}
+                aria-label={`Go to video slide position ${index + 1}`}
                 className={`h-2.5 rounded-full transition-all duration-300 ${
-                  index === activeVideoDotIndex
+                  index === videoIndex
                     ? "w-8 bg-primary"
                     : "w-2.5 bg-slate-300 hover:bg-slate-400"
                 }`}
@@ -459,8 +447,9 @@ export const TestimonialsSection = () => {
           <button
             type="button"
             onClick={handleVideoNext}
+            disabled={videoIndex >= maxVideoIndex}
             aria-label="Next video"
-            className="p-3 rounded-full bg-white border border-slate-200 text-navy hover:bg-primary hover:text-white hover:border-primary transition-all duration-200 shadow-sm focus:outline-none focus:ring-2 focus:ring-primary/50"
+            className="p-3 rounded-full bg-white border border-slate-200 text-navy hover:bg-primary hover:text-white hover:border-primary transition-all duration-200 shadow-sm focus:outline-none focus:ring-2 focus:ring-primary/50 disabled:opacity-40 disabled:hover:bg-white disabled:hover:text-navy disabled:hover:border-slate-200 disabled:cursor-not-allowed"
           >
             <ChevronRight className="w-5 h-5 rtl:rotate-180" />
           </button>
