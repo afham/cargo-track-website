@@ -175,8 +175,8 @@
     "services": [
       {
         "id": "01",
-        "title": "Household Goods Relocation",
-        "description": "Our household relocation service includes packing and assembling furniture and other household items, transportation, unpacking and placing your household belongings.",
+        "title": "Home Shifting Services",
+        "description": "Our Home Shifting Service includes packing and assembling furniture and other household items, transportation, unpacking and placing your household belongings.",
         "tags": [
           "Packing & Assembly",
           "Safe Transport",
@@ -185,54 +185,12 @@
       },
       {
         "id": "02",
-        "title": "Vehicle Relocation & Road Transportation",
-        "description": "We provide professional, reliable, and flexible road transportation solutions tailored to your needs. We also offer seamless vehicle relocation services worldwide, ensuring safe, efficient, and cost-effective transportation.",
-        "tags": [
-          "Flexible Road Transport",
-          "Worldwide Vehicle Moves",
-          "Affordable Shipping"
-        ]
-      },
-      {
-        "id": "03",
-        "title": "Transportation",
-        "description": "CargoTrack provides safe and reliable transportation services across Saudi Arabia and the GCC. We handle local transport, container shipping, FTL, LTL, and smooth customs clearance for import/export cargo.",
-        "tags": [
-          "Saudi & GCC Network",
-          "FTL & LTL Transport",
-          "Customs Clearance"
-        ]
-      },
-      {
-        "id": "04",
-        "title": "Artwork Packing and Handling Service",
-        "description": "We provide specialized artwork relocation with expert handling, secure packing, and safe transportation, ensuring your valuable pieces are protected and carefully managed from start to finish.",
-        "tags": ["Expert Artwork Care", "Secure Packing", "Safe Transport"]
-      },
-      {
-        "id": "05",
-        "title": "Pet Relocation",
-        "description": "Our pet relocation services cover every aspect of your pet’s journey, including safe pick-up and delivery, preparation of required documentation, and provision of suitable travel crates and facilities for a smooth and comfortable relocation.",
-        "tags": [
-          "Pet Pick-up & Delivery",
-          "Travel Documentation",
-          "Approved Containers"
-        ]
-      },
-      {
-        "id": "06",
-        "title": "Storage Services",
+        "title": "Warehouse and Storage Services",
         "description": "Cargotrack offers secure and convenient storage solutions to meet your short or long-term needs, giving you peace of mind that your belongings are safe and protected.",
         "tags": ["Short & Long-term", "Secure Storage", "Protected Belongings"]
       },
       {
-        "id": "07",
-        "title": "Industrial Packing",
-        "description": "Our industrial packing services provide secure, reliable solutions for transporting heavy machinery and valuable equipment, using high-quality packing materials and specialized techniques to ensure maximum protection throughout the journey.",
-        "tags": ["Heavy Machinery", "Premium Materials", "Equipment Protection"]
-      },
-      {
-        "id": "08",
+        "id": "03",
         "title": "Office Relocation",
         "description": "Our professional office relocation services are designed to make business moves seamless and efficient. From detailed planning and secure packing to transportation, unpacking, and setup, we handle your office equipment, furniture, and belongings with care and precision.",
         "tags": [
@@ -242,11 +200,55 @@
         ]
       },
       {
-        "id": "09",
+        "id": "04",
+        "title": "Vehicle Relocation",
+        "description": "We provide professional, reliable, and flexible road transportation solutions tailored to your needs. We also offer seamless vehicle relocation services worldwide, ensuring safe, efficient, and cost-effective transportation.",
+        "tags": [
+          "Flexible Road Transport",
+          "Worldwide Vehicle Moves",
+          "Affordable Shipping"
+        ]
+      },
+      {
+        "id": "05",
+        "title": "Industrial Packing",
+        "description": "Our industrial packing services provide secure, reliable solutions for transporting heavy machinery and valuable equipment, using high-quality packing materials and specialized techniques to ensure maximum protection throughout the journey.",
+        "tags": ["Heavy Machinery", "Premium Materials", "Equipment Protection"]
+      },
+
+      {
+        "id": "06",
         "title": "Freight Forwarding",
         "description": "CargoTrack delivers complete air, sea, and land freight forwarding services across Saudi Arabia and globally. We manage everything from cargo booking and documentation to customs clearance and final delivery.",
         "tags": ["Air, Sea & Land", "End-to-End Shipping", "Global Logistics"]
       },
+      {
+        "id": "07",
+        "title": "Transportation",
+        "description": "CargoTrack provides safe and reliable transportation services across Saudi Arabia and the GCC. We handle local transport, container shipping, FTL, LTL, and smooth customs clearance for import/export cargo.",
+        "tags": [
+          "Saudi & GCC Network",
+          "FTL & LTL Transport",
+          "Customs Clearance"
+        ]
+      },
+      {
+        "id": "08",
+        "title": "Artwork Packing and Handling Service",
+        "description": "We provide specialized artwork relocation with expert handling, secure packing, and safe transportation, ensuring your valuable pieces are protected and carefully managed from start to finish.",
+        "tags": ["Expert Artwork Care", "Secure Packing", "Safe Transport"]
+      },
+      {
+        "id": "09",
+        "title": "Pet Relocation",
+        "description": "Our pet relocation services cover every aspect of your pet’s journey, including safe pick-up and delivery, preparation of required documentation, and provision of suitable travel crates and facilities for a smooth and comfortable relocation.",
+        "tags": [
+          "Pet Pick-up & Delivery",
+          "Travel Documentation",
+          "Approved Containers"
+        ]
+      },
+
       {
         "id": "10",
         "title": "Pilgrim Baggage Handling",
@@ -508,24 +510,58 @@
       "contact": "Contact"
     },
     "servicesList": [
-      { "name": "Household Goods Relocation", "slug": "household-goods" },
       {
-        "name": "Vehicle Relocation & Transport",
-        "slug": "vehicle-relocation"
+        "slug": "home-shifting-services",
+        "name": "Home Shifting Services"
       },
-      { "name": "Packing & Crating Services", "slug": "packing-crating" },
-      { "name": "Artwork Packing & Handling", "slug": "artwork-packing" },
-      { "name": "Pet Relocation", "slug": "pet-relocation" },
-      { "name": "Storage & Warehousing", "slug": "storage-warehousing" },
-      { "name": "Industrial Packing", "slug": "industrial-packing" },
-      { "name": "Office Relocation", "slug": "office-relocation" },
-      { "name": "Groupage Services", "slug": "groupage-services" },
-      { "name": "Pilgrim Baggage Handling", "slug": "pilgrim-baggage" },
       {
-        "name": "Mobility & Destination Services",
-        "slug": "mobility-services"
+        "slug": "warehouse-and-storage-services",
+        "name": "Warehouse and Storage Services"
       },
-      { "name": "Deep Cleaning Service", "slug": "deep-cleaning" }
+      {
+        "slug": "office-relocation",
+        "name": "Office Relocation"
+      },
+      {
+        "slug": "vehicle-relocation",
+        "name": "Vehicle Relocation"
+      },
+      {
+        "slug": "industrial-packing",
+        "name": "Industrial Packing"
+      },
+      {
+        "slug": "freight-forwarding",
+        "name": "Freight Forwarding"
+      },
+
+      {
+        "slug": "transportation",
+        "name": "Transportation",
+        "image": "/assets/photos9.webp"
+      },
+      {
+        "slug": "artwork-moving",
+        "name": "Artwork Moving"
+      },
+      {
+        "slug": "pet-relocation",
+        "name": "Pet Relocation",
+        "image": "/assets/photos2.webp"
+      },
+
+      {
+        "slug": "piligrim-moving",
+        "name": "Piligrim Moving"
+      },
+      {
+        "slug": "mobility-services",
+        "name": "Mobility Services"
+      },
+      {
+        "slug": "deep-cleaning-services",
+        "name": "Deep Cleaning Services"
+      }
     ],
     "branches": [
       {
