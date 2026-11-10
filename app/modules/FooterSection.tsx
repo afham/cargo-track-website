@@ -282,15 +282,14 @@ export const FooterSection = () => {
                 const name = t(`servicesList.${idx}.name`);
                 const slug = t(`servicesList.${idx}.slug`);
                 return (
-                  <li key={slug}>
-                    <a
-                      href={`#${slug}`}
-                      className="text-white/70 text-[13px] hover:text-white transition-colors relative group w-fit text-start inline-block"
-                    >
-                      {name}
-                      <span className="absolute -bottom-0.5 start-0 w-0 h-[1px] bg-primary group-hover:w-full transition-all duration-300" />
-                    </a>
-                  </li>
+                  <Link
+                    key={slug}
+                    href={`services/${slug}`}
+                    className="text-white/70 text-[13px] hover:text-white transition-colors relative group w-fit text-start inline-block"
+                  >
+                    {name}
+                    <span className="absolute -bottom-0.5 start-0 w-0 h-[1px] bg-primary group-hover:w-full transition-all duration-300" />
+                  </Link>
                 );
               })}
             </ul>
