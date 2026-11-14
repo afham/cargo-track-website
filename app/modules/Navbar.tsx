@@ -362,7 +362,7 @@ export const Navbar = () => {
           </a>
 
           <a
-            href={`https://wa.me/${CONTACT_INFO.cleanPhone}`}
+            href={`https://wa.me/${CONTACT_INFO.cleanPhone}?text=${encodeURIComponent("Hi CargoTrack team, I would like to get a free quote for a move.")}`}
             onClick={() => trackWhatsApp("mobile_topbar")}
             target="_blank"
             rel="noopener noreferrer"
