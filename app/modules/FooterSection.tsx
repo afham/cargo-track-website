@@ -27,11 +27,11 @@ const BRANCH_CONTACT_DETAILS = [
     emails: ["info@cargotrack.co", "wafa.kamil@cargotrack.co"],
   },
   {
-    telephones: ["+966583180756", "+966580593809", "+966591545934"],
+    telephones: ["+966580593809", "+966597480313", "+966553659763"],
     emails: [
-      "rashif@cargotrack.co",
       "operation@cargotrack.co",
       "Pricing@cargotrack.co",
+      "enquiry@cargotrack.co",
     ],
   },
   {
