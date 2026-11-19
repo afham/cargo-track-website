@@ -94,7 +94,7 @@ export const FloatingActionButtons = () => {
             onClick={scrollToTop}
             aria-label={t("scrollToTop")}
             title={t("scrollToTop")}
-            className="pointer-events-auto w-11 h-11 sm:w-12 sm:h-12 rounded-full bg-navy text-white border border-white/15 flex items-center justify-center shadow-lg hover:bg-primary transition-colors focus:outline-none focus:ring-4 focus:ring-primary/30"
+            className="pointer-events-auto w-12 h-12 mr-1 rounded-full bg-navy text-white border border-white/15 flex items-center justify-center shadow-lg hover:bg-primary transition-colors focus:outline-none focus:ring-4 focus:ring-primary/30"
           >
             <ChevronUp size={22} />
           </motion.button>
@@ -121,13 +121,13 @@ export const FloatingActionButtons = () => {
           rel="noopener noreferrer"
           aria-label={whatsappLabel}
           title={whatsappLabel}
-          className="relative inline-flex items-center justify-center w-11 h-11 sm:w-12 sm:h-12 rounded-full bg-emerald-500 text-white shadow-lg shadow-emerald-600/25 hover:bg-emerald-600 hover:scale-105 active:scale-95 transition-all duration-300 focus:outline-none focus:ring-4 focus:ring-emerald-500/30"
+          className="relative inline-flex items-center justify-center w-14 h-14 rounded-full bg-emerald-500 text-white shadow-lg shadow-emerald-600/25 hover:bg-emerald-600 hover:scale-105 active:scale-95 transition-all duration-300 focus:outline-none focus:ring-4 focus:ring-emerald-500/30"
         >
           <span
             className="absolute inset-0 rounded-full bg-emerald-500/50 animate-[ping_1.8s_cubic-bezier(0,0,0.2,1)_infinite] pointer-events-none"
             aria-hidden="true"
           />
-          <WhatsAppIcon className="w-5 h-5 relative z-10" />
+          <WhatsAppIcon className="w-8 h-8 relative z-10" />
         </a>
       </div>
     </div>
