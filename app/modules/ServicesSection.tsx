@@ -65,7 +65,7 @@ export const ServicesSection = () => {
             </p>
             <Link
               href={`/${locale}/request-a-quote`}
-              className="inline-flex items-center gap-1.5 text-primary font-bold text-xs sm:text-sm shrink-0 group hover:text-navy transition-colors"
+              className="inline-flex items-center gap-1.5 text-primary font-bold text-xs sm:text-sm shrink-0 group hover:text-navy active:text-navy active:scale-[0.98] transition-all touch-manipulation"
             >
               {t("getQuote")}
               <ArrowRight
@@ -96,7 +96,7 @@ export const ServicesSection = () => {
               >
                 <Link
                   href={serviceHref}
-                  className="group h-full rounded-2xl overflow-hidden flex flex-col justify-between transition-all duration-300 border border-primary/25 hover:border-primary bg-white text-navy shadow-sm hover:shadow-lg hover:shadow-primary/10"
+                  className="group h-full rounded-2xl overflow-hidden flex flex-col justify-between transition-all duration-200 border border-primary/25 hover:border-primary active:border-primary active:scale-[0.985] active:bg-primary/[0.04] bg-white text-navy shadow-sm hover:shadow-lg hover:shadow-primary/10 active:shadow-md active:shadow-primary/15 select-none sm:select-auto touch-manipulation"
                 >
                   {/* Compact Top Thumbnail with Fade into White Body */}
                   <div className="relative h-36 w-full overflow-hidden bg-slate-100">
@@ -106,22 +106,22 @@ export const ServicesSection = () => {
                       fill
                       sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
                       quality={75}
-                      className="object-cover group-hover:scale-105 transition-transform duration-500 ease-out"
+                      className="object-cover group-hover:scale-105 group-active:scale-105 transition-transform duration-500 ease-out"
                     />
-                    <div className="absolute inset-0 bg-gradient-to-t from-white via-white/20 to-transparent" />
+                    <div className="absolute inset-0 bg-gradient-to-t from-white via-white/20 to-transparent group-active:from-primary/10 transition-colors duration-200" />
                     <span className="absolute top-2.5 end-2.5 font-mono text-[10px] font-bold px-2 py-0.5 rounded-md backdrop-blur-md bg-white/90 text-navy border border-primary/20 shadow-xs">
                       #{serviceId}
                     </span>
                   </div>
 
                   {/* Tight Card Body */}
-                  <div className="p-4 flex-1 flex flex-col justify-between bg-white">
+                  <div className="p-4 flex-1 flex flex-col justify-between bg-transparent">
                     <div>
                       <div className="flex items-start justify-between gap-2 mb-1.5">
-                        <h3 className="font-heading font-bold text-base leading-snug text-navy group-hover:text-primary transition-colors">
+                        <h3 className="font-heading font-bold text-base leading-snug text-navy group-hover:text-primary group-active:text-primary transition-colors">
                           {title}
                         </h3>
-                        <div className="w-6 h-6 rounded-full flex items-center justify-center shrink-0 transition-all group-hover:bg-primary group-hover:text-white group-hover:translate-x-0.5 rtl:group-hover:-translate-x-0.5 bg-slate-100 text-navy">
+                        <div className="w-6 h-6 rounded-full flex items-center justify-center shrink-0 transition-all group-hover:bg-primary group-hover:text-white group-hover:translate-x-0.5 rtl:group-hover:-translate-x-0.5 group-active:bg-primary group-active:text-white group-active:translate-x-0.5 rtl:group-active:-translate-x-0.5 bg-slate-100 text-navy">
                           <ArrowRight size={12} className="rtl:rotate-180" />
                         </div>
                       </div>
@@ -132,11 +132,11 @@ export const ServicesSection = () => {
                     </div>
 
                     {/* Compact Tags */}
-                    <div className="flex flex-wrap gap-1 pt-2.5 border-t border-slate-100">
+                    <div className="flex flex-wrap gap-1 pt-2.5 border-t border-slate-100 group-active:border-primary/15 transition-colors">
                       {[0, 1, 2].map((tagIdx) => (
                         <span
                           key={tagIdx}
-                          className="inline-flex items-center gap-1 text-[10px] font-medium px-2 py-0.5 rounded bg-slate-100 text-slate-700"
+                          className="inline-flex items-center gap-1 text-[10px] font-medium px-2 py-0.5 rounded bg-slate-100 group-active:bg-primary/10 group-active:text-primary text-slate-700 transition-colors"
                         >
                           <Check size={9} className="text-primary stroke-[3]" />
                           {t(`services.${index}.tags.${tagIdx}`)}
