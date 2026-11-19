@@ -194,21 +194,6 @@ export default async function RequestQuotePage({
 
           {/* 🟢 FORM COLUMN: Appears 1st on mobile, RIGHT (col-span-5) on Desktop */}
           <div className="lg:col-span-5 w-full flex flex-col items-center lg:items-end lg:sticky lg:top-28 order-1 lg:order-2">
-            {/* Mobile-Only Heading */}
-            <div className="block lg:hidden text-center mb-5 max-w-md mx-auto">
-              <div className="inline-flex items-center gap-2 mb-2 px-3 py-1 rounded-full bg-primary/10 border border-primary/20">
-                <span className="w-2 h-2 rounded-full bg-primary animate-pulse" />
-                <span className="text-[11px] font-bold text-primary uppercase tracking-wider">
-                  {isAr ? "تسعيرة مجانية خلال دقيقة" : "Instant Free Quote"}
-                </span>
-              </div>
-              <h1 className="font-heading font-extrabold text-[26px] sm:text-[32px] leading-tight text-navy">
-                {isAr
-                  ? "احصل على تسعيرة نقل مخصصة"
-                  : "Get Your Custom Moving Quote"}
-              </h1>
-            </div>
-
             {/* Form Container Card */}
             <div className="w-[420px] px-4 sm:py-0 flex justify-center bg-navy rounded-[24px] sm:rounded-[28px] shadow-xl border border-white/10 overflow-hidden">
               <QuoteForm />
