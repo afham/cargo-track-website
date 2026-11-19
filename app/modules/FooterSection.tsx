@@ -146,14 +146,14 @@ export const FooterSection = () => {
     [],
   );
 
-  const trackWhatsApp = (location: string) => {
-    sendGAEvent("event", "click_whatsapp", {
-      method: "whatsapp",
-      button_location: location,
-      phone_number: CONTACT_INFO.cleanPhone,
-      locale: locale,
-    });
-  };
+  // const trackWhatsApp = (location: string) => {
+  //   sendGAEvent("event", "click_whatsapp", {
+  //     method: "whatsapp",
+  //     button_location: location,
+  //     phone_number: CONTACT_INFO.cleanPhone,
+  //     locale: locale,
+  //   });
+  // };
 
   return (
     <footer
@@ -472,39 +472,6 @@ export const FooterSection = () => {
           </div>
         </div>
       </div>
-
-      <a
-        href={`https://wa.me/${CONTACT_INFO.cleanPhone}?text=${encodeURIComponent("Hi CargoTrack team, I would like to get a free quote for a move.")}`}
-        onClick={() => trackWhatsApp("mobile_topbar")}
-        target="_blank"
-        rel="noopener noreferrer"
-        className="fixed bottom-6 end-10  z-50 scale-150 flex sm:hidden items-center justify-center p-2 rounded-full bg-emerald-500 text-white hover:bg-emerald-600 transition-transform duration-300"
-        aria-label={"aria.whatsapp"}
-      >
-        <span className="absolute inset-0 rounded-full bg-emerald-500/60 animate-[ping_1.4s_cubic-bezier(0,0,0.2,1)_infinite] scale-90 pointer-events-none" />
-        <WhatsAppIcon className="w-4 h-4 relative z-10 scale-125" />
-      </a>
-
-      {/* BACK TO TOP BUTTON */}
-      <AnimatePresence>
-        {showScrollTop && (
-          <motion.button
-            initial={{ opacity: 0, scale: 0, y: 20 }}
-            animate={{ opacity: 1, scale: 1, y: 0 }}
-            exit={{ opacity: 0, scale: 0, y: 20 }}
-            whileHover={{
-              scale: 1.1,
-              boxShadow: "0 0 20px rgba(21,101,192,0.6)",
-            }}
-            whileTap={{ scale: 0.9 }}
-            onClick={scrollToTop}
-            className="fixed bottom-20 end-8 z-50 w-12 h-12 rounded-full bg-primary text-white flex items-center justify-center shadow-lg hover:bg-brightblue transition-colors focus:outline-none focus:ring-4 focus:ring-primary/30"
-            aria-label={t("scrollToTop")}
-          >
-            <ChevronUp size={24} />
-          </motion.button>
-        )}
-      </AnimatePresence>
     </footer>
   );
 };

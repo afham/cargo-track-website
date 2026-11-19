@@ -62,6 +62,18 @@ export default async function ServiceDetailPage({
   const description = t(`services.${service.index}.description`);
   const serviceId = t(`services.${service.index}.id`);
 
+  let extendedContent: string[] = [];
+  try {
+    const rawContent = t.raw(`services.${service.index}.content`);
+    if (Array.isArray(rawContent)) {
+      extendedContent = rawContent.filter(
+        (item): item is string => typeof item === "string",
+      );
+    }
+  } catch {
+    extendedContent = [];
+  }
+
   return (
     <main className="w-full min-h-screen bg-brand-bg relative overflow-hidden pt-24 lg:pt-28 pb-20">
       {/* Background Ambience */}
@@ -121,7 +133,7 @@ export default async function ServiceDetailPage({
               <div className="absolute inset-0 bg-gradient-to-t from-navy/60 via-transparent to-transparent pointer-events-none" />
             </div>
 
-            {/* Description */}
+            {/* Description & Key Inclusions */}
             <div className="bg-white rounded-2xl p-6 sm:p-8 border border-brand-text/[0.06] shadow-sm mb-8">
               <h2 className="font-heading font-bold text-xl text-navy mb-3">
                 {isAr ? "نظرة عامة على الخدمة" : "Service Overview"}
@@ -147,6 +159,22 @@ export default async function ServiceDetailPage({
               </div>
             </div>
 
+            {/* Extended Service Details & Advantages */}
+            {extendedContent.length > 0 && (
+              <article className="bg-white rounded-2xl p-6 sm:p-8 border border-brand-text/[0.06] shadow-sm mb-8">
+                <h2 className="font-heading font-bold text-xl text-navy mb-4">
+                  {isAr
+                    ? "تفاصيل الخدمة ومزايا العمل معنا"
+                    : "How We Deliver & Why Choose Us"}
+                </h2>
+                <div className="space-y-4 text-slate-600 text-sm sm:text-base leading-relaxed">
+                  {extendedContent.map((paragraph, idx) => (
+                    <p key={idx}>{paragraph}</p>
+                  ))}
+                </div>
+              </article>
+            )}
+
             {/* Trust Badges */}
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-8">
               <div className="p-4 rounded-xl bg-white border border-brand-text/[0.05] shadow-sm flex items-center gap-3">
@@ -171,12 +199,8 @@ export default async function ServiceDetailPage({
           </div>
 
           {/* Sticky Right Column: Quote Form */}
-          {/* <section
-          id="quote-section"
-          className="bg-navy rounded-[28px] p-8 sm:p-12 text-white relative overflow-hidden shadow-[0_25px_60px_rgba(11,58,102,0.25)] flex flex-col lg:flex-row items-center justify-between gap-10"
-        ></section> */}
           <div className="lg:col-span-5 w-full flex justify-center lg:justify-end sticky top-28">
-            <div className="w-fit max-w-[460px] bg-navy  rounded-[28px]">
+            <div className="w-fit max-w-[460px] bg-navy rounded-[28px]">
               <QuoteForm />
             </div>
           </div>

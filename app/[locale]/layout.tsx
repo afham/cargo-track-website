@@ -7,6 +7,7 @@ import { notFound } from "next/navigation";
 import { routing } from "@/i18n/routing";
 import { Navbar } from "@/app/modules/Navbar";
 import "./globals.css";
+import FloatingActionButtons from "../modules/FloatingActionButtons";
 
 const plusJakarta = Plus_Jakarta_Sans({
   variable: "--font-sans",
@@ -103,6 +104,7 @@ export default async function RootLayout({
         <NextIntlClientProvider messages={messages}>
           <Navbar />
           {children}
+          <FloatingActionButtons />
         </NextIntlClientProvider>
         <GoogleAnalytics gaId={process.env.NEXT_PUBLIC_GA_ID!} />
       </body>

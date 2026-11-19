@@ -92,17 +92,13 @@ export const GallerySection = ({ limit }: GallerySectionProps) => {
   }, [limit, t]);
 
   const handleNext = useCallback(() => {
-    if (selectedIndex !== null) {
-      setSelectedIndex((prev) =>
-        prev !== null && prev < items.length - 1 ? prev + 1 : prev,
-      );
-    }
+    setSelectedIndex((prev) =>
+      prev !== null && prev < items.length - 1 ? prev + 1 : prev,
+    );
   }, [items.length]);
 
   const handlePrev = useCallback(() => {
-    if (selectedIndex !== null) {
-      setSelectedIndex((prev) => (prev !== null && prev > 0 ? prev - 1 : prev));
-    }
+    setSelectedIndex((prev) => (prev !== null && prev > 0 ? prev - 1 : prev));
   }, []);
 
   // Performance-optimized manual scrolling handler using native scroll behavior
