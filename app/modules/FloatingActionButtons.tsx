@@ -2,6 +2,7 @@
 
 import React, { useState, useEffect, useCallback } from "react";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
 import { ChevronUp, FileText } from "lucide-react";
 import { useLocale, useTranslations } from "next-intl";
@@ -28,8 +29,11 @@ const WhatsAppIcon = ({ className = "w-5 h-5" }: { className?: string }) => (
 export const FloatingActionButtons = () => {
   const t = useTranslations("FooterSection");
   const locale = useLocale();
+  const pathname = usePathname();
   const isAr = locale === "ar";
   const [showScrollTop, setShowScrollTop] = useState(false);
+
+  const isQuotePage = /\/request-(a-)?quote\/?$/.test(pathname || "");
 
   useEffect(() => {
     let ticking = false;
@@ -90,23 +94,25 @@ export const FloatingActionButtons = () => {
             onClick={scrollToTop}
             aria-label={t("scrollToTop")}
             title={t("scrollToTop")}
-            className="pointer-events-auto w-11 h-11 mr-1  rounded-full bg-navy text-white border border-white/15 flex items-center justify-center shadow-lg hover:bg-primary transition-colors focus:outline-none focus:ring-4 focus:ring-primary/30"
+            className="pointer-events-auto w-11 h-11 sm:w-12 sm:h-12 rounded-full bg-navy text-white border border-white/15 flex items-center justify-center shadow-lg hover:bg-primary transition-colors focus:outline-none focus:ring-4 focus:ring-primary/30"
           >
-            <ChevronUp size={26} />
+            <ChevronUp size={22} />
           </motion.button>
         )}
       </AnimatePresence>
 
-      {/* Request Free Quote + WhatsApp Row/Stack */}
+      {/* Request Free Quote (hidden on quote page) + WhatsApp */}
       <div className="pointer-events-auto flex items-center gap-2.5 sm:gap-3">
-        <Link
-          href={`/${locale}/request-a-quote`}
-          onClick={trackQuoteClick}
-          className="inline-flex items-center gap-2 h-11 sm:h-12 px-4 sm:px-5 rounded-full bg-primary text-white font-heading font-bold text-xs sm:text-sm shadow-lg shadow-primary/25 hover:bg-navy hover:shadow-xl transition-all duration-300 focus:outline-none focus:ring-4 focus:ring-primary/30"
-        >
-          <FileText size={16} className="shrink-0" />
-          <span>{quoteLabel}</span>
-        </Link>
+        {!isQuotePage && (
+          <Link
+            href={`/${locale}/request-a-quote`}
+            onClick={trackQuoteClick}
+            className="inline-flex items-center gap-2 h-11 sm:h-12 px-4 sm:px-5 rounded-full bg-primary text-white font-heading font-bold text-xs sm:text-sm shadow-lg shadow-primary/25 hover:bg-navy hover:shadow-xl transition-all duration-300 focus:outline-none focus:ring-4 focus:ring-primary/30"
+          >
+            <FileText size={16} className="shrink-0" />
+            <span>{quoteLabel}</span>
+          </Link>
+        )}
 
         <a
           href={whatsappUrl}
@@ -115,13 +121,13 @@ export const FloatingActionButtons = () => {
           rel="noopener noreferrer"
           aria-label={whatsappLabel}
           title={whatsappLabel}
-          className="relative inline-flex items-center justify-center w-14 h-14 sm:w-14 sm:h-14 rounded-full bg-emerald-500 text-white shadow-lg shadow-emerald-600/25 hover:bg-emerald-600 hover:scale-105 active:scale-95 transition-all duration-300 focus:outline-none focus:ring-4 focus:ring-emerald-500/30"
+          className="relative inline-flex items-center justify-center w-11 h-11 sm:w-12 sm:h-12 rounded-full bg-emerald-500 text-white shadow-lg shadow-emerald-600/25 hover:bg-emerald-600 hover:scale-105 active:scale-95 transition-all duration-300 focus:outline-none focus:ring-4 focus:ring-emerald-500/30"
         >
           <span
             className="absolute inset-0 rounded-full bg-emerald-500/50 animate-[ping_1.8s_cubic-bezier(0,0,0.2,1)_infinite] pointer-events-none"
             aria-hidden="true"
           />
-          <WhatsAppIcon className="w-8 h-8 relative z-10" />
+          <WhatsAppIcon className="w-5 h-5 relative z-10" />
         </a>
       </div>
     </div>
