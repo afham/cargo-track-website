@@ -176,181 +176,653 @@
       {
         "id": "01",
         "title": "Home Shifting Services",
-        "description": "Our Home Shifting Service includes packing and assembling furniture and other household items, transportation, unpacking and placing your household belongings.",
+        "description": "End-to-end packing, furniture dismantling and assembly, safe transit, and room-by-room placement for apartments and villas.",
         "tags": [
           "Packing & Assembly",
           "Safe Transport",
           "Unpacking & Placement"
         ],
-        "content": [
-          "Relocating a household—whether you are moving out of an apartment, transitioning into a spacious family villa, or shifting between cities—involves far more than just putting boxes into a truck. CargoTrack provides complete, end-to-end Home Shifting Services designed to take the physical strain and logistical pressure off you and your family.",
-          "Our experienced crew begins with organized preparation and room-by-room packing using durable cartons, multi-layer bubble wrap, corner protectors, and padded blankets. Fragile glassware, kitchen appliances, electronics, wardrobes, and everyday essentials are wrapped and labeled systematically so nothing gets misplaced or damaged along the way.",
-          "Once transported in clean, well-maintained vehicles, we do not simply drop off sealed boxes at the door. Our team unloads carefully, unboxes your belongings, reassembles furniture, and places items into their designated rooms so you can settle into your new home faster.",
-          "The biggest advantage of choosing CargoTrack for home shifting is coordinated accountability and time savings. Instead of juggling separate packers, truck rentals, and furniture assemblers, you get one reliable team focused on care, punctuality, and a smooth move-in experience."
+        "steps": [
+          {
+            "title": "Quick Quote or Survey",
+            "detail": "Share your home size or item list to lock in a clear moving plan."
+          },
+          {
+            "title": "Room-by-Room Packing",
+            "detail": "Cartons, bubble wrap, corner guards, and labeled boxes for every room."
+          },
+          {
+            "title": "Careful Transit",
+            "detail": "Clean, well-maintained vehicles with balanced loading and protection."
+          },
+          {
+            "title": "Unpack & Settle In",
+            "detail": "Furniture reassembled and boxes placed in their matching rooms."
+          }
+        ],
+        "highlights": [
+          {
+            "label": "Apartments & Villas",
+            "detail": "Suited for compact flats, multi-bedroom homes, and family villas."
+          },
+          {
+            "label": "Furniture & Fragiles",
+            "detail": "Wardrobes, beds, appliances, and glassware wrapped and handled with care."
+          },
+          {
+            "label": "Single-Team Accountability",
+            "detail": "One coordinated crew from packing through setup—no juggling separate vendors."
+          }
+        ],
+        "faqs": [
+          {
+            "q": "Do you handle both packing and furniture assembly?",
+            "a": "Yes. Our crew packs your items, moves them, and reassembles standard household furniture on arrival."
+          },
+          {
+            "q": "Can you move both apartments and large family villas?",
+            "a": "Yes—we scale crew size, packing materials, and vehicle capacity to match your home size."
+          },
+          {
+            "q": "Will boxes be placed in the right rooms at delivery?",
+            "a": "Yes. Items are labeled by room and placed in their designated spaces rather than dumped at the door."
+          }
         ]
       },
       {
         "id": "02",
         "title": "Packers and Movers Services",
-        "description": "Reliable end-to-end packing and moving solutions using high-grade protective materials, careful loading, secure transit, and organized unloading for stress-free relocations.",
+        "description": "Reliable packing, protective materials, balanced loading, secure transit, and organized unloading for stress-free moves.",
         "tags": ["Quality Packing", "Careful Loading", "Door-to-Door Move"],
-        "content": [
-          "Strong packing is the foundation of every damage-free move. CargoTrack's Packers and Movers Services combine structured moving workflows with high-grade packing supplies so your items stay protected from the moment they are wrapped until they reach their final destination.",
-          "We select protective materials based on what you are moving—using heavy-duty double-wall boxes, stretch film, foam sheets, edge guards, and custom reinforcement for delicate or high-value items. Every carton is clearly marked by room and content type to keep loading, transit, and unloading orderly and transparent.",
-          "Our loading teams balance weight distribution inside the transport vehicle to prevent shifting, crushing, or friction on bumpy roads or long-distance routes. At delivery, items are unloaded methodically and placed cleanly without rushed or careless handling.",
-          "Partnering with CargoTrack gives you clear expectations, dependable schedules, and fewer hidden headaches. You benefit from lower risk of breakage, faster turnaround times, and a well-organized relocation handled by professionals who treat your belongings with respect."
+        "steps": [
+          {
+            "title": "Fast Quote or Survey",
+            "detail": "Message or request a quote with your pickup, drop-off, and item details."
+          },
+          {
+            "title": "Protective Wrapping",
+            "detail": "Double-wall cartons, bubble wrap, foam sheets, and edge guards."
+          },
+          {
+            "title": "Balanced Loading & Transit",
+            "detail": "Secure load distribution to prevent shifting or friction in transit."
+          },
+          {
+            "title": "Organized Unloading",
+            "detail": "Methodical unloading and clean placement at your destination."
+          }
+        ],
+        "highlights": [
+          {
+            "label": "Packing Materials Supplied",
+            "detail": "Double-wall boxes, stretch film, foam, edge protectors, and room labels."
+          },
+          {
+            "label": "Delicate & Everyday Items",
+            "detail": "Extra protection for fragile pieces, kitchenware, electronics, and boxes."
+          },
+          {
+            "label": "Structured Door-to-Door Flow",
+            "detail": "Clear labeling and orderly handling from pickup to final drop-off."
+          }
+        ],
+        "faqs": [
+          {
+            "q": "Do you provide the packing boxes and wrapping materials?",
+            "a": "Yes—protective cartons, wrapping, and cushioning are supplied as part of our packing service."
+          },
+          {
+            "q": "How do you keep items organized during the move?",
+            "a": "Cartons are marked by room and contents so loading and unloading stay orderly."
+          },
+          {
+            "q": "Do you offer both local and longer-distance moving?",
+            "a": "Yes—we handle local city moves as well as intercity and broader regional relocations."
+          }
         ]
       },
       {
         "id": "03",
         "title": "Furniture Shifting Services",
-        "description": "Specialized furniture dismantling, protective wrapping, safe loading, transport, and expert reassembly for beds, sofas, wardrobes, and delicate home or office pieces.",
+        "description": "Specialized dismantling, protective wrapping, safe loading, transport, and reassembly for home and office furniture.",
         "tags": [
           "Dismantling & Assembly",
           "Protective Wrapping",
           "Damage-Free Transit"
         ],
-        "content": [
-          "Heavy, oversized, and modular furniture—such as beds, sliding wardrobes, sofas, sectionals, dining tables, and office workstations—can easily suffer scratches, chipped laminates, or loose joints if handled with improper tools or rushed lifting. CargoTrack offers dedicated Furniture Shifting Services built specifically for safe furniture movement.",
-          "Before moving a single piece, our technicians carefully disassemble modular components and fittings, keep hardware organized so nothing goes missing, and wrap surfaces, corners, and glass or wood panels in protective padding and film.",
-          "During loading and transit, furniture pieces are braced securely so they do not rub against vehicle walls or other cargo. Upon arrival, our team reassembles beds, cabinets, tables, and fixtures accurately and positions them according to your layout.",
-          "The key advantage of specialized furniture shifting is preserving the lifespan and appearance of your furnishings while avoiding injury or frustration. You save hours of DIY assembly and reduce the risk of costly repairs or replacements."
+        "steps": [
+          {
+            "title": "Dismantle & Hardware Care",
+            "detail": "Modular pieces disassembled and fittings bagged so nothing goes missing."
+          },
+          {
+            "title": "Surface & Edge Protection",
+            "detail": "Padding, film, and corner guards on wood, glass, and upholstery."
+          },
+          {
+            "title": "Braced Vehicle Transit",
+            "detail": "Secured inside the truck to prevent rubbing, tipping, or impact."
+          },
+          {
+            "title": "Reassembly & Placement",
+            "detail": "Rebuilt accurately and positioned where you want each piece."
+          }
+        ],
+        "highlights": [
+          {
+            "label": "Bedroom & Living Pieces",
+            "detail": "Beds, wardrobes, sofas, sectionals, dining sets, and TV units."
+          },
+          {
+            "label": "Office Furniture",
+            "detail": "Desks, workstations, conference tables, and storage cabinets."
+          },
+          {
+            "label": "Finish & Joint Protection",
+            "detail": "Helps prevent scratches, chipped edges, loose joints, and strain injuries."
+          }
+        ],
+        "faqs": [
+          {
+            "q": "Do you dismantle beds and wardrobes before moving them?",
+            "a": "Yes—our crew disassembles eligible pieces before transit and reassembles them at the destination."
+          },
+          {
+            "q": "How do you protect delicate or large furniture pieces?",
+            "a": "We wrap surfaces and edges in protective padding and film and brace loads securely in transit."
+          },
+          {
+            "q": "Can you shift just a few furniture pieces or full room sets?",
+            "a": "Yes—whether you are moving specific items or full sets, we tailor the crew and truck to the load."
+          }
         ]
       },
       {
         "id": "04",
         "title": "Warehouse and Storage Services",
-        "description": "Cargotrack offers secure and convenient storage solutions to meet your short or long-term needs, giving you peace of mind that your belongings are safe and protected.",
+        "description": "Flexible short-term and long-term storage with organized inventory handling and protected custody until delivery.",
         "tags": ["Short & Long-term", "Secure Storage", "Protected Belongings"],
-        "content": [
-          "Life and business timelines do not always line up neatly—your new home might not be ready yet, you may be renovating a property, traveling abroad, or managing extra inventory that needs space outside your main premises. CargoTrack's Warehouse and Storage Services provide flexible short-term and long-term storage tailored to your exact timeline.",
-          "Items placed into storage are packed, logged, and arranged cleanly so your belongings remain organized, accessible, and protected from clutter or casual handling while in our care.",
-          "Whether you are storing household furniture, personal boxes, or commercial goods, our storage approach focuses on structured inventory management, cleanliness, and dependable custody until you schedule retrieval or delivery.",
-          "With CargoTrack, you gain space on demand without committing to rigid long-term leases or worrying about how your items are being kept. Whenever you are ready, we coordinate smooth retrieval and delivery back to your doorstep or facility."
+        "steps": [
+          {
+            "title": "Pack & Log Items",
+            "detail": "Belongings are packed, tagged, and recorded for clear tracking."
+          },
+          {
+            "title": "Store by Duration",
+            "detail": "Flexible short- or long-term options for renovations, gaps, or travel."
+          },
+          {
+            "title": "Maintain Orderly Custody",
+            "detail": "Kept cleanly arranged and separated from casual clutter or mishandling."
+          },
+          {
+            "title": "Schedule Redelivery",
+            "detail": "Delivered back to your home or site whenever your timeline is ready."
+          }
+        ],
+        "highlights": [
+          {
+            "label": "Flexible Timelines",
+            "detail": "Ideal between leases, during home renovations, or while abroad."
+          },
+          {
+            "label": "Household & Commercial",
+            "detail": "Suited for furniture, personal boxes, seasonal stock, and equipment."
+          },
+          {
+            "label": "On-Demand Retrieval",
+            "detail": "Coordinate pickup or redelivery when you have your new keys or space."
+          }
+        ],
+        "faqs": [
+          {
+            "q": "Can I store items for just a few weeks or several months?",
+            "a": "Yes—we offer flexible short-term and long-term storage depending on your schedule."
+          },
+          {
+            "q": "What can I put into storage?",
+            "a": "Household furniture, packed boxes, personal belongings, and commercial or business items."
+          },
+          {
+            "q": "How do I get my items back when I'm ready?",
+            "a": "Simply reach out to schedule retrieval and delivery to your new address."
+          }
         ]
       },
       {
         "id": "05",
         "title": "Office Relocation",
-        "description": "Our professional office relocation services are designed to make business moves seamless and efficient. From detailed planning and secure packing to transportation, unpacking, and setup, we handle your office equipment, furniture, and belongings with care and precision.",
+        "description": "Planned office, clinic, and commercial moves with labeled equipment handling, transport, and workspace setup to cut downtime.",
         "tags": [
           "Strategic Planning",
           "Equipment Setup",
           "Commercial Transport"
         ],
-        "content": [
-          "Moving an office, clinic, studio, or commercial workspace requires strict coordination so daily operations and client commitments stay on track. CargoTrack delivers structured Office Relocation services planned around your business hours, floor layout, and departmental priorities.",
-          "We assist with organized packing and labeling of desks, chairs, filing systems, documents, display units, and office electronics. Each item is tagged by department or workspace zone so nothing gets lost in the shuffle between old and new locations.",
-          "Our crew executes disciplined loading, transport, and placement at the destination site, helping your team get back to work quickly with minimal downtime or confusion.",
-          "The advantage for businesses is continuity, speed, and control. A well-sequenced relocation protects expensive commercial assets, reduces employee disruption, and allows management to stay focused on running the business rather than supervising logistics."
+        "steps": [
+          {
+            "title": "Move Plan & Zoning",
+            "detail": "Mapped around work schedules, floor layouts, and department priorities."
+          },
+          {
+            "title": "Labeled Packing",
+            "detail": "Workstations, files, and electronics tagged by team or room."
+          },
+          {
+            "title": "Coordinated Transit",
+            "detail": "Disciplined loading and direct transport to the new office."
+          },
+          {
+            "title": "Workspace Placement",
+            "detail": "Desks, equipment, and boxes placed so teams resume work fast."
+          }
+        ],
+        "highlights": [
+          {
+            "label": "Offices, Clinics & Studios",
+            "detail": "Structured for active businesses that cannot afford chaotic downtime."
+          },
+          {
+            "label": "Department & Asset Tagging",
+            "detail": "Keeps IT gear, files, and furniture organized from old to new site."
+          },
+          {
+            "label": "Minimal Business Disruption",
+            "detail": "Scheduled to keep your team focused on operations rather than moving logistics."
+          }
+        ],
+        "faqs": [
+          {
+            "q": "Can you help keep office downtime to a minimum?",
+            "a": "Yes—we plan around your layout, department tags, and schedule so teams can get back to work quickly."
+          },
+          {
+            "q": "What types of commercial spaces do you relocate?",
+            "a": "We handle offices, clinics, studios, and commercial workspaces."
+          },
+          {
+            "q": "Do you pack office furniture, files, and equipment?",
+            "a": "Yes—we assist with packing, labeling, moving, and placing desks, files, and office gear."
+          }
         ]
       },
       {
         "id": "06",
         "title": "Vehicle Relocation",
-        "description": "We provide professional, reliable, and flexible road transportation solutions tailored to your needs. We also offer seamless vehicle relocation services worldwide, ensuring safe, efficient, and cost-effective transportation.",
+        "description": "Dependable domestic road transport and worldwide vehicle shipping with clear checks and practical scheduling.",
         "tags": [
           "Flexible Road Transport",
           "Worldwide Vehicle Moves",
           "Affordable Shipping"
         ],
-        "content": [
-          "Driving a personal car or company vehicle over long distances takes a heavy toll in fuel, fatigue, wear and tear, and lost time. CargoTrack provides dependable domestic road transport and international vehicle relocation for sedans, SUVs, family cars, and commercial vehicles.",
-          "Our process emphasizes clear pre-transport checks, proper documentation guidance, and secure vehicle handling so your car is moved responsibly across cities, across the region, or internationally.",
-          "We tailor scheduling and transport options to match your timeline and budget, giving you a practical alternative to long self-drives or complicated shipping arrangements.",
-          "Choosing CargoTrack for vehicle relocation saves mileage and travel stress while giving you structured coordination from pickup to arrival."
+        "steps": [
+          {
+            "title": "Route & Quote Setup",
+            "detail": "Share vehicle type, pickup, and destination for tailored transport options."
+          },
+          {
+            "title": "Pre-Move Check & Docs",
+            "detail": "Structured inspection and guidance on required paperwork."
+          },
+          {
+            "title": "Road or Global Transit",
+            "detail": "Handled across cities, the region, or international routes."
+          },
+          {
+            "title": "Arrival & Handover",
+            "detail": "Coordinated delivery at the destination without long self-driving."
+          }
+        ],
+        "highlights": [
+          {
+            "label": "Domestic & International",
+            "detail": "Options for local/regional road transport and worldwide vehicle shipping."
+          },
+          {
+            "label": "Personal & Fleet Vehicles",
+            "detail": "Sedans, SUVs, family cars, and company vehicles."
+          },
+          {
+            "label": "Saves Mileage & Fatigue",
+            "detail": "Avoids long highway drives, fuel wear, and multi-day travel strain."
+          }
+        ],
+        "faqs": [
+          {
+            "q": "Do you ship cars locally as well as internationally?",
+            "a": "Yes—we support road transportation across cities/regions as well as worldwide vehicle relocation."
+          },
+          {
+            "q": "What kinds of vehicles can be relocated?",
+            "a": "Personal cars like sedans and SUVs as well as family and commercial vehicles."
+          },
+          {
+            "q": "Do you guide on required paperwork before transport?",
+            "a": "Yes—we provide guidance on documentation and pre-transport checks ahead of dispatch."
+          }
         ]
       },
       {
         "id": "07",
         "title": "Industrial Packing",
-        "description": "Our industrial packing services provide secure, reliable solutions for transporting heavy machinery and valuable equipment, using high-quality packing materials and specialized techniques to ensure maximum protection throughout the journey.",
+        "description": "Heavy-duty crating, bracing, and protective wrapping for machinery and commercial equipment in road, sea, or air transit.",
         "tags": [
           "Heavy Machinery",
           "Premium Materials",
           "Equipment Protection"
         ],
-        "content": [
-          "Heavy machinery, industrial tools, generators, sensitive instruments, and high-value commercial equipment face severe stress during road, sea, or air transit. CargoTrack's Industrial Packing services are engineered to protect demanding loads against impact, vibration, shifting, and environmental exposure.",
-          "Using sturdy crating, heavy-duty timber and bracing, moisture-resistant barriers, and protective wraps, we build packaging suited to the weight, dimensions, and sensitivity of each asset.",
-          "Every pack is prepared with handling and transport realities in mind—whether the shipment is moving locally, across regional borders, or into international export channels.",
-          "The clear advantage is risk reduction on high-value assets. Proper industrial packing helps prevent costly transit damage, customs/handling delays, and unexpected downtime once equipment reaches the site."
+        "steps": [
+          {
+            "title": "Assess Load & Route",
+            "detail": "Reviewed by weight, dimensions, sensitivity, and transport mode."
+          },
+          {
+            "title": "Custom Crating & Wrap",
+            "detail": "Built with timber crating, bracing, moisture barriers, and padding."
+          },
+          {
+            "title": "Handling-Ready Prep",
+            "detail": "Configured for local, regional, or export transit stress."
+          },
+          {
+            "title": "Dispatch & Arrival",
+            "detail": "Designed to reduce impact, shifting, and on-site damage risk."
+          }
+        ],
+        "highlights": [
+          {
+            "label": "Machinery & Equipment",
+            "detail": "Built for heavy tools, generators, instruments, and commercial gear."
+          },
+          {
+            "label": "Protective Engineering",
+            "detail": "Timber bracing, sturdy crates, wraps, and moisture protection."
+          },
+          {
+            "label": "Lower Transit Risk",
+            "detail": "Helps prevent costly damage, handling delays, and site downtime."
+          }
+        ],
+        "faqs": [
+          {
+            "q": "What equipment is industrial packing suited for?",
+            "a": "Heavy machinery, industrial tools, generators, sensitive instruments, and high-value commercial gear."
+          },
+          {
+            "q": "Do you use custom crating and bracing?",
+            "a": "Yes—we use crates, timber bracing, moisture-resistant barriers, and protective wraps matched to the load."
+          },
+          {
+            "q": "Does this cover export or long-haul shipping?",
+            "a": "Yes—packaging is prepared for local, regional, and international shipping conditions."
+          }
         ]
       },
       {
         "id": "08",
         "title": "Freight Forwarding",
-        "description": "CargoTrack delivers complete air, sea, and land freight forwarding services across Saudi Arabia and globally. We manage everything from cargo booking and documentation to customs clearance and final delivery.",
+        "description": "End-to-end air, sea, and land freight across Saudi Arabia and globally, including booking, customs clearance, and delivery.",
         "tags": ["Air, Sea & Land", "End-to-End Shipping", "Global Logistics"],
-        "content": [
-          "Moving freight across borders or between global markets involves multiple moving parts—carrier bookings, shipping documents, customs procedures, and last-mile coordination. CargoTrack simplifies this with integrated air, sea, and land freight forwarding across Saudi Arabia and international trade lanes.",
-          "We help match your cargo to the right transport mode based on urgency, volume, and cost—whether you need fast air freight for time-sensitive goods, sea freight for bulk or container shipments, or overland freight for regional routes.",
-          "From shipment coordination and paperwork support to customs clearance and final delivery, we keep your supply chain moving with clear communication at every stage.",
-          "Working with CargoTrack as a freight forwarding partner gives you consolidated coordination, fewer handoff gaps, and dependable delivery from origin to destination."
+        "steps": [
+          {
+            "title": "Select Freight Mode",
+            "detail": "Match cargo to air, sea, or overland freight based on speed and cost."
+          },
+          {
+            "title": "Booking & Paperwork",
+            "detail": "Coordinate carrier space and shipping documentation."
+          },
+          {
+            "title": "Customs Clearance",
+            "detail": "Support border and port clearance steps for smooth movement."
+          },
+          {
+            "title": "Final Delivery",
+            "detail": "Complete last-mile coordination to the destination."
+          }
+        ],
+        "highlights": [
+          {
+            "label": "Air, Sea & Overland",
+            "detail": "Flexible routing across Saudi Arabia and global trade lanes."
+          },
+          {
+            "label": "Consolidated Coordination",
+            "detail": "Fewer handoff gaps from origin booking through customs and delivery."
+          },
+          {
+            "label": "Urgent to Bulk Cargo",
+            "detail": "Suited for time-sensitive air shipments, containers, and regional freight."
+          }
+        ],
+        "faqs": [
+          {
+            "q": "Which freight modes do you handle?",
+            "a": "We coordinate air, sea, and land freight across Saudi Arabia and international routes."
+          },
+          {
+            "q": "Do you help with customs clearance and documentation?",
+            "a": "Yes—we assist with shipping documentation and customs clearance through final delivery."
+          },
+          {
+            "q": "How do I choose between air, sea, and land freight?",
+            "a": "We help match the transport mode to your cargo size, budget, and delivery timeline."
+          }
         ]
       },
       {
         "id": "09",
         "title": "Transportation",
-        "description": "CargoTrack provides safe and reliable transportation services across Saudi Arabia and the GCC. We handle local transport, container shipping, FTL, LTL, and smooth customs clearance for import/export cargo.",
+        "description": "Reliable Saudi and GCC ground transport covering local runs, container shipping, FTL, LTL, and customs clearance support.",
         "tags": [
           "Saudi & GCC Network",
           "FTL & LTL Transport",
           "Customs Clearance"
         ],
-        "content": [
-          "Consistent ground and regional logistics are essential for keeping supply chains and commercial operations running smoothly. CargoTrack provides dependable transportation services across Saudi Arabia and the GCC, supporting local city-to-city runs, container movements, and cross-border shipments.",
-          "We offer both Full Truckload (FTL) for dedicated high-volume or direct loads and Less-Than-Truckload (LTL) for flexible, cost-effective shipping when your cargo does not require a full truck.",
-          "Our team also supports smooth customs clearance coordination for import and export cargo, helping shipments transition cleanly through checkpoints and reach their final destination on schedule.",
-          "The advantage for businesses and shippers is flexibility, regional reach, and reliable execution—allowing you to scale shipping capacity up or down while maintaining consistent delivery standards."
+        "steps": [
+          {
+            "title": "Define Load & Route",
+            "detail": "Set up city-to-city, container, or cross-border GCC transport."
+          },
+          {
+            "title": "Choose FTL or LTL",
+            "detail": "Full truckload for dedicated loads or LTL for smaller shipments."
+          },
+          {
+            "title": "Clearance & Transit",
+            "detail": "Support import/export checkpoints and steady ground transit."
+          },
+          {
+            "title": "On-Schedule Drop-Off",
+            "detail": "Deliver cargo reliably to its destination facility or site."
+          }
+        ],
+        "highlights": [
+          {
+            "label": "Saudi & GCC Coverage",
+            "detail": "Built for domestic routes, container moves, and cross-border shipping."
+          },
+          {
+            "label": "FTL & LTL Flexibility",
+            "detail": "Scale capacity to full trucks or cost-effective partial loads."
+          },
+          {
+            "label": "Import & Export Support",
+            "detail": "Helps commercial shippers move goods cleanly across checkpoints."
+          }
+        ],
+        "faqs": [
+          {
+            "q": "Do you offer both Full Truckload (FTL) and LTL shipping?",
+            "a": "Yes—we provide FTL for large or dedicated loads and LTL for smaller, flexible shipments."
+          },
+          {
+            "q": "Do you cover routes outside a single city?",
+            "a": "Yes—we operate across Saudi Arabia and the GCC, including container and cross-border moves."
+          },
+          {
+            "q": "Can you assist with import/export customs clearance?",
+            "a": "Yes—we support customs clearance coordination for commercial import and export cargo."
+          }
         ]
       },
       {
         "id": "10",
         "title": "Pet Relocation",
-        "description": "Our pet relocation services cover every aspect of your pet’s journey, including safe pick-up and delivery, preparation of required documentation, and provision of suitable travel crates and facilities for a smooth and comfortable relocation.",
+        "description": "Safe pet pickup, compliant travel crates, paperwork guidance, and coordinated delivery for smooth relocations.",
         "tags": [
           "Pet Pick-up & Delivery",
           "Travel Documentation",
           "Approved Containers"
         ],
-        "content": [
-          "Pets are part of the family, and relocating with them requires thoughtful planning, compliant travel crates, and accurate paperwork. CargoTrack's Pet Relocation services are designed to make moving with your companion safe, organized, and less stressful.",
-          "We assist with coordinated pickup and delivery, guidance on required travel and entry/exit documentation, and proper travel crates sized and ventilated for your pet's comfort and safety.",
-          "Every step is planned with care and attention to routing requirements so your pet's journey is handled smoothly from start to finish.",
-          "The advantage for pet owners is peace of mind and practical guidance through complex travel requirements, letting you focus on your pet's comfort while logistics are handled systematically."
+        "steps": [
+          {
+            "title": "Plan Route & Paperwork",
+            "detail": "Review travel requirements and required entry/exit documents."
+          },
+          {
+            "title": "Prepare Travel Crate",
+            "detail": "Use properly sized, ventilated crates suited to your pet."
+          },
+          {
+            "title": "Coordinated Pickup & Transit",
+            "detail": "Planned pickup and routing focused on safety and comfort."
+          },
+          {
+            "title": "Safe Arrival Handover",
+            "detail": "Smooth delivery at the destination with clear coordination."
+          }
+        ],
+        "highlights": [
+          {
+            "label": "Safe, Ventilated Crates",
+            "detail": "Properly sized containers chosen for comfort and compliance."
+          },
+          {
+            "label": "Documentation Guidance",
+            "detail": "Practical help navigating travel and entry/exit paperwork."
+          },
+          {
+            "label": "End-to-End Coordination",
+            "detail": "Structured pickup and delivery so pet owners have peace of mind."
+          }
+        ],
+        "faqs": [
+          {
+            "q": "Do you help with travel crates and paperwork?",
+            "a": "Yes—we guide you on required travel documents and provide suitable, ventilated crates."
+          },
+          {
+            "q": "Do you offer pickup and delivery support?",
+            "a": "Yes—we coordinate pickup, routing, and delivery so your pet's move stays organized."
+          },
+          {
+            "q": "How early should I plan a pet move?",
+            "a": "Reach out as early as possible so paperwork and crate arrangements have plenty of lead time."
+          }
         ]
       },
       {
         "id": "11",
         "title": "Pilgrim Baggage Handling",
-        "description": "Pilgrim baggage handling services play a crucial role in ensuring a hassle-free and smooth pilgrimage experience for those visiting the holy cities of Mecca and Medina in Saudi Arabia.",
+        "description": "Organized luggage pickup, secure transit, and timely delivery for Hajj and Umrah travelers across KSA cities.",
         "tags": [
           "Hassle-Free Pilgrim Care",
           "Mecca & Medina Transit",
           "Doorstep Shipping"
         ],
-        "content": [
-          "Traveling to Saudi Arabia for Hajj or Umrah often involves tight schedules, airport arrivals, hotel check-ins, and movement between key cities including Jeddah, Mecca, and Medina. Managing heavy bags on your own during these transitions can add unnecessary fatigue.",
-          "CargoTrack's Pilgrim Baggage Handling service provides organized pickup, secure transit, and timely delivery of luggage so pilgrims, families, and groups can travel lighter and stay focused on their worship and itinerary.",
-          "Our service is built around reliability, clear coordination, and respectful handling suited to the needs of visiting pilgrims.",
-          "The key advantage is convenience and peace of mind—removing luggage strain during travel transitions so you and your family can enjoy a calmer, more comfortable pilgrimage journey."
+        "steps": [
+          {
+            "title": "Book Bag Pickup",
+            "detail": "Schedule luggage collection around your flight, hotel, or travel plan."
+          },
+          {
+            "title": "Secure Transit",
+            "detail": "Handled carefully across key routes including Jeddah, Mecca, and Medina."
+          },
+          {
+            "title": "Timely Delivery",
+            "detail": "Bags arrive on schedule so you don't carry heavy luggage yourself."
+          }
+        ],
+        "highlights": [
+          {
+            "label": "Built for Hajj & Umrah",
+            "detail": "Designed for pilgrims, families, and groups with tight itineraries."
+          },
+          {
+            "label": "Key City Transitions",
+            "detail": "Helps ease movement between arrivals, hotels, Mecca, and Medina."
+          },
+          {
+            "label": "Travel Lighter",
+            "detail": "Reduces physical strain so you can stay focused on worship and travel."
+          }
+        ],
+        "faqs": [
+          {
+            "q": "Who is this service for?",
+            "a": "Pilgrims, families, and groups visiting Saudi Arabia for Hajj or Umrah who want hassle-free luggage transit."
+          },
+          {
+            "q": "Which routes or cities are covered?",
+            "a": "We support transitions across key Saudi destinations including Jeddah, Mecca, and Medina."
+          },
+          {
+            "q": "Why use baggage handling during pilgrimage?",
+            "a": "It removes heavy bag handling during tight travel schedules so you can move more comfortably."
+          }
         ]
       },
       {
         "id": "12",
         "title": "Deep Cleaning Service",
-        "description": "We provide deep cleaning for homes, offices and facilities using eco-friendly products and equipment for spotless & hygienic results.",
+        "description": "Thorough home, office, and facility deep cleaning using eco-friendly products for move-in or post-work readiness.",
         "tags": [
           "Homes & Offices",
           "Eco-Friendly Products",
           "Spotless Results"
         ],
-        "content": [
-          "Everyday cleaning keeps surfaces tidy, but moving into a new home, wrapping up a renovation, or refreshing a busy office requires a much deeper level of care. CargoTrack offers thorough Deep Cleaning Services for residential homes, offices, and commercial facilities.",
-          "Our team uses effective cleaning equipment and eco-friendly products to tackle built-up dust, grime, and high-touch areas across rooms, kitchens, bathrooms, floors, and hard-to-reach corners—delivering a cleaner, healthier environment without harsh chemical residue.",
-          "Whether you are preparing a property for move-in, handing over a space after moving out, or maintaining workplace hygiene, we tailor the cleaning focus to your space.",
-          "The advantage is a genuinely fresh, hygienic, and move-in-ready environment while saving you hours of intensive labor and sourcing multiple cleaning supplies."
+        "steps": [
+          {
+            "title": "Scope the Space",
+            "detail": "Tailored to move-in, move-out, post-renovation, or routine deep needs."
+          },
+          {
+            "title": "Targeted Deep Clean",
+            "detail": "Tackles dust, grime, and high-touch areas in rooms, kitchens, and baths."
+          },
+          {
+            "title": "Eco-Friendly Finish",
+            "detail": "Uses effective equipment and eco-friendly products without harsh residue."
+          }
+        ],
+        "highlights": [
+          {
+            "label": "Residential & Commercial",
+            "detail": "Suitable for apartments, villas, offices, and commercial facilities."
+          },
+          {
+            "label": "Hard-to-Reach Detail",
+            "detail": "Goes beyond surface tidying into corners, floors, kitchens, and baths."
+          },
+          {
+            "label": "Move-In Ready",
+            "detail": "Ideal before moving into a new property or handing over a space."
+          }
+        ],
+        "faqs": [
+          {
+            "q": "Do you use eco-friendly cleaning products?",
+            "a": "Yes—we use effective cleaning equipment and eco-friendly products for a clean, hygienic result."
+          },
+          {
+            "q": "Is this good for move-in or post-renovation cleaning?",
+            "a": "Yes—it is designed for moving into a new space, post-renovation cleanup, or deep office refreshes."
+          },
+          {
+            "q": "Can you clean both homes and offices?",
+            "a": "Yes—we clean residential homes, apartments, villas, offices, and commercial spaces."
+          }
         ]
       }
     ]
