@@ -250,7 +250,7 @@ export default async function ServiceDetailPage({
 
         {/* Sliding Image Carousel Directly (Not Inside a Card) */}
         <div className="mb-6">
-          <GallerySection />
+          <GallerySection limit={30} />
         </div>
 
         {/* Inline Quote Form Block */}
