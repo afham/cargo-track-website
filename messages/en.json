@@ -74,8 +74,8 @@
     "fields": {
       "fullName": "Full Name *",
       "selectService": "Select Service *",
-      "email": "Email Address *",
-      "phone": "Phone Number",
+      "email": "Email Address",
+      "phone": "Phone Number *",
       "origin": "Origin (e.g. Mumbai)",
       "destination": "Destination (e.g. Dubai)",
       "message": "Additional shipment details (weight, dimensions, cargo type)..."
@@ -176,7 +176,7 @@
       {
         "id": "01",
         "title": "Home Shifting Services",
-        "description": "End-to-end packing, furniture dismantling and assembly, safe transit, and room-by-room placement for apartments and villas.",
+        "description": "End-to-end packing, furniture dismantling and assembly, safe transit, and room-by-room placement for apartments and villas. Our service covers Riyadh , Jeddah and Dammam Locally and Covers all major countries internatinally.",
         "tags": [
           "Packing & Assembly",
           "Safe Transport",
