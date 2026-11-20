@@ -167,7 +167,6 @@ export const QuoteForm = memo(() => {
               </label>
               <input
                 id="email"
-                required
                 type="email"
                 name="email"
                 value={formData.email}
@@ -184,6 +183,7 @@ export const QuoteForm = memo(() => {
                 id="phone"
                 type="tel"
                 name="phone"
+                required
                 value={formData.phone}
                 onChange={handleChange}
                 placeholder={t("fields.phone")}
