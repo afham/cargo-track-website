@@ -112,7 +112,7 @@ export default async function ServiceDetailPage({
         {/* Navigation Breadcrumb */}
         <div className="flex items-center gap-2 mb-6 text-sm">
           <Link
-            href={`/${locale}/services`}
+            href={`/${locale}`}
             className="inline-flex items-center gap-2 font-semibold text-primary hover:text-navy transition-colors group"
           >
             {isAr ? (
@@ -126,7 +126,7 @@ export default async function ServiceDetailPage({
                 className="group-hover:-translate-x-1 transition-transform"
               />
             )}
-            <span>{isAr ? "العودة إلى جميع الخدمات" : "Back to Services"}</span>
+            <span>{isAr ? "العودة للرئيسية" : "Back to Home"}</span>
           </Link>
         </div>
 
@@ -192,6 +192,34 @@ export default async function ServiceDetailPage({
           </div>
         </div>
 
+        {/* Inline Quote Form Block */}
+        <section
+          id="quote-section"
+          className="bg-navy rounded-[28px] mb-4 p-3 sm:p-12 text-white relative overflow-hidden shadow-[0_25px_60px_rgba(11,58,102,0.25)] flex flex-col lg:flex-row items-center justify-between gap-10"
+        >
+          <div className="absolute top-0 end-0 w-80 h-80 bg-primary/20 rounded-full blur-3xl pointer-events-none" />
+
+          <div className="w-full hidden sm:block lg:w-1/2 relative z-10">
+            <span className="text-xs font-bold uppercase tracking-wider text-blue-300 mb-2 block">
+              {isAr ? "احصل على استشارة مجانية" : "Fast & Transparent Pricing"}
+            </span>
+            <h2 className="text-[26px] sm:text-[32px] font-extrabold font-heading leading-tight mb-4 text-white">
+              {isAr
+                ? "هل تخطط للانتقال قريباً؟ دعنا نساعدك في البداية"
+                : "Planning a Move Soon? Get a Guaranteed Quote Today"}
+            </h2>
+            <p className="text-slate-300 text-sm sm:text-base leading-relaxed mb-6">
+              {isAr
+                ? "احصل على تسعير فوري ومخصص لاحتياجاتك سواء كنت تنتقل داخل الرياض أو جدة أو إلى خارج المملكة."
+                : "Whether moving within Riyadh, relocating across Saudi Arabia, or shipping internationally, our logistics specialists are ready to help."}
+            </p>
+          </div>
+
+          <div className="w-full lg:w-auto relative z-10 flex justify-center">
+            <QuoteForm />
+          </div>
+        </section>
+
         {/* How It Works */}
         {steps.length > 0 && (
           <section className="bg-white rounded-2xl p-5 sm:p-6 border border-brand-text/[0.06] shadow-sm mb-6">
@@ -248,18 +276,6 @@ export default async function ServiceDetailPage({
           </section>
         )}
 
-        {/* Sliding Image Carousel Directly (Not Inside a Card) */}
-        <div className="mb-6">
-          <GallerySection limit={25} />
-        </div>
-
-        {/* Inline Quote Form Block */}
-        <section className="mb-6 flex flex-col items-center">
-          <div className="w-full max-w-[480px] flex justify-center py-4 bg-navy rounded-[28px] shadow-md">
-            <QuoteForm />
-          </div>
-        </section>
-
         {/* Quick Answers / FAQs */}
         {faqs.length > 0 && (
           <section className="bg-white rounded-2xl p-5 sm:p-6 border border-brand-text/[0.06] shadow-sm mb-6">
@@ -285,26 +301,9 @@ export default async function ServiceDetailPage({
           </section>
         )}
 
-        {/* Trust Badges */}
-        <div className="grid grid-cols-1 sm:grid-cols-3 gap-3.5">
-          <div className="p-3.5 rounded-xl bg-white border border-brand-text/[0.05] shadow-sm flex items-center gap-3">
-            <Shield className="w-5 h-5 text-primary shrink-0" />
-            <span className="text-xs font-bold text-navy">
-              {isAr ? "حماية وضمان كامل" : "Full Transit Care"}
-            </span>
-          </div>
-          <div className="p-3.5 rounded-xl bg-white border border-brand-text/[0.05] shadow-sm flex items-center gap-3">
-            <Clock className="w-5 h-5 text-primary shrink-0" />
-            <span className="text-xs font-bold text-navy">
-              {isAr ? "التزام تام بالمواعيد" : "On-Time Dispatch"}
-            </span>
-          </div>
-          <div className="p-3.5 rounded-xl bg-white border border-brand-text/[0.05] shadow-sm flex items-center gap-3">
-            <Globe className="w-5 h-5 text-primary shrink-0" />
-            <span className="text-xs font-bold text-navy">
-              {isAr ? "تغطية عالمية ومحلية" : "KSA & Worldwide"}
-            </span>
-          </div>
+        {/* Sliding Image Carousel Directly (Not Inside a Card) */}
+        <div className="mb-6">
+          <GallerySection limit={25} />
         </div>
       </div>
     </main>

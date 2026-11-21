@@ -162,20 +162,6 @@ export const QuoteForm = memo(() => {
 
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
             <div className="space-y-1">
-              <label htmlFor="email" className="sr-only">
-                {t("fields.email")}
-              </label>
-              <input
-                id="email"
-                type="email"
-                name="email"
-                value={formData.email}
-                onChange={handleChange}
-                placeholder={t("fields.email")}
-                className="w-full bg-white/10 border border-white/15 rounded-xl px-3.5 py-2.5 text-sm text-white placeholder:text-slate-300/70 outline-none focus:bg-white/20 focus:border-white/40 focus:ring-2 focus:ring-white/20 transition-all backdrop-blur-md"
-              />
-            </div>
-            <div className="space-y-1">
               <label htmlFor="phone" className="sr-only">
                 {t("fields.phone")}
               </label>
@@ -187,6 +173,20 @@ export const QuoteForm = memo(() => {
                 value={formData.phone}
                 onChange={handleChange}
                 placeholder={t("fields.phone")}
+                className="w-full bg-white/10 border border-white/15 rounded-xl px-3.5 py-2.5 text-sm text-white placeholder:text-slate-300/70 outline-none focus:bg-white/20 focus:border-white/40 focus:ring-2 focus:ring-white/20 transition-all backdrop-blur-md"
+              />
+            </div>
+            <div className="space-y-1">
+              <label htmlFor="email" className="sr-only">
+                {t("fields.email")}
+              </label>
+              <input
+                id="email"
+                type="email"
+                name="email"
+                value={formData.email}
+                onChange={handleChange}
+                placeholder={t("fields.email")}
                 className="w-full bg-white/10 border border-white/15 rounded-xl px-3.5 py-2.5 text-sm text-white placeholder:text-slate-300/70 outline-none focus:bg-white/20 focus:border-white/40 focus:ring-2 focus:ring-white/20 transition-all backdrop-blur-md"
               />
             </div>
