@@ -13,8 +13,18 @@ const RATE_LIMIT_WINDOW = 60 * 60 * 1000; // 1 hour
 const quoteSchema = z.object({
   name: z.string().min(1, "Name is required").max(100).trim(),
   service: z.string().min(1, "Service selection is required"),
-  email: z.string().email("Invalid email address").max(255),
-  phone: z.string().optional(),
+  email: z
+    .string()
+    .trim()
+    .max(255)
+    .email("Invalid email address")
+    .optional()
+    .or(z.literal("")),
+  phone: z
+    .string()
+    .trim()
+    .min(6, "Phone number is required")
+    .max(30, "Phone number is too long"),
   origin: z.string().optional(),
   destination: z.string().optional(),
   message: z.string().max(2000).optional(),
@@ -49,18 +59,18 @@ export async function POST(request: NextRequest) {
   try {
     const body = await request.json();
     const validatedData = quoteSchema.parse(body);
-
+    const normalizedEmail = validatedData.email || undefined;
     // Send email using Resend SDK
     const { data, error } = await resend.emails.send({
       from: "Cargo Track Website <onboarding@resend.dev>", // Replace with your domain when in production
       to: process.env.CONTACT_RECEIVER_EMAIL!,
-      replyTo: validatedData.email,
+      ...(normalizedEmail ? { replyTo: normalizedEmail } : {}),
       subject: `New Quote Request from ${validatedData.name} (${validatedData.service})`,
       html: `
         <h2>New Quote Request</h2>
         <hr/>
         <p><strong>Name:</strong> ${validatedData.name}</p>
-        <p><strong>Email:</strong> ${validatedData.email}</p>
+        <p><strong>Email:</strong> ${normalizedEmail || "N/A"}</p>
         <p><strong>Service Requested:</strong> ${validatedData.service}</p>
         <p><strong>Phone:</strong> ${validatedData.phone || "N/A"}</p>
         <p><strong>Origin:</strong> ${validatedData.origin || "N/A"}</p>
