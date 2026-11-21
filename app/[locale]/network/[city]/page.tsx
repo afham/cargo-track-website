@@ -113,7 +113,7 @@ export default async function CityBranchPage({
         {/* Breadcrumb */}
         <div className="mb-6 flex items-center gap-2">
           <Link
-            href={`/${locale}/network`}
+            href={`/${locale}`}
             className="inline-flex items-center gap-2 text-[14px] font-semibold text-primary hover:text-navy transition-colors group"
           >
             {isAr ? (
@@ -127,7 +127,7 @@ export default async function CityBranchPage({
                 className="group-hover:-translate-x-1 transition-transform"
               />
             )}
-            <span>{isAr ? "العودة إلى شبكة الفروع" : "Back to Network"}</span>
+            <span>{isAr ? "العودة للرئيسية" : "Back to Home"}</span>
           </Link>
         </div>
 
