@@ -70,7 +70,7 @@ export async function POST(request: NextRequest) {
         <h2>New Quote Request</h2>
         <hr/>
         <p><strong>Name:</strong> ${validatedData.name}</p>
-        <p><strong>Email:</strong> ${validatedData.email}</p>
+        <p><strong>Email:</strong> ${normalizedEmail || "N/A"}</p>
         <p><strong>Service Requested:</strong> ${validatedData.service}</p>
         <p><strong>Phone:</strong> ${validatedData.phone || "N/A"}</p>
         <p><strong>Origin:</strong> ${validatedData.origin || "N/A"}</p>
