@@ -166,7 +166,7 @@ export const HeroTextSlider = memo(() => {
         </div>
         <div className="flex w-full justify-center gap-4 ">
           <GoogleReviewCard
-            reviewUrl="https://share.google/YwXo78vg3b4wYjBGE"
+            reviewUrl="https://www.google.com/maps/search/?api=1&query=CARGOTRACK+RELOCATIONS&query_place_id=ChIJAVlmYZIFLz4R-9YA16zxkmc"
             isAr={isAr}
           />
           <FidiAffiliationsCard
